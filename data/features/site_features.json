@@ -296,51 +296,26 @@
             "lon": 36.49333,
             "lat": 4.93389,
             "fields": [
-              "orgc"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100730",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 12.829,
-            "lon": 36.49333,
-            "lat": 4.93389,
-            "fields": [
-              "ph_h2o"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100730",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 12.829,
-            "lon": 36.49333,
-            "lat": 4.93389,
-            "fields": [
-              "sand"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100730",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 12.829,
-            "lon": 36.49333,
-            "lat": 4.93389,
-            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
               "silt"
             ]
           },
           {
             "source": "wosis",
-            "source_id": "100730",
+            "source_id": "100542",
             "dataset_id": "AF-AfSP",
-            "distance_km": 12.829,
-            "lon": 36.49333,
-            "lat": 4.93389,
+            "distance_km": 13.101,
+            "lon": 36.33444,
+            "lat": 5.06028,
             "fields": [
-              "clay"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           }
         ]
@@ -1081,7 +1056,10 @@
             "lon": 36.31389,
             "lat": 6.42194,
             "fields": [
-              "ph_h2o"
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
@@ -1092,39 +1070,9 @@
             "lon": 36.31389,
             "lat": 6.42194,
             "fields": [
-              "ph_h2o"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100539",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.418,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
-              "sand"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100540",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.418,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
-              "sand"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100539",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.418,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
               "silt"
             ]
           }
@@ -1321,7 +1269,10 @@
             "lon": 36.31389,
             "lat": 6.42194,
             "fields": [
-              "ph_h2o"
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
@@ -1332,39 +1283,9 @@
             "lon": 36.31389,
             "lat": 6.42194,
             "fields": [
-              "ph_h2o"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100539",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.248,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
-              "sand"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100540",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.248,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
-              "sand"
-            ]
-          },
-          {
-            "source": "wosis",
-            "source_id": "100539",
-            "dataset_id": "AF-AfSP",
-            "distance_km": 23.248,
-            "lon": 36.31389,
-            "lat": 6.42194,
-            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
               "silt"
             ]
           }
@@ -1545,14 +1466,14 @@
         "soil_observation_profile_count": 10,
         "soil_observation_nearest_distance_km": 9.882,
         "soil_observation_radius_km": 25,
-        "observed_soc_0_30cm_g_kg_mean": 30.026,
-        "observed_ph_h2o_0_30cm_mean": 5.226,
-        "observed_sand_pct_mean": 36.895,
-        "observed_silt_pct_mean": 38.632,
-        "observed_clay_pct_mean": 24.474,
+        "observed_soc_0_30cm_g_kg_mean": 30.895,
+        "observed_ph_h2o_0_30cm_mean": 5.207,
+        "observed_sand_pct_mean": 35.493,
+        "observed_silt_pct_mean": 40.02,
+        "observed_clay_pct_mean": 24.487,
         "soil_observation_support_score": 84,
-        "soilgrids_soc_delta_g_kg": 2.592,
-        "soilgrids_ph_delta": -0.349,
+        "soilgrids_soc_delta_g_kg": 3.461,
+        "soilgrids_ph_delta": -0.368,
         "nearest_observations": [
           {
             "source": "wosis",
@@ -1562,7 +1483,11 @@
             "lon": 37.68761,
             "lat": 7.07061,
             "fields": [
-              "orgc"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
@@ -1573,40 +1498,56 @@
             "lon": 37.68761,
             "lat": 7.07061,
             "fields": [
-              "orgc"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
             "source": "wosis",
-            "source_id": "102973",
+            "source_id": "102987",
             "dataset_id": "AF-AfSP",
-            "distance_km": 9.882,
-            "lon": 37.68761,
-            "lat": 7.07061,
+            "distance_km": 10.065,
+            "lon": 37.68911,
+            "lat": 7.06853,
             "fields": [
-              "ph_h2o"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
             "source": "wosis",
-            "source_id": "102974",
+            "source_id": "103003",
             "dataset_id": "AF-AfSP",
-            "distance_km": 9.882,
-            "lon": 37.68761,
-            "lat": 7.07061,
+            "distance_km": 10.147,
+            "lon": 37.69278,
+            "lat": 7.06694,
             "fields": [
-              "ph_h2o"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           },
           {
             "source": "wosis",
-            "source_id": "102973",
+            "source_id": "103004",
             "dataset_id": "AF-AfSP",
-            "distance_km": 9.882,
-            "lon": 37.68761,
-            "lat": 7.07061,
+            "distance_km": 10.147,
+            "lon": 37.69278,
+            "lat": 7.06694,
             "fields": [
-              "sand"
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
             ]
           }
         ]

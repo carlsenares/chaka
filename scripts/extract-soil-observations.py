@@ -67,7 +67,10 @@ def main():
             failures.append({"source": "afsis_phase1", "error": f"{type(exc).__name__}: {exc}"})
 
     soilgrids_by_site = load_soilgrids_by_site(args.soilgrids)
-    rows = [summarize_candidate(feature, observations, soilgrids_by_site, args.buffer_km) for feature in candidates["features"]]
+    rows = [
+        summarize_candidate(feature, observations, soilgrids_by_site, args.buffer_km, failures, expected_source_count(args))
+        for feature in candidates["features"]
+    ]
     output = {
         "source": source_metadata(args),
         "features": rows,
@@ -229,7 +232,7 @@ def afsis_values(row, lab):
     return {}
 
 
-def summarize_candidate(feature, observations, soilgrids_by_site, radius_km):
+def summarize_candidate(feature, observations, soilgrids_by_site, radius_km, failures, expected_sources):
     props = feature["properties"]
     site_id = props["site_id"]
     lon = float(props["centroid_lon"])
@@ -248,18 +251,18 @@ def summarize_candidate(feature, observations, soilgrids_by_site, radius_km):
     }
     row = {
         "site_id": site_id,
-        "source_status": "source_derived" if nearby else "no_observations",
+        "source_status": source_status(nearby, failures, expected_sources),
         "soil_observation_count_total": counts["total"],
         "soil_observation_count_wosis": counts["wosis"],
         "soil_observation_count_afsis": counts["afsis"],
         "soil_observation_profile_count": len(by_profile),
         "soil_observation_nearest_distance_km": round(min((item["distance_km"] for item in nearby), default=0), 3) if nearby else None,
         "soil_observation_radius_km": radius_km,
-        "observed_soc_0_30cm_g_kg_mean": mean_field(nearby, "orgc"),
-        "observed_ph_h2o_0_30cm_mean": mean_field(nearby, "ph_h2o"),
-        "observed_sand_pct_mean": mean_field(nearby, "sand"),
-        "observed_silt_pct_mean": mean_field(nearby, "silt"),
-        "observed_clay_pct_mean": mean_field(nearby, "clay"),
+        "observed_soc_0_30cm_g_kg_mean": depth_weighted_profile_mean(nearby, "orgc"),
+        "observed_ph_h2o_0_30cm_mean": depth_weighted_profile_mean(nearby, "ph_h2o"),
+        "observed_sand_pct_mean": depth_weighted_profile_mean(nearby, "sand"),
+        "observed_silt_pct_mean": depth_weighted_profile_mean(nearby, "silt"),
+        "observed_clay_pct_mean": depth_weighted_profile_mean(nearby, "clay"),
         "soil_observation_support_score": support_score(nearby, radius_km),
         "soilgrids_soc_delta_g_kg": None,
         "soilgrids_ph_delta": None,
@@ -274,6 +277,14 @@ def summarize_candidate(feature, observations, soilgrids_by_site, radius_km):
     return row
 
 
+def source_status(observations, failures, expected_sources):
+    if failures and len(failures) >= expected_sources:
+        return "blocked_source_unavailable"
+    if failures:
+        return "partial_source_derived"
+    return "source_derived" if observations else "no_observations"
+
+
 def support_score(observations, radius_km):
     if not observations:
         return 0
@@ -285,17 +296,24 @@ def support_score(observations, radius_km):
 
 
 def nearest_observation_summaries(observations):
-    summaries = []
-    for item in sorted(observations, key=lambda value: value["distance_km"])[:5]:
-        summaries.append({
+    grouped = {}
+    for item in observations:
+        key = (item.get("source"), item.get("source_id"), round(item["distance_km"], 6))
+        if key not in grouped:
+            grouped[key] = {
             "source": item["source"],
             "source_id": item["source_id"],
             "dataset_id": item.get("dataset_id"),
             "distance_km": round(item["distance_km"], 3),
             "lon": round(item["lon"], 5),
             "lat": round(item["lat"], 5),
-            "fields": sorted(field for field in ["orgc", "ph_h2o", "sand", "silt", "clay"] if item.get(field) is not None),
-        })
+                "fields": set(),
+            }
+        grouped[key]["fields"].update(field for field in ["orgc", "ph_h2o", "sand", "silt", "clay"] if item.get(field) is not None)
+
+    summaries = []
+    for item in sorted(grouped.values(), key=lambda value: value["distance_km"])[:5]:
+        summaries.append({**item, "fields": sorted(item["fields"])})
     return summaries
 
 
@@ -367,9 +385,33 @@ def overlaps_topsoil(upper, lower):
     return upper < 30 and lower > 0
 
 
-def mean_field(observations, field):
-    values = [item[field] for item in observations if item.get(field) is not None and math.isfinite(item[field])]
-    return round(sum(values) / len(values), 3) if values else None
+def depth_weighted_profile_mean(observations, field):
+    profile_values = []
+    by_profile = {}
+    for item in observations:
+        if item.get(field) is None or not math.isfinite(item[field]):
+            continue
+        by_profile.setdefault(item.get("profile_id") or item.get("source_id"), []).append(item)
+
+    for items in by_profile.values():
+        weighted_sum = 0
+        weight_total = 0
+        for item in items:
+            weight = topsoil_overlap_cm(item.get("upper_depth_cm"), item.get("lower_depth_cm"))
+            if weight <= 0:
+                continue
+            weighted_sum += item[field] * weight
+            weight_total += weight
+        if weight_total > 0:
+            profile_values.append(weighted_sum / weight_total)
+
+    return round(sum(profile_values) / len(profile_values), 3) if profile_values else None
+
+
+def topsoil_overlap_cm(upper, lower):
+    upper = 0 if upper is None else upper
+    lower = 30 if lower is None else lower
+    return max(0, min(lower, 30) - max(upper, 0))
 
 
 def percent_to_g_kg(value):
@@ -428,4 +470,3 @@ def relative_path(path):
 
 if __name__ == "__main__":
     main()
-

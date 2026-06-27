@@ -368,9 +368,17 @@ function validateSoilObservationsSync(row, soilObservations) {
     return;
   }
 
+  if (soilObservations.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated soil_observations status is stale`);
+  }
+
   for (const field of [
     "soil_observation_count_total",
+    "soil_observation_count_wosis",
+    "soil_observation_count_afsis",
+    "soil_observation_profile_count",
     "soil_observation_nearest_distance_km",
+    "soil_observation_radius_km",
     "observed_soc_0_30cm_g_kg_mean",
     "observed_ph_h2o_0_30cm_mean",
     "observed_sand_pct_mean",
@@ -383,6 +391,10 @@ function validateSoilObservationsSync(row, soilObservations) {
     if (!sameNullableNumber(soilObservations[field], integrated[field])) {
       addError(`feature ${row.site_id}: integrated soil_observations ${field} is stale`);
     }
+  }
+
+  if (JSON.stringify(soilObservations.nearest_observations ?? []) !== JSON.stringify(integrated.nearest_observations ?? [])) {
+    addError(`feature ${row.site_id}: integrated soil_observations nearest_observations is stale`);
   }
 }
 
