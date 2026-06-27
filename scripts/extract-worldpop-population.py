@@ -3,6 +3,7 @@
 import argparse
 import json
 import math
+import shutil
 import sys
 import urllib.request
 from pathlib import Path
@@ -78,7 +79,8 @@ def ensure_raster(args):
     print(f"Downloading {args.url}", file=sys.stderr)
     temp_path = args.raw_path.with_suffix(args.raw_path.suffix + ".tmp")
     try:
-        urllib.request.urlretrieve(args.url, temp_path)
+        with urllib.request.urlopen(args.url, timeout=60) as response, temp_path.open("wb") as target:
+            shutil.copyfileobj(response, target)
         with rasterio.open(temp_path):
             pass
         temp_path.replace(args.raw_path)

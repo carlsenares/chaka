@@ -281,7 +281,11 @@ This model is a pre-feasibility ranking prototype. Labels are not available yet,
 
 function renderSchema() {
   return {
-    feature_version: "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    feature_version_pattern: "^mixed_[a-z_]+_v0$",
+    example_feature_versions: [
+      "mixed_land_cover_forest_rainfall_access_v0",
+      "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    ],
     required_fields: [
       "site_id",
       "region",

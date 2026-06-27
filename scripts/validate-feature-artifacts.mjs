@@ -263,7 +263,12 @@ function validateGfwSync(row, gfw) {
 }
 
 function validateSoilGridsSync(row, soilGrids) {
-  if (!soilGrids) return;
+  if (!soilGrids) {
+    if (row.source_extracts?.soil?.status === "source_derived") {
+      addError(`feature ${row.site_id}: missing soilgrids source extract row`);
+    }
+    return;
+  }
 
   if (soilGrids.source_status === "source_derived") {
     if (!isScore(soilGrids.soil_organic_carbon_score)) {

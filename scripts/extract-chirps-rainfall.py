@@ -90,7 +90,8 @@ def ensure_raster(year, month):
         print(f"Downloading {url}", file=sys.stderr)
         temp_gz_path = gz_path.with_suffix(gz_path.suffix + ".tmp")
         try:
-            urllib.request.urlretrieve(url, temp_gz_path)
+            with urllib.request.urlopen(url, timeout=60) as response, temp_gz_path.open("wb") as target:
+                shutil.copyfileobj(response, target)
             with gzip.open(temp_gz_path, "rb") as source:
                 source.read(1)
             temp_gz_path.replace(gz_path)

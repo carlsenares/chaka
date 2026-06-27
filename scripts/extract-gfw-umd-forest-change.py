@@ -3,6 +3,7 @@
 import argparse
 import json
 import math
+import shutil
 import sys
 import urllib.request
 from pathlib import Path
@@ -93,7 +94,8 @@ def ensure_tile(args, layer, tile):
     print(f"Downloading {url}", file=sys.stderr)
     temp_path = path.with_suffix(path.suffix + ".tmp")
     try:
-        urllib.request.urlretrieve(url, temp_path)
+        with urllib.request.urlopen(url, timeout=60) as response, temp_path.open("wb") as target:
+            shutil.copyfileobj(response, target)
         with rasterio.open(temp_path):
             pass
         temp_path.replace(path)
