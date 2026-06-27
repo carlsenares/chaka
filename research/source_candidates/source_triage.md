@@ -17,6 +17,7 @@ should enter the Chaka restoration-prioritization pipeline.
 - `blocked`: cannot be automated or relied on until access, terms, OCR, or raw
   data availability is resolved.
 - `do-not-use`: should not be used in the scoring system in its current form.
+  Keep this as a separate triage flag; do not rely on `mvp_status` to carry it.
 
 ## Recommended Implementation Order
 
@@ -102,8 +103,7 @@ Keep layer classes separate in metadata and scoring:
 - `conservation_priority`: KBA/IBAT, IUCN spatial data, Area-of-Habitat richness.
 - `livelihood_proxy`: WaPOR productivity/water, WorldPop/GHSL, OSM access,
   existing settlement and infrastructure proxies.
-- `blocked_manual`: Soils4Africa, EBI platform, KBA/IBAT, IUCN spatial data,
-  eBird EBD, SHI preprint data.
+- `blocked_manual`: Soils4Africa, EBI platform, KBA/IBAT, SHI preprint data.
 
 Confidence should be explicit. Add penalties or flags for distance to observed
 anchors, coordinate uncertainty, record age, basis of record, sampling effort,
