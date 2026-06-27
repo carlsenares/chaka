@@ -29,11 +29,11 @@
     "settlement_proximity_score": 20,
     "protected_area_overlap_pct": 0,
     "safeguard_risk_score": 18,
-    "data_quality_score": 88,
+    "data_quality_score": 90,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_settlement_context_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_settlement_context_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, settlement_context, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -136,6 +136,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0.75,
+          "very_low_density_rural": 0.25,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 0.25,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 36
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "no_valid_pixels"
@@ -190,9 +209,9 @@
     "safeguard_risk_score": 24,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -372,6 +391,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0.933333,
+          "low_density_rural": 0.066667,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 1,
+        "ghsl_valid_pixel_count": 30
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -431,9 +469,9 @@
     "safeguard_risk_score": 48,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -583,6 +621,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0.921053,
+          "low_density_rural": 0.078947,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 1,
+        "ghsl_valid_pixel_count": 38
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -642,9 +699,9 @@
     "safeguard_risk_score": 16,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -791,6 +848,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 32
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -850,9 +926,9 @@
     "safeguard_risk_score": 12,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -998,6 +1074,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0.966667,
+          "low_density_rural": 0.033333,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 30
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1057,9 +1152,9 @@
     "safeguard_risk_score": 36,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1234,6 +1329,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 35
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1293,9 +1407,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1473,6 +1587,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 42
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1532,9 +1665,9 @@
     "safeguard_risk_score": 10,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1760,6 +1893,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0,
+          "low_density_rural": 0.25,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0.75,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 0.25,
+        "ghsl_settlement_context_score": 36,
+        "ghsl_valid_pixel_count": 32
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1819,9 +1971,9 @@
     "safeguard_risk_score": 18,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1967,6 +2119,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 41
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2026,9 +2197,9 @@
     "safeguard_risk_score": 24,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2175,6 +2346,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 30
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2234,9 +2424,9 @@
     "safeguard_risk_score": 48,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2385,6 +2575,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 35
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2444,9 +2653,9 @@
     "safeguard_risk_score": 16,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2593,6 +2802,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 36
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2652,9 +2880,9 @@
     "safeguard_risk_score": 12,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2804,6 +3032,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0.076923,
+          "low_density_rural": 0.487179,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0.307692,
+          "semi_dense_urban_cluster": 0.128205,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0.128205,
+        "ghsl_rural_or_low_density_fraction": 0.564102,
+        "ghsl_settlement_context_score": 28,
+        "ghsl_valid_pixel_count": 39
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2863,9 +3110,9 @@
     "safeguard_risk_score": 36,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3012,6 +3259,25 @@
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 36
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3071,9 +3337,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3279,6 +3545,25 @@
         "sampling_bias_risk_score": 80,
         "biodiversity_context_score": null
       },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 0.243243,
+          "low_density_rural": 0.621622,
+          "rural_cluster": 0.027027,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0.108108,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0.108108,
+        "ghsl_rural_or_low_density_fraction": 0.891892,
+        "ghsl_settlement_context_score": 14,
+        "ghsl_valid_pixel_count": 37
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3338,9 +3623,9 @@
     "safeguard_risk_score": 10,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_settlement_context_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_settlement_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, settlement_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3487,6 +3772,25 @@
         "coordinate_uncertainty_p90_m": null,
         "sampling_bias_risk_score": 100,
         "biodiversity_context_score": null
+      },
+      "settlement_context": {
+        "dataset_id": "ghsl_settlement",
+        "status": "source_derived",
+        "ghsl_smod_class_fractions": {
+          "water": 0,
+          "very_low_density_rural": 1,
+          "low_density_rural": 0,
+          "rural_cluster": 0,
+          "suburban_or_peri_urban": 0,
+          "semi_dense_urban_cluster": 0,
+          "dense_urban_cluster": 0,
+          "urban_centre": 0
+        },
+        "ghsl_urban_centre_fraction": 0,
+        "ghsl_dense_settlement_fraction": 0,
+        "ghsl_rural_or_low_density_fraction": 1,
+        "ghsl_settlement_context_score": 0,
+        "ghsl_valid_pixel_count": 40
       },
       "population": {
         "dataset_id": "worldpop_population",

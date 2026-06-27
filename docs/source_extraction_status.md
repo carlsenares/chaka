@@ -16,6 +16,7 @@ This document tracks which feature groups are source-derived and which are still
 | Biodiversity observations | `source_extracts.biodiversity_observations` | Optional source-derived context | GBIF occurrence search API | Observation-density/species context only. Does not overwrite ranker fields or imply absence where records are sparse. |
 | Population/livelihood | `population_pressure_score` | Source-derived for 15/16 sites | WorldPop Ethiopia 2020 UN-adjusted population counts | Extracted from official WorldPop 100m GeoTIFF. `SET-001` has no valid population pixels and falls back to OSM's zero-valued mapped population proxy. |
 | Access | `road_access_score`, `settlement_proximity_score` | Partial source-derived, reproducible local extract | OSM via Geofabrik Ethiopia `.osm.pbf` | Current Geofabrik artifact has road scores for 13/16 sites and settlement scores for 12/16 sites. Individual null fields still fall back to deterministic placeholders in `site_features.json`. |
+| Settlement context | `source_extracts.settlement_context` | Optional source-derived context | GHSL GHS-SMOD 2020 R2023A | Coarse 1 km settlement model context. Cross-checks WorldPop/OSM and does not overwrite access or population scores. |
 | Safeguards | `protected_area_overlap_pct`, `safeguard_risk_score` | Placeholder | Pending WDPA | WDPA access terms must be checked before committing raw data. |
 
 ## Implemented Extraction
@@ -340,6 +341,48 @@ Current Geofabrik-derived artifact coverage:
 
 The raw cache is gitignored. The source-derived summary JSON is small enough to commit.
 
+GHSL settlement dry-run command:
+
+```bash
+npm run data:ghsl:dry-run
+```
+
+GHSL settlement command:
+
+```bash
+npm run data:ghsl
+```
+
+GHSL settlement script:
+
+```text
+scripts/extract-ghsl-settlement.py
+```
+
+GHSL settlement output:
+
+```text
+data/features/source_extracts/ghsl_settlement.json
+```
+
+GHSL raw cache:
+
+```text
+data/raw/ghsl/
+```
+
+The GHSL lane uses the official JRC GHS-SMOD 2020, R2023A, 1 km global
+settlement model zip. Candidate polygons are reprojected to the product CRS
+(`ESRI:54009`) before raster masking. Results are embedded under
+`source_extracts.settlement_context` and are used as context only.
+
+Current GHSL-derived artifact coverage:
+
+- Settlement context rows: 16/16 sites.
+- Dense settlement fractions above zero: 2/16 sites (`SWE-005`, `SWE-007`).
+- Highest settlement-context scores: `SET-008` at 36, `SWE-005` at 28, and `SWE-007` at 14.
+- GHSL does not overwrite OSM access or WorldPop population pressure.
+
 ## Important Interpretation
 
 `data/features/site_features.json` currently has mixed quality:
@@ -362,6 +405,7 @@ This means:
 - soil SOC and pH suitability fields are source-derived from SoilGrids where valid soil pixels exist,
 - population pressure is source-derived from WorldPop where valid population pixels exist,
 - OSM access fields are source-derived where Overpass or Geofabrik returned usable mapped features,
+- GHSL settlement context is source-derived where valid settlement-model pixels exist,
 - GBIF biodiversity observation context is source-derived where enough occurrence/species records exist,
 - all other numerical environmental/social fields are deterministic placeholders,
 - rankings remain `rule_based_fallback`,

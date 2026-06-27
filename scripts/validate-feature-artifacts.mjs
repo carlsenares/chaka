@@ -14,6 +14,7 @@ const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_ch
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
+const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -69,6 +70,7 @@ async function main() {
   const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
   const gbifBiodiversityBySite = await loadOptionalExtractBySite(gbifBiodiversityPath);
+  const ghslSettlementBySite = await loadOptionalExtractBySite(ghslSettlementPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
   validateRows("feature", features, candidateIds, (row) =>
@@ -79,6 +81,7 @@ async function main() {
       soilGridsBySite,
       soilObservationsBySite,
       gbifBiodiversityBySite,
+      ghslSettlementBySite,
     })
   );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
@@ -165,6 +168,7 @@ function validateFeature(row, extracts) {
   validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
   validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
   validateGbifBiodiversitySync(row, extracts.gbifBiodiversityBySite.get(row.site_id));
+  validateGhslSettlementSync(row, extracts.ghslSettlementBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -515,6 +519,73 @@ function validateGbifBiodiversitySync(row, gbifBiodiversity) {
   }
 }
 
+function validateGhslSettlementSync(row, ghslSettlement) {
+  if (!ghslSettlement) {
+    if (row.source_extracts?.settlement_context?.status && row.source_extracts.settlement_context.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing ghsl_settlement source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "no_valid_pixels", "no_intersection"]);
+  if (!validStatuses.has(ghslSettlement.source_status)) {
+    addError(`ghsl settlement ${row.site_id}: invalid source_status`);
+  }
+
+  if (!isPlainObject(ghslSettlement.ghsl_smod_class_fractions)) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_smod_class_fractions must be an object`);
+  } else if (Object.keys(ghslSettlement.ghsl_smod_class_fractions).length > 0) {
+    const total = Object.values(ghslSettlement.ghsl_smod_class_fractions).reduce((sum, value) => sum + Number(value), 0);
+    if (Math.abs(total - 1) > 0.01) addError(`ghsl settlement ${row.site_id}: class fractions must sum to 1`);
+  }
+
+  for (const field of [
+    "ghsl_urban_centre_fraction",
+    "ghsl_dense_settlement_fraction",
+    "ghsl_rural_or_low_density_fraction",
+  ]) {
+    if (ghslSettlement[field] !== null && !isUnitFraction(ghslSettlement[field])) {
+      addError(`ghsl settlement ${row.site_id}: ${field} must be null or 0-1`);
+    }
+  }
+
+  if (ghslSettlement.ghsl_settlement_context_score !== null && !isScore(ghslSettlement.ghsl_settlement_context_score)) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_settlement_context_score must be null or 0-100`);
+  }
+  if (!Number.isInteger(Number(ghslSettlement.ghsl_valid_pixel_count)) || Number(ghslSettlement.ghsl_valid_pixel_count) < 0) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_valid_pixel_count must be a nonnegative integer`);
+  }
+  if (ghslSettlement.source_status === "source_derived" && Number(ghslSettlement.ghsl_valid_pixel_count) <= 0) {
+    addError(`ghsl settlement ${row.site_id}: source_derived rows must have valid pixels`);
+  }
+
+  const integrated = row.source_extracts?.settlement_context;
+  if (!integrated || integrated.dataset_id !== "ghsl_settlement") {
+    addError(`feature ${row.site_id}: missing integrated ghsl_settlement source extract`);
+    return;
+  }
+
+  if (ghslSettlement.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated ghsl_settlement status is stale`);
+  }
+
+  for (const field of [
+    "ghsl_urban_centre_fraction",
+    "ghsl_dense_settlement_fraction",
+    "ghsl_rural_or_low_density_fraction",
+    "ghsl_settlement_context_score",
+    "ghsl_valid_pixel_count",
+  ]) {
+    if (!sameNullableNumber(ghslSettlement[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated ghsl_settlement ${field} is stale`);
+    }
+  }
+
+  if (JSON.stringify(ghslSettlement.ghsl_smod_class_fractions ?? null) !== JSON.stringify(integrated.ghsl_smod_class_fractions ?? null)) {
+    addError(`feature ${row.site_id}: integrated ghsl_settlement class fractions are stale`);
+  }
+}
+
 function validatePrediction(row) {
   for (const field of predictionRequiredFields) {
     if (!(field in row)) addError(`prediction ${row.site_id}: missing "${field}"`);
@@ -548,6 +619,10 @@ function isScore(value) {
 
 function isNonNegativeNumber(value) {
   return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) && Number(value) >= 0;
+}
+
+function isUnitFraction(value) {
+  return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) && Number(value) >= 0 && Number(value) <= 1;
 }
 
 function isPlainObject(value) {

@@ -12,6 +12,7 @@ const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfal
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
+const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const jsonPath = path.join(root, "data/features/site_features.json");
@@ -186,6 +187,7 @@ async function main() {
   const soilGridsBySite = await loadExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
   const gbifBiodiversityBySite = await loadExtractBySite(gbifBiodiversityPath, { optional: true });
+  const ghslSettlementBySite = await loadExtractBySite(ghslSettlementPath, { optional: true });
   const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
   const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
@@ -197,6 +199,7 @@ async function main() {
       soilGrids: soilGridsBySite.get(candidate.properties.site_id),
       soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
       gbifBiodiversity: gbifBiodiversityBySite.get(candidate.properties.site_id),
+      ghslSettlement: ghslSettlementBySite.get(candidate.properties.site_id),
       worldPop: worldPopBySite.get(candidate.properties.site_id),
       osmAccess: osmAccessBySite.get(candidate.properties.site_id),
     })
@@ -233,6 +236,7 @@ function buildFeature(candidate, index, extracts) {
   const soilGridsFeature = extracts.soilGrids;
   const soilObservationsFeature = extracts.soilObservations;
   const gbifBiodiversityFeature = extracts.gbifBiodiversity;
+  const ghslSettlementFeature = extracts.ghslSettlement;
   const worldPopFeature = extracts.worldPop;
   const osmAccessFeature = extracts.osmAccess;
   const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
@@ -242,6 +246,7 @@ function buildFeature(candidate, index, extracts) {
   const hasSoilGrids = soilGridsFeature?.source_status === "source_derived";
   const hasSoilObservations = ["source_derived", "partial_source_derived"].includes(soilObservationsFeature?.source_status);
   const hasGbifBiodiversity = gbifBiodiversityFeature?.source_status === "source_derived";
+  const hasGhslSettlement = ghslSettlementFeature?.source_status === "source_derived";
   const hasWorldPop = worldPopFeature?.source_status === "source_derived";
   const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
   const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
@@ -291,6 +296,7 @@ function buildFeature(candidate, index, extracts) {
     (hasSoilGrids ? 8 : 0) +
     (hasSoilObservations && soilObservationsFeature.soil_observation_support_score >= 50 ? 3 : 0) +
     (hasGbifBiodiversity ? 3 : 0) +
+    (hasGhslSettlement ? 2 : 0) +
     (hasWorldPop ? 6 : 0) +
     (hasUsableOsmAccess ? 4 : 0)
   );
@@ -302,6 +308,7 @@ function buildFeature(candidate, index, extracts) {
     hasSoilGrids ? "soil" : null,
     hasSoilObservations ? "soil_observations" : null,
     hasGbifBiodiversity ? "biodiversity_observations" : null,
+    hasGhslSettlement ? "settlement_context" : null,
     hasWorldPop ? "population" : null,
     hasUsableOsmAccess ? "access" : null,
   ].filter(Boolean);
@@ -469,6 +476,21 @@ function buildFeature(candidate, index, extracts) {
           }
         : {
             dataset_id: "gbif_biodiversity",
+            status: "not_extracted",
+          },
+      settlement_context: ghslSettlementFeature
+        ? {
+            dataset_id: "ghsl_settlement",
+            status: ghslSettlementFeature.source_status,
+            ghsl_smod_class_fractions: ghslSettlementFeature.ghsl_smod_class_fractions,
+            ghsl_urban_centre_fraction: ghslSettlementFeature.ghsl_urban_centre_fraction,
+            ghsl_dense_settlement_fraction: ghslSettlementFeature.ghsl_dense_settlement_fraction,
+            ghsl_rural_or_low_density_fraction: ghslSettlementFeature.ghsl_rural_or_low_density_fraction,
+            ghsl_settlement_context_score: ghslSettlementFeature.ghsl_settlement_context_score,
+            ghsl_valid_pixel_count: ghslSettlementFeature.ghsl_valid_pixel_count,
+          }
+        : {
+            dataset_id: "ghsl_settlement",
             status: "not_extracted",
           },
       population: hasWorldPop
