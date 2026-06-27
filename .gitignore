@@ -26,3 +26,4 @@ data/catalog/source_url_checks.local.json
 
 # downloaded source data cache
 data/raw/
+srtm/

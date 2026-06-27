@@ -8,6 +8,8 @@
     "data:aoi": "node scripts/aoi-boundary-builder.mjs",
     "data:candidates": "npm run data:aoi && node scripts/candidate-site-generator.mjs",
     "data:candidates:validate": "node scripts/validate-candidate-sites.mjs",
+    "data:srtm:dry-run": "node scripts/srtm-terrain-extractor.mjs --dry-run",
+    "data:srtm": "node scripts/srtm-terrain-extractor.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
