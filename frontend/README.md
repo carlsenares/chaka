@@ -38,6 +38,16 @@ npm run build
 Running from inside `frontend/` keeps Next.js generated files, such as `next-env.d.ts`
 and `.next/`, scoped to the frontend app.
 
+## Default View
+
+The app opens directly into the interactive prioritization workspace, not a
+landing page. The workspace shows the Ethiopia map, ranked candidate areas,
+selected-area details, prioritization sliders, and the Demo/Backend data-source
+toggle on first load.
+
+The old landing and step-flow components remain in `frontend/app/page.tsx` for
+future reuse, but the default `step` state is `dashboard`.
+
 ## Changing Default Slider Values
 
 The restoration objective slider defaults live in:

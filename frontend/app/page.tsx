@@ -74,7 +74,7 @@ const scoreLabels = {
 };
 
 export default function Home() {
-  const [step, setStep] = useState<Step>("landing");
+  const [step, setStep] = useState<Step>("dashboard");
   const [dataSourceMode, setDataSourceMode] = useState<DataSourceMode>("demo");
   const [objectiveWeights, setObjectiveWeights] = useState<ObjectiveWeights>(defaultObjectiveWeights);
   const viewModel = atlasViewModels[dataSourceMode];
@@ -101,7 +101,6 @@ export default function Home() {
     [areas],
   );
   const selectedArea = areas.find((area) => area.id === selectedRankedAreaId) ?? areas[0];
-  const activeStepIndex = getStepIndex(step);
 
   function selectRegion(regionId: string) {
     const nextAreas = viewModel.areas
@@ -152,14 +151,7 @@ export default function Home() {
     <main className="min-h-screen bg-base text-fg">
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-5 sm:px-8">
         <PrototypeBanner notice={viewModel.prototypeNotice} />
-        <TopNav
-          activeStepIndex={activeStepIndex}
-          dataSourceMode={dataSourceMode}
-          sourceBadge={viewModel.sourceBadge}
-          sourceBadgeTone={viewModel.sourceBadgeTone}
-          onChangeDataSource={changeDataSource}
-          onReset={() => setStep("landing")}
-        />
+        <WorkspaceHeader sourceBadge={viewModel.sourceBadge} sourceBadgeTone={viewModel.sourceBadgeTone} />
 
         {step === "landing" && (
           <Landing
@@ -202,8 +194,12 @@ export default function Home() {
             priorityResults={dashboardPriorityResults}
             priorityScoreRange={priorityScoreRange}
             objectiveWeights={objectiveWeights}
+            dataSourceMode={dataSourceMode}
             onSelectArea={selectArea}
             onSelectMapArea={setSelectedMapAreaId}
+            onWeightChange={updateObjectiveWeight}
+            onResetWeights={resetObjectiveWeights}
+            onChangeDataSource={changeDataSource}
             onDetail={() => setStep("detail")}
             onBack={() => setStep("layers")}
           />
@@ -236,6 +232,30 @@ function PrototypeBanner({ notice }: { notice: string }) {
     <div className="mb-4 rounded-lg border border-[#d9d0bd] bg-[#fff9ed] px-4 py-3 text-sm text-muted">
       {notice}
     </div>
+  );
+}
+
+function WorkspaceHeader({
+  sourceBadge,
+  sourceBadgeTone,
+}: {
+  sourceBadge: string;
+  sourceBadgeTone: AtlasViewModel["sourceBadgeTone"];
+}) {
+  return (
+    <header className="mb-5 flex flex-col gap-3 border-b border-[#d9d0bd] pb-5 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p className="text-xs font-semibold uppercase text-accent">Restoration decision support</p>
+        <div className="mt-1 flex flex-wrap items-center gap-3">
+          <h1 className="text-2xl font-semibold text-fg">Chaka Priority Atlas</h1>
+          <SourceBadge label={sourceBadge} tone={sourceBadgeTone} />
+        </div>
+      </div>
+      <p className="max-w-2xl text-sm leading-6 text-muted">
+        Prioritize restoration areas by ecological and livelihood impact using map-linked ranking,
+        objective weights, and AI pipeline-ready evidence summaries.
+      </p>
+    </header>
   );
 }
 
@@ -573,8 +593,12 @@ function Dashboard({
   priorityResults,
   priorityScoreRange,
   objectiveWeights,
+  dataSourceMode,
   onSelectArea,
   onSelectMapArea,
+  onWeightChange,
+  onResetWeights,
+  onChangeDataSource,
   onDetail,
   onBack,
 }: {
@@ -587,120 +611,252 @@ function Dashboard({
   priorityResults: PriorityResult[];
   priorityScoreRange: PriorityScoreRange;
   objectiveWeights: ObjectiveWeights;
+  dataSourceMode: DataSourceMode;
   onSelectArea: (areaId: string) => void;
   onSelectMapArea: (pcode: string | undefined) => void;
+  onWeightChange: (key: ObjectiveKey, value: number) => void;
+  onResetWeights: () => void;
+  onChangeDataSource: (mode: DataSourceMode) => void;
   onDetail: () => void;
   onBack: () => void;
 }) {
+  const selectedMapResult = priorityResults.find((result) => result.pcode === selectedMapAreaId);
+  const selectedMapArea = areas.find((area) => area.pcode === selectedMapAreaId);
+  const selectedMapIsRecommendation = selectedMapArea?.id === selectedRankedAreaId;
+
   return (
-    <section className="py-6">
-      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <section className="pb-6">
+      <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeader
-          label="Dashboard"
-          title={`${region.name} restoration priority view`}
+          label="Workspace"
+          title={`${region.name} prioritization`}
           description={viewModel.dashboardDescription(objectiveWeights)}
         />
         <div className="flex gap-3">
-          <button className="rounded-full border border-[#cfc2aa] bg-white px-5 py-3 text-sm font-semibold text-fg" onClick={onBack}>
-            Edit weights
-          </button>
           <button className="rounded-full bg-[#1f6f68] px-5 py-3 text-sm font-semibold text-white" onClick={onDetail}>
             Open rationale
           </button>
         </div>
       </div>
 
-      <EthiopiaPriorityMap
-        status="ready"
-        priorityResults={priorityResults}
-        selectedRankedPcode={selectedArea.pcode}
-        selectedMapAreaId={selectedMapAreaId}
-        onSelectMapArea={onSelectMapArea}
-        priorityScoreRange={priorityScoreRange}
-        resultBadge={`${viewModel.sourceBadge} joined by PCODE`}
-        resultDescription={
-          viewModel.mode === "backend"
-            ? "Backend sample recommendations mapped to Admin 2 polygons through a temporary site-to-PCODE adapter."
-            : "HDX/OCHA COD-AB Admin 2 fixture · selected polygons follow administrative boundaries."
-        }
-        legendNote={`Thin grey outlines show all loaded Admin 2 boundaries. Heatmap colors are ${viewModel.sourceBadge.toLowerCase()} recommendations joined by PCODE.`}
-      />
+      <div className="grid min-h-[720px] gap-5 lg:grid-cols-[minmax(0,1.75fr)_minmax(360px,0.9fr)]">
+        <EthiopiaPriorityMap
+          className="h-full"
+          status="ready"
+          priorityResults={priorityResults}
+          selectedRankedPcode={selectedArea.pcode}
+          selectedMapAreaId={selectedMapAreaId}
+          onSelectMapArea={onSelectMapArea}
+          priorityScoreRange={priorityScoreRange}
+          showDetailsPanel={false}
+          resultBadge={`${viewModel.sourceBadge} joined by PCODE`}
+          resultDescription={
+            viewModel.mode === "backend"
+              ? "Backend sample recommendations mapped to Admin 2 polygons through a temporary site-to-PCODE adapter."
+              : "HDX/OCHA COD-AB Admin 2 fixture · selected polygons follow administrative boundaries."
+          }
+          legendNote={`Thin grey outlines show all loaded Admin 2 boundaries. Heatmap colors are ${viewModel.sourceBadge.toLowerCase()} recommendations joined by PCODE.`}
+        />
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.82fr]">
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
-              <h3 className="text-xl font-semibold text-fg">Ranked candidate areas</h3>
-              <p className="text-sm text-muted">
-                {viewModel.mode === "backend"
-                  ? "AI pipeline sample outputs normalized into the shared frontend model."
-                  : "Mock decision-support outputs for live pitch review."}
-              </p>
+        <aside className="flex max-h-[calc(100vh-9rem)] flex-col gap-4 overflow-y-auto rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-sm lg:sticky lg:top-4">
+          <section>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-semibold text-fg">Ranked candidate areas</h3>
+                <p className="text-sm text-muted">{viewModel.dashboardDataLabel}</p>
+              </div>
+              <span className="rounded-full bg-[#fff9ed] px-3 py-1 text-xs text-muted">{areas.length} areas</span>
             </div>
-            <span className="rounded-full bg-[#fff9ed] px-3 py-1 text-xs text-muted">{viewModel.dashboardDataLabel}</span>
-          </div>
-          <div className="overflow-hidden rounded-lg border border-[#e7deca]">
-            {areas.map((area) => {
-              const isSelected = selectedRankedAreaId === area.id;
-              const areaColor = priorityColor(area.priorityScore, priorityScoreRange);
-              const areaTextColor = priorityTextColor(area.priorityScore, priorityScoreRange);
+            <RankedCandidateList
+              areas={areas}
+              selectedRankedAreaId={selectedRankedAreaId}
+              priorityScoreRange={priorityScoreRange}
+              onSelectArea={onSelectArea}
+            />
+          </section>
 
-              return (
-                <button
-                  key={area.id}
-                  onClick={() => onSelectArea(area.id)}
-                  className={`grid w-full gap-4 border-b border-[#e7deca] p-4 text-left transition last:border-b-0 hover:bg-[#fbf7ee] md:grid-cols-[70px_1fr_130px] ${
-                    isSelected ? "bg-[#eef7f2]" : "bg-white"
-                  }`}
-                  style={
-                    isSelected
-                      ? { boxShadow: `inset 0 0 0 1px ${priorityTint(area.priorityScore, priorityScoreRange, 0.38)}` }
-                      : {
-                          backgroundImage: `linear-gradient(90deg, ${priorityTint(
-                            area.priorityScore,
-                            priorityScoreRange,
-                            0.16,
-                          )} 0%, rgba(255,255,255,0) 46%)`,
-                        }
-                  }
-                >
-                  <div>
-                    <p className="text-xs text-muted">Rank</p>
-                    <p className="text-2xl font-semibold text-fg">#{area.weightedRank}</p>
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="size-3 rounded-sm" style={{ backgroundColor: areaColor }} />
-                      <h4 className="font-semibold text-fg">{area.name}</h4>
-                    </div>
-                    <p className="mt-1 text-sm text-muted">{area.zone}</p>
-                    <p className="mt-2 text-sm text-muted">{area.intervention}</p>
-                  </div>
-                  <div className="md:text-right">
-                    <p className="text-xs text-muted">Priority score</p>
-                    <p
-                      className="mt-1 inline-flex min-w-16 justify-center rounded-full px-3 py-1 text-2xl font-semibold"
-                      style={{ backgroundColor: areaColor, color: areaTextColor }}
-                    >
-                      {area.priorityScore}
-                    </p>
-                    <p className="mt-1 text-xs text-muted">{area.confidence} confidence</p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+          <SelectedAreaSummary
+            selectedArea={selectedArea}
+            selectedMapArea={selectedMapArea}
+            selectedMapResult={selectedMapResult}
+            selectedMapIsRecommendation={selectedMapIsRecommendation}
+            priorityScoreRange={priorityScoreRange}
+          />
 
-        <div className="grid gap-4">
-          <ImpactSummary area={selectedArea} />
-          <PipelineStatesPreview />
-        </div>
+          <section className="rounded-lg border border-[#e7deca] bg-[#fbf7ee] p-4">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-semibold text-fg">Prioritization controls</h3>
+                <p className="mt-1 text-sm leading-6 text-muted">
+                  Adjust objective weights. Demo rankings update immediately; Backend Preview shows pipeline sample scores.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={onResetWeights}
+                className="shrink-0 rounded-full border border-[#cfc2aa] bg-white px-3 py-1.5 text-xs font-semibold text-fg transition hover:bg-[#fbf7ee]"
+              >
+                Reset
+              </button>
+            </div>
+            <div className="grid gap-3">
+              {objectives.map((objective) => (
+                <ObjectiveSlider
+                  key={objective.key}
+                  objective={objective}
+                  value={objectiveWeights[objective.key]}
+                  onChange={(value) => onWeightChange(objective.key, value)}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-[#e7deca] bg-white p-4">
+            <h3 className="text-lg font-semibold text-fg">Data source</h3>
+            <p className="mt-1 text-sm text-muted">Switch without changing the interface.</p>
+            <div className="mt-4">
+              <DataSourceTabs activeMode={dataSourceMode} onChange={onChangeDataSource} />
+            </div>
+          </section>
+        </aside>
       </div>
     </section>
   );
 }
 
+function RankedCandidateList({
+  areas,
+  selectedRankedAreaId,
+  priorityScoreRange,
+  onSelectArea,
+}: {
+  areas: RankedAreaViewModel[];
+  selectedRankedAreaId: string;
+  priorityScoreRange: PriorityScoreRange;
+  onSelectArea: (areaId: string) => void;
+}) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-[#e7deca]">
+      {areas.map((area) => {
+        const isSelected = selectedRankedAreaId === area.id;
+        const areaColor = priorityColor(area.priorityScore, priorityScoreRange);
+        const areaTextColor = priorityTextColor(area.priorityScore, priorityScoreRange);
+
+        return (
+          <button
+            key={area.id}
+            onClick={() => onSelectArea(area.id)}
+            className={`grid w-full gap-3 border-b border-[#e7deca] p-3 text-left transition last:border-b-0 hover:bg-[#fbf7ee] ${
+              isSelected ? "bg-[#eef7f2]" : "bg-white"
+            }`}
+            style={
+              isSelected
+                ? { boxShadow: `inset 0 0 0 1px ${priorityTint(area.priorityScore, priorityScoreRange, 0.38)}` }
+                : {
+                    backgroundImage: `linear-gradient(90deg, ${priorityTint(
+                      area.priorityScore,
+                      priorityScoreRange,
+                      0.16,
+                    )} 0%, rgba(255,255,255,0) 46%)`,
+                  }
+            }
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="size-3 shrink-0 rounded-sm" style={{ backgroundColor: areaColor }} />
+                  <h4 className="truncate font-semibold text-fg">{area.name}</h4>
+                </div>
+                <p className="mt-1 text-xs text-muted">Rank #{area.weightedRank} · {area.confidence} confidence</p>
+                <p className="mt-1 line-clamp-2 text-sm text-muted">{area.intervention}</p>
+              </div>
+              <span
+                className="inline-flex min-w-14 justify-center rounded-full px-2.5 py-1 text-lg font-semibold"
+                style={{ backgroundColor: areaColor, color: areaTextColor }}
+              >
+                {area.priorityScore}
+              </span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function SelectedAreaSummary({
+  selectedArea,
+  selectedMapArea,
+  selectedMapResult,
+  selectedMapIsRecommendation,
+  priorityScoreRange,
+}: {
+  selectedArea: RankedAreaViewModel;
+  selectedMapArea?: RankedAreaViewModel;
+  selectedMapResult?: PriorityResult;
+  selectedMapIsRecommendation: boolean;
+  priorityScoreRange: PriorityScoreRange;
+}) {
+  const hasMappedRecommendation = Boolean(selectedMapArea || selectedMapResult);
+  const displayArea = selectedMapArea ?? selectedArea;
+  const displayTitle = selectedMapArea?.name ?? selectedMapResult?.pcode ?? "Administrative boundary";
+  const displayZone =
+    selectedMapArea?.zone ??
+    (selectedMapResult ? `PCODE ${selectedMapResult.pcode}` : "No ranked recommendation attached");
+  const displayScore = selectedMapResult?.priority_score ?? selectedMapArea?.priorityScore ?? selectedArea.priorityScore;
+  const scoreColor = priorityColor(displayScore, priorityScoreRange);
+
+  return (
+    <section className="rounded-lg border border-[#e7deca] bg-white p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold uppercase text-accent">
+            {selectedMapIsRecommendation ? "Selected recommendation" : "Map selection"}
+          </p>
+          <h3 className="mt-1 text-xl font-semibold text-fg">{displayTitle}</h3>
+          <p className="mt-1 text-sm text-muted">{displayZone}</p>
+        </div>
+        <span
+          className="rounded-full px-3 py-1 text-lg font-semibold"
+          style={
+            hasMappedRecommendation
+              ? { backgroundColor: scoreColor, color: priorityTextColor(displayScore, priorityScoreRange) }
+              : { backgroundColor: "#f1eadc", color: "#5e584d" }
+          }
+        >
+          {hasMappedRecommendation ? displayScore : "No score"}
+        </span>
+      </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <MetricCard label="Area" value={hasMappedRecommendation ? displayArea.hectares : "Not in ranked set"} />
+        <MetricCard
+          label="Confidence"
+          value={hasMappedRecommendation ? selectedMapResult?.confidence ?? displayArea.confidence : "No score"}
+        />
+      </div>
+
+      <div className="mt-4 rounded-md border border-[#e7deca] bg-[#fbf7ee] p-3">
+        <p className="text-sm font-semibold text-fg">Priority explanation</p>
+        <p className="mt-2 text-sm leading-6 text-muted">
+          {selectedMapResult?.rationale ??
+            (selectedMapArea
+              ? selectedMapArea.rationale[0]
+              : "This administrative boundary is available for map browsing but is not part of the current ranked recommendation set.")}
+        </p>
+      </div>
+
+      {hasMappedRecommendation && (
+        <div className="mt-4 grid gap-3">
+          <ScoreBar label="Biodiversity uplift" value={selectedMapResult?.biodiversity_score ?? displayArea.scores.biodiversity} />
+          <ScoreBar label="Carbon storage potential" value={selectedMapResult?.carbon_score ?? displayArea.scores.carbon} />
+          <ScoreBar label="Water impact" value={selectedMapResult?.water_score ?? displayArea.scores.water} />
+          <ScoreBar label="Livelihood benefit" value={selectedMapResult?.livelihood_score ?? displayArea.scores.livelihoods} />
+        </div>
+      )}
+    </section>
+  );
+}
 function ImpactSummary({ area }: { area: RankedAreaViewModel }) {
   return (
     <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm">

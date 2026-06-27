@@ -35,6 +35,7 @@ type EthiopiaPriorityMapProps = {
   resultDescription?: string;
   legendNote?: string;
   priorityScoreRange?: PriorityScoreRange;
+  showDetailsPanel?: boolean;
   className?: string;
 };
 
@@ -68,6 +69,7 @@ export function EthiopiaPriorityMap({
   resultDescription = "HDX/OCHA COD-AB Admin 2 fixture · selected polygons follow administrative boundaries.",
   legendNote = "Thin grey outlines show all loaded Admin 2 boundaries. Heatmap colors are recommendations joined by PCODE.",
   priorityScoreRange,
+  showDetailsPanel = true,
   className = "",
 }: EthiopiaPriorityMapProps) {
   const [adminBoundaries, setAdminBoundaries] =
@@ -372,7 +374,7 @@ export function EthiopiaPriorityMap({
         </div>
       </div>
 
-      <div className="grid min-h-[600px] lg:grid-cols-[1fr_360px]">
+      <div className={`grid min-h-[600px] ${showDetailsPanel ? "lg:grid-cols-[1fr_360px]" : ""}`}>
         <div className="relative min-h-[500px] overflow-hidden bg-[#edf2e7]">
           <div ref={mapElementRef} className="h-full min-h-[500px] w-full" aria-label="Interactive Leaflet map of Ethiopia administrative boundaries" />
 
@@ -402,17 +404,19 @@ export function EthiopiaPriorityMap({
           )}
         </div>
 
-        <aside className="border-t border-[#e7deca] bg-[#fffdf7] p-5 lg:border-l lg:border-t-0">
-          {panelFeature && effectiveStatus === "ready" ? (
-            <PriorityAreaPanel
-              feature={panelFeature}
-              mode={effectivePanelMode}
-              priorityScoreRange={effectivePriorityScoreRange}
-            />
-          ) : (
-            <FutureDataPanel status={effectiveStatus} />
-          )}
-        </aside>
+        {showDetailsPanel && (
+          <aside className="border-t border-[#e7deca] bg-[#fffdf7] p-5 lg:border-l lg:border-t-0">
+            {panelFeature && effectiveStatus === "ready" ? (
+              <PriorityAreaPanel
+                feature={panelFeature}
+                mode={effectivePanelMode}
+                priorityScoreRange={effectivePriorityScoreRange}
+              />
+            ) : (
+              <FutureDataPanel status={effectiveStatus} />
+            )}
+          </aside>
+        )}
       </div>
     </section>
   );
