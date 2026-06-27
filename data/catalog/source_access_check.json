@@ -1,0 +1,135 @@
+{
+  "checked_at_utc": "2026-06-27T22:02:03.207Z",
+  "note": "Quick access/update check only. It does not download large source datasets or accept restricted terms.",
+  "results": [
+    {
+      "dataset_id": "ghsl_settlement",
+      "name": "GHSL GHS-SMOD 2020 R2023A zip",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_SMOD_GLOBE_R2023A/GHS_SMOD_E2020_GLOBE_R2023A_54009_1000/V1-0/GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.zip",
+      "expected": "available",
+      "method": "HEAD",
+      "http_status": 200,
+      "content_type": "application/zip",
+      "content_length": "29415458",
+      "access_status": "available"
+    },
+    {
+      "dataset_id": "wapor_l2_aeti",
+      "name": "FAO WaPOR v3 L2 AETI annual mapset metadata",
+      "url": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/WAPOR-3/mapsets/L2-AETI-A",
+      "expected": "available",
+      "method": "GET_JSON",
+      "http_status": 200,
+      "content_type": "application/json",
+      "content_length": null,
+      "access_status": "available",
+      "details": {
+        "mapset": "L2-AETI-A",
+        "unit": "mm/year",
+        "scale": 0.1,
+        "big_tiff": true
+      }
+    },
+    {
+      "dataset_id": "wapor_l2_tbp_latest",
+      "name": "FAO WaPOR v3 L2 TBP latest raster listing",
+      "url": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/WAPOR-3/mapsets/L2-TBP-A/rasters?size=1&sort=code:desc",
+      "expected": "available",
+      "method": "GET_JSON",
+      "http_status": 200,
+      "content_type": "application/json",
+      "content_length": null,
+      "access_status": "available",
+      "details": {
+        "latest_code": "WAPOR-3.L2-TBP-A.2025",
+        "download_url": "https://storage.googleapis.com/fao-gismgr-wapor-3-data/DATA/WAPOR-3/MAPSET/L2-TBP-A/WAPOR-3.L2-TBP-A.2025.tif",
+        "size": "9.03 GB",
+        "updated": "2026-03-09T13:39:50Z"
+      }
+    },
+    {
+      "dataset_id": "nhm_bii_v2_1_1_metadata",
+      "name": "NHM BII v2.1.1 package metadata",
+      "url": "https://data.nhm.ac.uk/api/3/action/package_show?id=ed428544-c494-4289-961c-1a5adf8fae74",
+      "expected": "available_metadata",
+      "method": "GET_JSON",
+      "http_status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "content_length": null,
+      "access_status": "available",
+      "details": {
+        "title": "The Biodiversity Intactness Index developed by The Natural History Museum, London, v2.1.1 (Open Access, Limited Release)",
+        "doi": "10.5519/k33reyb6",
+        "license": "Other (Non-Commercial)",
+        "temporal_extent": "2000-2020",
+        "download_url": "https://data.nhm.ac.uk/dataset/ed428544-c494-4289-961c-1a5adf8fae74/resource/c4c281c4-befa-4e1b-a162-ba2f25e5ae82/download/bii-v2-1-1-nhm-data-portal.zip"
+      }
+    },
+    {
+      "dataset_id": "nhm_bii_v2_1_1_download",
+      "name": "NHM BII v2.1.1 zip direct download",
+      "url": "https://data.nhm.ac.uk/dataset/ed428544-c494-4289-961c-1a5adf8fae74/resource/c4c281c4-befa-4e1b-a162-ba2f25e5ae82/download/bii-v2-1-1-nhm-data-portal.zip",
+      "expected": "blocked_server_challenge_or_available",
+      "method": "GET_RANGE",
+      "http_status": 403,
+      "content_type": "text/html; charset=UTF-8",
+      "content_length": "6050",
+      "access_status": "blocked_server_challenge"
+    },
+    {
+      "dataset_id": "gfw_carbon_removals_metadata",
+      "name": "GFW forest carbon removals metadata",
+      "url": "https://data-api.globalforestwatch.org/dataset/gfw_forest_carbon_gross_removals",
+      "expected": "available_metadata",
+      "method": "GET_JSON",
+      "http_status": 200,
+      "content_type": "application/json",
+      "content_length": "3181",
+      "access_status": "available",
+      "details": {
+        "latest_version": "v20260327",
+        "title": "Forest carbon removals",
+        "subtitle": "(2001-2025, 30m, Harris et al. 2021, Gibbs et al. 2025)",
+        "license": "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  "
+      }
+    },
+    {
+      "dataset_id": "gfw_carbon_removals_tile",
+      "name": "GFW forest carbon removals tile download",
+      "url": "https://data-api.globalforestwatch.org/dataset/gfw_forest_carbon_gross_removals/v20240308/download/geotiff?grid=10/40000&tile_id=10N_030E&pixel_meaning=Mg_CO2e_ha-1",
+      "expected": "blocked_auth_or_available",
+      "method": "GET_RANGE",
+      "http_status": 403,
+      "content_type": "application/json",
+      "content_length": "174",
+      "access_status": "blocked_auth"
+    },
+    {
+      "dataset_id": "wdpa_protected_areas",
+      "name": "WDPA Protected Planet",
+      "url": "https://www.protectedplanet.net/en/thematic-areas/wdpa",
+      "expected": "blocked_terms",
+      "method": "MANUAL",
+      "access_status": "blocked_terms",
+      "note": "Human must confirm WDPA terms and provide official download/API access before automation."
+    },
+    {
+      "dataset_id": "kba_wdkba",
+      "name": "World Database of Key Biodiversity Areas",
+      "url": "https://www.keybiodiversityareas.org/request-gis-data",
+      "expected": "blocked_access_request",
+      "method": "MANUAL",
+      "access_status": "blocked_access_request",
+      "note": "GIS access requires request or IBAT subscription/API."
+    },
+    {
+      "dataset_id": "iucn_red_list_spatial",
+      "name": "IUCN Red List spatial data",
+      "url": "https://www.iucnredlist.org/resources/spatial-data-download",
+      "expected": "blocked_account_terms",
+      "method": "MANUAL",
+      "access_status": "blocked_account_terms",
+      "note": "Requires IUCN account/terms and product/taxa selection."
+    }
+  ]
+}
