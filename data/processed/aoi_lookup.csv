@@ -1,0 +1,3 @@
+region_code,region,source_adm1_name,source_adm1_pcode,area_ha,geometry_quality,valid_on
+SET,South Ethiopia,South Ethiopia,ET08,4861138.5,real_boundary,2025-01-01
+SWE,Southwest Ethiopia Peoples' Region,South West Ethiopia,ET11,3929155.8,real_boundary,2025-01-01

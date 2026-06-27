@@ -1,0 +1,766 @@
+{
+  "type": "FeatureCollection",
+  "name": "chaka_candidate_sites",
+  "metadata": {
+    "generated_by": "scripts/candidate-site-generator.mjs",
+    "source_aoi": "data/processed/aoi_boundaries.geojson",
+    "crs": "EPSG:4326",
+    "cell_size_degrees": 0.045,
+    "candidate_count": 16,
+    "note": "MVP candidate sites are deterministic grid cells inside target AOIs. They preserve the AGENT_STRUCTURE.md GeoJSON contract and can scale to national grid generation later."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-001",
+        "name": "South Ethiopia Candidate 001",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Dasenech /Kuraz",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081202",
+        "area_ha": 2501.8,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.04619,
+        "centroid_lat": 4.456351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.02369,
+              4.433851
+            ],
+            [
+              36.06869,
+              4.433851
+            ],
+            [
+              36.06869,
+              4.478851
+            ],
+            [
+              36.02369,
+              4.478851
+            ],
+            [
+              36.02369,
+              4.433851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-002",
+        "name": "South Ethiopia Candidate 002",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Hamer",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081203",
+        "area_ha": 2499.7,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.45119,
+        "centroid_lat": 5.041351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.42869,
+              5.018851
+            ],
+            [
+              36.47369,
+              5.018851
+            ],
+            [
+              36.47369,
+              5.063851
+            ],
+            [
+              36.42869,
+              5.063851
+            ],
+            [
+              36.42869,
+              5.018851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-003",
+        "name": "South Ethiopia Candidate 003",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Bena Tsemay",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081201",
+        "area_ha": 2498.2,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.58619,
+        "centroid_lat": 5.401351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.56369,
+              5.378851
+            ],
+            [
+              36.60869,
+              5.378851
+            ],
+            [
+              36.60869,
+              5.423851
+            ],
+            [
+              36.56369,
+              5.423851
+            ],
+            [
+              36.56369,
+              5.378851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-004",
+        "name": "South Ethiopia Candidate 004",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Salamago",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081206",
+        "area_ha": 2497.1,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.13619,
+        "centroid_lat": 5.671351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.11369,
+              5.648851
+            ],
+            [
+              36.15869,
+              5.648851
+            ],
+            [
+              36.15869,
+              5.693851
+            ],
+            [
+              36.11369,
+              5.693851
+            ],
+            [
+              36.11369,
+              5.648851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-005",
+        "name": "South Ethiopia Candidate 005",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Salamago",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081206",
+        "area_ha": 2495.9,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.13619,
+        "centroid_lat": 5.941351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.11369,
+              5.918851
+            ],
+            [
+              36.15869,
+              5.918851
+            ],
+            [
+              36.15869,
+              5.963851
+            ],
+            [
+              36.11369,
+              5.963851
+            ],
+            [
+              36.11369,
+              5.918851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-006",
+        "name": "South Ethiopia Candidate 006",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "South Omo",
+        "woreda": "Salamago",
+        "zone_pcode": "ET0812",
+        "woreda_pcode": "ET081206",
+        "area_ha": 2494.7,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.31619,
+        "centroid_lat": 6.211351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.29369,
+              6.188851
+            ],
+            [
+              36.33869,
+              6.188851
+            ],
+            [
+              36.33869,
+              6.233851
+            ],
+            [
+              36.29369,
+              6.233851
+            ],
+            [
+              36.29369,
+              6.188851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-007",
+        "name": "South Ethiopia Candidate 007",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "Gofa",
+        "woreda": "Melekoza",
+        "zone_pcode": "ET0803",
+        "woreda_pcode": "ET080306",
+        "area_ha": 2493.1,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 36.49619,
+        "centroid_lat": 6.526351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.47369,
+              6.503851
+            ],
+            [
+              36.51869,
+              6.503851
+            ],
+            [
+              36.51869,
+              6.548851
+            ],
+            [
+              36.47369,
+              6.548851
+            ],
+            [
+              36.47369,
+              6.503851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SET-008",
+        "name": "South Ethiopia Candidate 008",
+        "region": "South Ethiopia",
+        "region_code": "SET",
+        "zone": "Wolayita",
+        "woreda": "Boloso Sore",
+        "zone_pcode": "ET0801",
+        "woreda_pcode": "ET080101",
+        "area_ha": 2489.8,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET08",
+        "centroid_lon": 37.71119,
+        "centroid_lat": 7.156351,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              37.68869,
+              7.133851
+            ],
+            [
+              37.73369,
+              7.133851
+            ],
+            [
+              37.73369,
+              7.178851
+            ],
+            [
+              37.68869,
+              7.178851
+            ],
+            [
+              37.68869,
+              7.133851
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-001",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 001",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "West Omo",
+        "woreda": "Surma",
+        "zone_pcode": "ET1105",
+        "woreda_pcode": "ET110506",
+        "area_ha": 2498.4,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 35.325423,
+        "centroid_lat": 5.367934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.302923,
+              5.345434
+            ],
+            [
+              35.347923,
+              5.345434
+            ],
+            [
+              35.347923,
+              5.390434
+            ],
+            [
+              35.302923,
+              5.390434
+            ],
+            [
+              35.302923,
+              5.345434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-002",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 002",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "West Omo",
+        "woreda": "Surma",
+        "zone_pcode": "ET1105",
+        "woreda_pcode": "ET110506",
+        "area_ha": 2495.6,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 35.325423,
+        "centroid_lat": 5.997934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.302923,
+              5.975434
+            ],
+            [
+              35.347923,
+              5.975434
+            ],
+            [
+              35.347923,
+              6.020434
+            ],
+            [
+              35.302923,
+              6.020434
+            ],
+            [
+              35.302923,
+              5.975434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-003",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 003",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "West Omo",
+        "woreda": "Gori Gesha",
+        "zone_pcode": "ET1105",
+        "woreda_pcode": "ET110503",
+        "area_ha": 2493.5,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 35.325423,
+        "centroid_lat": 6.447934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.302923,
+              6.425434
+            ],
+            [
+              35.347923,
+              6.425434
+            ],
+            [
+              35.347923,
+              6.470434
+            ],
+            [
+              35.302923,
+              6.470434
+            ],
+            [
+              35.302923,
+              6.425434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-004",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 004",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "Dawuro",
+        "woreda": "Disa",
+        "zone_pcode": "ET1104",
+        "woreda_pcode": "ET110409",
+        "area_ha": 2492.2,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 37.125423,
+        "centroid_lat": 6.717934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              37.102923,
+              6.695434
+            ],
+            [
+              37.147923,
+              6.695434
+            ],
+            [
+              37.147923,
+              6.740434
+            ],
+            [
+              37.102923,
+              6.740434
+            ],
+            [
+              37.102923,
+              6.695434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-005",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 005",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "Bench Sheko",
+        "woreda": "Shay Bench",
+        "zone_pcode": "ET1103",
+        "woreda_pcode": "ET110304",
+        "area_ha": 2491,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 35.820423,
+        "centroid_lat": 6.942934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.797923,
+              6.920434
+            ],
+            [
+              35.842923,
+              6.920434
+            ],
+            [
+              35.842923,
+              6.965434
+            ],
+            [
+              35.797923,
+              6.965434
+            ],
+            [
+              35.797923,
+              6.920434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-006",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 006",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "Kefa",
+        "woreda": "Decha",
+        "zone_pcode": "ET1102",
+        "woreda_pcode": "ET110208",
+        "area_ha": 2490,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 36.000423,
+        "centroid_lat": 7.122934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.977923,
+              7.100434
+            ],
+            [
+              36.022923,
+              7.100434
+            ],
+            [
+              36.022923,
+              7.145434
+            ],
+            [
+              35.977923,
+              7.145434
+            ],
+            [
+              35.977923,
+              7.100434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-007",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 007",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "Kefa",
+        "woreda": "Gimbo",
+        "zone_pcode": "ET1102",
+        "woreda_pcode": "ET110204",
+        "area_ha": 2488.8,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 36.270423,
+        "centroid_lat": 7.347934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.247923,
+              7.325434
+            ],
+            [
+              36.292923,
+              7.325434
+            ],
+            [
+              36.292923,
+              7.370434
+            ],
+            [
+              36.247923,
+              7.370434
+            ],
+            [
+              36.247923,
+              7.325434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SWE-008",
+        "name": "Southwest Ethiopia Peoples' Region Candidate 008",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "region_code": "SWE",
+        "zone": "Kefa",
+        "woreda": "Saylem",
+        "zone_pcode": "ET1102",
+        "woreda_pcode": "ET110201",
+        "area_ha": 2484.8,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET11",
+        "centroid_lon": 35.865423,
+        "centroid_lat": 8.022934,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              35.842923,
+              8.000434
+            ],
+            [
+              35.887923,
+              8.000434
+            ],
+            [
+              35.887923,
+              8.045434
+            ],
+            [
+              35.842923,
+              8.045434
+            ],
+            [
+              35.842923,
+              8.000434
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
