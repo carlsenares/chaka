@@ -19,11 +19,7 @@
     ],
     "source_url": "https://www.chc.ucsb.edu/data/chirps",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:36.320Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://www.chc.ucsb.edu/data/chirps"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -46,11 +42,7 @@
     ],
     "source_url": "https://www.cifor-icraf.org/knowledge/publication/8977/",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:36.570Z",
-      "status": 403,
-      "ok": false,
-      "final_url": "https://www.cifor-icraf.org/knowledge/publication/8977/"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -75,11 +67,7 @@
     ],
     "source_url": "https://esa-worldcover.org/en/data-access",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:36.685Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://esa-worldcover.org/en/data-access"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -103,11 +91,7 @@
     ],
     "source_url": "https://eth.restorationatlas.org/",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:37.171Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://eth.restorationatlas.org/"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -130,11 +114,7 @@
     ],
     "source_url": "https://data.globalforestwatch.org/",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:37.550Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://data.globalforestwatch.org/"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -157,11 +137,7 @@
     ],
     "source_url": "https://human-settlement.emergency.copernicus.eu/",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:37.625Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://human-settlement.emergency.copernicus.eu/"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -186,11 +162,7 @@
     ],
     "source_url": "https://data.humdata.org/dataset/cod-ab-eth",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:38.999Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://data.humdata.org/dataset/cod-ab-eth"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -213,11 +185,7 @@
     ],
     "source_url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:39.560Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -240,11 +208,7 @@
     ],
     "source_url": "https://download.geofabrik.de/africa/ethiopia.html",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:39.661Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://download.geofabrik.de/africa/ethiopia.html"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -268,11 +232,7 @@
     ],
     "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:40.148Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -296,11 +256,7 @@
     ],
     "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:40.697Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -324,11 +280,7 @@
     ],
     "source_url": "https://docs.isric.org/globaldata/soilgrids/",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:40.755Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://docs.isric.org/globaldata/soilgrids/"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -352,11 +304,7 @@
     ],
     "source_url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:41.031Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -379,11 +327,7 @@
     ],
     "source_url": "https://www.protectedplanet.net/en/thematic-areas/wdpa",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:43.968Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://www.protectedplanet.net/en/thematic-areas/wdpa"
+      "mode": "not_checked_this_run"
     }
   },
   {
@@ -405,11 +349,7 @@
     ],
     "source_url": "https://hub.worldpop.org/geodata/listing?id=29",
     "source_verification": {
-      "mode": "url_probe",
-      "checked_at": "2026-06-27T14:20:44.067Z",
-      "status": 200,
-      "ok": true,
-      "final_url": "https://hub.worldpop.org/geodata/listing?id=29"
+      "mode": "not_checked_this_run"
     }
   }
 ]

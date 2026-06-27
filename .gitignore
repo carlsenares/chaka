@@ -19,3 +19,9 @@ npm-debug.log*
 # local box config (init-deploy reads this; never commit)
 .config/
 deploy.env
+
+# local data diagnostics
+data/catalog/source_url_checks.local.json
+
+# downloaded source data cache
+data/raw/

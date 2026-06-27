@@ -6,6 +6,7 @@ import path from "node:path";
 const root = process.cwd();
 const sourcePath = path.join(root, "data/catalog/source_registry.json");
 const datasetsPath = path.join(root, "data/catalog/datasets.json");
+const urlChecksPath = path.join(root, "data/catalog/source_url_checks.local.json");
 const inventoryPath = path.join(root, "data/dataset_inventory.md");
 const qualityPath = path.join(root, "docs/data_quality.md");
 
@@ -26,6 +27,7 @@ const requiredFields = [
 
 const allowedMvpStatuses = new Set(["required", "optional", "future", "blocked"]);
 const checkUrls = process.argv.includes("--check-urls");
+const strictUrlChecks = process.argv.includes("--strict");
 
 function fail(message) {
   console.error(`data-registry-agent: ${message}`);
@@ -44,6 +46,12 @@ function validateDataset(dataset, index) {
     }
   }
 
+  for (const field of requiredFields.filter((field) => !["used_features", "known_limitations"].includes(field))) {
+    if (typeof dataset[field] !== "string" || dataset[field].trim() === "") {
+      fail(`${dataset.dataset_id ?? `dataset at index ${index}`}: "${field}" must be a non-empty string`);
+    }
+  }
+
   if (!/^[a-z0-9_]+$/.test(dataset.dataset_id)) {
     fail(`${dataset.dataset_id}: dataset_id must use lowercase snake_case`);
   }
@@ -56,8 +64,16 @@ function validateDataset(dataset, index) {
     fail(`${dataset.dataset_id}: used_features must be a non-empty array`);
   }
 
+  if (dataset.used_features.some((item) => typeof item !== "string" || item.trim() === "")) {
+    fail(`${dataset.dataset_id}: used_features must contain only non-empty strings`);
+  }
+
   if (!Array.isArray(dataset.known_limitations)) {
     fail(`${dataset.dataset_id}: known_limitations must be an array`);
+  }
+
+  if (dataset.known_limitations.some((item) => typeof item !== "string" || item.trim() === "")) {
+    fail(`${dataset.dataset_id}: known_limitations must contain only non-empty strings`);
   }
 
   try {
@@ -135,17 +151,34 @@ async function main() {
     .map((dataset) => ({
       ...dataset,
       source_verification: {
-        mode: checkUrls ? "url_probe" : "not_checked_this_run",
+        mode: "not_checked_this_run",
       },
     }))
     .sort((a, b) => a.dataset_id.localeCompare(b.dataset_id));
 
   if (checkUrls) {
+    const urlChecks = [];
     for (const dataset of normalized) {
-      dataset.source_verification = {
+      urlChecks.push({
+        dataset_id: dataset.dataset_id,
+        source_url: dataset.source_url,
         mode: "url_probe",
         ...(await probeUrl(dataset.source_url)),
-      };
+      });
+    }
+
+    await mkdir(path.dirname(urlChecksPath), { recursive: true });
+    await writeFile(urlChecksPath, `${JSON.stringify(urlChecks, null, 2)}\n`);
+
+    const failedChecks = urlChecks.filter((check) => !check.ok);
+    console.log(`Wrote ${path.relative(root, urlChecksPath)}`);
+    console.log(`URL checks: ${urlChecks.length - failedChecks.length}/${urlChecks.length} reachable`);
+
+    if (failedChecks.length > 0) {
+      const failedIds = failedChecks.map((check) => check.dataset_id).join(", ");
+      const message = `URL checks needing review: ${failedIds}`;
+      if (strictUrlChecks) fail(message);
+      console.warn(message);
     }
   }
 
