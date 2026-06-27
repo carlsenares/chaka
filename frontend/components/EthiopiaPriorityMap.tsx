@@ -3,25 +3,38 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type * as Leaflet from "leaflet";
 import type { FeatureCollection, Geometry } from "geojson";
-import priorityResults from "@/mock_priority_results.json";
 import {
   getAdminHierarchy,
   getAreaSqKm,
-  getPriorityColor,
   getPriorityLabel,
   joinPriorityResultsToBoundaries,
   type AdminBoundaryProperties,
   type JoinedPriorityFeature,
   type PriorityResult,
 } from "@/mapRenderer";
+import {
+  PRIORITY_GRADIENT_CSS,
+  getPriorityScoreRange,
+  priorityColor,
+  priorityOutlineColor,
+  priorityTextColor,
+  type PriorityScoreRange,
+} from "@/priorityColor";
 
 type MapMode = "map" | "satellite";
 type GeoDataStatus = "ready" | "loading" | "empty" | "error";
+type PanelMode = "ranked" | "browsed";
 
 type EthiopiaPriorityMapProps = {
-  selectedPcode?: string;
-  onSelectPcode?: (pcode: string) => void;
+  priorityResults: PriorityResult[];
+  selectedRankedPcode?: string;
+  selectedMapAreaId?: string;
+  onSelectMapArea?: (pcode: string | undefined) => void;
   status?: GeoDataStatus;
+  resultBadge?: string;
+  resultDescription?: string;
+  legendNote?: string;
+  priorityScoreRange?: PriorityScoreRange;
   className?: string;
 };
 
@@ -46,9 +59,15 @@ const BASEMAPS = {
 } satisfies Record<MapMode, { url: string; attribution: string }>;
 
 export function EthiopiaPriorityMap({
-  selectedPcode,
-  onSelectPcode,
+  priorityResults,
+  selectedRankedPcode,
+  selectedMapAreaId,
+  onSelectMapArea,
   status = "ready",
+  resultBadge = "Results joined by PCODE",
+  resultDescription = "HDX/OCHA COD-AB Admin 2 fixture · selected polygons follow administrative boundaries.",
+  legendNote = "Thin grey outlines show all loaded Admin 2 boundaries. Heatmap colors are recommendations joined by PCODE.",
+  priorityScoreRange,
   className = "",
 }: EthiopiaPriorityMapProps) {
   const [adminBoundaries, setAdminBoundaries] =
@@ -60,48 +79,77 @@ export function EthiopiaPriorityMap({
     }
 
     return joinPriorityResultsToBoundaries(adminBoundaries, priorityResults as PriorityResult[]);
-  }, [adminBoundaries]);
+  }, [adminBoundaries, priorityResults]);
   const priorityFeatures = useMemo(
     () => joinedBoundaries.features.filter((feature) => feature.properties.recommendation),
     [joinedBoundaries],
   );
   const [mode, setMode] = useState<MapMode>("map");
-  const [internalSelectedPcode, setInternalSelectedPcode] = useState(selectedPcode);
+  const [internalSelectedMapAreaId, setInternalSelectedMapAreaId] = useState<string | undefined>();
   const mapElementRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Leaflet.Map | null>(null);
   const leafletRef = useRef<typeof Leaflet | null>(null);
   const tileLayerRef = useRef<Leaflet.TileLayer | null>(null);
   const boundaryLayerRef = useRef<Leaflet.GeoJSON | null>(null);
+  const selectedLabelMarkerRef = useRef<Leaflet.Marker | null>(null);
 
-  const activePcode = selectedPcode ?? internalSelectedPcode;
-  const activeFeature = useMemo(
+  const effectiveSelectedMapAreaId = onSelectMapArea
+    ? selectedMapAreaId
+    : selectedMapAreaId ?? internalSelectedMapAreaId;
+  const selectedRankedFeature = useMemo(
     () =>
-      joinedBoundaries.features.find((feature) => feature.properties.join_pcode === activePcode) ??
+      joinedBoundaries.features.find((feature) => feature.properties.join_pcode === selectedRankedPcode) ??
       priorityFeatures[0],
-    [activePcode, priorityFeatures],
+    [joinedBoundaries, priorityFeatures, selectedRankedPcode],
   );
+  const selectedMapFeature = useMemo(
+    () =>
+      joinedBoundaries.features.find((feature) => feature.properties.join_pcode === effectiveSelectedMapAreaId) ??
+      selectedRankedFeature,
+    [effectiveSelectedMapAreaId, joinedBoundaries, selectedRankedFeature],
+  );
+  const panelFeature = selectedMapFeature;
+  const selectedMapPcodeForStyle = selectedMapFeature?.properties.join_pcode;
+  const rankedPcodeForMode = selectedRankedFeature?.properties.join_pcode;
+  const effectivePanelMode: PanelMode =
+    selectedMapPcodeForStyle && selectedMapPcodeForStyle !== rankedPcodeForMode ? "browsed" : "ranked";
   const effectiveStatus = status === "ready" ? boundaryStatus : status;
+  const fallbackPriorityScoreRange = useMemo(
+    () => getPriorityScoreRange(priorityResults.map((result) => result.priority_score)),
+    [priorityResults],
+  );
+  const effectivePriorityScoreRange = priorityScoreRange ?? fallbackPriorityScoreRange;
 
-  function selectFeature(feature: JoinedPriorityFeature, shouldZoom = true) {
-    if (!feature.properties.recommendation) return;
+  const flyToFeature = (feature: JoinedPriorityFeature) => {
+    const map = mapRef.current;
+    const L = leafletRef.current;
+    if (!map || !L) return;
 
+    const featureLayer = L.geoJSON(feature);
+    map.flyToBounds(featureLayer.getBounds(), {
+      padding: [44, 44],
+      duration: 0.7,
+      maxZoom: 9,
+    });
+  };
+
+  function selectMapFeature(feature: JoinedPriorityFeature, shouldZoom = true) {
     const pcode = feature.properties.join_pcode;
-    setInternalSelectedPcode(pcode);
-    onSelectPcode?.(pcode);
+    setInternalSelectedMapAreaId(pcode);
+    onSelectMapArea?.(pcode);
 
     if (shouldZoom) {
-      const map = mapRef.current;
-      const L = leafletRef.current;
-      if (!map || !L) return;
-
-      const featureLayer = L.geoJSON(feature);
-      map.flyToBounds(featureLayer.getBounds(), {
-        padding: [44, 44],
-        duration: 0.7,
-        maxZoom: 9,
-      });
+      flyToFeature(feature);
     }
   }
+
+  useEffect(
+    () => {
+      if (!selectedMapFeature) return;
+      flyToFeature(selectedMapFeature);
+    },
+    [selectedMapFeature?.properties.join_pcode],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -137,10 +185,12 @@ export function EthiopiaPriorityMap({
     return () => {
       cancelled = true;
       if (mapRef.current) {
+        selectedLabelMarkerRef.current?.remove();
         mapRef.current.remove();
         mapRef.current = null;
         tileLayerRef.current = null;
         boundaryLayerRef.current = null;
+        selectedLabelMarkerRef.current = null;
       }
     };
   }, []);
@@ -171,12 +221,6 @@ export function EthiopiaPriorityMap({
   }, []);
 
   useEffect(() => {
-    if (!internalSelectedPcode && priorityFeatures[0]) {
-      setInternalSelectedPcode(priorityFeatures[0].properties.join_pcode);
-    }
-  }, [internalSelectedPcode, priorityFeatures]);
-
-  useEffect(() => {
     const L = leafletRef.current;
     const map = mapRef.current;
     if (!L || !map) return;
@@ -204,7 +248,11 @@ export function EthiopiaPriorityMap({
 
     boundaryLayerRef.current = L.geoJSON(joinedBoundaries, {
       style: (feature) => {
-        return getBoundaryStyle(feature as JoinedPriorityFeature, activeFeature?.properties.join_pcode);
+        return getBoundaryStyle(
+          feature as JoinedPriorityFeature,
+          selectedMapPcodeForStyle,
+          effectivePriorityScoreRange,
+        );
       },
       onEachFeature: (feature, layer) => {
         const joinedFeature = feature as JoinedPriorityFeature;
@@ -212,16 +260,32 @@ export function EthiopiaPriorityMap({
         const layerWithStyle = layer as Leaflet.Path;
 
         layer.on("mouseover", () => {
-          layerWithStyle.setStyle(getBoundaryStyle(joinedFeature, activeFeature?.properties.join_pcode, true));
+          layerWithStyle.setStyle(
+            getBoundaryStyle(
+              joinedFeature,
+              selectedMapPcodeForStyle,
+              effectivePriorityScoreRange,
+              true,
+            ),
+          );
         });
         layer.on("mouseout", () => {
-          layerWithStyle.setStyle(getBoundaryStyle(joinedFeature, activeFeature?.properties.join_pcode));
+          layerWithStyle.setStyle(
+            getBoundaryStyle(
+              joinedFeature,
+              selectedMapPcodeForStyle,
+              effectivePriorityScoreRange,
+            ),
+          );
         });
-        layer.on("click", () => selectFeature(joinedFeature));
+        layer.on("click", () => selectMapFeature(joinedFeature));
 
         layer.bindTooltip(
           recommendation
-            ? `<strong>${joinedFeature.properties.adm2_name}</strong><br/>${getPriorityLabel(recommendation.priority_level)} · score ${recommendation.priority_score}`
+            ? `<strong>${joinedFeature.properties.adm2_name}</strong><br/><span style="display:inline-block;width:0.7rem;height:0.7rem;border-radius:0.18rem;background:${priorityColor(
+                recommendation.priority_score,
+                effectivePriorityScoreRange,
+              )};margin-right:0.35rem;"></span>${getPriorityLabel(recommendation.priority_level)} · score ${recommendation.priority_score}`
             : `<strong>${joinedFeature.properties.adm2_name}</strong><br/>Admin boundary · no prototype recommendation`,
           { sticky: true, className: "priority-map-tooltip" },
         );
@@ -229,7 +293,48 @@ export function EthiopiaPriorityMap({
     }).addTo(map);
 
     boundaryLayerRef.current.bringToFront();
-  }, [activeFeature?.properties.join_pcode, effectiveStatus, joinedBoundaries]);
+    boundaryLayerRef.current.eachLayer((layer) => {
+      const feature = (layer as Leaflet.Layer & { feature?: JoinedPriorityFeature }).feature;
+      if (feature?.properties.join_pcode === selectedMapPcodeForStyle && "bringToFront" in layer) {
+        (layer as Leaflet.Path).bringToFront();
+      }
+    });
+  }, [effectivePriorityScoreRange, effectiveStatus, joinedBoundaries, selectedMapPcodeForStyle]);
+
+  useEffect(() => {
+    const L = leafletRef.current;
+    const map = mapRef.current;
+    if (!L || !map) return;
+
+    selectedLabelMarkerRef.current?.remove();
+    selectedLabelMarkerRef.current = null;
+
+    if (effectiveStatus !== "ready" || !selectedMapFeature) return;
+
+    const selectedLayer = L.geoJSON(selectedMapFeature);
+    const center = selectedLayer.getBounds().getCenter();
+    const recommendation = selectedMapFeature.properties.recommendation;
+    const labelColor = recommendation
+      ? priorityOutlineColor(recommendation.priority_score, effectivePriorityScoreRange)
+      : "#243f32";
+
+    selectedLabelMarkerRef.current = L.marker(center, {
+      interactive: false,
+      keyboard: false,
+      zIndexOffset: 900,
+      icon: L.divIcon({
+        className: "priority-selected-label-wrapper",
+        html: `<span class="priority-selected-label" style="color:${labelColor}">${escapeHtml(
+          selectedMapFeature.properties.adm2_name,
+        )}</span>`,
+      }),
+    }).addTo(map);
+
+    return () => {
+      selectedLabelMarkerRef.current?.remove();
+      selectedLabelMarkerRef.current = null;
+    };
+  }, [effectivePriorityScoreRange, effectiveStatus, selectedMapFeature]);
 
   return (
     <section className={`overflow-hidden rounded-lg border border-[#d9d0bd] bg-[#fffdf7] shadow-sm ${className}`}>
@@ -238,13 +343,11 @@ export function EthiopiaPriorityMap({
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-sm font-semibold uppercase text-accent">Ethiopia admin boundary map</p>
             <span className="rounded-full border border-[#d9d0bd] bg-white px-2.5 py-1 text-xs text-muted">
-              Mock results joined by PCODE
+              {resultBadge}
             </span>
           </div>
           <h3 className="mt-1 text-xl font-semibold text-fg">Restoration opportunity overlays</h3>
-          <p className="mt-1 text-sm text-muted">
-            HDX/OCHA COD-AB Admin 2 fixture · selected polygons follow administrative boundaries.
-          </p>
+          <p className="mt-1 text-sm text-muted">{resultDescription}</p>
         </div>
 
         <div className="flex w-full rounded-full border border-[#d9d0bd] bg-white p-1 md:w-auto">
@@ -278,22 +381,34 @@ export function EthiopiaPriorityMap({
           {effectiveStatus === "ready" && joinedBoundaries.features.length > 0 && (
             <div className="absolute bottom-4 left-4 right-4 z-[500] flex flex-col gap-3 rounded-lg border border-[#d9d0bd] bg-white/90 p-4 shadow-sm backdrop-blur md:left-auto md:w-72">
               <p className="text-xs font-semibold uppercase text-muted">Priority legend</p>
-              {["Highest", "High", "Medium", "Lower"].map((level) => (
-                <div key={level} className="flex items-center gap-2 text-sm text-fg">
-                  <span className="size-3 rounded-sm" style={{ backgroundColor: getPriorityColor(level as never) }} />
-                  {getPriorityLabel(level as never)}
-                </div>
-              ))}
+              <div className="h-3 rounded-full border border-[#d9d0bd]" style={{ background: PRIORITY_GRADIENT_CSS }} />
+              <div className="flex items-center justify-between text-xs font-semibold text-muted">
+                <span>High</span>
+                <span>Restoration Priority</span>
+                <span>Low</span>
+              </div>
+              <div className="grid gap-2 text-sm text-fg">
+                <LegendItem color="#1B5E20" label="Highest restoration priority" />
+                <LegendItem color="#FDD835" label="Medium priority" />
+                <LegendItem color="#E53935" label="Lowest priority" />
+              </div>
+              <p className="text-xs leading-5 text-muted">
+                Colors indicate AI-computed restoration priority, normalized across displayed scores.
+              </p>
               <p className="border-t border-[#eee4d3] pt-3 text-xs leading-5 text-muted">
-                Thin grey outlines show all loaded Admin 2 boundaries. Green/yellow fills are prototype recommendations joined by PCODE.
+                {legendNote}
               </p>
             </div>
           )}
         </div>
 
         <aside className="border-t border-[#e7deca] bg-[#fffdf7] p-5 lg:border-l lg:border-t-0">
-          {activeFeature && effectiveStatus === "ready" ? (
-            <PriorityAreaPanel feature={activeFeature} />
+          {panelFeature && effectiveStatus === "ready" ? (
+            <PriorityAreaPanel
+              feature={panelFeature}
+              mode={effectivePanelMode}
+              priorityScoreRange={effectivePriorityScoreRange}
+            />
           ) : (
             <FutureDataPanel status={effectiveStatus} />
           )}
@@ -303,40 +418,65 @@ export function EthiopiaPriorityMap({
   );
 }
 
-function getBoundaryStyle(feature: JoinedPriorityFeature, activePcode?: string, hover = false): Leaflet.PathOptions {
+function getBoundaryStyle(
+  feature: JoinedPriorityFeature,
+  selectedMapPcode?: string,
+  priorityScoreRange: PriorityScoreRange = { min: 0, max: 100 },
+  hover = false,
+): Leaflet.PathOptions {
   const recommendation = feature.properties.recommendation;
-  const isActive = feature.properties.join_pcode === activePcode;
+  const isMapSelection = feature.properties.join_pcode === selectedMapPcode;
 
   if (!recommendation) {
     return {
-      color: "#8f8a7f",
-      fillColor: "#f7f1df",
-      fillOpacity: hover ? 0.08 : 0.02,
-      opacity: 0.56,
-      weight: hover ? 1.2 : 0.7,
+      color: isMapSelection ? "#4f6d5f" : "#8f8a7f",
+      fillColor: isMapSelection ? "#dceadf" : "#f7f1df",
+      fillOpacity: isMapSelection ? 0.34 : hover ? 0.14 : 0.02,
+      opacity: isMapSelection ? 0.96 : 0.56,
+      weight: isMapSelection ? 4.2 : hover ? 1.2 : 0.7,
+      className: isMapSelection ? "priority-boundary-active" : "priority-boundary",
     };
   }
 
-  const color = getPriorityColor(recommendation.priority_level);
+  const color = priorityColor(recommendation.priority_score, priorityScoreRange);
+  const outlineColor = priorityOutlineColor(recommendation.priority_score, priorityScoreRange);
 
   return {
-    color,
+    color: isMapSelection ? outlineColor : color,
     fillColor: color,
-    fillOpacity: hover ? 0.42 : isActive ? 0.38 : 0.31,
+    fillOpacity: isMapSelection ? (hover ? 0.7 : 0.66) : hover ? 0.42 : 0.29,
     opacity: 1,
-    weight: isActive ? 3.2 : hover ? 2.3 : 1.7,
-    className: isActive ? "priority-boundary-active" : "priority-boundary",
+    weight: isMapSelection ? (hover ? 5 : 4.6) : hover ? 2.3 : 1.5,
+    className: isMapSelection ? "priority-boundary-active" : "priority-boundary",
   };
 }
 
-function PriorityAreaPanel({ feature }: { feature: JoinedPriorityFeature }) {
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function PriorityAreaPanel({
+  feature,
+  mode,
+  priorityScoreRange,
+}: {
+  feature: JoinedPriorityFeature;
+  mode: PanelMode;
+  priorityScoreRange: PriorityScoreRange;
+}) {
   const recommendation = feature.properties.recommendation;
   const hierarchy = getAdminHierarchy(feature.properties);
+  const panelLabel = mode === "browsed" ? "Browsed administrative unit" : "Selected ranked recommendation";
 
   if (!recommendation) {
     return (
       <div className="rounded-lg border border-dashed border-[#cfc2aa] bg-[#fbf7ee] p-5">
-        <p className="text-sm font-semibold text-fg">Administrative boundary</p>
+        <p className="text-sm font-semibold text-fg">{panelLabel}</p>
         <p className="mt-2 text-sm leading-6 text-muted">
           {hierarchy.join(" → ")} has no prototype recommendation attached.
         </p>
@@ -348,14 +488,20 @@ function PriorityAreaPanel({ feature }: { feature: JoinedPriorityFeature }) {
     <div>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase text-accent">Selected administrative unit</p>
+          <p className="text-xs font-semibold uppercase text-accent">{panelLabel}</p>
           <h4 className="mt-1 text-2xl font-semibold text-fg">{feature.properties.adm2_name}</h4>
           <p className="mt-2 text-sm leading-6 text-muted">{hierarchy.join(" → ")}</p>
           <p className="mt-1 text-xs text-muted">PCODE: {feature.properties.join_pcode}</p>
         </div>
-        <div className="rounded-lg border border-[#d9d0bd] bg-[#fbf7ee] px-3 py-2 text-center">
-          <p className="text-xs text-muted">Score</p>
-          <p className="text-2xl font-semibold text-fg">{recommendation.priority_score}</p>
+        <div
+          className="rounded-lg border border-[#d9d0bd] px-3 py-2 text-center"
+          style={{
+            backgroundColor: priorityColor(recommendation.priority_score, priorityScoreRange),
+            color: priorityTextColor(recommendation.priority_score, priorityScoreRange),
+          }}
+        >
+          <p className="text-xs opacity-80">Score</p>
+          <p className="text-2xl font-semibold text-current">{recommendation.priority_score}</p>
         </div>
       </div>
 
@@ -382,6 +528,15 @@ function PriorityAreaPanel({ feature }: { feature: JoinedPriorityFeature }) {
         <p className="text-sm font-semibold text-fg">Evidence status</p>
         <p className="mt-2 text-sm leading-6 text-muted">{recommendation.evidence}</p>
       </div>
+    </div>
+  );
+}
+
+function LegendItem({ color, label }: { color: string; label: string }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="size-3 rounded-sm" style={{ backgroundColor: color }} />
+      <span>{label}</span>
     </div>
   );
 }

@@ -119,10 +119,47 @@ a {
 }
 
 .priority-boundary-active {
-  filter: drop-shadow(0 0 5px rgb(15 95 70 / 0.45));
-  transition: fill-opacity 180ms ease, stroke-width 180ms ease, filter 180ms ease;
+  filter: drop-shadow(0 0 7px rgb(36 49 38 / 0.34)) drop-shadow(0 2px 4px rgb(36 49 38 / 0.18));
+  transition: fill-opacity 240ms ease, stroke-width 240ms ease, stroke 240ms ease, filter 240ms ease;
 }
 
 .priority-boundary {
-  transition: fill-opacity 180ms ease, stroke-width 180ms ease;
+  transition: fill-opacity 220ms ease, stroke-width 220ms ease, stroke 220ms ease;
+}
+
+.priority-selected-label-wrapper {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+.priority-selected-label {
+  display: inline-block;
+  min-width: max-content;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 4px #fff,
+    1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff,
+    0 2px 5px rgb(36 49 38 / 0.24);
+  transition: opacity 240ms ease, transform 240ms ease;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .priority-boundary,
+  .priority-boundary-active,
+  .priority-selected-label {
+    transition: none;
+  }
 }

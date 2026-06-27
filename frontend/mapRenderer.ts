@@ -73,13 +73,6 @@ export function getFeaturePcode(properties: AdminBoundaryProperties) {
   return properties.adm3_pcode || properties.adm2_pcode || properties.adm1_pcode || properties.adm0_pcode;
 }
 
-export function getPriorityColor(level?: PriorityLevel) {
-  if (level === "Highest") return "#0f5f46";
-  if (level === "High") return "#2f7d4f";
-  if (level === "Medium") return "#9faa3d";
-  return "#e9d87a";
-}
-
 export function getPriorityLabel(level?: PriorityLevel) {
   if (level === "Highest") return "Highest priority";
   if (level === "High") return "High priority";

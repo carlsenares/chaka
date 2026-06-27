@@ -88,13 +88,137 @@ The scoring function is:
 calculatePriorityScore(...)
 ```
 
-in `frontend/app/page.tsx`.
+in `frontend/data/atlasViewModel.ts`.
 
 Mock restoration area data lives in:
 
 ```text
 frontend/mockData.js
 ```
+
+## Priority Heatmap Colors
+
+Priority colors are generated from a continuous score scale in:
+
+```text
+frontend/priorityColor.ts
+```
+
+The highest displayed priority score maps to dark green, the lowest displayed
+priority score maps to red, and intermediate values interpolate through
+green, yellow-green, yellow, and orange. The ranked list, map polygons, map
+legend, and side-panel score badges all use this shared utility.
+
+To adjust the palette, update `PRIORITY_COLOR_STOPS` in that file. Keep the
+array ordered from highest priority to lowest priority.
+
+## Data Flow: Mock Now, Backend Later
+
+The frontend currently uses local mock data so the demo works without a backend.
+These files are the main frontend data inputs today:
+
+```text
+frontend/mockData.js
+frontend/mock_priority_results.json
+frontend/public/ethiopia_admin_boundaries.geojson
+```
+
+Current responsibilities:
+
+- `frontend/mockData.js`: region summaries, ranked restoration area cards,
+  impact scores, rationale text, interventions, and export-preview values.
+- `frontend/mock_priority_results.json`: map recommendation results shaped like
+  future backend outputs.
+- `frontend/public/ethiopia_admin_boundaries.geojson`: administrative boundary
+  polygons used by the map.
+
+For the map, recommendation results are joined to administrative boundary
+features by PCODE or another administrative identifier. That join logic lives in:
+
+```text
+frontend/mapRenderer.ts
+```
+
+Future backend recommendation output should use this kind of shape:
+
+```json
+{
+  "admin_level": 3,
+  "pcode": "ET...",
+  "priority_score": 91,
+  "biodiversity_score": 94,
+  "carbon_score": 88,
+  "water_score": 92,
+  "livelihood_score": 89,
+  "rationale": "Why this area is prioritized",
+  "confidence": "High",
+  "evidence": "Source summary"
+}
+```
+
+The long-term backend flow should be:
+
+```text
+AI recommendation
+  -> PCODE or admin identifier
+  -> lookup matching boundary polygon
+  -> render highlighted polygon on the map
+  -> populate dashboard and side-panel metrics
+```
+
+When the backend is connected, replace local mock imports/fetches with API
+responses that preserve the same field names where possible. If the backend
+changes field names or data shape, update this README and the frontend mapping
+helpers in the same change.
+
+## Switching Data Sources
+
+The app has two interchangeable data-source modes in the same UI:
+
+- `Demo (Mock Data)`: uses the existing frontend mock data.
+- `Backend Preview`: uses committed backend sample outputs and API sample
+  responses to show how the same interface looks with AI pipeline data.
+
+The mode toggle is rendered near the page title in:
+
+```text
+frontend/app/page.tsx
+```
+
+The shared data model and adapters live in:
+
+```text
+frontend/data/atlasViewModel.ts
+```
+
+Current adapter inputs:
+
+```text
+Demo adapter:
+frontend/mockData.js
+frontend/mock_priority_results.json
+
+Backend Preview adapter:
+agents/sample_outputs/SWE-001.recommendation.json
+agents/sample_outputs/SWE-001.critic.json
+agents/sample_outputs/SWE-001.brief.json
+api/sample_responses/sites.json
+api/sample_responses/site_detail_SWE-001.json
+```
+
+The React UI should consume the shared view model rather than importing raw mock
+or backend files directly. This keeps the interface identical while only the data
+source changes.
+
+Backend samples currently use `site_id`, while the map needs PCODE/admin IDs to
+join recommendations to boundary polygons. Until the backend returns PCODEs
+directly, the adapter contains a temporary `site_id -> pcode` bridge. Replace
+that bridge when `GET /prioritization` or `GET /pipeline/latest` returns admin
+identifiers.
+
+Future live API integration should replace the sample-output imports inside
+`frontend/data/atlasViewModel.ts` with a fetch/API client that returns the same
+shared view model shape.
 
 ## Map Data
 

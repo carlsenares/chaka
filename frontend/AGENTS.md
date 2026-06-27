@@ -92,8 +92,11 @@ Current important configuration locations:
 - Slider defaults: `frontend/app/page.tsx`, `defaultObjectiveWeights`
 - Slider labels and backend field names: `frontend/app/page.tsx`, `objectives`
 - Slider-to-agent payload: `frontend/app/page.tsx`, `toBackendWeights(...)`
-- Mock ranking logic: `frontend/app/page.tsx`, `calculatePriorityScore(...)`
-- Mock restoration area data: `frontend/mockData.js`
+- Shared frontend view model and data-source adapters: `frontend/data/atlasViewModel.ts`
+- Mock ranking logic: `frontend/data/atlasViewModel.ts`, `calculatePriorityScore(...)` and `rankAreas(...)`
+- Priority heatmap color scale: `frontend/priorityColor.ts`, `PRIORITY_COLOR_STOPS`
+- Mock restoration area data: `frontend/mockData.js`, consumed through the demo adapter
+- Backend Preview sample inputs: `agents/sample_outputs/` and `api/sample_responses/`, consumed through the backend adapter
 - Map component: `frontend/components/EthiopiaPriorityMap.tsx`
 - Map join/rendering helpers: `frontend/mapRenderer.ts`
 - Mock priority results: `frontend/mock_priority_results.json`
