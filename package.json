@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "data:registry": "node scripts/data-registry-agent.mjs",
+    "data:registry:check": "node scripts/data-registry-agent.mjs --check-urls",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

@@ -1,0 +1,415 @@
+[
+  {
+    "dataset_id": "chirps_rainfall",
+    "name": "CHIRPS rainfall",
+    "provider": "Climate Hazards Center",
+    "type": "climate_time_series",
+    "spatial_resolution": "0.05 degree",
+    "temporal_resolution": "daily to monthly",
+    "coverage": "near-global land",
+    "access_method": "download_or_google_earth_engine",
+    "mvp_status": "required",
+    "used_features": [
+      "rainfall_mean_mm",
+      "rainfall_reliability_score"
+    ],
+    "known_limitations": [
+      "Resolution is coarse relative to 5-10km candidate sites.",
+      "Do not over-weight rainfall compared with field hydrology."
+    ],
+    "source_url": "https://www.chc.ucsb.edu/data/chirps",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:36.320Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://www.chc.ucsb.edu/data/chirps"
+    }
+  },
+  {
+    "dataset_id": "cifor_icraf_species_atlas",
+    "name": "CIFOR-ICRAF Climate Change Atlas for Ethiopian FLR tree species",
+    "provider": "CIFOR-ICRAF / World Agroforestry",
+    "type": "species_suitability_context",
+    "spatial_resolution": "species/model dependent",
+    "temporal_resolution": "atlas/model release",
+    "coverage": "Ethiopia",
+    "access_method": "web_atlas_or_reference",
+    "mvp_status": "optional",
+    "used_features": [
+      "species_suitability_context",
+      "species_suggestions"
+    ],
+    "known_limitations": [
+      "Use as context for suggested species, not as a deterministic field prescription.",
+      "Local nursery availability and community preference still require validation."
+    ],
+    "source_url": "https://www.cifor-icraf.org/knowledge/publication/8977/",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:36.570Z",
+      "status": 403,
+      "ok": false,
+      "final_url": "https://www.cifor-icraf.org/knowledge/publication/8977/"
+    }
+  },
+  {
+    "dataset_id": "esa_worldcover",
+    "name": "ESA WorldCover",
+    "provider": "ESA",
+    "type": "categorical_raster",
+    "spatial_resolution": "10m",
+    "temporal_resolution": "annual products",
+    "coverage": "global",
+    "access_method": "download_or_google_earth_engine",
+    "mvp_status": "required",
+    "used_features": [
+      "land_cover_primary",
+      "land_cover_mix",
+      "water_mask",
+      "built_up_mask"
+    ],
+    "known_limitations": [
+      "Categorical classes need mapping into project-specific restoration classes.",
+      "Classification errors are possible at local scale."
+    ],
+    "source_url": "https://esa-worldcover.org/en/data-access",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:36.685Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://esa-worldcover.org/en/data-access"
+    }
+  },
+  {
+    "dataset_id": "ethiopia_restoration_atlas",
+    "name": "Ethiopia Tree-Based Landscape Restoration Atlas",
+    "provider": "MEFCC/WRI",
+    "type": "restoration_context",
+    "spatial_resolution": "atlas layer dependent",
+    "temporal_resolution": "atlas release",
+    "coverage": "Ethiopia",
+    "access_method": "web_atlas",
+    "mvp_status": "required",
+    "used_features": [
+      "restoration_context",
+      "weak_label_priority",
+      "weak_label_intervention"
+    ],
+    "known_limitations": [
+      "Layer download/API availability must be verified before automated extraction.",
+      "Atlas classes should be treated as context or weak labels, not ground truth."
+    ],
+    "source_url": "https://eth.restorationatlas.org/",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:37.171Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://eth.restorationatlas.org/"
+    }
+  },
+  {
+    "dataset_id": "gfw_umd_forest_change",
+    "name": "Global Forest Watch / UMD forest change layers",
+    "provider": "Global Forest Watch / University of Maryland",
+    "type": "raster_layers",
+    "spatial_resolution": "30m",
+    "temporal_resolution": "annual loss layers with baseline tree cover",
+    "coverage": "global",
+    "access_method": "download_or_api",
+    "mvp_status": "required",
+    "used_features": [
+      "forest_loss_score",
+      "tree_cover_context_score"
+    ],
+    "known_limitations": [
+      "Tree-cover loss is not the same as carbon loss or degradation severity.",
+      "Threshold choices affect forest/non-forest interpretation."
+    ],
+    "source_url": "https://data.globalforestwatch.org/",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:37.550Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://data.globalforestwatch.org/"
+    }
+  },
+  {
+    "dataset_id": "ghsl_built_up_settlement",
+    "name": "Global Human Settlement Layer",
+    "provider": "European Commission Joint Research Centre",
+    "type": "built_up_and_settlement_rasters",
+    "spatial_resolution": "layer dependent",
+    "temporal_resolution": "multi-year releases",
+    "coverage": "global",
+    "access_method": "download",
+    "mvp_status": "optional",
+    "used_features": [
+      "settlement_proximity_score",
+      "built_up_mask"
+    ],
+    "known_limitations": [
+      "Built-up settlement proxies do not capture informal access or land tenure.",
+      "Layer choice should be documented."
+    ],
+    "source_url": "https://human-settlement.emergency.copernicus.eu/",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:37.625Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://human-settlement.emergency.copernicus.eu/"
+    }
+  },
+  {
+    "dataset_id": "hdx_ocha_eth_admin_boundaries",
+    "name": "Ethiopia administrative boundaries COD-AB",
+    "provider": "HDX/OCHA",
+    "type": "vector_polygons",
+    "spatial_resolution": "admin 0-3",
+    "temporal_resolution": "administrative release",
+    "coverage": "Ethiopia",
+    "access_method": "download",
+    "mvp_status": "required",
+    "used_features": [
+      "region",
+      "zone",
+      "woreda",
+      "aoi_boundary",
+      "area_ha"
+    ],
+    "known_limitations": [
+      "Newer South Ethiopia and Southwest Ethiopia boundaries may require name cleanup or crosswalks from older SNNPR-era data."
+    ],
+    "source_url": "https://data.humdata.org/dataset/cod-ab-eth",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:38.999Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://data.humdata.org/dataset/cod-ab-eth"
+    }
+  },
+  {
+    "dataset_id": "landsat_collection2_sr",
+    "name": "Landsat Collection 2 Level-2 Surface Reflectance",
+    "provider": "USGS/NASA via Google Earth Engine",
+    "type": "raster_time_series",
+    "spatial_resolution": "30m",
+    "temporal_resolution": "16 day revisit per sensor",
+    "coverage": "global",
+    "access_method": "google_earth_engine",
+    "mvp_status": "optional",
+    "used_features": [
+      "ndvi_trend_5y",
+      "long_term_vegetation_baseline"
+    ],
+    "known_limitations": [
+      "Trend windows need consistent sensor and cloud masking choices.",
+      "Use as trend context, not precise biomass measurement."
+    ],
+    "source_url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:39.560Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2"
+    }
+  },
+  {
+    "dataset_id": "osm_geofabrik_ethiopia",
+    "name": "OpenStreetMap Ethiopia extract",
+    "provider": "Geofabrik / OpenStreetMap contributors",
+    "type": "vector_roads_and_places",
+    "spatial_resolution": "mapped feature dependent",
+    "temporal_resolution": "frequent extracts",
+    "coverage": "Ethiopia",
+    "access_method": "download",
+    "mvp_status": "required",
+    "used_features": [
+      "road_access_score",
+      "settlement_proximity_score"
+    ],
+    "known_limitations": [
+      "Road completeness varies by area.",
+      "Distance to road is a feasibility proxy, not a full cost model."
+    ],
+    "source_url": "https://download.geofabrik.de/africa/ethiopia.html",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:39.661Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://download.geofabrik.de/africa/ethiopia.html"
+    }
+  },
+  {
+    "dataset_id": "sentinel1_grd",
+    "name": "Sentinel-1 SAR GRD",
+    "provider": "ESA/Copernicus via Google Earth Engine",
+    "type": "radar_raster_time_series",
+    "spatial_resolution": "10m",
+    "temporal_resolution": "6-12 day revisit depending on orbit/location",
+    "coverage": "global land and coastal areas",
+    "access_method": "google_earth_engine",
+    "mvp_status": "optional",
+    "used_features": [
+      "vv_median",
+      "vh_median",
+      "vv_vh_ratio"
+    ],
+    "known_limitations": [
+      "Requires preprocessing choices for orbit direction, polarization, speckle, and terrain effects.",
+      "Use only if time allows."
+    ],
+    "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:40.148Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD"
+    }
+  },
+  {
+    "dataset_id": "sentinel2_sr_harmonized",
+    "name": "Sentinel-2 Surface Reflectance Harmonized",
+    "provider": "ESA/Copernicus via Google Earth Engine",
+    "type": "raster_time_series",
+    "spatial_resolution": "10-20m",
+    "temporal_resolution": "5 day revisit",
+    "coverage": "global",
+    "access_method": "google_earth_engine",
+    "mvp_status": "required",
+    "used_features": [
+      "ndvi_current",
+      "evi_current",
+      "bare_soil_signal"
+    ],
+    "known_limitations": [
+      "Cloud and shadow masking required.",
+      "Recent seasonal windows must be selected consistently."
+    ],
+    "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:40.697Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED"
+    }
+  },
+  {
+    "dataset_id": "soilgrids",
+    "name": "SoilGrids",
+    "provider": "ISRIC",
+    "type": "soil_rasters",
+    "spatial_resolution": "250m",
+    "temporal_resolution": "static modeled layers",
+    "coverage": "global",
+    "access_method": "download_or_api",
+    "mvp_status": "required",
+    "used_features": [
+      "soil_organic_carbon_score",
+      "soil_ph_suitability_score",
+      "soil_texture_context"
+    ],
+    "known_limitations": [
+      "Modeled global product, coarse for project-level site decisions.",
+      "SOC proxy must not be presented as measured project carbon."
+    ],
+    "source_url": "https://docs.isric.org/globaldata/soilgrids/",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:40.755Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://docs.isric.org/globaldata/soilgrids/"
+    }
+  },
+  {
+    "dataset_id": "srtm_dem",
+    "name": "SRTM 30m DEM",
+    "provider": "NASA/USGS via Google Earth Engine",
+    "type": "elevation_raster",
+    "spatial_resolution": "30m",
+    "temporal_resolution": "static",
+    "coverage": "near-global",
+    "access_method": "google_earth_engine",
+    "mvp_status": "required",
+    "used_features": [
+      "slope_mean_deg",
+      "slope_risk_score",
+      "elevation_mean_m"
+    ],
+    "known_limitations": [
+      "Slope is an erosion proxy, not a direct erosion measurement.",
+      "Micro-topography and local drainage are not captured."
+    ],
+    "source_url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:41.031Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003"
+    }
+  },
+  {
+    "dataset_id": "wdpa_protected_areas",
+    "name": "World Database on Protected Areas",
+    "provider": "Protected Planet / UNEP-WCMC / IUCN",
+    "type": "vector_polygons",
+    "spatial_resolution": "protected area boundaries",
+    "temporal_resolution": "monthly releases",
+    "coverage": "global",
+    "access_method": "download",
+    "mvp_status": "required",
+    "used_features": [
+      "protected_area_overlap_pct",
+      "safeguard_risk_score"
+    ],
+    "known_limitations": [
+      "Boundary accuracy and designation status should be checked before operational decisions.",
+      "Overlap is a safeguard flag, not an automatic no-go decision."
+    ],
+    "source_url": "https://www.protectedplanet.net/en/thematic-areas/wdpa",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:43.968Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://www.protectedplanet.net/en/thematic-areas/wdpa"
+    }
+  },
+  {
+    "dataset_id": "worldpop_population",
+    "name": "WorldPop population",
+    "provider": "WorldPop",
+    "type": "population_raster",
+    "spatial_resolution": "approximately 100m products",
+    "temporal_resolution": "annual products",
+    "coverage": "global with country products",
+    "access_method": "download",
+    "mvp_status": "required",
+    "used_features": [
+      "population_pressure_score"
+    ],
+    "known_limitations": [
+      "Population pressure is a proxy for livelihood relevance and human pressure, not community support.",
+      "Settlement patterns can be misrepresented in sparse rural areas."
+    ],
+    "source_url": "https://hub.worldpop.org/geodata/listing?id=29",
+    "source_verification": {
+      "mode": "url_probe",
+      "checked_at": "2026-06-27T14:20:44.067Z",
+      "status": 200,
+      "ok": true,
+      "final_url": "https://hub.worldpop.org/geodata/listing?id=29"
+    }
+  }
+]

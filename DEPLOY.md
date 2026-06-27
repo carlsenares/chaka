@@ -80,3 +80,105 @@ EOF
 Or pass inline: `SSH_HOST=1.2.3.4 ./scripts/init-deploy you/project`. Custom dir as $2.
 Note: deploy runs as `root` because the nginx vhost dir lives under `/root/`.
 The CI key is dedicated and revocable (`sed -i '/ci_deploy/d' ~/.ssh/authorized_keys`).
+
+## AWS EC2 Codex and demo host
+
+Use this when the hackathon credits should pay for the dev/demo machine, so
+Codex, builds, data exports, and hosting run on AWS instead of your laptop.
+
+Recommended shape:
+
+- Region: `us-west-2`, matching the AWS console access.
+- Service: EC2.
+- OS: Ubuntu Server LTS.
+- Instance: `t3.medium` for normal app work, `t3.large` if running heavier
+  geospatial preprocessing. Stop the instance when not working.
+- Disk: 40-80 GB gp3 root volume.
+- Network: public subnet, public IPv4 or Elastic IP.
+- Security group:
+  - SSH `22` from your current IP only.
+  - HTTP `80` and HTTPS `443` from anywhere only when hosting the demo.
+  - Do not expose Codex app-server ports publicly; use SSH tunneling if needed.
+
+Launch flow:
+
+1. In AWS Console, choose region `us-west-2`.
+2. Open EC2 -> Instances -> Launch instance.
+3. Pick Ubuntu Server LTS, create or choose a key pair, and download the `.pem`.
+4. Create a security group with SSH from your IP. Add `80` and `443` only if
+   this instance will serve the public demo.
+5. Launch, wait for status checks, then connect:
+
+```bash
+chmod 400 ~/Downloads/chaka-aws.pem
+ssh -i ~/Downloads/chaka-aws.pem ubuntu@<public-ip-or-dns>
+```
+
+Bootstrap the box:
+
+```bash
+sudo apt update
+sudo apt install -y \
+  git curl ca-certificates build-essential unzip \
+  docker.io docker-compose-plugin nginx certbot python3-certbot-nginx \
+  bubblewrap
+sudo usermod -aG docker ubuntu
+```
+
+Install Codex CLI:
+
+```bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+exec "$SHELL" -l
+codex login --device-auth
+```
+
+Clone and work on the repo:
+
+```bash
+mkdir -p ~/work
+cd ~/work
+git clone <repo-url> chaka
+cd chaka
+./scripts/setup
+codex --sandbox workspace-write --ask-for-approval on-request
+```
+
+If device login is not enabled, run `codex login` in an SSH session with local
+callback forwarding:
+
+```bash
+ssh -L 1455:localhost:1455 -i ~/Downloads/chaka-aws.pem ubuntu@<public-ip-or-dns>
+codex login
+```
+
+Local SSH convenience:
+
+```text
+Host chaka-aws
+  HostName <elastic-ip-or-public-dns>
+  User ubuntu
+  IdentityFile ~/Downloads/chaka-aws.pem
+```
+
+Then connect with:
+
+```bash
+ssh chaka-aws
+```
+
+Hosting options on AWS:
+
+- Fastest: run this repo's existing Docker/nginx deploy pattern on the EC2
+  instance and point `DOMAIN` to the instance IP.
+- Stable IP: allocate an Elastic IP and associate it with the instance before
+  setting DNS.
+- Demo fallback: use `app.<elastic-ip>.sslip.io` as `DOMAIN` if no purchased
+  domain is ready.
+
+Cost controls:
+
+- Stop the EC2 instance when done for the day.
+- Release unused Elastic IPs. AWS charges for public IPv4 addresses, including
+  Elastic IPs.
+- Keep only one dev/demo instance unless a separate training job is needed.
