@@ -91,6 +91,25 @@
         "dataset_id": "soilgrids",
         "status": "no_valid_pixels"
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "no_valid_pixels"
@@ -145,9 +164,9 @@
     "safeguard_risk_score": 24,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -250,6 +269,56 @@
         },
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "source_derived",
+        "soil_observation_count_total": 10,
+        "soil_observation_count_wosis": 10,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 2,
+        "soil_observation_nearest_distance_km": 12.829,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": 4.75,
+        "observed_ph_h2o_0_30cm_mean": 7.6,
+        "observed_sand_pct_mean": 47.5,
+        "observed_silt_pct_mean": 20,
+        "observed_clay_pct_mean": 32.5,
+        "soil_observation_support_score": 43,
+        "soilgrids_soc_delta_g_kg": -12.683,
+        "soilgrids_ph_delta": 0.508,
+        "nearest_observations": [
+          {
+            "source": "wosis",
+            "source_id": "100730",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 12.829,
+            "lon": 36.49333,
+            "lat": 4.93389,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "100542",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 13.101,
+            "lon": 36.33444,
+            "lat": 5.06028,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          }
+        ]
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -417,6 +486,25 @@
         "soilgrids_valid_pixel_count_min": 437,
         "soilgrids_valid_pixel_count_max": 437
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -580,6 +668,25 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -742,6 +849,25 @@
         "soilgrids_valid_pixel_count_min": 435,
         "soilgrids_valid_pixel_count_max": 435
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -801,9 +927,9 @@
     "safeguard_risk_score": 36,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -904,6 +1030,54 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "source_derived",
+        "soil_observation_count_total": 8,
+        "soil_observation_count_wosis": 8,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 1,
+        "soil_observation_nearest_distance_km": 23.418,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": 7.3,
+        "observed_sand_pct_mean": 35,
+        "observed_silt_pct_mean": 10,
+        "observed_clay_pct_mean": 55,
+        "soil_observation_support_score": 15,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": 1.768,
+        "nearest_observations": [
+          {
+            "source": "wosis",
+            "source_id": "100539",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 23.418,
+            "lon": 36.31389,
+            "lat": 6.42194,
+            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "100540",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 23.418,
+            "lon": 36.31389,
+            "lat": 6.42194,
+            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          }
+        ]
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -963,9 +1137,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1069,6 +1243,54 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "source_derived",
+        "soil_observation_count_total": 8,
+        "soil_observation_count_wosis": 8,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 1,
+        "soil_observation_nearest_distance_km": 23.248,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": 7.3,
+        "observed_sand_pct_mean": 35,
+        "observed_silt_pct_mean": 10,
+        "observed_clay_pct_mean": 55,
+        "soil_observation_support_score": 15,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": 0.878,
+        "nearest_observations": [
+          {
+            "source": "wosis",
+            "source_id": "100539",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 23.248,
+            "lon": 36.31389,
+            "lat": 6.42194,
+            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "100540",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 23.248,
+            "lon": 36.31389,
+            "lat": 6.42194,
+            "fields": [
+              "clay",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          }
+        ]
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1128,9 +1350,9 @@
     "safeguard_risk_score": 10,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1234,6 +1456,101 @@
         },
         "soilgrids_valid_pixel_count_min": 440,
         "soilgrids_valid_pixel_count_max": 440
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "source_derived",
+        "soil_observation_count_total": 95,
+        "soil_observation_count_wosis": 95,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 10,
+        "soil_observation_nearest_distance_km": 9.882,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": 30.895,
+        "observed_ph_h2o_0_30cm_mean": 5.207,
+        "observed_sand_pct_mean": 35.493,
+        "observed_silt_pct_mean": 40.02,
+        "observed_clay_pct_mean": 24.487,
+        "soil_observation_support_score": 84,
+        "soilgrids_soc_delta_g_kg": 3.461,
+        "soilgrids_ph_delta": -0.368,
+        "nearest_observations": [
+          {
+            "source": "wosis",
+            "source_id": "102973",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 9.882,
+            "lon": 37.68761,
+            "lat": 7.07061,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "102974",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 9.882,
+            "lon": 37.68761,
+            "lat": 7.07061,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "102987",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 10.065,
+            "lon": 37.68911,
+            "lat": 7.06853,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "103003",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 10.147,
+            "lon": 37.69278,
+            "lat": 7.06694,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          },
+          {
+            "source": "wosis",
+            "source_id": "103004",
+            "dataset_id": "AF-AfSP",
+            "distance_km": 10.147,
+            "lon": 37.69278,
+            "lat": 7.06694,
+            "fields": [
+              "clay",
+              "orgc",
+              "ph_h2o",
+              "sand",
+              "silt"
+            ]
+          }
+        ]
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1397,6 +1714,25 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1559,6 +1895,25 @@
         },
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1725,6 +2080,25 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1887,6 +2261,25 @@
         },
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -2054,6 +2447,25 @@
         "soilgrids_valid_pixel_count_min": 433,
         "soilgrids_valid_pixel_count_max": 433
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2217,6 +2629,25 @@
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
       },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2276,9 +2707,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
-    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_soil_observations_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_soil_observations_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, soil_observations, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2381,6 +2812,37 @@
         },
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "source_derived",
+        "soil_observation_count_total": 1,
+        "soil_observation_count_wosis": 1,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 1,
+        "soil_observation_nearest_distance_km": 17.31,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": 21.1,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 24,
+        "soilgrids_soc_delta_g_kg": -12.2,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": [
+          {
+            "source": "wosis",
+            "source_id": "3178374",
+            "dataset_id": "WD-NWAFU-SCS",
+            "distance_km": 17.31,
+            "lon": 36.11666,
+            "lat": 7.31667,
+            "fields": [
+              "orgc"
+            ]
+          }
+        ]
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -2545,6 +3007,25 @@
         },
         "soilgrids_valid_pixel_count_min": 441,
         "soilgrids_valid_pixel_count_max": 441
+      },
+      "soil_observations": {
+        "dataset_id": "soil_observations",
+        "status": "no_observations",
+        "soil_observation_count_total": 0,
+        "soil_observation_count_wosis": 0,
+        "soil_observation_count_afsis": 0,
+        "soil_observation_profile_count": 0,
+        "soil_observation_nearest_distance_km": null,
+        "soil_observation_radius_km": 25,
+        "observed_soc_0_30cm_g_kg_mean": null,
+        "observed_ph_h2o_0_30cm_mean": null,
+        "observed_sand_pct_mean": null,
+        "observed_silt_pct_mean": null,
+        "observed_clay_pct_mean": null,
+        "soil_observation_support_score": 0,
+        "soilgrids_soc_delta_g_kg": null,
+        "soilgrids_ph_delta": null,
+        "nearest_observations": []
       },
       "population": {
         "dataset_id": "worldpop_population",
