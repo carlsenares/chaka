@@ -1,0 +1,173 @@
+{
+  "source": {
+    "dataset_id": "srtm_dem",
+    "name": "SRTM 1 Arc-Second Global DEM (SRTMGL1)",
+    "provider": "NASA/USGS",
+    "source_url": "https://lpdaac.usgs.gov/products/srtmgl1v003/",
+    "registry_source_url": "https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003",
+    "spatial_resolution": "1 arc-second, approximately 30m",
+    "access_method": "local official SRTMGL1 .hgt tiles",
+    "raw_tile_dir": "data/raw/srtm",
+    "raw_data_commit_policy": "Raw .hgt files are intentionally ignored and are not committed.",
+    "required_tiles": [
+      "N04E036",
+      "N05E035",
+      "N05E036",
+      "N06E035",
+      "N06E036",
+      "N06E037",
+      "N07E035",
+      "N07E036",
+      "N07E037",
+      "N08E035"
+    ],
+    "extraction_method": "Source-derived artifact from local SRTMGL1 .hgt tiles sampled inside each candidate polygon. Slope was estimated from neighboring 1 arc-second elevation cells.",
+    "note": "Artifact imported from origin/feature/intelligence_layer commit 1fa6400 and normalized to the current source_extracts schema. Raw official tiles are not committed."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "elevation_mean_m": 361.0,
+      "slope_mean_deg": 0.01,
+      "slope_p90_deg": 0.0,
+      "slope_risk_score": 0,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-002",
+      "elevation_mean_m": 996.7,
+      "slope_mean_deg": 3.91,
+      "slope_p90_deg": 7.43,
+      "slope_risk_score": 13,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "elevation_mean_m": 1352.9,
+      "slope_mean_deg": 4.38,
+      "slope_p90_deg": 7.22,
+      "slope_risk_score": 15,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "elevation_mean_m": 1005.1,
+      "slope_mean_deg": 10.9,
+      "slope_p90_deg": 22.1,
+      "slope_risk_score": 36,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "elevation_mean_m": 613.4,
+      "slope_mean_deg": 3.82,
+      "slope_p90_deg": 7.21,
+      "slope_risk_score": 13,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "elevation_mean_m": 1700.5,
+      "slope_mean_deg": 29.32,
+      "slope_p90_deg": 41.48,
+      "slope_risk_score": 98,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "elevation_mean_m": 693.4,
+      "slope_mean_deg": 14.6,
+      "slope_p90_deg": 25.45,
+      "slope_risk_score": 49,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "elevation_mean_m": 1697.1,
+      "slope_mean_deg": 3.65,
+      "slope_p90_deg": 6.52,
+      "slope_risk_score": 12,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "elevation_mean_m": 731.2,
+      "slope_mean_deg": 3.42,
+      "slope_p90_deg": 6.67,
+      "slope_risk_score": 11,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "elevation_mean_m": 965.3,
+      "slope_mean_deg": 6.85,
+      "slope_p90_deg": 13.63,
+      "slope_risk_score": 23,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "elevation_mean_m": 740.7,
+      "slope_mean_deg": 5.39,
+      "slope_p90_deg": 9.24,
+      "slope_risk_score": 18,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "elevation_mean_m": 1058.5,
+      "slope_mean_deg": 9.49,
+      "slope_p90_deg": 20.42,
+      "slope_risk_score": 32,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "elevation_mean_m": 2020.4,
+      "slope_mean_deg": 9.24,
+      "slope_p90_deg": 16.44,
+      "slope_risk_score": 31,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "elevation_mean_m": 1222.7,
+      "slope_mean_deg": 12.0,
+      "slope_p90_deg": 20.73,
+      "slope_risk_score": 40,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "elevation_mean_m": 1766.6,
+      "slope_mean_deg": 9.94,
+      "slope_p90_deg": 17.75,
+      "slope_risk_score": 33,
+      "valid_pixel_count": 2970,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "elevation_mean_m": 2175.1,
+      "slope_mean_deg": 10.76,
+      "slope_p90_deg": 18.09,
+      "slope_risk_score": 36,
+      "valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    }
+  ]
+}

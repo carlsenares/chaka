@@ -31,7 +31,7 @@ model/scoring updates.
 | OpenStreetMap Ethiopia extract | Geofabrik / OSM contributors | Roads, settlements, mapped population-like tags | `road_access_score`, `settlement_proximity_score`, fallback population proxy | `scripts/extract-osm-access.py`, `data/features/source_extracts/osm_access.json` | Re-run when the Geofabrik `.osm.pbf` is refreshed | Partial source-derived |
 | GBIF occurrence search | GBIF publishers | Georeferenced occurrence records, species counts, basis-of-record, coordinate uncertainty, dataset summaries, taxon/date filters, sampling-bias context | `source_extracts.biodiversity_observations`; no ranker weight yet | `scripts/extract-gbif-biodiversity.py`, `data/features/source_extracts/gbif_biodiversity.json` | Re-run before biodiversity scoring changes or reports; GBIF changes continuously | Ethiopia API counts verified 2026-06-27; extractor works, but current candidate polygons have insufficient records under current filters |
 | Hawassa University / GBIF Bale Mountains plant diversity and structure dataset | Hawassa University / GBIF | Plot-level plant diversity and structure records with DBH, height, crown diameter, growth habit, habitat, and land-use context | Future local validation for woody plant biodiversity/restoration response; not national scoring | Not implemented | Recheck GBIF DOI/update status before local validation use | Use-later; local Bale Mountains dataset, CC0, 2024-2025 |
-| SRTMGL1 terrain | NASA/USGS | Elevation and slope | Intended for `slope_mean_deg`, `slope_risk_score` | `scripts/extract-srtm-terrain.py` | Recheck only if tile/source path changes; product is static | Scaffolded, blocked on local official tiles or Earth Engine |
+| SRTMGL1 terrain | NASA/USGS | Elevation and slope | `slope_mean_deg`, `slope_risk_score`, `source_extracts.terrain` | `scripts/extract-srtm-terrain.py`, `data/features/source_extracts/srtm_terrain.json` | Recheck only if tile/source path changes; product is static | Source-derived for 16/16 sites from coworker-provided artifact; raw official tiles are not committed |
 | Sentinel-2 Surface Reflectance | ESA/Copernicus via Earth Engine or alternate raster path | Current NDVI/EVI, bare-soil signal, seasonal vegetation condition | Intended for `ndvi_current`, `evi_current` | Not implemented as real extractor yet | Re-run frequently when current-season vegetation state matters | Blocked on Earth Engine/auth or alternate public raster workflow |
 | Landsat Collection 2 SR | USGS/NASA via Earth Engine or alternate raster path | Long-term NDVI trend and vegetation baseline | Intended for `ndvi_trend_5y` | Not implemented as real extractor yet | Re-run when trend window or current year changes | Blocked on Earth Engine/auth or alternate public raster workflow |
 | Sentinel-1 GRD | ESA/Copernicus via Earth Engine or alternate raster path | Radar vegetation/structure and moisture proxies | Optional vegetation/degradation context | Not implemented | Recheck if radar features become a scoring target | Blocked on Earth Engine/auth or alternate public raster workflow |
@@ -98,8 +98,9 @@ by newer editions if someone provides a new file.
 ## Current Gap Summary
 
 The current system has working source-derived coverage for admin geometry, land
-cover, rainfall, forest disturbance context, SoilGrids soil, WorldPop population,
-partial OSM access, GHSL settlement context, WaPOR water/productivity context,
-nearby soil observations, and GBIF biodiversity observation context. Remaining
-high-value gaps are vegetation indices, terrain, safeguards, carbon stock/flux,
-modeled biodiversity condition, and conservation-priority layers.
+cover, rainfall, terrain, forest disturbance context, SoilGrids soil, WorldPop
+population, partial OSM access, GHSL settlement context, WaPOR
+water/productivity context, nearby soil observations, and GBIF biodiversity
+observation context. Remaining high-value gaps are vegetation indices,
+safeguards, carbon stock/flux, modeled biodiversity condition, and
+conservation-priority layers.

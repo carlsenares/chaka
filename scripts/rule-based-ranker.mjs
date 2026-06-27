@@ -251,7 +251,7 @@ Transparent rule-based fallback. This is not a trained model.
 
 \`rule_based_fallback\`
 
-The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality: geometry/admin labels, ESA WorldCover land-cover fields, GFW/UMD forest-change fields, CHIRPS rainfall fields, SoilGrids soil fields, WorldPop population fields, and partial OSM access fields are source-derived where valid pixels or mapped features exist, while the remaining environmental and social feature values are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
+The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality. Geometry/admin labels, ESA WorldCover land cover, SRTM terrain, GFW/UMD forest-change context, CHIRPS rainfall, SoilGrids soil, WorldPop population, partial OSM access, GHSL settlement context, WaPOR water/productivity context, nearby soil observations, and GBIF biodiversity observation context are source-derived where valid pixels, observations, or mapped features exist. Remaining fields, especially vegetation indices and safeguards, are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
 
 ## Default Weights
 
@@ -265,7 +265,7 @@ The current model reads \`data/features/site_features.json\`, which currently co
 
 ## Land-Cover Suitability Adjustment
 
-ESA WorldCover land-cover extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant or heavily built-up, the ranker applies a negative adjustment and recommends field validation before investment. This prevents strong placeholder values in other feature groups from over-ranking areas that are visibly unsuitable from land-cover evidence.
+ESA WorldCover land-cover extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, or otherwise high-risk, the ranker applies the relevant feature penalties and recommends field validation before investment. This prevents strong placeholder values in other feature groups from over-ranking areas that are visibly or physically unsuitable from source evidence.
 
 ## Top Ranked Candidates
 

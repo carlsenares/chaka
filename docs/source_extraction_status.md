@@ -12,7 +12,7 @@ This document tracks which feature groups are source-derived and which are still
 | Forest context | `forest_loss_score` | Source-derived for 16/16 sites | Hansen Global Forest Change / GFW v1.13 | Extracts tree-cover baseline and loss from official direct-download tiles. Default threshold is 30% tree cover; tree-cover loss is a disturbance proxy, not verified deforestation or carbon loss. |
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
 | Water/productivity context | `source_extracts.water_productivity` | Optional source-derived context | FAO WaPOR v3 L2 annual products | AETI, total biomass production, and biomass water productivity context. Does not overwrite rainfall, carbon, or livelihood scores. |
-| Terrain | `slope_mean_deg`, `slope_risk_score` | Placeholder, extractor scaffolded | SRTMGL1 | Script lists required official tiles and extracts terrain once local official `.hgt`/`.hgt.zip` tiles are supplied. |
+| Terrain | `slope_mean_deg`, `slope_risk_score` | Source-derived for 16/16 sites | SRTMGL1 | Artifact imported from the coworker SRTM branch and normalized to the current source-extract schema. Raw official `.hgt` tiles remain gitignored. |
 | Soil | `soil_organic_carbon_score`, `soil_ph_suitability_score` | Source-derived for 15/16 sites | SoilGrids 2.0 topsoil SOC and pH | Extracted from official ISRIC WebDAV/VRT rasters. `SET-001` has no valid soil pixels, consistent with water-dominant WorldCover. |
 | Biodiversity observations | `source_extracts.biodiversity_observations` | Optional source-derived context | GBIF occurrence search API | Observation-density/species context only. Does not overwrite ranker fields or imply absence where records are sparse. |
 | Population/livelihood | `population_pressure_score` | Source-derived for 15/16 sites | WorldPop Ethiopia 2020 UN-adjusted population counts | Extracted from official WorldPop 100m GeoTIFF. `SET-001` has no valid population pixels and falls back to OSM's zero-valued mapped population proxy. |
@@ -93,6 +93,12 @@ Terrain raw tile location:
 ```text
 data/raw/srtm/
 ```
+
+Current terrain artifact coverage:
+
+- Source-derived elevation and slope summaries for 16/16 candidate sites.
+- Raw SRTMGL1 `.hgt` tiles are not committed. The committed artifact is small and reproducible if the official tiles listed in `data/features/source_extracts/srtm_terrain.json` are placed under `data/raw/srtm/`.
+- Steepest current candidate by mean slope is `SET-006` at 29.32 degrees; flattest is `SET-001` at 0.01 degrees.
 
 Soil command:
 
