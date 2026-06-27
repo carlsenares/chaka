@@ -2,11 +2,54 @@
 
 import { useMemo, useState } from "react";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
-import { layers, portfolioMetrics, regions, restorationAreas } from "@/mockData";
+import { portfolioMetrics, regions, restorationAreas } from "@/mockData";
 
 type Step = "landing" | "region" | "layers" | "loading" | "dashboard" | "detail" | "recommendation" | "export";
+type ObjectiveKey = "biodiversity" | "carbon" | "water" | "livelihood";
+type ObjectiveWeights = Record<ObjectiveKey, number>;
+type RestorationArea = (typeof restorationAreas)[number];
+type RankedArea = RestorationArea & { priorityScore: number; weightedRank: number };
 
-const stepLabels = ["Start", "Region", "Layers", "Analysis", "Dashboard", "Detail", "Brief"];
+const stepLabels = ["Start", "Region", "Weights", "Analysis", "Dashboard", "Detail", "Brief"];
+
+const defaultObjectiveWeights: ObjectiveWeights = {
+  biodiversity: 90,
+  carbon: 75,
+  water: 85,
+  livelihood: 80,
+};
+
+const objectives: Array<{
+  key: ObjectiveKey;
+  label: string;
+  description: string;
+  backendField: string;
+}> = [
+  {
+    key: "biodiversity",
+    label: "Biodiversity",
+    description: "Habitat connectivity, species value, and ecological uplift.",
+    backendField: "biodiversity_weight",
+  },
+  {
+    key: "carbon",
+    label: "Carbon Storage",
+    description: "Above-ground biomass recovery and long-term sequestration potential.",
+    backendField: "carbon_weight",
+  },
+  {
+    key: "water",
+    label: "Water Security",
+    description: "Watershed regulation, spring protection, and downstream water benefits.",
+    backendField: "water_weight",
+  },
+  {
+    key: "livelihood",
+    label: "Livelihood Impact",
+    description: "Household benefit, implementation feasibility, and community value.",
+    backendField: "livelihood_weight",
+  },
+];
 
 const scoreLabels = {
   biodiversity: "Biodiversity uplift",
@@ -20,7 +63,7 @@ const scoreLabels = {
 export default function Home() {
   const [step, setStep] = useState<Step>("landing");
   const [selectedRegion, setSelectedRegion] = useState(regions[1].id);
-  const [selectedLayers, setSelectedLayers] = useState(layers.map((layer) => layer.id));
+  const [objectiveWeights, setObjectiveWeights] = useState<ObjectiveWeights>(defaultObjectiveWeights);
   const [selectedAreaId, setSelectedAreaId] = useState("maji-bench-forest-edge");
 
   const region = regions.find((item) => item.id === selectedRegion) ?? regions[0];
@@ -28,8 +71,13 @@ export default function Home() {
     () =>
       restorationAreas
         .filter((area) => area.regionId === selectedRegion)
-        .sort((a, b) => a.rank - b.rank),
-    [selectedRegion],
+        .map((area) => ({
+          ...area,
+          priorityScore: calculatePriorityScore(area, objectiveWeights),
+        }))
+        .sort((a, b) => b.priorityScore - a.priorityScore || a.rank - b.rank)
+        .map((area, index) => ({ ...area, weightedRank: index + 1 })),
+    [selectedRegion, objectiveWeights],
   );
   const selectedArea = areas.find((area) => area.id === selectedAreaId) ?? areas[0];
   const activeStepIndex = getStepIndex(step);
@@ -46,10 +94,12 @@ export default function Home() {
     setSelectedAreaId(areaId);
   }
 
-  function toggleLayer(layerId: string) {
-    setSelectedLayers((current) =>
-      current.includes(layerId) ? current.filter((id) => id !== layerId) : [...current, layerId],
-    );
+  function updateObjectiveWeight(key: ObjectiveKey, value: number) {
+    setObjectiveWeights((current) => ({ ...current, [key]: value }));
+  }
+
+  function resetObjectiveWeights() {
+    setObjectiveWeights(defaultObjectiveWeights);
   }
 
   function runAnalysis() {
@@ -77,9 +127,10 @@ export default function Home() {
         )}
 
         {step === "layers" && (
-          <LayerSelection
-            selectedLayers={selectedLayers}
-            onToggle={toggleLayer}
+          <PreferenceSelection
+            objectiveWeights={objectiveWeights}
+            onWeightChange={updateObjectiveWeight}
+            onReset={resetObjectiveWeights}
             onBack={() => setStep("region")}
             onNext={runAnalysis}
           />
@@ -93,7 +144,7 @@ export default function Home() {
             areas={areas}
             selectedArea={selectedArea}
             selectedAreaId={selectedAreaId}
-            selectedLayers={selectedLayers}
+            objectiveWeights={objectiveWeights}
             onSelectArea={selectArea}
             onDetail={() => setStep("detail")}
             onBack={() => setStep("layers")}
@@ -112,7 +163,7 @@ export default function Home() {
           <ExportPreview
             area={selectedArea}
             region={region}
-            selectedLayers={selectedLayers}
+            objectiveWeights={objectiveWeights}
             onBack={() => setStep("recommendation")}
             onRestart={() => setStep("region")}
           />
@@ -228,57 +279,132 @@ function RegionSelection({
           </button>
         ))}
       </div>
-      <PageActions onBack={onBack} onNext={onNext} nextLabel="Continue to evidence layers" />
+      <PageActions onBack={onBack} onNext={onNext} nextLabel="Continue to objective weights" />
     </section>
   );
 }
 
-function LayerSelection({
-  selectedLayers,
-  onToggle,
+function PreferenceSelection({
+  objectiveWeights,
+  onWeightChange,
+  onReset,
   onBack,
   onNext,
 }: {
-  selectedLayers: string[];
-  onToggle: (layerId: string) => void;
+  objectiveWeights: ObjectiveWeights;
+  onWeightChange: (key: ObjectiveKey, value: number) => void;
+  onReset: () => void;
   onBack: () => void;
   onNext: () => void;
 }) {
+  const backendPayload = toBackendWeights(objectiveWeights);
+
   return (
     <section className="py-8">
       <SectionHeader
         label="Step 2"
-        title="Select evidence layers"
-        description="Layer selections are passed through client state today and can later map directly to ingestion and scoring pipeline inputs."
+        title="Set restoration objective weights"
+        description="Adjust the importance of each restoration objective. The prioritization will update based on your selected preferences."
       />
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {layers.map((layer) => {
-          const active = selectedLayers.includes(layer.id);
-          return (
+      <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
+        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm sm:p-6">
+          <div className="mb-6 flex flex-col gap-3 border-b border-[#e7deca] pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 className="text-xl font-semibold text-fg">Preference weights</h3>
+              <p className="mt-1 text-sm leading-6 text-muted">
+                Values are prototype inputs for client-side mock scoring. Later, the same object can be sent to the prioritization agent.
+              </p>
+            </div>
             <button
-              key={layer.id}
-              onClick={() => onToggle(layer.id)}
-              className={`min-h-44 rounded-lg border p-5 text-left shadow-sm transition ${
-                active ? "border-[#1f6f68] bg-[#eef7f2]" : "border-[#d9d0bd] bg-surface opacity-75 hover:opacity-100"
-              }`}
+              type="button"
+              onClick={onReset}
+              className="w-fit rounded-full border border-[#cfc2aa] bg-white px-4 py-2 text-sm font-semibold text-fg transition hover:bg-[#fbf7ee] focus:outline-none focus:ring-2 focus:ring-[#1f6f68] focus:ring-offset-2 focus:ring-offset-base"
             >
-              <span className={`mb-5 inline-flex size-8 items-center justify-center rounded-full border text-sm ${active ? "border-[#1f6f68] text-[#1f6f68]" : "border-[#cfc2aa] text-muted"}`}>
-                {active ? "On" : "+"}
-              </span>
-              <h3 className="text-lg font-semibold text-fg">{layer.name}</h3>
-              <p className="mt-2 text-xs font-semibold uppercase text-accent">{layer.source}</p>
-              <p className="mt-3 text-sm leading-6 text-muted">{layer.description}</p>
+              Reset to Recommended
             </button>
-          );
-        })}
+          </div>
+
+          <div className="grid gap-6">
+            {objectives.map((objective) => (
+              <ObjectiveSlider
+                key={objective.key}
+                objective={objective}
+                value={objectiveWeights[objective.key]}
+                onChange={(value) => onWeightChange(objective.key, value)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-[#d9d0bd] bg-[#fbf7ee] p-5 shadow-sm sm:p-6">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-xl font-semibold text-fg">Agent input preview</h3>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                This structure is ready to pass to the backend when live prioritization is connected.
+              </p>
+            </div>
+            <span className="rounded-full bg-[#e7f0eb] px-3 py-1 text-xs font-semibold text-[#1f6f68]">
+              Mock scoring
+            </span>
+          </div>
+          <dl className="mt-6 grid gap-3">
+            {Object.entries(backendPayload).map(([key, value]) => (
+              <div key={key} className="flex items-center justify-between gap-4 rounded-md border border-[#e7deca] bg-white px-4 py-3">
+                <dt className="text-sm text-muted">{key}</dt>
+                <dd className="text-lg font-semibold text-fg">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
-      <PageActions
-        onBack={onBack}
-        onNext={onNext}
-        nextLabel={`Run prototype analysis with ${selectedLayers.length} layers`}
-        disabled={selectedLayers.length === 0}
-      />
+      <PageActions onBack={onBack} onNext={onNext} nextLabel="Run weighted prototype analysis" />
     </section>
+  );
+}
+
+function ObjectiveSlider({
+  objective,
+  value,
+  onChange,
+}: {
+  objective: (typeof objectives)[number];
+  value: number;
+  onChange: (value: number) => void;
+}) {
+  const inputId = `objective-${objective.key}`;
+
+  return (
+    <div className="rounded-md border border-[#e7deca] bg-white p-4 transition hover:border-[#bfd3c6]">
+      <div className="mb-3 flex items-start justify-between gap-4">
+        <div>
+          <label htmlFor={inputId} className="font-semibold text-fg">
+            {objective.label}
+          </label>
+          <p className="mt-1 text-sm leading-6 text-muted">{objective.description}</p>
+        </div>
+        <output
+          htmlFor={inputId}
+          className="min-w-14 rounded-full bg-[#e7f0eb] px-3 py-1 text-center text-sm font-semibold text-[#1f6f68]"
+        >
+          {value}
+        </output>
+      </div>
+      <input
+        id={inputId}
+        className="objective-slider"
+        type="range"
+        min="0"
+        max="100"
+        value={value}
+        aria-label={`${objective.label} weight`}
+        onChange={(event) => onChange(Number(event.target.value))}
+      />
+      <div className="mt-2 flex justify-between text-xs text-muted">
+        <span>0</span>
+        <span>100</span>
+      </div>
+    </div>
   );
 }
 
@@ -292,7 +418,7 @@ function AnalysisLoading({ regionName }: { regionName: string }) {
         <p className="text-sm font-semibold uppercase text-accent">Preparing prototype outputs</p>
         <h2 className="mt-3 text-3xl font-semibold text-fg">Ranking restoration opportunities in {regionName}</h2>
         <div className="mt-8 grid gap-3 text-left sm:grid-cols-3">
-          {["Checking evidence layers", "Scoring candidate areas", "Preparing map overlays"].map((item) => (
+          {["Applying objective weights", "Scoring candidate areas", "Preparing map overlays"].map((item) => (
             <div key={item} className="rounded-md border border-[#e7deca] bg-[#fbf7ee] px-4 py-3 text-sm text-muted">
               {item}
             </div>
@@ -308,16 +434,16 @@ function Dashboard({
   areas,
   selectedArea,
   selectedAreaId,
-  selectedLayers,
+  objectiveWeights,
   onSelectArea,
   onDetail,
   onBack,
 }: {
   region: (typeof regions)[number];
-  areas: typeof restorationAreas;
-  selectedArea: (typeof restorationAreas)[number];
+  areas: RankedArea[];
+  selectedArea: RankedArea;
   selectedAreaId: string;
-  selectedLayers: string[];
+  objectiveWeights: ObjectiveWeights;
   onSelectArea: (areaId: string) => void;
   onDetail: () => void;
   onBack: () => void;
@@ -328,11 +454,11 @@ function Dashboard({
         <SectionHeader
           label="Dashboard"
           title={`${region.name} restoration priority view`}
-          description={`${selectedLayers.length} selected evidence layers are shown as prototype decision-support outputs, ready to be replaced by live pipeline results.`}
+          description={`Priority scores are recomputed from mock data using the current objective weights: biodiversity ${objectiveWeights.biodiversity}, carbon ${objectiveWeights.carbon}, water ${objectiveWeights.water}, livelihood ${objectiveWeights.livelihood}.`}
         />
         <div className="flex gap-3">
           <button className="rounded-full border border-[#cfc2aa] bg-white px-5 py-3 text-sm font-semibold text-fg" onClick={onBack}>
-            Edit layers
+            Edit weights
           </button>
           <button className="rounded-full bg-[#1f6f68] px-5 py-3 text-sm font-semibold text-white" onClick={onDetail}>
             Open rationale
@@ -362,7 +488,7 @@ function Dashboard({
               >
                 <div>
                   <p className="text-xs text-muted">Rank</p>
-                  <p className="text-2xl font-semibold text-fg">#{area.rank}</p>
+                  <p className="text-2xl font-semibold text-fg">#{area.weightedRank}</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-fg">{area.name}</h4>
@@ -371,7 +497,7 @@ function Dashboard({
                 </div>
                 <div className="md:text-right">
                   <p className="text-xs text-muted">Priority score</p>
-                  <p className="text-3xl font-semibold text-[#1f6f68]">{area.score}</p>
+                  <p className="text-3xl font-semibold text-[#1f6f68]">{area.priorityScore}</p>
                   <p className="text-xs text-muted">{area.confidence} confidence</p>
                 </div>
               </button>
@@ -388,7 +514,7 @@ function Dashboard({
   );
 }
 
-function ImpactSummary({ area }: { area: (typeof restorationAreas)[number] }) {
+function ImpactSummary({ area }: { area: RankedArea }) {
   return (
     <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm">
       <h3 className="text-lg font-semibold text-fg">Impact indicators</h3>
@@ -416,18 +542,18 @@ function PipelineStatesPreview() {
   );
 }
 
-function AreaDetail({ area, onBack, onNext }: { area: (typeof restorationAreas)[number]; onBack: () => void; onNext: () => void }) {
+function AreaDetail({ area, onBack, onNext }: { area: RankedArea; onBack: () => void; onNext: () => void }) {
   return (
     <section className="py-8">
       <SectionHeader
         label="Recommendation rationale"
         title={area.name}
-        description={`${area.zone}. Ranked #${area.rank} with ${area.confidence.toLowerCase()} prototype confidence.`}
+        description={`${area.zone}. Ranked #${area.weightedRank} with ${area.confidence.toLowerCase()} prototype confidence.`}
       />
       <div className="mt-8 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
           <p className="text-sm text-muted">Priority score</p>
-          <p className="mt-2 text-6xl font-semibold text-[#1f6f68]">{area.score}</p>
+          <p className="mt-2 text-6xl font-semibold text-[#1f6f68]">{area.priorityScore}</p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             <MetricCard label="Area" value={area.hectares} />
             <MetricCard label="Households" value={area.households} />
@@ -495,13 +621,13 @@ function Recommendation({ area, onBack, onNext }: { area: (typeof restorationAre
 function ExportPreview({
   area,
   region,
-  selectedLayers,
+  objectiveWeights,
   onBack,
   onRestart,
 }: {
-  area: (typeof restorationAreas)[number];
+  area: RankedArea;
   region: (typeof regions)[number];
-  selectedLayers: string[];
+  objectiveWeights: ObjectiveWeights;
   onBack: () => void;
   onRestart: () => void;
 }) {
@@ -523,13 +649,13 @@ function ExportPreview({
             <h4 className="text-lg font-semibold">Decision summary</h4>
             <p className="mt-3 leading-7 text-muted">
               Review {area.intervention.toLowerCase()} as a candidate restoration package. This
-              prototype ranks the area #{area.rank} in {region.name} with a priority score of {area.score}/100.
+              prototype ranks the area #{area.weightedRank} in {region.name} with a weighted priority score of {area.priorityScore}/100.
             </p>
-            <h4 className="mt-6 text-lg font-semibold">Evidence layers used</h4>
+            <h4 className="mt-6 text-lg font-semibold">Objective weights used</h4>
             <div className="mt-3 flex flex-wrap gap-2">
-              {selectedLayers.map((layerId) => (
-                <span key={layerId} className="rounded-full bg-[#e7f0eb] px-3 py-1 text-sm text-[#1f6f68]">
-                  {layers.find((layer) => layer.id === layerId)?.source}
+              {objectives.map((objective) => (
+                <span key={objective.key} className="rounded-full bg-[#e7f0eb] px-3 py-1 text-sm text-[#1f6f68]">
+                  {objective.label}: {objectiveWeights[objective.key]}
                 </span>
               ))}
             </div>
@@ -639,4 +765,29 @@ function getStepIndex(step: Step) {
   };
 
   return map[step];
+}
+
+function calculatePriorityScore(area: RestorationArea, weights: ObjectiveWeights) {
+  const totalWeight = Object.values(weights).reduce((sum, value) => sum + value, 0);
+
+  if (totalWeight === 0) {
+    return 0;
+  }
+
+  const weightedTotal =
+    area.scores.biodiversity * weights.biodiversity +
+    area.scores.carbon * weights.carbon +
+    area.scores.water * weights.water +
+    area.scores.livelihoods * weights.livelihood;
+
+  return Math.round(weightedTotal / totalWeight);
+}
+
+function toBackendWeights(weights: ObjectiveWeights) {
+  return {
+    biodiversity_weight: weights.biodiversity,
+    carbon_weight: weights.carbon,
+    water_weight: weights.water,
+    livelihood_weight: weights.livelihood,
+  };
 }
