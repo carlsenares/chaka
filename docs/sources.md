@@ -37,10 +37,10 @@ model/scoring updates.
 | Sentinel-1 GRD | ESA/Copernicus via Earth Engine or alternate raster path | Radar vegetation/structure and moisture proxies | Optional vegetation/degradation context | Not implemented | Recheck if radar features become a scoring target | Blocked on Earth Engine/auth or alternate public raster workflow |
 | WDPA protected areas | UNEP-WCMC / IUCN Protected Planet | Protected-area overlap and safeguard context | Intended for `protected_area_overlap_pct`, `safeguard_risk_score` | Not implemented | Recheck monthly release and license/redistribution terms | Blocked pending access/terms decision |
 | GHSL GHS-SMOD settlement model | European Commission JRC | 1 km settlement degree-of-urbanization classes and class fractions | `source_extracts.settlement_context`; optional WorldPop/OSM cross-check | `scripts/extract-ghsl-settlement.py`, `data/features/source_extracts/ghsl_settlement.json` | Recheck when GHSL publishes a newer release/epoch | Source-derived context; does not replace access or population scores |
-| FAO WaPOR | FAO | ETa, biomass production, NPP, precipitation, water productivity | Future water/productivity/livelihood context | Not implemented | Recheck when selecting exact WaPOR products/version | Use-later |
+| FAO WaPOR v3 L2 annual products | FAO | Actual evapotranspiration/interception, total biomass production, gross and net biomass water productivity | `source_extracts.water_productivity`; water/productivity/livelihood-support context | `scripts/extract-wapor-water-productivity.py`, `data/features/source_extracts/wapor_water_productivity.json` | Recheck when adding newer years or changing WaPOR products/version | Source-derived context; default products are `L2-AETI-A`, `L2-TBP-A`, `L2-GBWP-A`, `L2-NBWP-A` for 2023-2025 |
 | NHM Biodiversity Intactness Index | Natural History Museum | Modeled biodiversity intactness / ecosystem condition | Future coarse biodiversity pressure/context layer | Not implemented | Recheck model version before use | Use-later; public metadata and DOI verified, but direct zip download is Cloudflare-challenged from the server, so user-provided zip may be needed |
 | GLOBIO / GLOBIOweb | PBL / GLOBIO consortium | Modeled mean species abundance and pressure-based biodiversity condition | Future secondary ecosystem-condition screen | Not implemented | Recheck model/version and data access before use | Use-later; modeled secondary layer |
-| GFW/WRI forest carbon flux | WRI / GFW | Modeled gross removals, emissions, net forest carbon flux | Future carbon stock/flux context | Not implemented | Recheck product period and tile availability | Use-later; modeled period totals, not annual trend unless normalized |
+| GFW/WRI forest carbon flux | WRI / GFW | Modeled gross removals, emissions, net forest carbon flux | Future carbon stock/flux context | Not implemented | Recheck product period, API key requirements, and tile availability | Use-later; public metadata verified but raster download endpoint requires a valid GFW API key from this host; modeled period totals, not annual trend unless normalized |
 | ESA CCI Biomass v7.0 | ESA CCI / CEDA | 100 m annual aboveground biomass maps with uncertainty for 2005-2012 and 2015-2024 | Future carbon stock layer | Not implemented | Recheck release/version and storage strategy | Use-later; GeoTIFF/NetCDF, very large download |
 | GEDI L4A footprint AGBD v3 | NASA ORNL DAAC / Earthdata | Footprint aboveground biomass density with uncertainty and quality flags | Future observed biomass validation/calibration anchor | Not implemented | Recheck product version and Earthdata access | Use-later; account/heavy processing |
 | GEDI L4B gridded AGBD v2.1 | NASA ORNL DAAC / Earthdata | 1 km gridded aboveground biomass density with standard error | Future coarse biomass/carbon screening layer | Not implemented | Recheck product version and Earthdata access | Use-later; account/heavy processing |
@@ -99,7 +99,7 @@ by newer editions if someone provides a new file.
 
 The current system has working source-derived coverage for admin geometry, land
 cover, rainfall, forest disturbance context, SoilGrids soil, WorldPop population,
-partial OSM access, GHSL settlement context, nearby soil observations, and GBIF
-biodiversity observation context. Remaining high-value gaps are vegetation
-indices, terrain, safeguards, carbon stock/flux, modeled biodiversity condition,
-and conservation-priority layers.
+partial OSM access, GHSL settlement context, WaPOR water/productivity context,
+nearby soil observations, and GBIF biodiversity observation context. Remaining
+high-value gaps are vegetation indices, terrain, safeguards, carbon stock/flux,
+modeled biodiversity condition, and conservation-priority layers.

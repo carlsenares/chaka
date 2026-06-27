@@ -11,6 +11,7 @@ This document tracks which feature groups are source-derived and which are still
 | Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Placeholder | Pending Sentinel-2/Landsat | Requires Earth Engine auth or alternate public raster workflow. |
 | Forest context | `forest_loss_score` | Source-derived for 16/16 sites | Hansen Global Forest Change / GFW v1.13 | Extracts tree-cover baseline and loss from official direct-download tiles. Default threshold is 30% tree cover; tree-cover loss is a disturbance proxy, not verified deforestation or carbon loss. |
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
+| Water/productivity context | `source_extracts.water_productivity` | Optional source-derived context | FAO WaPOR v3 L2 annual products | AETI, total biomass production, and biomass water productivity context. Does not overwrite rainfall, carbon, or livelihood scores. |
 | Terrain | `slope_mean_deg`, `slope_risk_score` | Placeholder, extractor scaffolded | SRTMGL1 | Script lists required official tiles and extracts terrain once local official `.hgt`/`.hgt.zip` tiles are supplied. |
 | Soil | `soil_organic_carbon_score`, `soil_ph_suitability_score` | Source-derived for 15/16 sites | SoilGrids 2.0 topsoil SOC and pH | Extracted from official ISRIC WebDAV/VRT rasters. `SET-001` has no valid soil pixels, consistent with water-dominant WorldCover. |
 | Biodiversity observations | `source_extracts.biodiversity_observations` | Optional source-derived context | GBIF occurrence search API | Observation-density/species context only. Does not overwrite ranker fields or imply absence where records are sparse. |
@@ -279,6 +280,43 @@ Current GFW/UMD-derived artifact coverage:
 - Tree-cover context scores: 16/16 sites.
 - Hansen tile set: `10N_030E`.
 
+WaPOR water/productivity dry-run command:
+
+```bash
+npm run data:wapor:dry-run
+```
+
+WaPOR water/productivity command:
+
+```bash
+npm run data:wapor
+```
+
+WaPOR water/productivity script:
+
+```text
+scripts/extract-wapor-water-productivity.py
+```
+
+WaPOR water/productivity output:
+
+```text
+data/features/source_extracts/wapor_water_productivity.json
+```
+
+WaPOR metadata cache:
+
+```text
+data/raw/wapor/metadata/
+```
+
+The WaPOR lane uses FAO WaPOR v3 `WAPOR-3` Level 2 annual 100 m products:
+`L2-AETI-A`, `L2-TBP-A`, `L2-GBWP-A`, and `L2-NBWP-A`. The extractor reads
+official FAO Cloud Optimized GeoTIFFs through GDAL `/vsicurl/` range requests
+and caches only product metadata. It summarizes annual values for 2023-2025 by
+default. These values are water/productivity context, not carbon stock or direct
+biodiversity evidence.
+
 OSM access dry-run command:
 
 ```bash
@@ -402,6 +440,7 @@ This means:
 - geometry/admin labels are source-derived,
 - forest context is source-derived from Hansen/GFW where valid land pixels exist,
 - rainfall fields are source-derived from CHIRPS,
+- WaPOR water/productivity context is source-derived where valid product pixels exist,
 - soil SOC and pH suitability fields are source-derived from SoilGrids where valid soil pixels exist,
 - population pressure is source-derived from WorldPop where valid population pixels exist,
 - OSM access fields are source-derived where Overpass or Geofabrik returned usable mapped features,

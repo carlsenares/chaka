@@ -15,6 +15,7 @@ const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_s
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
 const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
+const waporWaterProductivityPath = path.join(root, "data/features/source_extracts/wapor_water_productivity.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -71,6 +72,7 @@ async function main() {
   const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
   const gbifBiodiversityBySite = await loadOptionalExtractBySite(gbifBiodiversityPath);
   const ghslSettlementBySite = await loadOptionalExtractBySite(ghslSettlementPath);
+  const waporWaterProductivityBySite = await loadOptionalExtractBySite(waporWaterProductivityPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
   validateRows("feature", features, candidateIds, (row) =>
@@ -82,6 +84,7 @@ async function main() {
       soilObservationsBySite,
       gbifBiodiversityBySite,
       ghslSettlementBySite,
+      waporWaterProductivityBySite,
     })
   );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
@@ -169,6 +172,7 @@ function validateFeature(row, extracts) {
   validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
   validateGbifBiodiversitySync(row, extracts.gbifBiodiversityBySite.get(row.site_id));
   validateGhslSettlementSync(row, extracts.ghslSettlementBySite.get(row.site_id));
+  validateWaporWaterProductivitySync(row, extracts.waporWaterProductivityBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -583,6 +587,91 @@ function validateGhslSettlementSync(row, ghslSettlement) {
 
   if (JSON.stringify(ghslSettlement.ghsl_smod_class_fractions ?? null) !== JSON.stringify(integrated.ghsl_smod_class_fractions ?? null)) {
     addError(`feature ${row.site_id}: integrated ghsl_settlement class fractions are stale`);
+  }
+}
+
+function validateWaporWaterProductivitySync(row, waporWaterProductivity) {
+  if (!waporWaterProductivity) {
+    if (row.source_extracts?.water_productivity?.status && row.source_extracts.water_productivity.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing wapor_water_productivity source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "partial_source_derived", "not_processed_limit"]);
+  if (!validStatuses.has(waporWaterProductivity.source_status)) {
+    addError(`wapor ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "wapor_aeti_mm_by_year",
+    "wapor_total_biomass_production_kg_ha_by_year",
+    "wapor_gross_biomass_water_productivity_kg_m3_by_year",
+    "wapor_net_biomass_water_productivity_kg_m3_by_year",
+  ]) {
+    if (!isPlainObject(waporWaterProductivity[field])) {
+      addError(`wapor ${row.site_id}: ${field} must be an object`);
+    } else {
+      for (const [year, value] of Object.entries(waporWaterProductivity[field])) {
+        if (!/^\d{4}$/.test(year)) addError(`wapor ${row.site_id}: ${field} has invalid year key ${year}`);
+        if (value !== null && !isNonNegativeNumber(value)) addError(`wapor ${row.site_id}: ${field}.${year} must be null or nonnegative`);
+      }
+    }
+  }
+
+  for (const field of [
+    "wapor_aeti_annual_mean_mm",
+    "wapor_total_biomass_production_mean_kg_ha",
+    "wapor_gross_biomass_water_productivity_mean_kg_m3",
+    "wapor_net_biomass_water_productivity_mean_kg_m3",
+  ]) {
+    if (waporWaterProductivity[field] !== null && !isNonNegativeNumber(waporWaterProductivity[field])) {
+      addError(`wapor ${row.site_id}: ${field} must be null or nonnegative`);
+    }
+  }
+
+  if (waporWaterProductivity.wapor_productivity_context_score !== null && !isScore(waporWaterProductivity.wapor_productivity_context_score)) {
+    addError(`wapor ${row.site_id}: wapor_productivity_context_score must be null or 0-100`);
+  }
+  for (const field of ["wapor_valid_pixel_count_min", "wapor_valid_pixel_count_max"]) {
+    if (!Number.isInteger(Number(waporWaterProductivity[field])) || Number(waporWaterProductivity[field]) < 0) {
+      addError(`wapor ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  const integrated = row.source_extracts?.water_productivity;
+  if (!integrated || integrated.dataset_id !== "wapor_water_productivity") {
+    addError(`feature ${row.site_id}: missing integrated wapor_water_productivity source extract`);
+    return;
+  }
+
+  if (waporWaterProductivity.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated wapor_water_productivity status is stale`);
+  }
+
+  for (const field of [
+    "wapor_aeti_annual_mean_mm",
+    "wapor_total_biomass_production_mean_kg_ha",
+    "wapor_gross_biomass_water_productivity_mean_kg_m3",
+    "wapor_net_biomass_water_productivity_mean_kg_m3",
+    "wapor_productivity_context_score",
+    "wapor_valid_pixel_count_min",
+    "wapor_valid_pixel_count_max",
+  ]) {
+    if (!sameNullableNumber(waporWaterProductivity[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated wapor_water_productivity ${field} is stale`);
+    }
+  }
+
+  for (const field of [
+    "wapor_aeti_mm_by_year",
+    "wapor_total_biomass_production_kg_ha_by_year",
+    "wapor_gross_biomass_water_productivity_kg_m3_by_year",
+    "wapor_net_biomass_water_productivity_kg_m3_by_year",
+  ]) {
+    if (JSON.stringify(waporWaterProductivity[field] ?? null) !== JSON.stringify(integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated wapor_water_productivity ${field} is stale`);
+    }
   }
 }
 

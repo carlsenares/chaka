@@ -17,6 +17,8 @@
     "data:gbif": "python3 scripts/extract-gbif-biodiversity.py",
     "data:ghsl:dry-run": "python3 scripts/extract-ghsl-settlement.py --dry-run",
     "data:ghsl": "python3 scripts/extract-ghsl-settlement.py",
+    "data:wapor:dry-run": "python3 scripts/extract-wapor-water-productivity.py --dry-run",
+    "data:wapor": "python3 scripts/extract-wapor-water-productivity.py",
     "data:worldpop:dry-run": "python3 scripts/extract-worldpop-population.py --dry-run",
     "data:worldpop": "python3 scripts/extract-worldpop-population.py",
     "data:gfw:dry-run": "python3 scripts/extract-gfw-umd-forest-change.py --dry-run",
@@ -38,6 +40,7 @@
     "data:pipeline:soilobs": "npm run data:pipeline:full:noauth && npm run data:soilobs && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
     "data:pipeline:gbif": "npm run data:gbif && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
     "data:pipeline:ghsl": "npm run data:ghsl && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
+    "data:pipeline:wapor": "npm run data:wapor && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

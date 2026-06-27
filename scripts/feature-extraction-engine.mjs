@@ -13,6 +13,7 @@ const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_s
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
 const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
+const waporWaterProductivityPath = path.join(root, "data/features/source_extracts/wapor_water_productivity.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const jsonPath = path.join(root, "data/features/site_features.json");
@@ -188,6 +189,7 @@ async function main() {
   const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
   const gbifBiodiversityBySite = await loadExtractBySite(gbifBiodiversityPath, { optional: true });
   const ghslSettlementBySite = await loadExtractBySite(ghslSettlementPath, { optional: true });
+  const waporWaterProductivityBySite = await loadExtractBySite(waporWaterProductivityPath, { optional: true });
   const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
   const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
@@ -200,6 +202,7 @@ async function main() {
       soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
       gbifBiodiversity: gbifBiodiversityBySite.get(candidate.properties.site_id),
       ghslSettlement: ghslSettlementBySite.get(candidate.properties.site_id),
+      waporWaterProductivity: waporWaterProductivityBySite.get(candidate.properties.site_id),
       worldPop: worldPopBySite.get(candidate.properties.site_id),
       osmAccess: osmAccessBySite.get(candidate.properties.site_id),
     })
@@ -237,6 +240,7 @@ function buildFeature(candidate, index, extracts) {
   const soilObservationsFeature = extracts.soilObservations;
   const gbifBiodiversityFeature = extracts.gbifBiodiversity;
   const ghslSettlementFeature = extracts.ghslSettlement;
+  const waporWaterProductivityFeature = extracts.waporWaterProductivity;
   const worldPopFeature = extracts.worldPop;
   const osmAccessFeature = extracts.osmAccess;
   const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
@@ -247,6 +251,7 @@ function buildFeature(candidate, index, extracts) {
   const hasSoilObservations = ["source_derived", "partial_source_derived"].includes(soilObservationsFeature?.source_status);
   const hasGbifBiodiversity = gbifBiodiversityFeature?.source_status === "source_derived";
   const hasGhslSettlement = ghslSettlementFeature?.source_status === "source_derived";
+  const hasWaporWaterProductivity = ["source_derived", "partial_source_derived"].includes(waporWaterProductivityFeature?.source_status);
   const hasWorldPop = worldPopFeature?.source_status === "source_derived";
   const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
   const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
@@ -297,6 +302,7 @@ function buildFeature(candidate, index, extracts) {
     (hasSoilObservations && soilObservationsFeature.soil_observation_support_score >= 50 ? 3 : 0) +
     (hasGbifBiodiversity ? 3 : 0) +
     (hasGhslSettlement ? 2 : 0) +
+    (hasWaporWaterProductivity ? 3 : 0) +
     (hasWorldPop ? 6 : 0) +
     (hasUsableOsmAccess ? 4 : 0)
   );
@@ -309,6 +315,7 @@ function buildFeature(candidate, index, extracts) {
     hasSoilObservations ? "soil_observations" : null,
     hasGbifBiodiversity ? "biodiversity_observations" : null,
     hasGhslSettlement ? "settlement_context" : null,
+    hasWaporWaterProductivity ? "water_productivity" : null,
     hasWorldPop ? "population" : null,
     hasUsableOsmAccess ? "access" : null,
   ].filter(Boolean);
@@ -491,6 +498,26 @@ function buildFeature(candidate, index, extracts) {
           }
         : {
             dataset_id: "ghsl_settlement",
+            status: "not_extracted",
+          },
+      water_productivity: waporWaterProductivityFeature
+        ? {
+            dataset_id: "wapor_water_productivity",
+            status: waporWaterProductivityFeature.source_status,
+            wapor_aeti_mm_by_year: waporWaterProductivityFeature.wapor_aeti_mm_by_year,
+            wapor_aeti_annual_mean_mm: waporWaterProductivityFeature.wapor_aeti_annual_mean_mm,
+            wapor_total_biomass_production_kg_ha_by_year: waporWaterProductivityFeature.wapor_total_biomass_production_kg_ha_by_year,
+            wapor_total_biomass_production_mean_kg_ha: waporWaterProductivityFeature.wapor_total_biomass_production_mean_kg_ha,
+            wapor_gross_biomass_water_productivity_kg_m3_by_year: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_kg_m3_by_year,
+            wapor_gross_biomass_water_productivity_mean_kg_m3: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_mean_kg_m3,
+            wapor_net_biomass_water_productivity_kg_m3_by_year: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_kg_m3_by_year,
+            wapor_net_biomass_water_productivity_mean_kg_m3: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_mean_kg_m3,
+            wapor_productivity_context_score: waporWaterProductivityFeature.wapor_productivity_context_score,
+            wapor_valid_pixel_count_min: waporWaterProductivityFeature.wapor_valid_pixel_count_min,
+            wapor_valid_pixel_count_max: waporWaterProductivityFeature.wapor_valid_pixel_count_max,
+          }
+        : {
+            dataset_id: "wapor_water_productivity",
             status: "not_extracted",
           },
       population: hasWorldPop
