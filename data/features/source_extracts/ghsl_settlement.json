@@ -1,0 +1,336 @@
+{
+  "source": {
+    "dataset_id": "ghsl_settlement",
+    "name": "GHSL Settlement Model 2020",
+    "provider": "European Commission Joint Research Centre",
+    "source_url": "https://human-settlement.emergency.copernicus.eu/ghs_smod2023.php",
+    "access_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_SMOD_GLOBE_R2023A/GHS_SMOD_E2020_GLOBE_R2023A_54009_1000/V1-0/GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.zip",
+    "version": "R2023A",
+    "year": 2020,
+    "product": "GHS-SMOD global settlement model",
+    "spatial_resolution": "1 km",
+    "crs": "ESRI:54009 World Mollweide",
+    "license": "European Commission reuse terms; verify redistribution terms before committing raw data.",
+    "raw_zip": "data/raw/ghsl/GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.zip",
+    "source_file_size_bytes": 29415458,
+    "tif_member": "GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.tif",
+    "class_labels": {
+      "10": "water",
+      "11": "very_low_density_rural",
+      "12": "low_density_rural",
+      "13": "rural_cluster",
+      "21": "suburban_or_peri_urban",
+      "22": "semi_dense_urban_cluster",
+      "23": "dense_urban_cluster",
+      "30": "urban_centre"
+    },
+    "extraction_method": "rasterio polygon mask over reprojected candidate geometries; settlement classes summarized as class fractions and a context score",
+    "note": "Settlement model context only. It cross-checks WorldPop and OSM signals and does not prove access, tenure, or community willingness."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "ghsl_smod_class_fractions": {
+        "water": 0.75,
+        "very_low_density_rural": 0.25,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 0.25,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 36,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-002",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.933333,
+        "low_density_rural": 0.066667,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 1,
+      "ghsl_valid_pixel_count": 30,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.921053,
+        "low_density_rural": 0.078947,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 1,
+      "ghsl_valid_pixel_count": 38,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 32,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.966667,
+        "low_density_rural": 0.033333,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 30,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 35,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 42,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.0,
+        "low_density_rural": 0.25,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.75,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 0.25,
+      "ghsl_settlement_context_score": 36,
+      "ghsl_valid_pixel_count": 32,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 41,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 30,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 35,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 36,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.076923,
+        "low_density_rural": 0.487179,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.307692,
+        "semi_dense_urban_cluster": 0.128205,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.128205,
+      "ghsl_rural_or_low_density_fraction": 0.564102,
+      "ghsl_settlement_context_score": 28,
+      "ghsl_valid_pixel_count": 39,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 36,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 0.243243,
+        "low_density_rural": 0.621622,
+        "rural_cluster": 0.027027,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.108108,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.108108,
+      "ghsl_rural_or_low_density_fraction": 0.891892,
+      "ghsl_settlement_context_score": 14,
+      "ghsl_valid_pixel_count": 37,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "ghsl_smod_class_fractions": {
+        "water": 0.0,
+        "very_low_density_rural": 1.0,
+        "low_density_rural": 0.0,
+        "rural_cluster": 0.0,
+        "suburban_or_peri_urban": 0.0,
+        "semi_dense_urban_cluster": 0.0,
+        "dense_urban_cluster": 0.0,
+        "urban_centre": 0.0
+      },
+      "ghsl_urban_centre_fraction": 0.0,
+      "ghsl_dense_settlement_fraction": 0.0,
+      "ghsl_rural_or_low_density_fraction": 1.0,
+      "ghsl_settlement_context_score": 0,
+      "ghsl_valid_pixel_count": 40,
+      "source_status": "source_derived"
+    }
+  ]
+}

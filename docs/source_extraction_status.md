@@ -8,13 +8,17 @@ This document tracks which feature groups are source-derived and which are still
 | --- | --- | --- | --- | --- |
 | Geometry/admin labels | `site_id`, `region`, `zone`, `woreda`, `area_ha` | Source-derived | HDX/OCHA Ethiopia Admin 1-3 | Generated from downloaded HDX GeoJSON. |
 | Land cover | `land_cover_primary`, `land_cover_mix` | Source-derived | ESA WorldCover 2021 v200 | Extracted from public 10m WorldCover COG tiles. |
-| Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Placeholder | Pending Sentinel-2/Landsat | Requires Earth Engine auth or alternate public raster workflow. |
+| Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Partial source-derived for 16/16 sites | Sentinel-2 L2A via Element84 Earth Search; optional Landsat C2 L2 via Planetary Computer | Current NDVI/EVI are extracted from public Sentinel-2 COGs. Landsat 5-year trend is implemented as opt-in because signed COG reads are slow from this environment, so `ndvi_trend_5y` still falls back when trend is not run. |
 | Forest context | `forest_loss_score` | Source-derived for 16/16 sites | Hansen Global Forest Change / GFW v1.13 | Extracts tree-cover baseline and loss from official direct-download tiles. Default threshold is 30% tree cover; tree-cover loss is a disturbance proxy, not verified deforestation or carbon loss. |
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
-| Terrain | `slope_mean_deg`, `slope_risk_score` | Placeholder, extractor scaffolded | SRTMGL1 | Script lists required official tiles and extracts terrain once local official `.hgt`/`.hgt.zip` tiles are supplied. |
+| Water/productivity context | `source_extracts.water_productivity` | Optional source-derived context | FAO WaPOR v3 L2 annual products | AETI, total biomass production, and biomass water productivity context. Does not overwrite rainfall, carbon, or livelihood scores. |
+| Terrain | `slope_mean_deg`, `slope_risk_score` | Source-derived for 16/16 sites | SRTMGL1 | Artifact imported from the coworker SRTM branch and normalized to the current source-extract schema. Raw official `.hgt` tiles remain gitignored. |
 | Soil | `soil_organic_carbon_score`, `soil_ph_suitability_score` | Source-derived for 15/16 sites | SoilGrids 2.0 topsoil SOC and pH | Extracted from official ISRIC WebDAV/VRT rasters. `SET-001` has no valid soil pixels, consistent with water-dominant WorldCover. |
+| Biodiversity observations | `source_extracts.biodiversity_observations` | Optional source-derived context | GBIF occurrence search API | Observation-density/species context only. Does not overwrite ranker fields or imply absence where records are sparse. |
 | Population/livelihood | `population_pressure_score` | Source-derived for 15/16 sites | WorldPop Ethiopia 2020 UN-adjusted population counts | Extracted from official WorldPop 100m GeoTIFF. `SET-001` has no valid population pixels and falls back to OSM's zero-valued mapped population proxy. |
 | Access | `road_access_score`, `settlement_proximity_score` | Partial source-derived, reproducible local extract | OSM via Geofabrik Ethiopia `.osm.pbf` | Current Geofabrik artifact has road scores for 13/16 sites and settlement scores for 12/16 sites. Individual null fields still fall back to deterministic placeholders in `site_features.json`. |
+| Settlement context | `source_extracts.settlement_context` | Optional source-derived context | GHSL GHS-SMOD 2020 R2023A | Coarse 1 km settlement model context. Cross-checks WorldPop/OSM and does not overwrite access or population scores. |
+| Local research context | `source_extracts.local_research_context` | Context-derived for 16/16 sites | Curated local PDF bundle | Evidence-card matches for implementation caveats and policy/method context. Does not overwrite scoring fields. |
 | Safeguards | `protected_area_overlap_pct`, `safeguard_risk_score` | Placeholder | Pending WDPA | WDPA access terms must be checked before committing raw data. |
 
 ## Implemented Extraction
@@ -42,6 +46,42 @@ Land-cover raw cache:
 ```text
 data/raw/esa_worldcover/
 ```
+
+Vegetation dry-run command:
+
+```bash
+npm run data:vegetation:dry-run
+```
+
+Vegetation command:
+
+```bash
+npm run data:vegetation
+```
+
+Vegetation trend command, slower opt-in:
+
+```bash
+npm run data:vegetation:trend
+```
+
+Vegetation script:
+
+```text
+scripts/extract-vegetation-indices.py
+```
+
+Vegetation output:
+
+```text
+data/features/source_extracts/vegetation_indices.json
+```
+
+Current vegetation artifact coverage:
+
+- Sentinel-2 current NDVI/EVI extracted for 16/16 candidate sites.
+- Landsat NDVI trend extraction is implemented but not part of the default vegetation command because Planetary Computer signed COG reads were too slow for the PR workflow.
+- `ndvi_current` and `evi_current` are now source-derived from Sentinel-2 where valid scenes exist; `ndvi_trend_5y` remains fallback unless `npm run data:vegetation:trend` is run successfully.
 
 Rainfall command:
 
@@ -90,6 +130,12 @@ Terrain raw tile location:
 ```text
 data/raw/srtm/
 ```
+
+Current terrain artifact coverage:
+
+- Source-derived elevation and slope summaries for 16/16 candidate sites.
+- Raw SRTMGL1 `.hgt` tiles are not committed. The committed artifact is small and reproducible if the official tiles listed in `data/features/source_extracts/srtm_terrain.json` are placed under `data/raw/srtm/`.
+- Steepest current candidate by mean slope is `SET-006` at 29.32 degrees; flattest is `SET-001` at 0.01 degrees.
 
 Soil command:
 
@@ -156,6 +202,91 @@ Current soil-observation artifact coverage:
 - Nearby observations found for 5/16 candidate sites.
 - Current nearby matches are from WoSIS; AfSIS Phase I data fetched successfully but had no topsoil observations within the default 25 km candidate radius.
 - Observation rows are context/provenance only and do not change current priority scores.
+
+GBIF biodiversity dry-run command:
+
+```bash
+npm run data:gbif:dry-run
+```
+
+GBIF biodiversity command:
+
+```bash
+npm run data:gbif
+```
+
+GBIF biodiversity script:
+
+```text
+scripts/extract-gbif-biodiversity.py
+```
+
+GBIF biodiversity output:
+
+```text
+data/features/source_extracts/gbif_biodiversity.json
+```
+
+GBIF raw cache:
+
+```text
+data/raw/gbif_biodiversity/
+```
+
+The GBIF lane queries candidate-site polygons through the public occurrence
+search API and filters to Ethiopia records with coordinates, no GBIF geospatial
+issue flag, present occurrence status, 2000-current event dates, coordinate
+uncertainty up to 5 km, accepted Creative Commons licenses, and observation or
+specimen basis types. It tags EOD/eBird and Bale Mountains plant-record subsets
+when those GBIF dataset keys appear in candidate polygons.
+
+GBIF rows are embedded under `source_extracts.biodiversity_observations`.
+They are biodiversity observation context only. Sparse or missing records mean
+the source has insufficient local observations for this polygon, not that the
+site has low biodiversity. The current PR does not give GBIF a direct ranker
+weight and does not override top-level feature values from GBIF; GBIF can still
+appear in source provenance, quality/context groups, and the per-site source
+payload.
+
+Current GBIF-derived artifact coverage:
+
+- Source-derived biodiversity context scores: 0/16 sites.
+- Insufficient-record context rows: 16/16 sites.
+- `SWE-007` currently has 8 filtered occurrences across 8 species; the other candidate polygons have zero filtered GBIF records.
+- Records with missing or greater-than-5-km coordinate uncertainty, disallowed licenses, disallowed basis types, geospatial issues, non-present status, or dates before 2000 are filtered out before summarization.
+
+Local research context dry-run command:
+
+```bash
+npm run data:local-research:dry-run
+```
+
+Local research context command:
+
+```bash
+npm run data:local-research
+```
+
+Local research context script:
+
+```text
+scripts/extract-local-research-context.mjs
+```
+
+Local research context output:
+
+```text
+data/features/source_extracts/local_research_context.json
+```
+
+The local research lane turns curated PDF/source-matrix findings into evidence
+cards and candidate matches. It is context-only and cannot change priority
+scores. It currently provides national policy/method context for 16/16 sites,
+national species-selection context for 16/16 sites, comparable
+western-Ethiopia context for 8/16 Southwest Ethiopia sites, and one explicit
+district-level match for `SWE-007` from the Gimbo soil-management paper. Newly
+pushed Bale/Konso/local plant papers are included as context/use-later evidence
+cards, not scoring layers.
 
 WorldPop population dry-run command:
 
@@ -227,6 +358,43 @@ Current GFW/UMD-derived artifact coverage:
 - Tree-cover context scores: 16/16 sites.
 - Hansen tile set: `10N_030E`.
 
+WaPOR water/productivity dry-run command:
+
+```bash
+npm run data:wapor:dry-run
+```
+
+WaPOR water/productivity command:
+
+```bash
+npm run data:wapor
+```
+
+WaPOR water/productivity script:
+
+```text
+scripts/extract-wapor-water-productivity.py
+```
+
+WaPOR water/productivity output:
+
+```text
+data/features/source_extracts/wapor_water_productivity.json
+```
+
+WaPOR metadata cache:
+
+```text
+data/raw/wapor/metadata/
+```
+
+The WaPOR lane uses FAO WaPOR v3 `WAPOR-3` Level 2 annual 100 m products:
+`L2-AETI-A`, `L2-TBP-A`, `L2-GBWP-A`, and `L2-NBWP-A`. The extractor reads
+official FAO Cloud Optimized GeoTIFFs through GDAL `/vsicurl/` range requests
+and caches only product metadata. It summarizes annual values for 2023-2025 by
+default. These values are water/productivity context, not carbon stock or direct
+biodiversity evidence.
+
 OSM access dry-run command:
 
 ```bash
@@ -289,6 +457,48 @@ Current Geofabrik-derived artifact coverage:
 
 The raw cache is gitignored. The source-derived summary JSON is small enough to commit.
 
+GHSL settlement dry-run command:
+
+```bash
+npm run data:ghsl:dry-run
+```
+
+GHSL settlement command:
+
+```bash
+npm run data:ghsl
+```
+
+GHSL settlement script:
+
+```text
+scripts/extract-ghsl-settlement.py
+```
+
+GHSL settlement output:
+
+```text
+data/features/source_extracts/ghsl_settlement.json
+```
+
+GHSL raw cache:
+
+```text
+data/raw/ghsl/
+```
+
+The GHSL lane uses the official JRC GHS-SMOD 2020, R2023A, 1 km global
+settlement model zip. Candidate polygons are reprojected to the product CRS
+(`ESRI:54009`) before raster masking. Results are embedded under
+`source_extracts.settlement_context` and are used as context only.
+
+Current GHSL-derived artifact coverage:
+
+- Settlement context rows: 16/16 sites.
+- Dense settlement fractions above zero: 2/16 sites (`SWE-005`, `SWE-007`).
+- Highest settlement-context scores: `SET-008` at 36, `SWE-005` at 28, and `SWE-007` at 14.
+- GHSL does not overwrite OSM access or WorldPop population pressure.
+
 ## Important Interpretation
 
 `data/features/site_features.json` currently has mixed quality:
@@ -308,9 +518,12 @@ This means:
 - geometry/admin labels are source-derived,
 - forest context is source-derived from Hansen/GFW where valid land pixels exist,
 - rainfall fields are source-derived from CHIRPS,
+- WaPOR water/productivity context is source-derived where valid product pixels exist,
 - soil SOC and pH suitability fields are source-derived from SoilGrids where valid soil pixels exist,
 - population pressure is source-derived from WorldPop where valid population pixels exist,
 - OSM access fields are source-derived where Overpass or Geofabrik returned usable mapped features,
+- GHSL settlement context is source-derived where valid settlement-model pixels exist,
+- GBIF biodiversity observation context is source-derived where enough occurrence/species records exist,
 - all other numerical environmental/social fields are deterministic placeholders,
 - rankings remain `rule_based_fallback`,
 - the output is suitable for integration and demo scaffolding, not final evidence claims.

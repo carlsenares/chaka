@@ -13,6 +13,9 @@ const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_pop
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
+const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
+const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
+const waporWaterProductivityPath = path.join(root, "data/features/source_extracts/wapor_water_productivity.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -67,10 +70,22 @@ async function main() {
   const gfwBySite = await loadOptionalExtractBySite(gfwPath);
   const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
+  const gbifBiodiversityBySite = await loadOptionalExtractBySite(gbifBiodiversityPath);
+  const ghslSettlementBySite = await loadOptionalExtractBySite(ghslSettlementPath);
+  const waporWaterProductivityBySite = await loadOptionalExtractBySite(waporWaterProductivityPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
   validateRows("feature", features, candidateIds, (row) =>
-    validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite, soilGridsBySite, soilObservationsBySite })
+    validateFeature(row, {
+      osmAccessBySite,
+      worldPopBySite,
+      gfwBySite,
+      soilGridsBySite,
+      soilObservationsBySite,
+      gbifBiodiversityBySite,
+      ghslSettlementBySite,
+      waporWaterProductivityBySite,
+    })
   );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
 
@@ -96,6 +111,16 @@ async function loadOptionalExtractBySite(filePath) {
     const extract = JSON.parse(await readFile(filePath, "utf8"));
     if (!Array.isArray(extract.features)) {
       throw new Error("missing features array");
+    }
+    const seenIds = new Set();
+    for (const feature of extract.features) {
+      if (!feature || typeof feature.site_id !== "string" || feature.site_id.length === 0) {
+        throw new Error("feature row missing site_id");
+      }
+      if (seenIds.has(feature.site_id)) {
+        throw new Error(`duplicate site_id ${feature.site_id}`);
+      }
+      seenIds.add(feature.site_id);
     }
     return new Map(extract.features.map((feature) => [feature.site_id, feature]));
   } catch (error) {
@@ -155,6 +180,9 @@ function validateFeature(row, extracts) {
   validateGfwSync(row, extracts.gfwBySite.get(row.site_id));
   validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
   validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
+  validateGbifBiodiversitySync(row, extracts.gbifBiodiversityBySite.get(row.site_id));
+  validateGhslSettlementSync(row, extracts.ghslSettlementBySite.get(row.site_id));
+  validateWaporWaterProductivitySync(row, extracts.waporWaterProductivityBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -398,6 +426,288 @@ function validateSoilObservationsSync(row, soilObservations) {
   }
 }
 
+function validateGbifBiodiversitySync(row, gbifBiodiversity) {
+  if (!gbifBiodiversity) {
+    if (row.source_extracts?.biodiversity_observations?.status && row.source_extracts.biodiversity_observations.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing gbif_biodiversity source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "insufficient_records", "blocked_source_unavailable", "source_error", "not_processed_limit"]);
+  if (!validStatuses.has(gbifBiodiversity.source_status)) {
+    addError(`gbif biodiversity ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "occurrence_count",
+    "unfiltered_occurrence_count",
+    "rejected_or_filtered_occurrence_count",
+    "species_count",
+    "eod_ebird_occurrence_count",
+    "eod_ebird_species_count",
+    "bale_plant_occurrence_count",
+    "bale_plant_species_count",
+    "plant_species_count",
+    "threatened_or_near_threatened_species_count",
+    "recent_occurrence_count_5y",
+  ]) {
+    if (!Number.isInteger(Number(gbifBiodiversity[field])) || Number(gbifBiodiversity[field]) < 0) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  if (!isScore(gbifBiodiversity.sampling_bias_risk_score)) {
+    addError(`gbif biodiversity ${row.site_id}: sampling_bias_risk_score must be 0-100`);
+  }
+  if (gbifBiodiversity.biodiversity_context_score !== null && !isScore(gbifBiodiversity.biodiversity_context_score)) {
+    addError(`gbif biodiversity ${row.site_id}: biodiversity_context_score must be null or 0-100`);
+  }
+  if (gbifBiodiversity.observation_density_per_km2 !== null && !isNonNegativeNumber(gbifBiodiversity.observation_density_per_km2)) {
+    addError(`gbif biodiversity ${row.site_id}: observation_density_per_km2 must be nonnegative`);
+  }
+  for (const field of ["coordinate_uncertainty_median_m", "coordinate_uncertainty_p90_m"]) {
+    if (gbifBiodiversity[field] !== null && !isNonNegativeNumber(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be nonnegative`);
+    }
+  }
+  for (const field of ["gbif_query_hash", "gbif_query_url"]) {
+    if (gbifBiodiversity[field] !== null && typeof gbifBiodiversity[field] !== "string") {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be null or a string`);
+    }
+  }
+  for (const field of ["basis_counts", "license_counts"]) {
+    if (!isPlainObject(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be an object`);
+    }
+  }
+  for (const field of ["dataset_counts_top", "top_taxa"]) {
+    if (!Array.isArray(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be an array`);
+    }
+  }
+
+  const integrated = row.source_extracts?.biodiversity_observations;
+  if (!integrated || integrated.dataset_id !== "gbif_biodiversity") {
+    addError(`feature ${row.site_id}: missing integrated gbif_biodiversity source extract`);
+    return;
+  }
+
+  if (gbifBiodiversity.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated gbif_biodiversity status is stale`);
+  }
+
+  for (const field of ["gbif_query_hash", "gbif_query_url"]) {
+    if ((gbifBiodiversity[field] ?? null) !== (integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+
+  for (const field of [
+    "occurrence_count",
+    "unfiltered_occurrence_count",
+    "rejected_or_filtered_occurrence_count",
+    "species_count",
+    "eod_ebird_occurrence_count",
+    "eod_ebird_species_count",
+    "bale_plant_occurrence_count",
+    "bale_plant_species_count",
+    "plant_species_count",
+    "threatened_or_near_threatened_species_count",
+    "recent_occurrence_count_5y",
+    "observation_density_per_km2",
+    "coordinate_uncertainty_median_m",
+    "coordinate_uncertainty_p90_m",
+    "sampling_bias_risk_score",
+    "biodiversity_context_score",
+  ]) {
+    if (!sameNullableNumber(gbifBiodiversity[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+
+  for (const field of ["basis_counts", "license_counts", "dataset_counts_top", "top_taxa"]) {
+    if (JSON.stringify(gbifBiodiversity[field] ?? null) !== JSON.stringify(integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+}
+
+function validateGhslSettlementSync(row, ghslSettlement) {
+  if (!ghslSettlement) {
+    if (row.source_extracts?.settlement_context?.status && row.source_extracts.settlement_context.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing ghsl_settlement source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "no_valid_pixels", "no_intersection"]);
+  if (!validStatuses.has(ghslSettlement.source_status)) {
+    addError(`ghsl settlement ${row.site_id}: invalid source_status`);
+  }
+
+  if (!isPlainObject(ghslSettlement.ghsl_smod_class_fractions)) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_smod_class_fractions must be an object`);
+  } else if (Object.keys(ghslSettlement.ghsl_smod_class_fractions).length > 0) {
+    const values = Object.values(ghslSettlement.ghsl_smod_class_fractions);
+    for (const value of values) {
+      if (!isUnitFraction(value)) addError(`ghsl settlement ${row.site_id}: class fractions must be finite 0-1 values`);
+    }
+    const total = values.reduce((sum, value) => sum + Number(value), 0);
+    if (Number.isFinite(total) && Math.abs(total - 1) > 0.01) addError(`ghsl settlement ${row.site_id}: class fractions must sum to 1`);
+  }
+
+  for (const field of [
+    "ghsl_urban_centre_fraction",
+    "ghsl_dense_settlement_fraction",
+    "ghsl_rural_or_low_density_fraction",
+  ]) {
+    if (ghslSettlement[field] !== null && !isUnitFraction(ghslSettlement[field])) {
+      addError(`ghsl settlement ${row.site_id}: ${field} must be null or 0-1`);
+    }
+  }
+
+  if (ghslSettlement.ghsl_settlement_context_score !== null && !isScore(ghslSettlement.ghsl_settlement_context_score)) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_settlement_context_score must be null or 0-100`);
+  }
+  if (!Number.isInteger(Number(ghslSettlement.ghsl_valid_pixel_count)) || Number(ghslSettlement.ghsl_valid_pixel_count) < 0) {
+    addError(`ghsl settlement ${row.site_id}: ghsl_valid_pixel_count must be a nonnegative integer`);
+  }
+  if (ghslSettlement.source_status === "source_derived" && Number(ghslSettlement.ghsl_valid_pixel_count) <= 0) {
+    addError(`ghsl settlement ${row.site_id}: source_derived rows must have valid pixels`);
+  }
+
+  const integrated = row.source_extracts?.settlement_context;
+  if (!integrated || integrated.dataset_id !== "ghsl_settlement") {
+    addError(`feature ${row.site_id}: missing integrated ghsl_settlement source extract`);
+    return;
+  }
+
+  if (ghslSettlement.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated ghsl_settlement status is stale`);
+  }
+
+  for (const field of [
+    "ghsl_urban_centre_fraction",
+    "ghsl_dense_settlement_fraction",
+    "ghsl_rural_or_low_density_fraction",
+    "ghsl_settlement_context_score",
+    "ghsl_valid_pixel_count",
+  ]) {
+    if (!sameNullableNumber(ghslSettlement[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated ghsl_settlement ${field} is stale`);
+    }
+  }
+
+  if (JSON.stringify(ghslSettlement.ghsl_smod_class_fractions ?? null) !== JSON.stringify(integrated.ghsl_smod_class_fractions ?? null)) {
+    addError(`feature ${row.site_id}: integrated ghsl_settlement class fractions are stale`);
+  }
+}
+
+function validateWaporWaterProductivitySync(row, waporWaterProductivity) {
+  if (!waporWaterProductivity) {
+    if (row.source_extracts?.water_productivity?.status && row.source_extracts.water_productivity.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing wapor_water_productivity source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "partial_source_derived", "not_processed_limit"]);
+  if (!validStatuses.has(waporWaterProductivity.source_status)) {
+    addError(`wapor ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "wapor_aeti_mm_by_year",
+    "wapor_total_biomass_production_kg_ha_by_year",
+    "wapor_gross_biomass_water_productivity_kg_m3_by_year",
+    "wapor_net_biomass_water_productivity_kg_m3_by_year",
+  ]) {
+    if (!isPlainObject(waporWaterProductivity[field])) {
+      addError(`wapor ${row.site_id}: ${field} must be an object`);
+    } else {
+      for (const [year, value] of Object.entries(waporWaterProductivity[field])) {
+        if (!/^\d{4}$/.test(year)) addError(`wapor ${row.site_id}: ${field} has invalid year key ${year}`);
+        if (value !== null && !isNonNegativeNumber(value)) addError(`wapor ${row.site_id}: ${field}.${year} must be null or nonnegative`);
+      }
+    }
+  }
+
+  for (const field of [
+    "wapor_aeti_annual_mean_mm",
+    "wapor_total_biomass_production_mean_kg_ha",
+    "wapor_gross_biomass_water_productivity_mean_kg_m3",
+    "wapor_net_biomass_water_productivity_mean_kg_m3",
+  ]) {
+    if (waporWaterProductivity[field] !== null && !isNonNegativeNumber(waporWaterProductivity[field])) {
+      addError(`wapor ${row.site_id}: ${field} must be null or nonnegative`);
+    }
+  }
+
+  if (waporWaterProductivity.wapor_productivity_context_score !== null && !isScore(waporWaterProductivity.wapor_productivity_context_score)) {
+    addError(`wapor ${row.site_id}: wapor_productivity_context_score must be null or 0-100`);
+  }
+  for (const field of [
+    "wapor_aeti_mm_valid_pixel_count_min",
+    "wapor_aeti_mm_valid_pixel_count_max",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_min",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_max",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_valid_pixel_count_min",
+    "wapor_valid_pixel_count_max",
+  ]) {
+    if (!Number.isInteger(Number(waporWaterProductivity[field])) || Number(waporWaterProductivity[field]) < 0) {
+      addError(`wapor ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  const integrated = row.source_extracts?.water_productivity;
+  if (!integrated || integrated.dataset_id !== "wapor_water_productivity") {
+    addError(`feature ${row.site_id}: missing integrated wapor_water_productivity source extract`);
+    return;
+  }
+
+  if (waporWaterProductivity.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated wapor_water_productivity status is stale`);
+  }
+
+  for (const field of [
+    "wapor_aeti_annual_mean_mm",
+    "wapor_total_biomass_production_mean_kg_ha",
+    "wapor_gross_biomass_water_productivity_mean_kg_m3",
+    "wapor_net_biomass_water_productivity_mean_kg_m3",
+    "wapor_productivity_context_score",
+    "wapor_aeti_mm_valid_pixel_count_min",
+    "wapor_aeti_mm_valid_pixel_count_max",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_min",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_max",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_valid_pixel_count_min",
+    "wapor_valid_pixel_count_max",
+  ]) {
+    if (!sameNullableNumber(waporWaterProductivity[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated wapor_water_productivity ${field} is stale`);
+    }
+  }
+
+  for (const field of [
+    "wapor_aeti_mm_by_year",
+    "wapor_total_biomass_production_kg_ha_by_year",
+    "wapor_gross_biomass_water_productivity_kg_m3_by_year",
+    "wapor_net_biomass_water_productivity_kg_m3_by_year",
+  ]) {
+    if (JSON.stringify(waporWaterProductivity[field] ?? null) !== JSON.stringify(integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated wapor_water_productivity ${field} is stale`);
+    }
+  }
+}
+
 function validatePrediction(row) {
   for (const field of predictionRequiredFields) {
     if (!(field in row)) addError(`prediction ${row.site_id}: missing "${field}"`);
@@ -431,6 +741,14 @@ function isScore(value) {
 
 function isNonNegativeNumber(value) {
   return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) && Number(value) >= 0;
+}
+
+function isUnitFraction(value) {
+  return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) && Number(value) >= 0 && Number(value) <= 1;
+}
+
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function sameNullableNumber(left, right) {

@@ -1,0 +1,1105 @@
+{
+  "source": {
+    "dataset_id": "local_research_context",
+    "name": "Curated local research evidence cards",
+    "provider": "Committed local PDF bundle and curated source matrix",
+    "source_path": "research/source_candidates/",
+    "evidence_index_path": "research/source_candidates/local_research_evidence_index.md",
+    "extraction_method": "Rule-based candidate matching over reviewed evidence-card metadata; no OCR-derived claim is used without manual QA status.",
+    "scoring_policy": "Context only. This artifact must not change priority scores without explicit scoring review.",
+    "generated_at": "2026-06-27T23:47:57.827Z"
+  },
+  "evidence_cards": [
+    {
+      "evidence_id": "local_research:alemayehu_haile:gimbo_soil_management_001",
+      "source_id": "local_research_source:alemayehu_haile",
+      "filename": "Alemayehu Haile.pdf",
+      "source_type": "local_thesis_or_report",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "Southwest Ethiopia Peoples' Region",
+        "zone": "Kefa",
+        "woreda": "Gimbo",
+        "place_names": [
+          "Gimbo District"
+        ]
+      },
+      "topics": [
+        "soil_fertility",
+        "soil_management",
+        "local_land_management"
+      ],
+      "intervention_tags": [
+        "agroforestry",
+        "soil_conservation",
+        "native_tree_planting"
+      ],
+      "claim": "Local Gimbo soil-fertility research is relevant context for land-management and restoration recommendations in the Gimbo candidate site.",
+      "citation_locator": "local research evidence index; PDF requires manual page/table QA before quoting",
+      "confidence": "medium",
+      "allowed_use": "site_specific_implementation_caveat",
+      "not_allowed_use": "direct_score_override",
+      "review_status": "needs_manual_table_qa"
+    },
+    {
+      "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+      "source_id": "local_research_source:wondimu_mamo",
+      "filename": "Wondimu Mamo.pdf",
+      "source_type": "local_dissertation",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "western Ethiopia",
+        "zone": null,
+        "woreda": null,
+        "place_names": [
+          "Bururi Catchment"
+        ]
+      },
+      "topics": [
+        "land_use_change",
+        "erosion",
+        "soil_quality",
+        "soil_organic_carbon"
+      ],
+      "intervention_tags": [
+        "erosion_control_exclosures",
+        "soil_conservation",
+        "agroforestry"
+      ],
+      "claim": "Western Ethiopia catchment research is relevant comparable-landscape context for erosion, soil quality, and land-management caveats, but it is not site-specific to the candidate polygons.",
+      "citation_locator": "local research evidence index; PDF requires manual page/table QA before quoting",
+      "confidence": "medium_low",
+      "allowed_use": "comparable_landscape_caveat",
+      "not_allowed_use": "direct_score_override",
+      "review_status": "needs_manual_table_qa"
+    },
+    {
+      "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+      "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+      "filename": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+      "source_type": "official_national_report",
+      "geography": {
+        "country": "Ethiopia",
+        "region": null,
+        "zone": null,
+        "woreda": null,
+        "place_names": []
+      },
+      "topics": [
+        "biodiversity_policy",
+        "protected_areas",
+        "ecosystem_services",
+        "safeguards"
+      ],
+      "intervention_tags": [
+        "field_validation_before_investment",
+        "safeguard_screening"
+      ],
+      "claim": "National biodiversity reporting provides policy and safeguard context, including protected-area and ecosystem-service framing, but it is not a spatial protected-area overlap layer.",
+      "citation_locator": "local research evidence index; extract policy targets/protected-area context before frontend quoting",
+      "confidence": "medium_high",
+      "allowed_use": "national_policy_context",
+      "not_allowed_use": "protected_area_overlap_calculation",
+      "review_status": "needs_manual_section_qa"
+    },
+    {
+      "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+      "source_id": "local_research_source:ethiopia_frel_frl_2026",
+      "filename": "2026_submission_frel_frl_eth_final.pdf",
+      "source_type": "official_unfccc_submission",
+      "geography": {
+        "country": "Ethiopia",
+        "region": null,
+        "zone": null,
+        "woreda": null,
+        "place_names": []
+      },
+      "topics": [
+        "forest_definition",
+        "carbon_pools",
+        "mrv",
+        "uncertainty"
+      ],
+      "intervention_tags": [
+        "native_tree_planting",
+        "assisted_natural_regeneration",
+        "carbon_mrv"
+      ],
+      "claim": "Ethiopia's FREL/FRL submission is useful for forest-carbon definitions, MRV framing, and coefficient QA, but it is not a candidate-site biomass raster.",
+      "citation_locator": "local research evidence index; extract definition/table references before quoting",
+      "confidence": "high",
+      "allowed_use": "methods_context",
+      "not_allowed_use": "site_specific_carbon_score_override",
+      "review_status": "needs_table_qa"
+    },
+    {
+      "evidence_id": "local_research:bale_migration_conservation:grazing_pressure_001",
+      "source_id": "local_research_source:bale_migration_conservation",
+      "filename": "migration-conservation-bale-mountains-ecosystem-report.pdf",
+      "source_type": "local_conservation_report",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "Oromia",
+        "zone": "Bale",
+        "woreda": null,
+        "place_names": [
+          "Bale Mountains ecosystem",
+          "Harenna Forest"
+        ]
+      },
+      "topics": [
+        "grazing_pressure",
+        "migration",
+        "forest_pressure",
+        "livelihoods",
+        "conservation_governance"
+      ],
+      "intervention_tags": [
+        "native_tree_planting",
+        "assisted_natural_regeneration",
+        "field_validation_before_investment"
+      ],
+      "claim": "Bale Mountains local research can inform general forest-edge implementation caveats such as grazing and livelihood pressure, but it is not geographically matched to the current South/Southwest Ethiopia candidates.",
+      "citation_locator": "local research evidence index; PDF requires manual claim-level QA before quoting",
+      "confidence": "low",
+      "allowed_use": "general_comparable_context_only",
+      "not_allowed_use": "site_specific_warning_without_manual_approval",
+      "review_status": "needs_manual_claim_qa"
+    },
+    {
+      "evidence_id": "local_research:bale_livestock_settlement:wildlife_pressure_001",
+      "source_id": "local_research_source:bale_livestock_settlement",
+      "filename": "Livestock and settlement - peer reviewed research paper may be useful for grazing patterns etc.pdf",
+      "source_type": "peer_reviewed_local_conservation_paper",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "Oromia",
+        "zone": "Bale",
+        "woreda": null,
+        "place_names": [
+          "Bale Mountains National Park"
+        ]
+      },
+      "topics": [
+        "livestock_pressure",
+        "settlement_pressure",
+        "wildlife_decline",
+        "protected_area_management"
+      ],
+      "intervention_tags": [
+        "native_tree_planting",
+        "assisted_natural_regeneration",
+        "safeguard_screening"
+      ],
+      "claim": "Peer-reviewed Bale Mountains research documents how livestock and settlement pressure can affect wildlife and protected-area restoration outcomes; use as a general implementation caveat, not as candidate-site overlap evidence.",
+      "citation_locator": "paper abstract and study-area sections; claim-level frontend quotes require manual page QA",
+      "confidence": "medium",
+      "allowed_use": "general_biodiversity_and_grazing_caveat",
+      "not_allowed_use": "site_specific_warning_without_manual_approval",
+      "review_status": "needs_manual_claim_qa"
+    },
+    {
+      "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+      "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+      "filename": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+      "source_type": "peer_reviewed_ethnobotany_paper",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "Oromia/Amhara",
+        "zone": "Bale and other highland sites",
+        "woreda": null,
+        "place_names": [
+          "Bale",
+          "Kofele",
+          "Debark"
+        ]
+      },
+      "topics": [
+        "local_species_value",
+        "medicinal_plants",
+        "species_conservation",
+        "traditional_knowledge"
+      ],
+      "intervention_tags": [
+        "native_tree_planting",
+        "assisted_natural_regeneration",
+        "species_selection"
+      ],
+      "claim": "Peer-reviewed ethnobotany research shows local cultural and medicinal value for Hagenia abyssinica and notes conservation pressure on the species; useful for species-selection caveats where agroecology matches.",
+      "citation_locator": "paper abstract and methodology sections; species recommendation requires local ecological/manual QA",
+      "confidence": "medium",
+      "allowed_use": "species_selection_context",
+      "not_allowed_use": "direct_species_prescription_or_score_override",
+      "review_status": "needs_manual_species_qa"
+    },
+    {
+      "evidence_id": "local_research:konso_bundle:dryland_context_001",
+      "source_id": "local_research_source:konso_context_bundle",
+      "filename": "Konso-20260627T215313Z-3-001.zip",
+      "source_type": "zipped_local_context_bundle",
+      "geography": {
+        "country": "Ethiopia",
+        "region": "South Ethiopia",
+        "zone": "Konso",
+        "woreda": null,
+        "place_names": [
+          "Konso"
+        ]
+      },
+      "topics": [
+        "dryland_restoration",
+        "terracing",
+        "cultural_landscape",
+        "local_governance"
+      ],
+      "intervention_tags": [
+        "erosion_control_exclosures",
+        "soil_conservation",
+        "field_validation_before_investment"
+      ],
+      "claim": "The Konso bundle is potentially useful for South Ethiopia dryland/soil-conservation context, but it is outside the current candidate zones and needs manual unpacking and QA.",
+      "citation_locator": "zip bundle; inspect contained reports before frontend citation",
+      "confidence": "low",
+      "allowed_use": "use_later_context",
+      "not_allowed_use": "candidate_scoring_or_site_specific_warning",
+      "review_status": "needs_manual_bundle_qa"
+    }
+  ],
+  "features": [
+    {
+      "site_id": "SET-001",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Dasenech /Kuraz",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-002",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Hamer",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Bena Tsemay",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Salamago",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Salamago",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Salamago",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "region": "South Ethiopia",
+      "zone": "Gofa",
+      "woreda": "Melekoza",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "region": "South Ethiopia",
+      "zone": "Wolayita",
+      "woreda": "Boloso Sore",
+      "matched_evidence_count": 3,
+      "matched_sources": [
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "West Omo",
+      "woreda": "Surma",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "West Omo",
+      "woreda": "Surma",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "West Omo",
+      "woreda": "Gori Gesha",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "Dawuro",
+      "woreda": "Disa",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "Bench Sheko",
+      "woreda": "Shay Bench",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "Kefa",
+      "woreda": "Decha",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "Kefa",
+      "woreda": "Gimbo",
+      "matched_evidence_count": 5,
+      "matched_sources": [
+        "local_research_source:alemayehu_haile",
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "explicit_district",
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:alemayehu_haile:gimbo_soil_management_001",
+          "source_id": "local_research_source:alemayehu_haile",
+          "match_type": "explicit_district",
+          "confidence": "medium",
+          "allowed_use": "site_specific_implementation_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "region": "Southwest Ethiopia Peoples' Region",
+      "zone": "Kefa",
+      "woreda": "Saylem",
+      "matched_evidence_count": 4,
+      "matched_sources": [
+        "local_research_source:wondimu_mamo",
+        "local_research_source:ethiopia_nbsap_sixth_report",
+        "local_research_source:ethiopia_frel_frl_2026",
+        "local_research_source:hagenia_abyssinica_ethnobotany"
+      ],
+      "match_types": [
+        "comparable_western_ethiopia",
+        "national_context",
+        "national_species_context"
+      ],
+      "evidence_refs": [
+        {
+          "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+          "source_id": "local_research_source:wondimu_mamo",
+          "match_type": "comparable_western_ethiopia",
+          "confidence": "medium_low",
+          "allowed_use": "comparable_landscape_caveat",
+          "not_allowed_use": "direct_score_override",
+          "review_status": "needs_manual_table_qa"
+        },
+        {
+          "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+          "source_id": "local_research_source:ethiopia_nbsap_sixth_report",
+          "match_type": "national_context",
+          "confidence": "medium_high",
+          "allowed_use": "national_policy_context",
+          "not_allowed_use": "protected_area_overlap_calculation",
+          "review_status": "needs_manual_section_qa"
+        },
+        {
+          "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+          "source_id": "local_research_source:ethiopia_frel_frl_2026",
+          "match_type": "national_context",
+          "confidence": "high",
+          "allowed_use": "methods_context",
+          "not_allowed_use": "site_specific_carbon_score_override",
+          "review_status": "needs_table_qa"
+        },
+        {
+          "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+          "source_id": "local_research_source:hagenia_abyssinica_ethnobotany",
+          "match_type": "national_species_context",
+          "confidence": "medium",
+          "allowed_use": "species_selection_context",
+          "not_allowed_use": "direct_species_prescription_or_score_override",
+          "review_status": "needs_manual_species_qa"
+        }
+      ],
+      "source_status": "context_derived"
+    }
+  ]
+}

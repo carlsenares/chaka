@@ -8,11 +8,12 @@ const featuresPath = path.join(root, "data/features/site_features.json");
 const predictionsPath = path.join(root, "models/artifacts/site_predictions.json");
 const reportPath = path.join(root, "models/reports/model_report.md");
 const schemaPath = path.join(root, "models/schemas/feature_schema.json");
+const modelVersion = "ranker_rule_based_v0.2";
 
 const weights = {
   carbon: 0.35,
-  biodiversity: 0.25,
-  water_soil: 0.2,
+  biodiversity: 0.3,
+  water_soil: 0.15,
   livelihood: 0.15,
   feasibility: 0.05,
 };
@@ -43,18 +44,15 @@ async function main() {
 }
 
 function buildPrediction(feature) {
-  const carbonScore = average([
+  const carbonOpportunityScore = average([
     vegetationOpportunityScore(feature),
     feature.forest_loss_score,
     feature.soil_organic_carbon_score,
-    feature.rainfall_reliability_score,
+    carbonLandCoverFitScore(feature),
   ]);
+  const carbonScore = clampScore(carbonOpportunityScore * rainfallFeasibilityMultiplier(feature.rainfall_reliability_score));
 
-  const biodiversityScore = average([
-    habitatOpportunityScore(feature),
-    feature.forest_loss_score,
-    100 - feature.safeguard_risk_score,
-  ]);
+  const biodiversityScore = biodiversityBenefitScore(feature);
 
   const waterSoilScore = average([
     feature.rainfall_reliability_score,
@@ -87,7 +85,7 @@ function buildPrediction(feature) {
 
   return {
     site_id: feature.site_id,
-    model_version: "ranker_rule_based_v0.1",
+    model_version: modelVersion,
     priority_score: priorityScore,
     carbon_potential: label(carbonScore),
     biodiversity_benefit: label(biodiversityScore),
@@ -98,6 +96,7 @@ function buildPrediction(feature) {
     recommended_intervention_seed: interventionFor(feature),
     top_feature_contributions: topContributions(feature, {
       carbonScore,
+      carbonOpportunityScore,
       biodiversityScore,
       waterSoilScore,
       livelihoodScore,
@@ -116,9 +115,68 @@ function vegetationOpportunityScore(feature) {
   return clampScore((lowCurrentVegetationOpportunity + degradationSignal + feature.evi_current * 100) / 3);
 }
 
-function habitatOpportunityScore(feature) {
+function carbonLandCoverFitScore(feature) {
   const mix = feature.land_cover_mix;
-  return clampScore(mix.tree_cover * 80 + mix.grassland * 65 + mix.cropland * 45 + feature.forest_loss_score * 0.35);
+  return clampScore(
+    mix.tree_cover * 65 +
+      mix.cropland * 55 +
+      mix.grassland * 50 +
+      mix.other * 35 -
+      mix.built_up * 80 -
+      mix.water * 80
+  );
+}
+
+function rainfallFeasibilityMultiplier(rainfallReliabilityScore) {
+  const score = Number(rainfallReliabilityScore);
+  if (!Number.isFinite(score)) return 0.85;
+  if (score <= 40) return 0.65;
+  if (score <= 70) return 0.65 + ((score - 40) / 30) * 0.25;
+  return Math.min(1, 0.9 + ((score - 70) / 30) * 0.1);
+}
+
+function biodiversityBenefitScore(feature) {
+  const habitatBase = habitatBaseScore(feature);
+  const restorationUplift = average([feature.forest_loss_score, vegetationOpportunityScore(feature)]);
+  const observationContext = biodiversityObservationContextScore(feature);
+  const pressurePenalty = biodiversityPressurePenalty(feature);
+
+  if (observationContext === null) {
+    return clampScore(habitatBase * 0.6 + restorationUplift * 0.4 - pressurePenalty);
+  }
+
+  return clampScore(habitatBase * 0.55 + restorationUplift * 0.35 + observationContext * 0.1 - pressurePenalty);
+}
+
+function habitatBaseScore(feature) {
+  const mix = feature.land_cover_mix;
+  return clampScore(
+    mix.tree_cover * 85 +
+      mix.grassland * 65 +
+      mix.cropland * 40 +
+      mix.other * 35 -
+      mix.built_up * 90 -
+      mix.water * 35
+  );
+}
+
+function biodiversityObservationContextScore(feature) {
+  const observations = feature.source_extracts?.biodiversity_observations;
+  const occurrenceCount = Number(observations?.occurrence_count);
+  const contextScore = Number(observations?.biodiversity_context_score);
+
+  if (Number.isFinite(occurrenceCount) && occurrenceCount >= 10 && Number.isFinite(contextScore)) {
+    return contextScore;
+  }
+
+  return null;
+}
+
+function biodiversityPressurePenalty(feature) {
+  const builtUpPenalty = feature.land_cover_mix.built_up * 35;
+  const settlementPenalty = Math.max(0, Number(feature.settlement_proximity_score ?? 0) - 75) * 0.2;
+  const safeguardPenalty = Math.max(0, Number(feature.safeguard_risk_score ?? 0) - 45) * 0.15;
+  return builtUpPenalty + settlementPenalty + safeguardPenalty;
 }
 
 function interventionFor(feature) {
@@ -176,6 +234,12 @@ function topContributions(feature, scores) {
       value: feature.forest_loss_score,
     },
     {
+      feature: "rainfall_feasibility_multiplier",
+      direction: "negative",
+      weight: 0.08,
+      value: (1 - rainfallFeasibilityMultiplier(feature.rainfall_reliability_score)) * 100,
+    },
+    {
       feature: "safeguard_risk_score",
       direction: "negative",
       weight: 0.08,
@@ -201,6 +265,7 @@ function topContributions(feature, scores) {
   return contributions
     .sort((a, b) => contributionStrength(b) - contributionStrength(a))
     .slice(0, 3)
+    .sort((a, b) => b.weight - a.weight)
     .map(({ feature, direction, weight }) => ({ feature, direction, weight }));
 }
 
@@ -251,7 +316,7 @@ Transparent rule-based fallback. This is not a trained model.
 
 \`rule_based_fallback\`
 
-The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality: geometry/admin labels, ESA WorldCover land-cover fields, GFW/UMD forest-change fields, CHIRPS rainfall fields, SoilGrids soil fields, WorldPop population fields, and partial OSM access fields are source-derived where valid pixels or mapped features exist, while the remaining environmental and social feature values are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
+The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality. Geometry/admin labels, ESA WorldCover land cover, Sentinel-2 current NDVI/EVI, SRTM terrain, GFW/UMD forest-change context, CHIRPS rainfall, SoilGrids soil, WorldPop population, partial OSM access, GHSL settlement context, WaPOR water/productivity context, nearby soil observations, and GBIF biodiversity observation context are source-derived where valid pixels, observations, or mapped features exist. Local research evidence cards are context-derived for caveats and implementation notes only. Remaining fields, especially vegetation trend and safeguards, are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
 
 ## Default Weights
 
@@ -263,9 +328,11 @@ The current model reads \`data/features/site_features.json\`, which currently co
 | Livelihood benefit | ${weights.livelihood} |
 | Feasibility/risk adjustment | ${weights.feasibility} |
 
-## Land-Cover Suitability Adjustment
+## Formula Notes
 
-ESA WorldCover land-cover extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant or heavily built-up, the ranker applies a negative adjustment and recommends field validation before investment. This prevents strong placeholder values in other feature groups from over-ranking areas that are visibly unsuitable from land-cover evidence.
+The formula is documented in \`docs/formula.md\`. Rainfall no longer enters carbon as a direct averaged input. Instead, carbon opportunity is multiplied by a rainfall feasibility factor so dry sites are not over-promoted for tree-carbon restoration. Biodiversity is scored from habitat structure, restoration uplift, limited positive observation context, and pressure penalties.
+
+ESA WorldCover land-cover extraction, Sentinel-2 current vegetation extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, or otherwise high-risk, the ranker applies the relevant feature penalties and recommends field validation before investment. This prevents strong values in other feature groups from over-ranking areas that are visibly or physically unsuitable from source evidence.
 
 ## Top Ranked Candidates
 
