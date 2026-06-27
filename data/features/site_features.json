@@ -1,342 +1,2576 @@
 [
   {
-    "site_id": "SWE-001",
-    "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Bench Sheko",
-    "woreda": "Example Woreda",
-    "area_ha": 1287.5,
-    "land_cover_primary": "cropland_tree_mosaic",
+    "site_id": "SET-001",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Dasenech /Kuraz",
+    "area_ha": 2501.8,
+    "land_cover_primary": "water_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.18,
-      "cropland": 0.52,
-      "grassland": 0.17,
-      "built_up": 0.04,
-      "water": 0,
-      "other": 0.09
+      "tree_cover": 0,
+      "cropland": 0,
+      "grassland": 0,
+      "built_up": 0,
+      "water": 0.952788,
+      "other": 0.047212
     },
     "ndvi_current": 0.43,
     "ndvi_trend_5y": -0.06,
     "evi_current": 0.31,
-    "forest_loss_score": 76,
-    "rainfall_mean_mm": 1120,
-    "rainfall_reliability_score": 78,
-    "slope_mean_deg": 18,
-    "slope_risk_score": 82,
-    "soil_organic_carbon_score": 67,
+    "forest_loss_score": 0,
+    "rainfall_mean_mm": 700.262,
+    "rainfall_reliability_score": 72,
+    "slope_mean_deg": 8.4,
+    "slope_risk_score": 42,
+    "soil_organic_carbon_score": 66,
     "soil_ph_suitability_score": 72,
-    "population_pressure_score": 78,
+    "population_pressure_score": 0,
     "road_access_score": 69,
-    "settlement_proximity_score": 70,
+    "settlement_proximity_score": 20,
     "protected_area_overlap_pct": 0,
     "safeguard_risk_score": 18,
-    "data_quality_score": 73,
+    "data_quality_score": 88,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 80,
+        "worldcover_primary_label": "Permanent water bodies",
+        "worldcover_class_fractions": {
+          "80": 0.952788,
+          "90": 0.047212
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 0,
+        "raw_forest_loss_score": 0,
+        "tree_cover_context_score": 2,
+        "treecover2000_mean_pct": 3.467,
+        "baseline_tree_cover_area_ha": 0.076,
+        "loss_area_ha_total": 0.076,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 100,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 12731,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 700.262,
+        "rainfall_reliability_score_0_100": 72,
+        "rainfall_reliability_raw_0_1": 0.724,
+        "rainfall_annual_totals_mm": {
+          "2021": 512.117,
+          "2022": 442.341,
+          "2023": 799.542,
+          "2024": 959.662,
+          "2025": 787.648
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "no_valid_pixels"
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "no_valid_pixels"
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 69,
+        "settlement_proximity_score": 20,
+        "population_pressure_score": 0,
+        "raw_road_access_score": null,
+        "raw_settlement_proximity_score": 20,
+        "raw_population_pressure_proxy_score": 0,
+        "nearest_road_distance_km": null,
+        "nearest_road_highway": null,
+        "nearest_settlement_distance_km": 10.123,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 0,
+        "osm_settlement_element_count": 2
+      }
+    }
+  },
+  {
+    "site_id": "SET-002",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Hamer",
+    "area_ha": 2499.7,
+    "land_cover_primary": "shrubland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.26691,
+      "cropland": 0.000034,
+      "grassland": 0.289901,
+      "built_up": 0.000003,
+      "water": 0,
+      "other": 0.443152
+    },
+    "ndvi_current": 0.34,
+    "ndvi_trend_5y": -0.09,
+    "evi_current": 0.24,
+    "forest_loss_score": 1,
+    "rainfall_mean_mm": 957.741,
+    "rainfall_reliability_score": 75,
+    "slope_mean_deg": 12.6,
+    "slope_risk_score": 64,
+    "soil_organic_carbon_score": 50,
+    "soil_ph_suitability_score": 76,
+    "population_pressure_score": 2,
+    "road_access_score": 91,
+    "settlement_proximity_score": 72,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 24,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 20,
+        "worldcover_primary_label": "Shrubland",
+        "worldcover_class_fractions": {
+          "10": 0.26691,
+          "20": 0.443076,
+          "30": 0.289901,
+          "40": 0.000034,
+          "50": 0.000003,
+          "60": 0.000075
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 1,
+        "raw_forest_loss_score": 1,
+        "tree_cover_context_score": 4,
+        "treecover2000_mean_pct": 5.53,
+        "baseline_tree_cover_area_ha": 1.373,
+        "loss_area_ha_total": 0.686,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 50,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 957.741,
+        "rainfall_reliability_score_0_100": 75,
+        "rainfall_reliability_raw_0_1": 0.747,
+        "rainfall_annual_totals_mm": {
+          "2021": 692.67,
+          "2022": 642.756,
+          "2023": 1087.141,
+          "2024": 1231.697,
+          "2025": 1134.439
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 50,
+        "soil_ph_suitability_score": 76,
+        "soilgrids_soc_0_30cm_g_kg_mean": 17.433,
+        "soilgrids_ph_h2o_0_30cm_mean": 7.092,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 30.151,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 19.727,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 11.665,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 7.046,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 7.083,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 7.113,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 2,
+        "raw_population_pressure_score": 2,
+        "worldpop_population_sum": 720.04,
+        "worldpop_population_density_per_km2": 28.805,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 91,
+        "settlement_proximity_score": 72,
+        "population_pressure_score": 61,
+        "raw_road_access_score": 91,
+        "raw_settlement_proximity_score": 72,
+        "raw_population_pressure_proxy_score": 61,
+        "nearest_road_distance_km": 0.177,
+        "nearest_road_highway": "unclassified",
+        "nearest_settlement_distance_km": 1.731,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 99,
+        "osm_settlement_element_count": 21
+      }
+    }
+  },
+  {
+    "site_id": "SET-003",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Bena Tsemay",
+    "area_ha": 2498.2,
+    "land_cover_primary": "shrubland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.271564,
+      "cropland": 0.00451,
+      "grassland": 0.158471,
+      "built_up": 0.000909,
+      "water": 0.000586,
+      "other": 0.563961
+    },
+    "ndvi_current": 0.55,
+    "ndvi_trend_5y": -0.04,
+    "evi_current": 0.39,
+    "forest_loss_score": 47,
+    "rainfall_mean_mm": 1262.445,
+    "rainfall_reliability_score": 79,
+    "slope_mean_deg": 15.2,
+    "slope_risk_score": 69,
+    "soil_organic_carbon_score": 61,
+    "soil_ph_suitability_score": 93,
+    "population_pressure_score": 35,
+    "road_access_score": 84,
+    "settlement_proximity_score": 56,
+    "protected_area_overlap_pct": 6.5,
+    "safeguard_risk_score": 48,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 20,
+        "worldcover_primary_label": "Shrubland",
+        "worldcover_class_fractions": {
+          "10": 0.271564,
+          "20": 0.563704,
+          "30": 0.158471,
+          "40": 0.00451,
+          "50": 0.000909,
+          "60": 0.000257,
+          "80": 0.000586
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 47,
+        "raw_forest_loss_score": 47,
+        "tree_cover_context_score": 10,
+        "treecover2000_mean_pct": 13.53,
+        "baseline_tree_cover_area_ha": 85.732,
+        "loss_area_ha_total": 10.983,
+        "loss_area_ha_recent": 3.814,
+        "loss_pct_of_baseline": 12.811,
+        "recent_loss_pct_of_baseline": 4.448,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1262.445,
+        "rainfall_reliability_score_0_100": 79,
+        "rainfall_reliability_raw_0_1": 0.793,
+        "rainfall_annual_totals_mm": {
+          "2021": 945.064,
+          "2022": 949.167,
+          "2023": 1424.597,
+          "2024": 1559.438,
+          "2025": 1433.961
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 61,
+        "soil_ph_suitability_score": 93,
+        "soilgrids_soc_0_30cm_g_kg_mean": 20.212,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.675,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 33.339,
+              "unit": "g/kg",
+              "valid_pixel_count": 437
+            },
+            "5-15": {
+              "mean": 21.93,
+              "unit": "g/kg",
+              "valid_pixel_count": 437
+            },
+            "15-30": {
+              "mean": 14.692,
+              "unit": "g/kg",
+              "valid_pixel_count": 437
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.675,
+              "unit": "pH",
+              "valid_pixel_count": 437
+            },
+            "5-15": {
+              "mean": 6.675,
+              "unit": "pH",
+              "valid_pixel_count": 437
+            },
+            "15-30": {
+              "mean": 6.675,
+              "unit": "pH",
+              "valid_pixel_count": 437
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 437,
+        "soilgrids_valid_pixel_count_max": 437
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 35,
+        "raw_population_pressure_score": 35,
+        "worldpop_population_sum": 2395.262,
+        "worldpop_population_density_per_km2": 95.88,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 84,
+        "settlement_proximity_score": 56,
+        "population_pressure_score": 13,
+        "raw_road_access_score": 84,
+        "raw_settlement_proximity_score": 56,
+        "raw_population_pressure_proxy_score": 13,
+        "nearest_road_distance_km": 0.104,
+        "nearest_road_highway": "track",
+        "nearest_settlement_distance_km": 3.575,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 98,
+        "osm_settlement_element_count": 5
+      }
+    }
+  },
+  {
+    "site_id": "SET-004",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Salamago",
+    "area_ha": 2497.1,
+    "land_cover_primary": "shrubland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.251361,
+      "cropland": 0.000027,
+      "grassland": 0.276615,
+      "built_up": 0,
+      "water": 0,
+      "other": 0.471996
+    },
+    "ndvi_current": 0.48,
+    "ndvi_trend_5y": -0.02,
+    "evi_current": 0.34,
+    "forest_loss_score": 85,
+    "rainfall_mean_mm": 1391.143,
+    "rainfall_reliability_score": 77,
+    "slope_mean_deg": 9.8,
+    "slope_risk_score": 46,
+    "soil_organic_carbon_score": 91,
+    "soil_ph_suitability_score": 84,
+    "population_pressure_score": 0,
+    "road_access_score": 81,
+    "settlement_proximity_score": 88,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 16,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 20,
+        "worldcover_primary_label": "Shrubland",
+        "worldcover_class_fractions": {
+          "10": 0.251361,
+          "20": 0.471996,
+          "30": 0.276615,
+          "40": 0.000027
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 85,
+        "raw_forest_loss_score": 85,
+        "tree_cover_context_score": 11,
+        "treecover2000_mean_pct": 13.152,
+        "baseline_tree_cover_area_ha": 140.116,
+        "loss_area_ha_total": 46.604,
+        "loss_area_ha_recent": 0.61,
+        "loss_pct_of_baseline": 33.261,
+        "recent_loss_pct_of_baseline": 0.435,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1391.143,
+        "rainfall_reliability_score_0_100": 77,
+        "rainfall_reliability_raw_0_1": 0.774,
+        "rainfall_annual_totals_mm": {
+          "2021": 1028.152,
+          "2022": 1006.873,
+          "2023": 1550.058,
+          "2024": 1775.252,
+          "2025": 1595.379
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 91,
+        "soil_ph_suitability_score": 84,
+        "soilgrids_soc_0_30cm_g_kg_mean": 27.864,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.174,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 45.25,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 29.407,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 21.041,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.19,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 6.173,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 6.169,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 109.267,
+        "worldpop_population_density_per_km2": 4.376,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 81,
+        "settlement_proximity_score": 88,
+        "population_pressure_score": 48,
+        "raw_road_access_score": 81,
+        "raw_settlement_proximity_score": 88,
+        "raw_population_pressure_proxy_score": 48,
+        "nearest_road_distance_km": 0.21,
+        "nearest_road_highway": "path",
+        "nearest_settlement_distance_km": 0.854,
+        "nearest_settlement_type": "isolated_dwelling",
+        "osm_road_way_count": 8,
+        "osm_settlement_element_count": 121
+      }
+    }
+  },
+  {
+    "site_id": "SET-005",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Salamago",
+    "area_ha": 2495.9,
+    "land_cover_primary": "shrubland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.19644,
+      "cropland": 0,
+      "grassland": 0.218721,
+      "built_up": 0,
+      "water": 0,
+      "other": 0.584839
+    },
+    "ndvi_current": 0.27,
+    "ndvi_trend_5y": -0.03,
+    "evi_current": 0.18,
+    "forest_loss_score": 4,
+    "rainfall_mean_mm": 1509.653,
+    "rainfall_reliability_score": 78,
+    "slope_mean_deg": 6.2,
+    "slope_risk_score": 24,
+    "soil_organic_carbon_score": 83,
+    "soil_ph_suitability_score": 86,
+    "population_pressure_score": 0,
+    "road_access_score": 56,
+    "settlement_proximity_score": 88,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 12,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 20,
+        "worldcover_primary_label": "Shrubland",
+        "worldcover_class_fractions": {
+          "10": 0.19644,
+          "20": 0.584839,
+          "30": 0.218721
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 4,
+        "raw_forest_loss_score": 4,
+        "tree_cover_context_score": 8,
+        "treecover2000_mean_pct": 10.819,
+        "baseline_tree_cover_area_ha": 12.204,
+        "loss_area_ha_total": 1.449,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 11.875,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1509.653,
+        "rainfall_reliability_score_0_100": 78,
+        "rainfall_reliability_raw_0_1": 0.777,
+        "rainfall_annual_totals_mm": {
+          "2021": 1107.893,
+          "2022": 1097.159,
+          "2023": 1689.125,
+          "2024": 1869.082,
+          "2025": 1785.007
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 83,
+        "soil_ph_suitability_score": 86,
+        "soilgrids_soc_0_30cm_g_kg_mean": 25.707,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.228,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 40.382,
+              "unit": "g/kg",
+              "valid_pixel_count": 435
+            },
+            "5-15": {
+              "mean": 26.629,
+              "unit": "g/kg",
+              "valid_pixel_count": 435
+            },
+            "15-30": {
+              "mean": 20.2,
+              "unit": "g/kg",
+              "valid_pixel_count": 435
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.213,
+              "unit": "pH",
+              "valid_pixel_count": 435
+            },
+            "5-15": {
+              "mean": 6.231,
+              "unit": "pH",
+              "valid_pixel_count": 435
+            },
+            "15-30": {
+              "mean": 6.231,
+              "unit": "pH",
+              "valid_pixel_count": 435
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 435,
+        "soilgrids_valid_pixel_count_max": 435
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 122.078,
+        "worldpop_population_density_per_km2": 4.891,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 56,
+        "settlement_proximity_score": 88,
+        "population_pressure_score": 50,
+        "raw_road_access_score": 56,
+        "raw_settlement_proximity_score": 88,
+        "raw_population_pressure_proxy_score": 50,
+        "nearest_road_distance_km": 3.096,
+        "nearest_road_highway": "tertiary",
+        "nearest_settlement_distance_km": 0.911,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 8,
+        "osm_settlement_element_count": 81
+      }
+    }
+  },
+  {
+    "site_id": "SET-006",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Salamago",
+    "area_ha": 2494.7,
+    "land_cover_primary": "tree_cover_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.95488,
+      "cropland": 0,
+      "grassland": 0.009407,
+      "built_up": 0,
+      "water": 0,
+      "other": 0.035713
+    },
+    "ndvi_current": 0.61,
+    "ndvi_trend_5y": -0.05,
+    "evi_current": 0.44,
+    "forest_loss_score": 9,
+    "rainfall_mean_mm": 2066.885,
+    "rainfall_reliability_score": 79,
+    "slope_mean_deg": 11.4,
+    "slope_risk_score": 53,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 52,
+    "population_pressure_score": 4,
+    "road_access_score": 25,
+    "settlement_proximity_score": 56,
+    "protected_area_overlap_pct": 3.2,
+    "safeguard_risk_score": 36,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.95488,
+          "20": 0.035713,
+          "30": 0.009407
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 9,
+        "raw_forest_loss_score": 9,
+        "tree_cover_context_score": 76,
+        "treecover2000_mean_pct": 69.337,
+        "baseline_tree_cover_area_ha": 2255.964,
+        "loss_area_ha_total": 65.443,
+        "loss_area_ha_recent": 6.483,
+        "loss_pct_of_baseline": 2.901,
+        "recent_loss_pct_of_baseline": 0.287,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 2066.885,
+        "rainfall_reliability_score_0_100": 79,
+        "rainfall_reliability_raw_0_1": 0.793,
+        "rainfall_annual_totals_mm": {
+          "2021": 1545.727,
+          "2022": 1547.872,
+          "2023": 2322.385,
+          "2024": 2502.534,
+          "2025": 2415.907
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 52,
+        "soilgrids_soc_0_30cm_g_kg_mean": 43.059,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.532,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 73.099,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 47.283,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 30.229,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.544,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 5.533,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 5.527,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 4,
+        "raw_population_pressure_score": 4,
+        "worldpop_population_sum": 845.089,
+        "worldpop_population_density_per_km2": 33.875,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 25,
+        "settlement_proximity_score": 56,
+        "population_pressure_score": 34,
+        "raw_road_access_score": 25,
+        "raw_settlement_proximity_score": 56,
+        "raw_population_pressure_proxy_score": 34,
+        "nearest_road_distance_km": 5.865,
+        "nearest_road_highway": "path",
+        "nearest_settlement_distance_km": 4.511,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 1,
+        "osm_settlement_element_count": 6
+      }
+    }
+  },
+  {
+    "site_id": "SET-007",
+    "region": "South Ethiopia",
+    "zone": "Gofa",
+    "woreda": "Melekoza",
+    "area_ha": 2493.1,
+    "land_cover_primary": "grassland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.305271,
+      "cropland": 0.000895,
+      "grassland": 0.388471,
+      "built_up": 0,
+      "water": 0.017308,
+      "other": 0.288056
+    },
+    "ndvi_current": 0.37,
+    "ndvi_trend_5y": -0.08,
+    "evi_current": 0.26,
+    "forest_loss_score": 0,
+    "rainfall_mean_mm": 1989.657,
+    "rainfall_reliability_score": 80,
+    "slope_mean_deg": 18.6,
+    "slope_risk_score": 82,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 96,
+    "population_pressure_score": 4,
+    "road_access_score": 38,
+    "settlement_proximity_score": 38,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 21,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 30,
+        "worldcover_primary_label": "Grassland",
+        "worldcover_class_fractions": {
+          "10": 0.305271,
+          "20": 0.286526,
+          "30": 0.388471,
+          "40": 0.000895,
+          "60": 0.001529,
+          "80": 0.017308
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 0,
+        "raw_forest_loss_score": 0,
+        "tree_cover_context_score": 20,
+        "treecover2000_mean_pct": 22.121,
+        "baseline_tree_cover_area_ha": 386.177,
+        "loss_area_ha_total": 0.229,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 0.059,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32722,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1989.657,
+        "rainfall_reliability_score_0_100": 80,
+        "rainfall_reliability_raw_0_1": 0.802,
+        "rainfall_annual_totals_mm": {
+          "2021": 1530.096,
+          "2022": 1499.257,
+          "2023": 2347.131,
+          "2024": 2393.359,
+          "2025": 2178.444
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 96,
+        "soilgrids_soc_0_30cm_g_kg_mean": 30.422,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.422,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 51.691,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 30.044,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 23.585,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.424,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 6.423,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 6.421,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 4,
+        "raw_population_pressure_score": 4,
+        "worldpop_population_sum": 837.457,
+        "worldpop_population_density_per_km2": 33.591,
+        "worldpop_valid_pixel_count": 3022
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 38,
+        "settlement_proximity_score": 38,
+        "population_pressure_score": 8,
+        "raw_road_access_score": 38,
+        "raw_settlement_proximity_score": 38,
+        "raw_population_pressure_proxy_score": 8,
+        "nearest_road_distance_km": 6.792,
+        "nearest_road_highway": "tertiary",
+        "nearest_settlement_distance_km": 7.907,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 31,
+        "osm_settlement_element_count": 2
+      }
+    }
+  },
+  {
+    "site_id": "SET-008",
+    "region": "South Ethiopia",
+    "zone": "Wolayita",
+    "woreda": "Boloso Sore",
+    "area_ha": 2489.8,
+    "land_cover_primary": "forest_agriculture_edge",
+    "land_cover_mix": {
+      "tree_cover": 0.455439,
+      "cropland": 0.257462,
+      "grassland": 0.058707,
+      "built_up": 0.005405,
+      "water": 0,
+      "other": 0.222987
+    },
+    "ndvi_current": 0.22,
+    "ndvi_trend_5y": 0.01,
+    "evi_current": 0.15,
+    "forest_loss_score": 1,
+    "rainfall_mean_mm": 1422.677,
+    "rainfall_reliability_score": 84,
+    "slope_mean_deg": 5.1,
+    "slope_risk_score": 20,
+    "soil_organic_carbon_score": 90,
+    "soil_ph_suitability_score": 54,
+    "population_pressure_score": 100,
+    "road_access_score": 86,
+    "settlement_proximity_score": 72,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 10,
+    "data_quality_score": 96,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.455439,
+          "20": 0.20964,
+          "30": 0.058707,
+          "40": 0.257462,
+          "50": 0.005405,
+          "60": 0.00024,
+          "90": 0.013107
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 1,
+        "raw_forest_loss_score": 1,
+        "tree_cover_context_score": 10,
+        "treecover2000_mean_pct": 14.161,
+        "baseline_tree_cover_area_ha": 6.712,
+        "loss_area_ha_total": 0.381,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 5.682,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1422.677,
+        "rainfall_reliability_score_0_100": 84,
+        "rainfall_reliability_raw_0_1": 0.838,
+        "rainfall_annual_totals_mm": {
+          "2021": 1133.48,
+          "2022": 1192.713,
+          "2023": 1459.949,
+          "2024": 1742.288,
+          "2025": 1584.953
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 90,
+        "soil_ph_suitability_score": 54,
+        "soilgrids_soc_0_30cm_g_kg_mean": 27.434,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.575,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 39.59,
+              "unit": "g/kg",
+              "valid_pixel_count": 440
+            },
+            "5-15": {
+              "mean": 30.973,
+              "unit": "g/kg",
+              "valid_pixel_count": 440
+            },
+            "15-30": {
+              "mean": 21.022,
+              "unit": "g/kg",
+              "valid_pixel_count": 440
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.608,
+              "unit": "pH",
+              "valid_pixel_count": 440
+            },
+            "5-15": {
+              "mean": 5.572,
+              "unit": "pH",
+              "valid_pixel_count": 440
+            },
+            "15-30": {
+              "mean": 5.566,
+              "unit": "pH",
+              "valid_pixel_count": 440
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 440,
+        "soilgrids_valid_pixel_count_max": 440
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 100,
+        "raw_population_pressure_score": 100,
+        "worldpop_population_sum": 23946.819,
+        "worldpop_population_density_per_km2": 961.797,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 86,
+        "settlement_proximity_score": 72,
+        "population_pressure_score": 80,
+        "raw_road_access_score": 86,
+        "raw_settlement_proximity_score": 72,
+        "raw_population_pressure_proxy_score": 80,
+        "nearest_road_distance_km": 0.539,
+        "nearest_road_highway": "tertiary",
+        "nearest_settlement_distance_km": 1.11,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 1029,
+        "osm_settlement_element_count": 28
+      }
+    }
+  },
+  {
+    "site_id": "SWE-001",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "West Omo",
+    "woreda": "Surma",
+    "area_ha": 2498.4,
+    "land_cover_primary": "shrubland_dominant",
+    "land_cover_mix": {
+      "tree_cover": 0.000446,
+      "cropland": 0,
+      "grassland": 0.392071,
+      "built_up": 0,
+      "water": 0,
+      "other": 0.607483
+    },
+    "ndvi_current": 0.43,
+    "ndvi_trend_5y": -0.06,
+    "evi_current": 0.31,
+    "forest_loss_score": 0,
+    "rainfall_mean_mm": 819.03,
+    "rainfall_reliability_score": 77,
+    "slope_mean_deg": 8.4,
+    "slope_risk_score": 42,
+    "soil_organic_carbon_score": 81,
+    "soil_ph_suitability_score": 89,
+    "population_pressure_score": 0,
+    "road_access_score": 62,
+    "settlement_proximity_score": 56,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 18,
+    "data_quality_score": 100,
+    "field_validation_required": true,
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 20,
+        "worldcover_primary_label": "Shrubland",
+        "worldcover_class_fractions": {
+          "10": 0.000446,
+          "20": 0.607483,
+          "30": 0.392071
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 0,
+        "raw_forest_loss_score": 0,
+        "tree_cover_context_score": 3,
+        "treecover2000_mean_pct": 4.403,
+        "baseline_tree_cover_area_ha": 0,
+        "loss_area_ha_total": 0,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 0,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 819.03,
+        "rainfall_reliability_score_0_100": 77,
+        "rainfall_reliability_raw_0_1": 0.77,
+        "rainfall_annual_totals_mm": {
+          "2021": 607.713,
+          "2022": 624.906,
+          "2023": 827.728,
+          "2024": 1106.786,
+          "2025": 928.019
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 81,
+        "soil_ph_suitability_score": 89,
+        "soilgrids_soc_0_30cm_g_kg_mean": 25.271,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.288,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 36.841,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 26.552,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 20.561,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.273,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 6.283,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 6.297,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 98.307,
+        "worldpop_population_density_per_km2": 3.935,
+        "worldpop_valid_pixel_count": 3022
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 62,
+        "settlement_proximity_score": 56,
+        "population_pressure_score": 1,
+        "raw_road_access_score": 62,
+        "raw_settlement_proximity_score": 56,
+        "raw_population_pressure_proxy_score": 1,
+        "nearest_road_distance_km": 1.928,
+        "nearest_road_highway": "track",
+        "nearest_settlement_distance_km": 3.222,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 3,
+        "osm_settlement_element_count": 17
+      }
+    }
   },
   {
     "site_id": "SWE-002",
     "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Keffa",
-    "woreda": "Hillside Woreda",
-    "area_ha": 1335,
-    "land_cover_primary": "shrubland_grassland",
+    "zone": "West Omo",
+    "woreda": "Surma",
+    "area_ha": 2495.6,
+    "land_cover_primary": "grassland_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.09,
-      "cropland": 0.12,
-      "grassland": 0.52,
-      "built_up": 0.02,
+      "tree_cover": 0.294897,
+      "cropland": 0.001934,
+      "grassland": 0.560662,
+      "built_up": 0,
       "water": 0,
-      "other": 0.25
+      "other": 0.142507
     },
-    "ndvi_current": 0.31,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.22,
-    "forest_loss_score": 68,
-    "rainfall_mean_mm": 980,
-    "rainfall_reliability_score": 70,
-    "slope_mean_deg": 27,
-    "slope_risk_score": 91,
-    "soil_organic_carbon_score": 58,
-    "soil_ph_suitability_score": 64,
-    "population_pressure_score": 54,
-    "road_access_score": 47,
-    "settlement_proximity_score": 46,
+    "ndvi_current": 0.34,
+    "ndvi_trend_5y": -0.09,
+    "evi_current": 0.24,
+    "forest_loss_score": 14,
+    "rainfall_mean_mm": 1338.829,
+    "rainfall_reliability_score": 84,
+    "slope_mean_deg": 12.6,
+    "slope_risk_score": 64,
+    "soil_organic_carbon_score": 81,
+    "soil_ph_suitability_score": 73,
+    "population_pressure_score": 0,
+    "road_access_score": 38,
+    "settlement_proximity_score": 42,
     "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 38,
-    "data_quality_score": 71,
+    "safeguard_risk_score": 24,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 30,
+        "worldcover_primary_label": "Grassland",
+        "worldcover_class_fractions": {
+          "10": 0.294897,
+          "20": 0.142507,
+          "30": 0.560662,
+          "40": 0.001934
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 14,
+        "raw_forest_loss_score": 14,
+        "tree_cover_context_score": 13,
+        "treecover2000_mean_pct": 14.554,
+        "baseline_tree_cover_area_ha": 207.008,
+        "loss_area_ha_total": 10.907,
+        "loss_area_ha_recent": 0.305,
+        "loss_pct_of_baseline": 5.269,
+        "recent_loss_pct_of_baseline": 0.147,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1338.829,
+        "rainfall_reliability_score_0_100": 84,
+        "rainfall_reliability_raw_0_1": 0.84,
+        "rainfall_annual_totals_mm": {
+          "2021": 1088.767,
+          "2022": 1106.561,
+          "2023": 1343.93,
+          "2024": 1581.548,
+          "2025": 1573.338
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 81,
+        "soil_ph_suitability_score": 73,
+        "soilgrids_soc_0_30cm_g_kg_mean": 25.207,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.956,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 35.311,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 27.487,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 20.319,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.972,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 5.953,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 5.952,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 112.668,
+        "worldpop_population_density_per_km2": 4.515,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 38,
+        "settlement_proximity_score": 42,
+        "population_pressure_score": 0,
+        "raw_road_access_score": null,
+        "raw_settlement_proximity_score": null,
+        "raw_population_pressure_proxy_score": 0,
+        "nearest_road_distance_km": null,
+        "nearest_road_highway": null,
+        "nearest_settlement_distance_km": null,
+        "nearest_settlement_type": null,
+        "osm_road_way_count": 0,
+        "osm_settlement_element_count": 0
+      }
+    }
   },
   {
     "site_id": "SWE-003",
     "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Sheka",
-    "woreda": "River Buffer Woreda",
-    "area_ha": 1382.5,
-    "land_cover_primary": "riparian_degraded",
+    "zone": "West Omo",
+    "woreda": "Gori Gesha",
+    "area_ha": 2493.5,
+    "land_cover_primary": "grassland_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.14,
-      "cropland": 0.12,
-      "grassland": 0.45,
-      "built_up": 0.01,
-      "water": 0.03,
-      "other": 0.25
+      "tree_cover": 0.086955,
+      "cropland": 0.000182,
+      "grassland": 0.87073,
+      "built_up": 0,
+      "water": 0.000072,
+      "other": 0.042061
     },
-    "ndvi_current": 0.39,
-    "ndvi_trend_5y": 0,
-    "evi_current": 0.28,
-    "forest_loss_score": 48,
-    "rainfall_mean_mm": 1350,
-    "rainfall_reliability_score": 83,
-    "slope_mean_deg": 9,
-    "slope_risk_score": 74,
-    "soil_organic_carbon_score": 71,
-    "soil_ph_suitability_score": 79,
-    "population_pressure_score": 51,
-    "road_access_score": 61,
-    "settlement_proximity_score": 43,
-    "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 18,
-    "data_quality_score": 78,
+    "ndvi_current": 0.55,
+    "ndvi_trend_5y": -0.04,
+    "evi_current": 0.39,
+    "forest_loss_score": 21,
+    "rainfall_mean_mm": 1644.003,
+    "rainfall_reliability_score": 87,
+    "slope_mean_deg": 15.2,
+    "slope_risk_score": 69,
+    "soil_organic_carbon_score": 80,
+    "soil_ph_suitability_score": 78,
+    "population_pressure_score": 0,
+    "road_access_score": 53,
+    "settlement_proximity_score": 47,
+    "protected_area_overlap_pct": 6.5,
+    "safeguard_risk_score": 48,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 30,
+        "worldcover_primary_label": "Grassland",
+        "worldcover_class_fractions": {
+          "10": 0.086955,
+          "20": 0.04202,
+          "30": 0.87073,
+          "40": 0.000182,
+          "60": 0.000041,
+          "80": 0.000072
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 21,
+        "raw_forest_loss_score": 21,
+        "tree_cover_context_score": 14,
+        "treecover2000_mean_pct": 17.604,
+        "baseline_tree_cover_area_ha": 148.048,
+        "loss_area_ha_total": 9,
+        "loss_area_ha_recent": 1.602,
+        "loss_pct_of_baseline": 6.079,
+        "recent_loss_pct_of_baseline": 1.082,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1644.003,
+        "rainfall_reliability_score_0_100": 87,
+        "rainfall_reliability_raw_0_1": 0.867,
+        "rainfall_annual_totals_mm": {
+          "2021": 1355.653,
+          "2022": 1446.768,
+          "2023": 1680.729,
+          "2024": 1781.775,
+          "2025": 1955.091
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 80,
+        "soil_ph_suitability_score": 78,
+        "soilgrids_soc_0_30cm_g_kg_mean": 25.039,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.061,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 39.418,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 27.057,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 18.901,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.085,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 6.061,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 6.054,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 145.749,
+        "worldpop_population_density_per_km2": 5.845,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 53,
+        "settlement_proximity_score": 47,
+        "population_pressure_score": 0,
+        "raw_road_access_score": 53,
+        "raw_settlement_proximity_score": null,
+        "raw_population_pressure_proxy_score": 0,
+        "nearest_road_distance_km": 4.898,
+        "nearest_road_highway": "unclassified",
+        "nearest_settlement_distance_km": null,
+        "nearest_settlement_type": null,
+        "osm_road_way_count": 3,
+        "osm_settlement_element_count": 0
+      }
+    }
   },
   {
     "site_id": "SWE-004",
     "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Dawro",
-    "woreda": "Forest Edge Woreda",
-    "area_ha": 1430,
-    "land_cover_primary": "degraded_forest_edge",
+    "zone": "Dawuro",
+    "woreda": "Disa",
+    "area_ha": 2492.2,
+    "land_cover_primary": "tree_cover_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.24,
-      "cropland": 0.12,
-      "grassland": 0.18,
-      "built_up": 0.01,
+      "tree_cover": 0.362112,
+      "cropland": 0.02368,
+      "grassland": 0.283831,
+      "built_up": 0,
       "water": 0,
-      "other": 0.45
+      "other": 0.330377
     },
-    "ndvi_current": 0.36,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.26,
-    "forest_loss_score": 92,
-    "rainfall_mean_mm": 1210,
-    "rainfall_reliability_score": 80,
-    "slope_mean_deg": 14,
-    "slope_risk_score": 68,
-    "soil_organic_carbon_score": 76,
-    "soil_ph_suitability_score": 73,
-    "population_pressure_score": 49,
-    "road_access_score": 58,
-    "settlement_proximity_score": 41,
+    "ndvi_current": 0.48,
+    "ndvi_trend_5y": -0.02,
+    "evi_current": 0.34,
+    "forest_loss_score": 5,
+    "rainfall_mean_mm": 1613.354,
+    "rainfall_reliability_score": 82,
+    "slope_mean_deg": 9.8,
+    "slope_risk_score": 46,
+    "soil_organic_carbon_score": 92,
+    "soil_ph_suitability_score": 95,
+    "population_pressure_score": 3,
+    "road_access_score": 35,
+    "settlement_proximity_score": 38,
     "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 38,
-    "data_quality_score": 72,
+    "safeguard_risk_score": 16,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.362112,
+          "20": 0.330377,
+          "30": 0.283831,
+          "40": 0.02368
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 5,
+        "raw_forest_loss_score": 5,
+        "tree_cover_context_score": 18,
+        "treecover2000_mean_pct": 20.004,
+        "baseline_tree_cover_area_ha": 301.894,
+        "loss_area_ha_total": 2.136,
+        "loss_area_ha_recent": 2.059,
+        "loss_pct_of_baseline": 0.707,
+        "recent_loss_pct_of_baseline": 0.682,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1613.354,
+        "rainfall_reliability_score_0_100": 82,
+        "rainfall_reliability_raw_0_1": 0.816,
+        "rainfall_annual_totals_mm": {
+          "2021": 1255.744,
+          "2022": 1269.021,
+          "2023": 1905.876,
+          "2024": 1932.413,
+          "2025": 1703.717
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 92,
+        "soil_ph_suitability_score": 95,
+        "soilgrids_soc_0_30cm_g_kg_mean": 28.005,
+        "soilgrids_ph_h2o_0_30cm_mean": 6.409,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 45.931,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 29.888,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 20.775,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 6.424,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 6.409,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 6.404,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 3,
+        "raw_population_pressure_score": 3,
+        "worldpop_population_sum": 779.737,
+        "worldpop_population_density_per_km2": 31.287,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 35,
+        "settlement_proximity_score": 38,
+        "population_pressure_score": 2,
+        "raw_road_access_score": 35,
+        "raw_settlement_proximity_score": 38,
+        "raw_population_pressure_proxy_score": 2,
+        "nearest_road_distance_km": 5.365,
+        "nearest_road_highway": "unclassified",
+        "nearest_settlement_distance_km": 7.667,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 23,
+        "osm_settlement_element_count": 2
+      }
+    }
   },
   {
-    "site_id": "SET-005",
-    "region": "South Ethiopia Region",
-    "zone": "Gamo",
-    "woreda": "Settlement Edge Woreda",
-    "area_ha": 1217.5,
-    "land_cover_primary": "cropland_built_up_mosaic",
+    "site_id": "SWE-005",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "Bench Sheko",
+    "woreda": "Shay Bench",
+    "area_ha": 2491,
+    "land_cover_primary": "forest_agriculture_edge",
     "land_cover_mix": {
-      "tree_cover": 0.11,
-      "cropland": 0.52,
-      "grassland": 0.08,
-      "built_up": 0.18,
+      "tree_cover": 0.300768,
+      "cropland": 0.181248,
+      "grassland": 0.187785,
+      "built_up": 0.004513,
       "water": 0,
-      "other": 0.11
+      "other": 0.325686
     },
-    "ndvi_current": 0.35,
-    "ndvi_trend_5y": 0,
-    "evi_current": 0.25,
-    "forest_loss_score": 41,
-    "rainfall_mean_mm": 900,
-    "rainfall_reliability_score": 63,
-    "slope_mean_deg": 8,
-    "slope_risk_score": 52,
-    "soil_organic_carbon_score": 52,
-    "soil_ph_suitability_score": 61,
-    "population_pressure_score": 89,
-    "road_access_score": 82,
-    "settlement_proximity_score": 90,
+    "ndvi_current": 0.27,
+    "ndvi_trend_5y": -0.03,
+    "evi_current": 0.18,
+    "forest_loss_score": 5,
+    "rainfall_mean_mm": 1880.846,
+    "rainfall_reliability_score": 91,
+    "slope_mean_deg": 6.2,
+    "slope_risk_score": 24,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 58,
+    "population_pressure_score": 100,
+    "road_access_score": 91,
+    "settlement_proximity_score": 88,
     "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 38,
-    "data_quality_score": 70,
+    "safeguard_risk_score": 12,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.300768,
+          "20": 0.271355,
+          "30": 0.187785,
+          "40": 0.181248,
+          "50": 0.004513,
+          "60": 0.000003,
+          "90": 0.054328
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 5,
+        "raw_forest_loss_score": 5,
+        "tree_cover_context_score": 34,
+        "treecover2000_mean_pct": 31.267,
+        "baseline_tree_cover_area_ha": 1044.424,
+        "loss_area_ha_total": 10.526,
+        "loss_area_ha_recent": 5.339,
+        "loss_pct_of_baseline": 1.008,
+        "recent_loss_pct_of_baseline": 0.511,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1880.846,
+        "rainfall_reliability_score_0_100": 91,
+        "rainfall_reliability_raw_0_1": 0.907,
+        "rainfall_annual_totals_mm": {
+          "2021": 1724.098,
+          "2022": 1624.769,
+          "2023": 2030.65,
+          "2024": 1954.746,
+          "2025": 2069.966
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 58,
+        "soilgrids_soc_0_30cm_g_kg_mean": 32.15,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.655,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 49.3,
+              "unit": "g/kg",
+              "valid_pixel_count": 433
+            },
+            "5-15": {
+              "mean": 35.59,
+              "unit": "g/kg",
+              "valid_pixel_count": 433
+            },
+            "15-30": {
+              "mean": 24.139,
+              "unit": "g/kg",
+              "valid_pixel_count": 433
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.659,
+              "unit": "pH",
+              "valid_pixel_count": 433
+            },
+            "5-15": {
+              "mean": 5.661,
+              "unit": "pH",
+              "valid_pixel_count": 433
+            },
+            "15-30": {
+              "mean": 5.65,
+              "unit": "pH",
+              "valid_pixel_count": 433
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 433,
+        "soilgrids_valid_pixel_count_max": 433
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 100,
+        "raw_population_pressure_score": 100,
+        "worldpop_population_sum": 11017.535,
+        "worldpop_population_density_per_km2": 442.294,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 91,
+        "settlement_proximity_score": 88,
+        "population_pressure_score": 62,
+        "raw_road_access_score": 91,
+        "raw_settlement_proximity_score": 88,
+        "raw_population_pressure_proxy_score": 62,
+        "nearest_road_distance_km": 0.097,
+        "nearest_road_highway": "unclassified",
+        "nearest_settlement_distance_km": 0.956,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 357,
+        "osm_settlement_element_count": 119
+      }
+    }
   },
   {
     "site_id": "SWE-006",
     "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Sheka",
-    "woreda": "Protected Buffer Woreda",
-    "area_ha": 1525,
-    "land_cover_primary": "protected_degraded_forest_edge",
+    "zone": "Kefa",
+    "woreda": "Decha",
+    "area_ha": 2490,
+    "land_cover_primary": "tree_cover_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.42,
-      "cropland": 0.08,
-      "grassland": 0.12,
+      "tree_cover": 0.480792,
+      "cropland": 0.017527,
+      "grassland": 0.177212,
       "built_up": 0,
       "water": 0,
-      "other": 0.38
+      "other": 0.324468
     },
-    "ndvi_current": 0.55,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.4,
-    "forest_loss_score": 64,
-    "rainfall_mean_mm": 1480,
-    "rainfall_reliability_score": 87,
-    "slope_mean_deg": 16,
-    "slope_risk_score": 66,
-    "soil_organic_carbon_score": 83,
-    "soil_ph_suitability_score": 81,
-    "population_pressure_score": 34,
-    "road_access_score": 39,
-    "settlement_proximity_score": 26,
-    "protected_area_overlap_pct": 35,
-    "safeguard_risk_score": 90,
-    "data_quality_score": 61,
+    "ndvi_current": 0.61,
+    "ndvi_trend_5y": -0.05,
+    "evi_current": 0.44,
+    "forest_loss_score": 0,
+    "rainfall_mean_mm": 1671.969,
+    "rainfall_reliability_score": 92,
+    "slope_mean_deg": 11.4,
+    "slope_risk_score": 53,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 52,
+    "population_pressure_score": 13,
+    "road_access_score": 35,
+    "settlement_proximity_score": 46,
+    "protected_area_overlap_pct": 3.2,
+    "safeguard_risk_score": 36,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.480792,
+          "20": 0.324468,
+          "30": 0.177212,
+          "40": 0.017527
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 0,
+        "raw_forest_loss_score": 0,
+        "tree_cover_context_score": 66,
+        "treecover2000_mean_pct": 51.57,
+        "baseline_tree_cover_area_ha": 2475.1,
+        "loss_area_ha_total": 2.517,
+        "loss_area_ha_recent": 0.381,
+        "loss_pct_of_baseline": 0.102,
+        "recent_loss_pct_of_baseline": 0.015,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1671.969,
+        "rainfall_reliability_score_0_100": 92,
+        "rainfall_reliability_raw_0_1": 0.916,
+        "rainfall_annual_totals_mm": {
+          "2021": 1544.239,
+          "2022": 1495.107,
+          "2023": 1869.308,
+          "2024": 1668.291,
+          "2025": 1782.902
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 52,
+        "soilgrids_soc_0_30cm_g_kg_mean": 37.075,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.549,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 63.545,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 43.55,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 23.934,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.584,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 5.561,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 5.53,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 13,
+        "raw_population_pressure_score": 13,
+        "worldpop_population_sum": 1273.464,
+        "worldpop_population_density_per_km2": 51.143,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 35,
+        "settlement_proximity_score": 46,
+        "population_pressure_score": 0,
+        "raw_road_access_score": 35,
+        "raw_settlement_proximity_score": null,
+        "raw_population_pressure_proxy_score": 0,
+        "nearest_road_distance_km": 7.367,
+        "nearest_road_highway": "unclassified",
+        "nearest_settlement_distance_km": null,
+        "nearest_settlement_type": null,
+        "osm_road_way_count": 3,
+        "osm_settlement_element_count": 0
+      }
+    }
   },
   {
-    "site_id": "SET-007",
-    "region": "South Ethiopia Region",
-    "zone": "Wolayita",
-    "woreda": "Carbon Candidate Woreda",
-    "area_ha": 1312.5,
-    "land_cover_primary": "shrubland_cropland_mosaic",
+    "site_id": "SWE-007",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "Kefa",
+    "woreda": "Gimbo",
+    "area_ha": 2488.8,
+    "land_cover_primary": "forest_agriculture_edge",
     "land_cover_mix": {
-      "tree_cover": 0.08,
-      "cropland": 0.28,
-      "grassland": 0.22,
-      "built_up": 0.03,
+      "tree_cover": 0.581019,
+      "cropland": 0.200789,
+      "grassland": 0.084228,
+      "built_up": 0.000182,
       "water": 0,
-      "other": 0.39
+      "other": 0.133783
     },
-    "ndvi_current": 0.29,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.21,
-    "forest_loss_score": 84,
-    "rainfall_mean_mm": 1040,
-    "rainfall_reliability_score": 72,
-    "slope_mean_deg": 22,
-    "slope_risk_score": 84,
-    "soil_organic_carbon_score": 86,
-    "soil_ph_suitability_score": 75,
-    "population_pressure_score": 72,
-    "road_access_score": 28,
-    "settlement_proximity_score": 64,
+    "ndvi_current": 0.37,
+    "ndvi_trend_5y": -0.08,
+    "evi_current": 0.26,
+    "forest_loss_score": 25,
+    "rainfall_mean_mm": 1881.584,
+    "rainfall_reliability_score": 90,
+    "slope_mean_deg": 18.6,
+    "slope_risk_score": 82,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 52,
+    "population_pressure_score": 85,
+    "road_access_score": 88,
+    "settlement_proximity_score": 56,
     "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 38,
-    "data_quality_score": 63,
+    "safeguard_risk_score": 21,
+    "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.581019,
+          "20": 0.126804,
+          "30": 0.084228,
+          "40": 0.200789,
+          "50": 0.000182,
+          "90": 0.006979
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 25,
+        "raw_forest_loss_score": 25,
+        "tree_cover_context_score": 61,
+        "treecover2000_mean_pct": 50.498,
+        "baseline_tree_cover_area_ha": 2152.612,
+        "loss_area_ha_total": 103.504,
+        "loss_area_ha_recent": 57.282,
+        "loss_pct_of_baseline": 4.808,
+        "recent_loss_pct_of_baseline": 2.661,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 1881.584,
+        "rainfall_reliability_score_0_100": 90,
+        "rainfall_reliability_raw_0_1": 0.897,
+        "rainfall_annual_totals_mm": {
+          "2021": 1733.162,
+          "2022": 1633.737,
+          "2023": 2187.124,
+          "2024": 1869.598,
+          "2025": 1984.298
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 4,
+        "chirps_valid_pixel_count_max": 4
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 52,
+        "soilgrids_soc_0_30cm_g_kg_mean": 33.3,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.538,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 52.922,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 38.073,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 23.577,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.566,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 5.544,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 5.525,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 85,
+        "raw_population_pressure_score": 85,
+        "worldpop_population_sum": 4847.034,
+        "worldpop_population_density_per_km2": 194.754,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 88,
+        "settlement_proximity_score": 56,
+        "population_pressure_score": 80,
+        "raw_road_access_score": 88,
+        "raw_settlement_proximity_score": 56,
+        "raw_population_pressure_proxy_score": 80,
+        "nearest_road_distance_km": 0.528,
+        "nearest_road_highway": "secondary",
+        "nearest_settlement_distance_km": 3.004,
+        "nearest_settlement_type": "residential",
+        "osm_road_way_count": 132,
+        "osm_settlement_element_count": 24
+      }
+    }
   },
   {
-    "site_id": "SET-008",
-    "region": "South Ethiopia Region",
-    "zone": "Konso",
-    "woreda": "Dryland Woreda",
-    "area_ha": 1360,
-    "land_cover_primary": "bare_sparse_vegetation",
+    "site_id": "SWE-008",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "Kefa",
+    "woreda": "Saylem",
+    "area_ha": 2484.8,
+    "land_cover_primary": "tree_cover_dominant",
     "land_cover_mix": {
-      "tree_cover": 0.05,
-      "cropland": 0.1,
-      "grassland": 0.45,
-      "built_up": 0.02,
+      "tree_cover": 0.995586,
+      "cropland": 0.000254,
+      "grassland": 0.000123,
+      "built_up": 0,
       "water": 0,
-      "other": 0.38
+      "other": 0.004036
     },
     "ndvi_current": 0.22,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.16,
-    "forest_loss_score": 35,
-    "rainfall_mean_mm": 620,
-    "rainfall_reliability_score": 42,
-    "slope_mean_deg": 19,
-    "slope_risk_score": 77,
-    "soil_organic_carbon_score": 38,
-    "soil_ph_suitability_score": 45,
-    "population_pressure_score": 61,
-    "road_access_score": 55,
-    "settlement_proximity_score": 53,
+    "ndvi_trend_5y": 0.01,
+    "evi_current": 0.15,
+    "forest_loss_score": 2,
+    "rainfall_mean_mm": 2112.452,
+    "rainfall_reliability_score": 94,
+    "slope_mean_deg": 5.1,
+    "slope_risk_score": 20,
+    "soil_organic_carbon_score": 100,
+    "soil_ph_suitability_score": 39,
+    "population_pressure_score": 0,
+    "road_access_score": 22,
+    "settlement_proximity_score": 26,
     "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 18,
-    "data_quality_score": 68,
+    "safeguard_risk_score": 10,
+    "data_quality_score": 96,
     "field_validation_required": true,
-    "feature_version": "v0.1"
-  },
-  {
-    "site_id": "SWE-009",
-    "region": "Southwest Ethiopia Peoples' Region",
-    "zone": "Bench Sheko",
-    "woreda": "Agroforestry Woreda",
-    "area_ha": 1667.5,
-    "land_cover_primary": "cropland_tree_mosaic",
-    "land_cover_mix": {
-      "tree_cover": 0.23,
-      "cropland": 0.52,
-      "grassland": 0.12,
-      "built_up": 0.03,
-      "water": 0,
-      "other": 0.1
-    },
-    "ndvi_current": 0.48,
-    "ndvi_trend_5y": 0,
-    "evi_current": 0.35,
-    "forest_loss_score": 55,
-    "rainfall_mean_mm": 1180,
-    "rainfall_reliability_score": 84,
-    "slope_mean_deg": 11,
-    "slope_risk_score": 61,
-    "soil_organic_carbon_score": 69,
-    "soil_ph_suitability_score": 76,
-    "population_pressure_score": 83,
-    "road_access_score": 78,
-    "settlement_proximity_score": 75,
-    "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 18,
-    "data_quality_score": 80,
-    "field_validation_required": true,
-    "feature_version": "v0.1"
-  },
-  {
-    "site_id": "SET-010",
-    "region": "South Ethiopia Region",
-    "zone": "Gedeo",
-    "woreda": "Watershed Woreda",
-    "area_ha": 1455,
-    "land_cover_primary": "steep_cropland_mosaic",
-    "land_cover_mix": {
-      "tree_cover": 0.16,
-      "cropland": 0.52,
-      "grassland": 0.14,
-      "built_up": 0.05,
-      "water": 0,
-      "other": 0.13
-    },
-    "ndvi_current": 0.41,
-    "ndvi_trend_5y": -0.06,
-    "evi_current": 0.3,
-    "forest_loss_score": 62,
-    "rainfall_mean_mm": 1260,
-    "rainfall_reliability_score": 79,
-    "slope_mean_deg": 24,
-    "slope_risk_score": 89,
-    "soil_organic_carbon_score": 64,
-    "soil_ph_suitability_score": 71,
-    "population_pressure_score": 76,
-    "road_access_score": 64,
-    "settlement_proximity_score": 68,
-    "protected_area_overlap_pct": 0,
-    "safeguard_risk_score": 18,
-    "data_quality_score": 74,
-    "field_validation_required": true,
-    "feature_version": "v0.1"
+    "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+    "feature_quality": "land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, forest, rainfall, soil, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "source_extracts": {
+      "land_cover": {
+        "dataset_id": "esa_worldcover",
+        "version": "2021_v200",
+        "status": "source_derived",
+        "valid_pixel_count": 291600,
+        "worldcover_primary_class": 10,
+        "worldcover_primary_label": "Tree cover",
+        "worldcover_class_fractions": {
+          "10": 0.995586,
+          "20": 0.003728,
+          "30": 0.000123,
+          "40": 0.000254,
+          "90": 0.000309
+        }
+      },
+      "terrain": {
+        "dataset_id": "srtm_dem",
+        "status": "not_extracted"
+      },
+      "forest": {
+        "dataset_id": "gfw_umd_forest_change",
+        "status": "source_derived",
+        "forest_loss_score": 2,
+        "raw_forest_loss_score": 2,
+        "tree_cover_context_score": 89,
+        "treecover2000_mean_pct": 84.718,
+        "baseline_tree_cover_area_ha": 2498.821,
+        "loss_area_ha_total": 17.391,
+        "loss_area_ha_recent": 0,
+        "loss_pct_of_baseline": 0.696,
+        "recent_loss_pct_of_baseline": 0,
+        "tree_cover_threshold_pct": 30,
+        "recent_loss_start_year": 2019,
+        "gfw_valid_pixel_count": 32761,
+        "source_tiles": [
+          "10N_030E"
+        ]
+      },
+      "rainfall": {
+        "dataset_id": "chirps_v2_africa_monthly",
+        "status": "source_derived",
+        "rainfall_mean_mm": 2112.452,
+        "rainfall_reliability_score_0_100": 94,
+        "rainfall_reliability_raw_0_1": 0.939,
+        "rainfall_annual_totals_mm": {
+          "2021": 1960.762,
+          "2022": 2024.836,
+          "2023": 2320.348,
+          "2024": 2063.291,
+          "2025": 2193.021
+        },
+        "chirps_valid_month_count": 60,
+        "chirps_valid_pixel_count_min": 2,
+        "chirps_valid_pixel_count_max": 2
+      },
+      "soil": {
+        "dataset_id": "soilgrids",
+        "status": "source_derived",
+        "soil_organic_carbon_score": 100,
+        "soil_ph_suitability_score": 39,
+        "soilgrids_soc_0_30cm_g_kg_mean": 42.521,
+        "soilgrids_ph_h2o_0_30cm_mean": 5.276,
+        "soilgrids_depth_means": {
+          "soc": {
+            "0-5": {
+              "mean": 77.666,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 44.445,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 29.524,
+              "unit": "g/kg",
+              "valid_pixel_count": 441
+            }
+          },
+          "phh2o": {
+            "0-5": {
+              "mean": 5.282,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "5-15": {
+              "mean": 5.285,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            },
+            "15-30": {
+              "mean": 5.269,
+              "unit": "pH",
+              "valid_pixel_count": 441
+            }
+          }
+        },
+        "soilgrids_valid_pixel_count_min": 441,
+        "soilgrids_valid_pixel_count_max": 441
+      },
+      "population": {
+        "dataset_id": "worldpop_population",
+        "status": "source_derived",
+        "population_pressure_score": 0,
+        "raw_population_pressure_score": 0,
+        "worldpop_population_sum": 582.888,
+        "worldpop_population_density_per_km2": 23.458,
+        "worldpop_valid_pixel_count": 3025
+      },
+      "access": {
+        "dataset_id": "osm_access",
+        "status": "source_derived",
+        "road_access_score": 22,
+        "settlement_proximity_score": 26,
+        "population_pressure_score": 0,
+        "raw_road_access_score": null,
+        "raw_settlement_proximity_score": null,
+        "raw_population_pressure_proxy_score": 0,
+        "nearest_road_distance_km": null,
+        "nearest_road_highway": null,
+        "nearest_settlement_distance_km": null,
+        "nearest_settlement_type": null,
+        "osm_road_way_count": 0,
+        "osm_settlement_element_count": 0
+      }
+    }
   }
 ]

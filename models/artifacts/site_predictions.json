@@ -1,183 +1,514 @@
 [
   {
-    "site_id": "SWE-001",
-    "model_version": "ranker_v0.1",
-    "priority_score": 69,
-    "carbon_potential": "medium",
+    "site_id": "SET-004",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 73,
+    "carbon_potential": "high",
     "biodiversity_benefit": "high",
-    "livelihood_benefit": "high",
-    "water_soil_benefit": "high",
-    "implementation_feasibility": "medium",
-    "risk_level": "medium",
-    "recommended_intervention_seed": "fmnr_agroforestry",
-    "top_feature_contributions": [
-      { "feature": "population_pressure_score", "direction": "positive", "weight": 0.18 },
-      { "feature": "rainfall_reliability_score", "direction": "positive", "weight": 0.14 },
-      { "feature": "slope_risk_score", "direction": "positive", "weight": 0.12 },
-      { "feature": "safeguard_risk_score", "direction": "negative", "weight": 0.05 }
-    ],
-    "prediction_quality": "rule_based_fallback"
-  },
-  {
-    "site_id": "SWE-002",
-    "model_version": "ranker_v0.1",
-    "priority_score": 62,
-    "carbon_potential": "medium",
-    "biodiversity_benefit": "high",
-    "livelihood_benefit": "medium",
-    "water_soil_benefit": "high",
-    "implementation_feasibility": "medium",
-    "risk_level": "medium",
-    "recommended_intervention_seed": "assisted_natural_regeneration",
-    "top_feature_contributions": [
-      { "feature": "slope_risk_score", "direction": "positive", "weight": 0.2 },
-      { "feature": "forest_loss_score", "direction": "positive", "weight": 0.13 },
-      { "feature": "road_access_score", "direction": "negative", "weight": 0.07 }
-    ],
-    "prediction_quality": "rule_based_fallback"
-  },
-  {
-    "site_id": "SWE-003",
-    "model_version": "ranker_v0.1",
-    "priority_score": 65,
-    "carbon_potential": "medium",
-    "biodiversity_benefit": "medium",
     "livelihood_benefit": "medium",
     "water_soil_benefit": "high",
     "implementation_feasibility": "high",
     "risk_level": "low",
-    "recommended_intervention_seed": "riparian_restoration",
-    "top_feature_contributions": [
-      { "feature": "rainfall_reliability_score", "direction": "positive", "weight": 0.16 },
-      { "feature": "slope_risk_score", "direction": "positive", "weight": 0.12 },
-      { "feature": "safeguard_risk_score", "direction": "negative", "weight": 0.04 }
-    ],
-    "prediction_quality": "rule_based_fallback"
-  },
-  {
-    "site_id": "SWE-004",
-    "model_version": "ranker_v0.1",
-    "priority_score": 69,
-    "carbon_potential": "medium",
-    "biodiversity_benefit": "high",
-    "livelihood_benefit": "medium",
-    "water_soil_benefit": "medium",
-    "implementation_feasibility": "medium",
-    "risk_level": "medium",
     "recommended_intervention_seed": "native_tree_planting",
     "top_feature_contributions": [
-      { "feature": "forest_loss_score", "direction": "positive", "weight": 0.2 },
-      { "feature": "soil_organic_carbon_score", "direction": "positive", "weight": 0.14 },
-      { "feature": "safeguard_risk_score", "direction": "negative", "weight": 0.08 }
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      }
     ],
-    "prediction_quality": "rule_based_fallback"
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 1
   },
   {
-    "site_id": "SET-005",
-    "model_version": "ranker_v0.1",
-    "priority_score": 44,
+    "site_id": "SWE-005",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 67,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "high",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "high",
+    "risk_level": "low",
+    "recommended_intervention_seed": "assisted_natural_regeneration",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "livelihood_benefit_composite",
+        "direction": "positive",
+        "weight": 0.15
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 2
+  },
+  {
+    "site_id": "SWE-007",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 67,
     "carbon_potential": "medium",
     "biodiversity_benefit": "medium",
     "livelihood_benefit": "high",
     "water_soil_benefit": "medium",
-    "implementation_feasibility": "medium",
-    "risk_level": "high",
-    "recommended_intervention_seed": "field_validation_before_investment",
+    "implementation_feasibility": "high",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "erosion_control_exclosures",
     "top_feature_contributions": [
-      { "feature": "population_pressure_score", "direction": "positive", "weight": 0.18 },
-      { "feature": "settlement_proximity_score", "direction": "negative", "weight": 0.15 },
-      { "feature": "safeguard_risk_score", "direction": "negative", "weight": 0.09 }
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      }
     ],
-    "prediction_quality": "rule_based_fallback"
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 3
   },
   {
-    "site_id": "SWE-006",
-    "model_version": "ranker_v0.1",
-    "priority_score": 29,
+    "site_id": "SET-008",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 63,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "high",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "high",
+    "risk_level": "low",
+    "recommended_intervention_seed": "assisted_natural_regeneration",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "livelihood_benefit_composite",
+        "direction": "positive",
+        "weight": 0.15
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 4
+  },
+  {
+    "site_id": "SET-003",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 58,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "medium",
+    "water_soil_benefit": "medium",
+    "implementation_feasibility": "high",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "field_validation_before_investment",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 5
+  },
+  {
+    "site_id": "SET-005",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 56,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "medium",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "high",
+    "risk_level": "low",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 6
+  },
+  {
+    "site_id": "SWE-008",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 56,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "medium",
+    "risk_level": "low",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 7
+  },
+  {
+    "site_id": "SWE-002",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 55,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "medium",
+    "implementation_feasibility": "high",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 8
+  },
+  {
+    "site_id": "SET-006",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 54,
     "carbon_potential": "medium",
     "biodiversity_benefit": "medium",
     "livelihood_benefit": "low",
     "water_soil_benefit": "medium",
     "implementation_feasibility": "medium",
-    "risk_level": "high",
-    "recommended_intervention_seed": "field_validation_before_investment",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "native_tree_planting",
     "top_feature_contributions": [
-      { "feature": "protected_area_overlap_pct", "direction": "negative", "weight": 0.22 },
-      { "feature": "safeguard_risk_score", "direction": "negative", "weight": 0.2 },
-      { "feature": "soil_organic_carbon_score", "direction": "positive", "weight": 0.1 }
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
     ],
-    "prediction_quality": "rule_based_fallback"
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 9
   },
   {
     "site_id": "SET-007",
-    "model_version": "ranker_v0.1",
-    "priority_score": 61,
-    "carbon_potential": "high",
-    "biodiversity_benefit": "high",
-    "livelihood_benefit": "medium",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 54,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "low",
     "water_soil_benefit": "high",
-    "implementation_feasibility": "low",
+    "implementation_feasibility": "high",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "erosion_control_exclosures",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 10
+  },
+  {
+    "site_id": "SWE-003",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 54,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "medium",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "medium",
+    "implementation_feasibility": "medium",
     "risk_level": "medium",
     "recommended_intervention_seed": "field_validation_before_investment",
     "top_feature_contributions": [
-      { "feature": "soil_organic_carbon_score", "direction": "positive", "weight": 0.18 },
-      { "feature": "forest_loss_score", "direction": "positive", "weight": 0.17 },
-      { "feature": "road_access_score", "direction": "negative", "weight": 0.12 }
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
     ],
-    "prediction_quality": "rule_based_fallback"
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 11
   },
   {
-    "site_id": "SET-008",
-    "model_version": "ranker_v0.1",
-    "priority_score": 45,
-    "carbon_potential": "low",
-    "biodiversity_benefit": "medium",
-    "livelihood_benefit": "medium",
-    "water_soil_benefit": "high",
-    "implementation_feasibility": "low",
-    "risk_level": "high",
-    "recommended_intervention_seed": "erosion_control_exclosures",
-    "top_feature_contributions": [
-      { "feature": "slope_risk_score", "direction": "positive", "weight": 0.18 },
-      { "feature": "rainfall_reliability_score", "direction": "negative", "weight": 0.15 },
-      { "feature": "soil_organic_carbon_score", "direction": "negative", "weight": 0.08 }
-    ],
-    "prediction_quality": "rule_based_fallback"
-  },
-  {
-    "site_id": "SWE-009",
-    "model_version": "ranker_v0.1",
-    "priority_score": 73,
+    "site_id": "SWE-004",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 54,
     "carbon_potential": "medium",
     "biodiversity_benefit": "medium",
-    "livelihood_benefit": "high",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "high",
+    "risk_level": "low",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 12
+  },
+  {
+    "site_id": "SWE-006",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 53,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "medium",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 13
+  },
+  {
+    "site_id": "SWE-001",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 52,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "low",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "high",
+    "risk_level": "low",
+    "recommended_intervention_seed": "native_tree_planting",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 14
+  },
+  {
+    "site_id": "SET-002",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 51,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "medium",
+    "water_soil_benefit": "medium",
+    "implementation_feasibility": "high",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "field_validation_before_investment",
+    "top_feature_contributions": [
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
+    ],
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 15
+  },
+  {
+    "site_id": "SET-001",
+    "model_version": "ranker_rule_based_v0.1",
+    "priority_score": 0,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "low",
+    "livelihood_benefit": "low",
     "water_soil_benefit": "medium",
     "implementation_feasibility": "high",
     "risk_level": "low",
-    "recommended_intervention_seed": "fmnr_agroforestry",
+    "recommended_intervention_seed": "field_validation_before_investment",
     "top_feature_contributions": [
-      { "feature": "population_pressure_score", "direction": "positive", "weight": 0.2 },
-      { "feature": "rainfall_reliability_score", "direction": "positive", "weight": 0.16 },
-      { "feature": "road_access_score", "direction": "positive", "weight": 0.1 }
+      {
+        "feature": "carbon_potential_composite",
+        "direction": "positive",
+        "weight": 0.35
+      },
+      {
+        "feature": "water_soil_benefit_composite",
+        "direction": "positive",
+        "weight": 0.2
+      },
+      {
+        "feature": "biodiversity_benefit_composite",
+        "direction": "positive",
+        "weight": 0.25
+      }
     ],
-    "prediction_quality": "rule_based_fallback"
-  },
-  {
-    "site_id": "SET-010",
-    "model_version": "ranker_v0.1",
-    "priority_score": 75,
-    "carbon_potential": "medium",
-    "biodiversity_benefit": "high",
-    "livelihood_benefit": "high",
-    "water_soil_benefit": "high",
-    "implementation_feasibility": "high",
-    "risk_level": "low",
-    "recommended_intervention_seed": "fmnr_agroforestry",
-    "top_feature_contributions": [
-      { "feature": "slope_risk_score", "direction": "positive", "weight": 0.18 },
-      { "feature": "population_pressure_score", "direction": "positive", "weight": 0.16 },
-      { "feature": "rainfall_reliability_score", "direction": "positive", "weight": 0.14 }
-    ],
-    "prediction_quality": "rule_based_fallback"
+    "prediction_quality": "rule_based_fallback",
+    "scoring_note": "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+    "rank": 16
   }
 ]

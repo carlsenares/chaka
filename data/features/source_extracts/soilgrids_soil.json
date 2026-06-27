@@ -1,0 +1,781 @@
+{
+  "source": {
+    "dataset_id": "soilgrids_2_0_topsoil",
+    "name": "SoilGrids 2.0 topsoil soil properties",
+    "source_url": "https://docs.isric.org/globaldata/soilgrids/WebDav.html",
+    "access_url_template": "https://files.isric.org/soilgrids/latest/data/{property}/{property}_{depth}cm_mean.vrt",
+    "properties": {
+      "soc": {
+        "description": "Soil organic carbon content in fine earth fraction",
+        "mapped_unit": "dg/kg",
+        "conversion_factor": 10,
+        "conventional_unit": "g/kg"
+      },
+      "phh2o": {
+        "description": "Soil pH in water",
+        "mapped_unit": "pH x 10",
+        "conversion_factor": 10,
+        "conventional_unit": "pH"
+      }
+    },
+    "depth_intervals_cm": [
+      "0-5",
+      "5-15",
+      "15-30"
+    ],
+    "topsoil_aggregation": "0-30 cm thickness-weighted mean from 0-5, 5-15, and 15-30 cm SoilGrids mean rasters",
+    "spatial_resolution": "250m",
+    "extraction_method": "rasterio mask over candidate polygons using SoilGrids WebDAV VRTs via GDAL /vsicurl; all_touched=True",
+    "score_methods": {
+      "soil_organic_carbon_score": "Linear 0-100 score from 5 to 30 g/kg topsoil SOC, clamped.",
+      "soil_ph_suitability_score": "Triangular 0-100 suitability score: 100 at pH 6.5, 0 at pH <= 4.5 or >= 9.0."
+    },
+    "accessed_vrts": [
+      "https://files.isric.org/soilgrids/latest/data/soc/soc_0-5cm_mean.vrt",
+      "https://files.isric.org/soilgrids/latest/data/soc/soc_5-15cm_mean.vrt",
+      "https://files.isric.org/soilgrids/latest/data/soc/soc_15-30cm_mean.vrt",
+      "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_0-5cm_mean.vrt",
+      "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_5-15cm_mean.vrt",
+      "https://files.isric.org/soilgrids/latest/data/phh2o/phh2o_15-30cm_mean.vrt"
+    ],
+    "note": "Official no-auth ISRIC SoilGrids WebDAV VRT access. Full global rasters are not downloaded; GDAL reads bounded windows for each candidate polygon."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "soil_organic_carbon_score": null,
+      "soil_ph_suitability_score": null,
+      "soilgrids_soc_0_30cm_g_kg_mean": null,
+      "soilgrids_ph_h2o_0_30cm_mean": null,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": null,
+            "unit": "g/kg",
+            "valid_pixel_count": 0
+          },
+          "5-15": {
+            "mean": null,
+            "unit": "g/kg",
+            "valid_pixel_count": 0
+          },
+          "15-30": {
+            "mean": null,
+            "unit": "g/kg",
+            "valid_pixel_count": 0
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": null,
+            "unit": "pH",
+            "valid_pixel_count": 0
+          },
+          "5-15": {
+            "mean": null,
+            "unit": "pH",
+            "valid_pixel_count": 0
+          },
+          "15-30": {
+            "mean": null,
+            "unit": "pH",
+            "valid_pixel_count": 0
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 0,
+      "soilgrids_valid_pixel_count_max": 0,
+      "source_status": "no_valid_pixels"
+    },
+    {
+      "site_id": "SET-002",
+      "soil_organic_carbon_score": 50,
+      "soil_ph_suitability_score": 76,
+      "soilgrids_soc_0_30cm_g_kg_mean": 17.433,
+      "soilgrids_ph_h2o_0_30cm_mean": 7.092,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 30.151,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 19.727,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 11.665,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 7.046,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 7.083,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 7.113,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "soil_organic_carbon_score": 61,
+      "soil_ph_suitability_score": 93,
+      "soilgrids_soc_0_30cm_g_kg_mean": 20.212,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.675,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 33.339,
+            "unit": "g/kg",
+            "valid_pixel_count": 437
+          },
+          "5-15": {
+            "mean": 21.93,
+            "unit": "g/kg",
+            "valid_pixel_count": 437
+          },
+          "15-30": {
+            "mean": 14.692,
+            "unit": "g/kg",
+            "valid_pixel_count": 437
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.675,
+            "unit": "pH",
+            "valid_pixel_count": 437
+          },
+          "5-15": {
+            "mean": 6.675,
+            "unit": "pH",
+            "valid_pixel_count": 437
+          },
+          "15-30": {
+            "mean": 6.675,
+            "unit": "pH",
+            "valid_pixel_count": 437
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 437,
+      "soilgrids_valid_pixel_count_max": 437,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "soil_organic_carbon_score": 91,
+      "soil_ph_suitability_score": 84,
+      "soilgrids_soc_0_30cm_g_kg_mean": 27.864,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.174,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 45.25,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 29.407,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 21.041,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.19,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 6.173,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 6.169,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "soil_organic_carbon_score": 83,
+      "soil_ph_suitability_score": 86,
+      "soilgrids_soc_0_30cm_g_kg_mean": 25.707,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.228,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 40.382,
+            "unit": "g/kg",
+            "valid_pixel_count": 435
+          },
+          "5-15": {
+            "mean": 26.629,
+            "unit": "g/kg",
+            "valid_pixel_count": 435
+          },
+          "15-30": {
+            "mean": 20.2,
+            "unit": "g/kg",
+            "valid_pixel_count": 435
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.213,
+            "unit": "pH",
+            "valid_pixel_count": 435
+          },
+          "5-15": {
+            "mean": 6.231,
+            "unit": "pH",
+            "valid_pixel_count": 435
+          },
+          "15-30": {
+            "mean": 6.231,
+            "unit": "pH",
+            "valid_pixel_count": 435
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 435,
+      "soilgrids_valid_pixel_count_max": 435,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 52,
+      "soilgrids_soc_0_30cm_g_kg_mean": 43.059,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.532,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 73.099,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 47.283,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 30.229,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.544,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 5.533,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 5.527,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 96,
+      "soilgrids_soc_0_30cm_g_kg_mean": 30.422,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.422,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 51.691,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 30.044,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 23.585,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.424,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 6.423,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 6.421,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "soil_organic_carbon_score": 90,
+      "soil_ph_suitability_score": 54,
+      "soilgrids_soc_0_30cm_g_kg_mean": 27.434,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.575,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 39.59,
+            "unit": "g/kg",
+            "valid_pixel_count": 440
+          },
+          "5-15": {
+            "mean": 30.973,
+            "unit": "g/kg",
+            "valid_pixel_count": 440
+          },
+          "15-30": {
+            "mean": 21.022,
+            "unit": "g/kg",
+            "valid_pixel_count": 440
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.608,
+            "unit": "pH",
+            "valid_pixel_count": 440
+          },
+          "5-15": {
+            "mean": 5.572,
+            "unit": "pH",
+            "valid_pixel_count": 440
+          },
+          "15-30": {
+            "mean": 5.566,
+            "unit": "pH",
+            "valid_pixel_count": 440
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 440,
+      "soilgrids_valid_pixel_count_max": 440,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "soil_organic_carbon_score": 81,
+      "soil_ph_suitability_score": 89,
+      "soilgrids_soc_0_30cm_g_kg_mean": 25.271,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.288,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 36.841,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 26.552,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 20.561,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.273,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 6.283,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 6.297,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "soil_organic_carbon_score": 81,
+      "soil_ph_suitability_score": 73,
+      "soilgrids_soc_0_30cm_g_kg_mean": 25.207,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.956,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 35.311,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 27.487,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 20.319,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.972,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 5.953,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 5.952,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "soil_organic_carbon_score": 80,
+      "soil_ph_suitability_score": 78,
+      "soilgrids_soc_0_30cm_g_kg_mean": 25.039,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.061,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 39.418,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 27.057,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 18.901,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.085,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 6.061,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 6.054,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "soil_organic_carbon_score": 92,
+      "soil_ph_suitability_score": 95,
+      "soilgrids_soc_0_30cm_g_kg_mean": 28.005,
+      "soilgrids_ph_h2o_0_30cm_mean": 6.409,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 45.931,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 29.888,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 20.775,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 6.424,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 6.409,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 6.404,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 58,
+      "soilgrids_soc_0_30cm_g_kg_mean": 32.15,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.655,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 49.3,
+            "unit": "g/kg",
+            "valid_pixel_count": 433
+          },
+          "5-15": {
+            "mean": 35.59,
+            "unit": "g/kg",
+            "valid_pixel_count": 433
+          },
+          "15-30": {
+            "mean": 24.139,
+            "unit": "g/kg",
+            "valid_pixel_count": 433
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.659,
+            "unit": "pH",
+            "valid_pixel_count": 433
+          },
+          "5-15": {
+            "mean": 5.661,
+            "unit": "pH",
+            "valid_pixel_count": 433
+          },
+          "15-30": {
+            "mean": 5.65,
+            "unit": "pH",
+            "valid_pixel_count": 433
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 433,
+      "soilgrids_valid_pixel_count_max": 433,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 52,
+      "soilgrids_soc_0_30cm_g_kg_mean": 37.075,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.549,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 63.545,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 43.55,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 23.934,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.584,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 5.561,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 5.53,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 52,
+      "soilgrids_soc_0_30cm_g_kg_mean": 33.3,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.538,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 52.922,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 38.073,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 23.577,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.566,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 5.544,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 5.525,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "soil_organic_carbon_score": 100,
+      "soil_ph_suitability_score": 39,
+      "soilgrids_soc_0_30cm_g_kg_mean": 42.521,
+      "soilgrids_ph_h2o_0_30cm_mean": 5.276,
+      "soilgrids_depth_means": {
+        "soc": {
+          "0-5": {
+            "mean": 77.666,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 44.445,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 29.524,
+            "unit": "g/kg",
+            "valid_pixel_count": 441
+          }
+        },
+        "phh2o": {
+          "0-5": {
+            "mean": 5.282,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "5-15": {
+            "mean": 5.285,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          },
+          "15-30": {
+            "mean": 5.269,
+            "unit": "pH",
+            "valid_pixel_count": 441
+          }
+        }
+      },
+      "soilgrids_valid_pixel_count_min": 441,
+      "soilgrids_valid_pixel_count_max": 441,
+      "source_status": "source_derived"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "feature_version": "mixed_land_cover_forest_rainfall_soil_population_access_v0",
+  "required_fields": [
+    "site_id",
+    "region",
+    "area_ha",
+    "land_cover_primary",
+    "ndvi_current",
+    "ndvi_trend_5y",
+    "forest_loss_score",
+    "rainfall_reliability_score",
+    "slope_risk_score",
+    "soil_organic_carbon_score",
+    "population_pressure_score",
+    "road_access_score",
+    "protected_area_overlap_pct",
+    "safeguard_risk_score",
+    "data_quality_score",
+    "field_validation_required"
+  ],
+  "score_scale": "0-100; higher is better except fields containing risk",
+  "source_status": "mixed source-derived and demo placeholders pending full source extraction"
+}
