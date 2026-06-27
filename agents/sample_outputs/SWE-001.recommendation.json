@@ -1,0 +1,35 @@
+{
+  "site_id": "SWE-001",
+  "rank": 3,
+  "priority_score": 69,
+  "recommended_intervention": "FMNR + agroforestry",
+  "intervention_code": "fmnr_agroforestry",
+  "carbon_potential": "medium",
+  "biodiversity_benefit": "high",
+  "livelihood_benefit": "high",
+  "water_soil_benefit": "high",
+  "implementation_feasibility": "medium",
+  "risk_level": "medium",
+  "main_reasons": [
+    "High livelihood pressure near farming communities",
+    "Rainfall suitability supports tree establishment",
+    "Cropland-tree mosaic is appropriate for farmer-managed natural regeneration",
+    "Slope and erosion risk make soil and water resilience important",
+    "Forest-loss signal indicates a restoration opportunity"
+  ],
+  "risk_flags": [
+    "Field validation is required before project investment"
+  ],
+  "field_validation_questions": [
+    "Who currently uses this land and under what tenure arrangement?",
+    "Is grazing pressure seasonal or year-round?",
+    "Which tree species are locally preferred for fodder, fruit, fuelwood, or soil restoration?"
+  ],
+  "evidence_refs": [
+    "site_features:SWE-001.population_pressure_score",
+    "site_features:SWE-001.rainfall_reliability_score",
+    "site_features:SWE-001.land_cover_primary",
+    "site_features:SWE-001.slope_risk_score",
+    "site_features:SWE-001.forest_loss_score"
+  ]
+}

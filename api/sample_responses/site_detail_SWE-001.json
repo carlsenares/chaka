@@ -1,0 +1,161 @@
+{
+  "site_features": {
+    "site_id": "SWE-001",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "Bench Sheko",
+    "woreda": "Example Woreda",
+    "area_ha": 1287.5,
+    "land_cover_primary": "cropland_tree_mosaic",
+    "land_cover_mix": {
+      "tree_cover": 0.18,
+      "cropland": 0.52,
+      "grassland": 0.17,
+      "built_up": 0.04,
+      "water": 0,
+      "other": 0.09
+    },
+    "ndvi_current": 0.43,
+    "ndvi_trend_5y": -0.06,
+    "evi_current": 0.31,
+    "forest_loss_score": 76,
+    "rainfall_mean_mm": 1120,
+    "rainfall_reliability_score": 78,
+    "slope_mean_deg": 18,
+    "slope_risk_score": 82,
+    "soil_organic_carbon_score": 67,
+    "soil_ph_suitability_score": 72,
+    "population_pressure_score": 78,
+    "road_access_score": 69,
+    "settlement_proximity_score": 70,
+    "protected_area_overlap_pct": 0,
+    "safeguard_risk_score": 18,
+    "data_quality_score": 73,
+    "field_validation_required": true,
+    "feature_version": "v0.1"
+  },
+  "model_prediction": {
+    "site_id": "SWE-001",
+    "model_version": "ranker_v0.1",
+    "priority_score": 69,
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "high",
+    "livelihood_benefit": "high",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "medium",
+    "risk_level": "medium",
+    "recommended_intervention_seed": "fmnr_agroforestry",
+    "top_feature_contributions": [
+      {
+        "feature": "population_pressure_score",
+        "direction": "positive",
+        "weight": 0.18
+      },
+      {
+        "feature": "rainfall_reliability_score",
+        "direction": "positive",
+        "weight": 0.14
+      },
+      {
+        "feature": "slope_risk_score",
+        "direction": "positive",
+        "weight": 0.12
+      },
+      {
+        "feature": "safeguard_risk_score",
+        "direction": "negative",
+        "weight": 0.05
+      }
+    ],
+    "prediction_quality": "rule_based_fallback"
+  },
+  "recommendation": {
+    "site_id": "SWE-001",
+    "rank": 3,
+    "priority_score": 69,
+    "recommended_intervention": "FMNR + agroforestry",
+    "intervention_code": "fmnr_agroforestry",
+    "carbon_potential": "medium",
+    "biodiversity_benefit": "high",
+    "livelihood_benefit": "high",
+    "water_soil_benefit": "high",
+    "implementation_feasibility": "medium",
+    "risk_level": "medium",
+    "main_reasons": [
+      "High livelihood pressure near farming communities",
+      "Rainfall suitability supports tree establishment",
+      "Cropland-tree mosaic is appropriate for farmer-managed natural regeneration",
+      "Slope and erosion risk make soil and water resilience important",
+      "Forest-loss signal indicates a restoration opportunity"
+    ],
+    "risk_flags": [
+      "Field validation is required before project investment"
+    ],
+    "field_validation_questions": [
+      "Who currently uses this land and under what tenure arrangement?",
+      "Is grazing pressure seasonal or year-round?",
+      "Which tree species are locally preferred for fodder, fruit, fuelwood, or soil restoration?"
+    ],
+    "evidence_refs": [
+      "site_features:SWE-001.population_pressure_score",
+      "site_features:SWE-001.rainfall_reliability_score",
+      "site_features:SWE-001.land_cover_primary",
+      "site_features:SWE-001.slope_risk_score",
+      "site_features:SWE-001.forest_loss_score"
+    ]
+  },
+  "critic": {
+    "site_id": "SWE-001",
+    "support_level": "supported_with_validation_needed",
+    "unsupported_claims": [],
+    "weak_claims": [],
+    "must_show_disclaimer": true,
+    "recommended_disclaimer": "This is a pre-feasibility screening result. Field validation is required before project investment or carbon claims."
+  },
+  "similar_cases": [
+    {
+      "case_id": "CASE-008",
+      "title": "FMNR + agroforestry in Shire Highlands",
+      "location": "Shire Highlands, Malawi",
+      "intervention": "FMNR + agroforestry",
+      "similarity_score": 0.7,
+      "why_similar": [
+        "rainfall suitability",
+        "cropland tree mosaic",
+        "recommended intervention",
+        "livelihood pressure"
+      ],
+      "lesson": "Livelihood species selection can make agroforestry more acceptable than carbon-only planting.",
+      "source": "manual_demo_case"
+    },
+    {
+      "case_id": "CASE-003",
+      "title": "FMNR + agroforestry in Makueni",
+      "location": "Makueni, Kenya",
+      "intervention": "FMNR + agroforestry",
+      "similarity_score": 0.58,
+      "why_similar": [
+        "cropland tree mosaic",
+        "recommended intervention",
+        "livelihood pressure",
+        "regional similarity"
+      ],
+      "lesson": "Avoid blanket recommendations near settlements; validate household willingness and water constraints first.",
+      "source": "manual_demo_case"
+    },
+    {
+      "case_id": "CASE-004",
+      "title": "Assisted natural regeneration + soil and water conservation in Western Province",
+      "location": "Western Province, Rwanda",
+      "intervention": "Assisted natural regeneration + soil and water conservation",
+      "similarity_score": 0.54,
+      "why_similar": [
+        "rainfall suitability",
+        "cropland tree mosaic",
+        "livelihood pressure",
+        "regional similarity"
+      ],
+      "lesson": "Watershed restoration should bundle vegetation recovery with physical soil conservation on steep farms.",
+      "source": "manual_demo_case"
+    }
+  ]
+}

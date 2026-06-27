@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/api/contracts/project_brief.schema.json",
+  "title": "ProjectBriefObject",
+  "description": "Stakeholder-ready restoration opportunity brief generated from the recommendation, evidence audit, and context.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "title",
+    "one_sentence_summary",
+    "recommended_actions",
+    "expected_benefits",
+    "data_evidence",
+    "risks",
+    "next_steps"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[0-9]{3}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "one_sentence_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommended_actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "expected_benefits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "climate",
+        "biodiversity",
+        "livelihood",
+        "water_soil"
+      ],
+      "properties": {
+        "climate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "biodiversity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "livelihood": {
+          "type": "string",
+          "minLength": 1
+        },
+        "water_soil": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "data_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "disclaimer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Critic-provided disclaimer when the evidence critic requires one."
+    }
+  }
+}

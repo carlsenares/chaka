@@ -1,0 +1,8 @@
+{
+  "site_id": "SWE-001",
+  "support_level": "supported_with_validation_needed",
+  "unsupported_claims": [],
+  "weak_claims": [],
+  "must_show_disclaimer": true,
+  "recommended_disclaimer": "This is a pre-feasibility screening result. Field validation is required before project investment or carbon claims."
+}
