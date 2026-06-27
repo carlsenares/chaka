@@ -1,3 +1,7 @@
+# Plan
+
+## Concept and Dataset-Grounded Plan
+
 Below is the **dataset\-grounded version** of the hackathon concept\. I adapted the idea around the exact data themes in the uploaded brief: admin boundaries, Ethiopia restoration atlas, Sentinel/Landsat imagery, ESA land cover, forest change, rainfall, terrain, soils, safeguards, population/settlement data, OSM/HOTOSM, and CIFOR\-ICRAF tree\-species suitability\.
 
 # 1\. Dataset links found
@@ -358,3 +362,629 @@ A ranked map of priority restoration areas with:
 
 - **MfM Restoration Carbon &amp; Livelihood Prioritisation Engine helps Menschen für Menschen combine open geospatial data, AI scoring and field knowledge to identify where restoration in South and Southwest Ethiopia can deliver the greatest climate, biodiversity and livelihood impact\.**
 
+---
+
+## Team Structure and Implementation Plan
+
+# Recommended team structure
+
+## Overall MVP goal
+
+Build a prototype that shows:
+
+**Select region → view relevant restoration/carbon layers → rank candidate areas → explain why an area is prioritised → recommend intervention type → generate a short decision brief**
+
+The MVP does not need to be a perfect working carbon system\. It needs to convincingly show the **decision\-making workflow** for Menschen für Menschen\.
+
+# 1\. Workstream ownership
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821406&cot=14)*
+
+| Person | Main ownership | Role in MVP |
+| --- | --- | --- |
+| Julia | Frontend, Figma, user journey, stakeholder demo | Owns what the user sees and how the management contact experiences the prototype |
+| Patrick | Data ingestion, geospatial datasets, scoring inputs | Owns datasets, cleaning, region filtering, spatial layers, and base ranking data |
+| Chirag | Reasoning layer, RAG logic, explanation engine, integration | Owns how the system reasons, explains recommendations, retrieves similar cases, and connects backend outputs to the frontend |
+
+This split matches the three workstreams discussed in the meeting: **frontend/user journey**, **data/database**, and **reasoning/routing/agent logic**\.
+
+# 2\. Parallel task division
+
+## Julia — Frontend, Figma prototype, user journey
+
+Julia should own the **stakeholder\-facing experience**\.
+
+Her main question is:
+
+**How will Menschen für Menschen actually use this tool?**
+
+### Tasks
+
+1. **Create the Lovable walkthrough**
+    - Landing page / dashboard
+    - Select area of interest: South Ethiopia or Southwest Ethiopia
+    - Layer selection: land cover, forest loss, rainfall, soil, carbon, water, population pressure
+    - Ranked areas view
+    - Area detail page
+    - Recommendation page
+    - Project brief export screen
+2. **Design the main user journey**
+    - User selects a region or woreda\.
+    - Tool shows available environmental and social layers\.
+    - Tool ranks candidate restoration sites\.
+    - User clicks one site\.
+    - Tool explains why this site is recommended\.
+    - Tool suggests intervention type\.
+    - User exports a short project brief\.
+3. **Prepare stakeholder validation questions**<br>Keep them short, as agreed in the meeting\.
+4. Example questions:
+    - Who would use this tool internally?
+    - Would this be used individually or in a project\-planning meeting?
+    - Which information would be most useful on the first screen?
+    - Do you prefer a map\-first interface or a ranked\-list\-first interface?
+    - What decisions should this tool support?
+    - Do you already have visual or reporting guidelines?
+    - Do field teams in Ethiopia need to use this directly?
+5. **Define frontend API expectations**<br>Julia does not need to build the backend, but she should define what the frontend needs from the backend\.
+6. Example:
+
+```json
+   {
+     "region": "Southwest Ethiopia",
+     "ranked_sites": [
+       {
+         "site_id": "SW-001",
+         "priority_score": 87,
+         "recommended_intervention": "FMNR + agroforestry",
+         "carbon_potential": "High",
+         "livelihood_benefit": "High",
+         "risk_level": "Medium"
+       }
+     ]
+   }
+```
+
+1. **Own the demo story**<br>Julia should prepare the exact 3–5 minute stakeholder flow\.
+2. Example:
+
+> “We start by selecting a target region\. The system loads open datasets\. It identifies degraded but feasible areas\. Then it ranks them based on carbon, biodiversity, livelihood and implementation feasibility\. When we click an area, we see why it was selected and what intervention type is recommended\.”
+
+### Julia’s deliverables
+
+- Lovable prototype
+- User journey flow
+- Stakeholder question list
+- Frontend API requirements
+- Demo script
+
+## Patrick — Data ingestion, geospatial datasets, scoring foundation
+
+Patrick should own the **data and geospatial foundation**\.
+
+His main question is:
+
+**What data do we actually have, what format is it in, and what can we reliably extract from it?**
+
+### Tasks
+
+1. **Review and organise all datasets**<br>For each dataset, document:
+    - dataset name,
+    - link/source,
+    - file format,
+    - coverage,
+    - resolution,
+    - useful columns/layers,
+    - missing data issues,
+    - whether it can be used in the MVP\.
+2. **Create a dataset inventory table**
+3. Example structure:
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821407&cot=14)*
+
+| Dataset | Format | Coverage | Useful for | MVP usable? | Notes |
+| --- | --- | --- | --- | --- | --- |
+| HDX/OCHA boundaries | SHP/GDB | Ethiopia Admin 0–3 | Region/woreda filtering | Yes | Admin 1 fields may need cleanup |
+| ESA WorldCover | Raster | Global | Land cover | Yes | 10 m resolution |
+| CHIRPS | Raster/time series | Global | Rainfall/drought | Yes | Good for suitability |
+| SoilGrids | Raster | Global | Soil carbon/pH/texture | Yes | Need variable selection |
+
+1. 
+2. **Clean and standardise region boundaries**<br>Especially because the meeting notes mentioned:
+    - empty Admin 1 fields,
+    - South West region missing or unclear,
+    - region/zone data only making sense after inspection\.
+3. Patrick should create a clean version of the area of interest:
+    - South Ethiopia Region
+    - Southwest Ethiopia Peoples’ Region
+    - zones/woredas if available
+4. **Prepare geospatial feature layers**<br>For each candidate area, extract simple features:
+    - land\-cover class,
+    - vegetation index,
+    - forest\-loss signal,
+    - rainfall suitability,
+    - slope,
+    - soil organic carbon,
+    - population pressure,
+    - distance to roads/settlements,
+    - protected\-area overlap\.
+5. **Create the first ranking dataset**<br>Patrick should produce a simple table that Chirag and Julia can use\.
+6. Example:
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821409&cot=14)*
+
+| site\_id | region | zone | land\_cover | slope\_score | rainfall\_score | soil\_score | population\_pressure | forest\_loss\_score |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SW\-001 | Southwest Ethiopia | Zone A | Cropland/tree mosaic | 72 | 81 | 65 | 78 | 70 |
+| SW\-002 | South Ethiopia | Zone B | Shrubland | 84 | 75 | 69 | 52 | 80 |
+
+1. 
+2. **Create map\-ready outputs**<br>For frontend/demo use:
+    - GeoJSON for selected candidate sites,
+    - CSV/JSON ranking table,
+    - sample map tiles or static screenshots if live maps are too hard\.
+
+### Patrick’s deliverables
+
+- Dataset inventory
+- Clean AOI boundary file
+- Processed geospatial features
+- Ranked candidate\-site table
+- GeoJSON/CSV/JSON outputs for frontend and reasoning layer
+- Notes on data quality problems
+
+## Chirag — Reasoning, RAG, recommendation logic, integration
+
+Chirag should own the **intelligence layer**\.
+
+His main question is:
+
+**How does the system explain what should be done, where, and why?**
+
+### Tasks
+
+1. **Define the scoring logic**<br>Create a transparent priority score\.
+2. Example:
+
+```
+   Restoration Priority Score =
+   25% carbon potential
+   + 20% biodiversity/restoration relevance
+   + 20% livelihood need
+   + 15% erosion/water benefit
+   + 10% rainfall/soil suitability
+   + 10% accessibility
+   - risk penalty
+```
+
+This does not need to be perfect\. It needs to be explainable\.
+
+1. **Define intervention recommendation rules**
+2. Example:
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821410&cot=14)*
+
+| Condition | Recommended intervention |
+| --- | --- |
+| High slope \+ high degradation | Assisted natural regeneration \+ erosion control |
+| Cropland/tree mosaic \+ high population pressure | FMNR \+ agroforestry |
+| Riparian/water\-adjacent zone | Riparian restoration |
+| High forest loss \+ good rainfall | Native tree restoration |
+| High settlement overlap | Avoid large\-scale planting; validate land use first |
+| High carbon but high social risk | Field validation before carbon project |
+
+1. 
+2. **Build the explanation layer**<br>The system should explain recommendations in plain language\.
+3. Example:
+
+> “This area is ranked highly because it has moderate\-to\-high rainfall, strong vegetation recovery potential, high livelihood relevance, and visible degradation near existing agricultural land\. The recommended intervention is FMNR combined with agroforestry because the area appears to be a cropland\-tree mosaic rather than fully open land\.”
+
+1. **Design the RAG layer**<br>The RAG layer should retrieve similar restoration cases, but only when context is actually similar\.
+2. Case metadata should include:
+    - country,
+    - climate zone,
+    - rainfall range,
+    - land\-cover type,
+    - intervention type,
+    - community context,
+    - outcome: successful, unsuccessful, mixed,
+    - reason for outcome,
+    - relevance to Ethiopia\.
+3. **Define similarity metrics for RAG**<br>This was an open question in the meeting\. Chirag should propose the first version\.
+4. Suggested similarity dimensions:
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821412&cot=14)*
+
+| Similarity metric | Why it matters |
+| --- | --- |
+| Climate zone similarity | Avoids transferring lessons from completely different ecosystems |
+| Rainfall similarity | Tree survival and restoration type depend heavily on rainfall |
+| Land\-cover similarity | Cropland, shrubland, degraded forest and grassland require different interventions |
+| Intervention similarity | FMNR cases should be compared with FMNR cases, not generic afforestation |
+| Livelihood context | Community dependence on land/fuelwood/grazing affects feasibility |
+| Governance/tenure similarity | Restoration success depends on land rights and local management |
+| Biodiversity context | Helps avoid inappropriate species or monoculture transfer |
+
+1. 
+2. **Create API contracts with Julia and Patrick**<br>Chirag should define what the reasoning layer receives and returns\.
+3. Input from Patrick:
+
+```json
+   {
+     "site_id": "SW-001",
+     "region": "Southwest Ethiopia",
+     "land_cover": "Cropland/tree mosaic",
+     "slope_score": 72,
+     "rainfall_score": 81,
+     "soil_score": 65,
+     "population_pressure": 78,
+     "forest_loss_score": 70,
+     "protected_area_overlap": false,
+     "road_access_score": 69
+   }
+```
+
+Output to Julia:
+
+```json
+   {
+     "site_id": "SW-001",
+     "priority_score": 87,
+     "recommended_intervention": "FMNR + agroforestry",
+     "carbon_potential": "High",
+     "livelihood_benefit": "High",
+     "risk_level": "Medium",
+     "explanation": "This area is suitable because...",
+     "similar_cases": [
+       {
+         "country": "Kenya",
+         "intervention": "FMNR",
+         "outcome": "Successful",
+         "similarity_score": 0.78,
+         "lesson": "Community-managed grazing rules improved survival."
+       }
+     ]
+   }
+```
+
+1. **Own integration logic**<br>Chirag should make sure Patrick’s data can feed the reasoning layer, and Julia’s frontend can consume the outputs\.
+
+### Chirag’s deliverables
+
+- Scoring model
+- Intervention recommendation logic
+- RAG similarity framework
+- Example case database structure
+- Explanation generator
+- API contract
+- Integration between data output and frontend output
+
+# 3\. Suggested architecture
+
+```
+                 ┌────────────────────────┐
+                 │      Julia: Frontend    │
+                 │   Figma / UI / Demo     │
+                 └───────────▲────────────┘
+                             │
+                             │ API response:
+                             │ ranked sites, explanations,
+                             │ recommended interventions
+                             │
+┌────────────────────────────┴────────────────────────────┐
+│               Chirag: Reasoning Layer                    │
+│ scoring model + intervention logic + RAG + explanations   │
+└────────────────────────────▲────────────────────────────┘
+                             │
+                             │ processed geospatial features
+                             │ site_id, slope, rainfall, soil,
+                             │ land cover, population, forest loss
+                             │
+                 ┌───────────┴────────────┐
+                 │   Patrick: Data Layer   │
+                 │ datasets / GIS / GeoJSON│
+                 └────────────────────────┘
+```
+
+# 4\. Work that must be aligned before parallel development
+
+Before everyone goes too deep, the team should agree on **three contracts**\.
+
+## Contract 1: Site object
+
+This is the common unit everyone uses\.
+
+```json
+{
+  "site_id": "SW-001",
+  "name": "Candidate Area 1",
+  "region": "Southwest Ethiopia",
+  "zone": "Example Zone",
+  "geometry": "GeoJSON polygon",
+  "land_cover": "Cropland/tree mosaic",
+  "slope_score": 72,
+  "rainfall_score": 81,
+  "soil_score": 65,
+  "forest_loss_score": 70,
+  "population_pressure_score": 78,
+  "accessibility_score": 69,
+  "protected_area_overlap": false
+}
+```
+
+## Contract 2: Recommendation object
+
+This is what Chirag sends to Julia\.
+
+```json
+{
+  "site_id": "SW-001",
+  "priority_score": 87,
+  "rank": 1,
+  "recommended_intervention": "FMNR + agroforestry",
+  "carbon_potential": "High",
+  "biodiversity_benefit": "Medium",
+  "livelihood_benefit": "High",
+  "water_erosion_benefit": "High",
+  "risk_level": "Medium",
+  "main_reasons": [
+    "High livelihood pressure",
+    "Good rainfall suitability",
+    "Moderate vegetation recovery potential",
+    "Accessible from nearby roads"
+  ],
+  "risk_flags": [
+    "Grazing pressure needs field validation",
+    "Land tenure should be checked"
+  ]
+}
+```
+
+## Contract 3: Project brief object
+
+This is the final donor/stakeholder output\.
+
+```json
+{
+  "site_id": "SW-001",
+  "title": "FMNR and Agroforestry Opportunity in Southwest Ethiopia",
+  "summary": "This area is a strong candidate for restoration because...",
+  "recommended_actions": [
+    "Farmer-managed natural regeneration",
+    "Agroforestry with suitable native and livelihood species",
+    "Community validation of grazing and land-use pressure"
+  ],
+  "expected_benefits": {
+    "climate": "High carbon and vegetation recovery potential",
+    "biodiversity": "Moderate native restoration value",
+    "livelihood": "High benefit due to proximity to farming communities",
+    "water_soil": "High erosion-control relevance"
+  },
+  "next_steps": [
+    "Conduct field validation",
+    "Check tenure and community readiness",
+    "Confirm locally suitable species",
+    "Estimate implementation cost"
+  ]
+}
+```
+
+# 5\. Parallel development plan
+
+## Phase 1: First alignment session
+
+All three should agree on:
+
+- MVP user journey,
+- selected region for demo,
+- data fields Patrick will provide,
+- JSON structure Chirag will consume,
+- JSON structure Julia will display,
+- one demo scenario\.
+
+Best demo scenario:
+
+**“A programme manager selects Southwest Ethiopia and receives the top 5 candidate areas for FMNR/agroforestry/restoration, with reasons and risk flags\.”**
+
+## Phase 2: Parallel build
+
+### Julia works on:
+
+- Figma prototype,
+- dashboard screens,
+- map/list/detail/brief screens,
+- stakeholder walkthrough,
+- visual language\.
+
+### Patrick works on:
+
+- dataset inventory,
+- cleaning admin boundaries,
+- extracting sample features,
+- creating mock/real candidate site table,
+- creating GeoJSON\.
+
+### Chirag works on:
+
+- scoring formula,
+- intervention rules,
+- explanation templates,
+- RAG case schema,
+- API contract,
+- mock endpoint or JSON output\.
+
+## Phase 3: Integration
+
+Once Patrick has even a small sample table, Chirag can run the scoring logic on it\.
+
+Once Chirag has sample JSON outputs, Julia can plug them into the frontend prototype\.
+
+The team should not wait for perfect data\. Use mock data first, then replace it with real data\.
+
+# 6\. Git / branch structure
+
+Use separate branches to avoid blocking each other\.
+
+```
+main
+├── frontend-julia
+├── data-patrick
+├── reasoning-chirag
+└── integration
+```
+
+Recommended folder structure:
+
+```
+project-root/
+│
+├── frontend/
+│   ├── figma-assets/
+│   ├── ui/
+│   └── mock-data/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   ├── geojson/
+│   └── dataset_inventory.md
+│
+├── reasoning/
+│   ├── scoring_model.py
+│   ├── intervention_rules.py
+│   ├── rag_schema.md
+│   └── sample_outputs/
+│
+├── api/
+│   ├── contracts/
+│   └── sample_responses/
+│
+└── docs/
+    ├── stakeholder_questions.md
+    ├── user_journey.md
+    └── demo_script.md
+```
+
+# 7\. Concrete task board
+
+## Julia
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821414&cot=14)*
+
+| Priority | Task | Output |
+| --- | --- | --- |
+| High | Build Figma user journey | Clickable prototype |
+| High | Create dashboard wireframes | Map \+ ranked list \+ detail page |
+| High | Prepare stakeholder questions | Short validation list |
+| Medium | Define frontend data needs | JSON field list |
+| Medium | Prepare demo script | 3–5 minute walkthrough |
+
+## Patrick
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821417&cot=14)*
+
+| Priority | Task | Output |
+| --- | --- | --- |
+| High | Review dataset formats and coverage | Dataset inventory |
+| High | Clean South/Southwest Ethiopia boundaries | AOI file |
+| High | Create sample candidate areas | GeoJSON/CSV |
+| High | Extract simple geospatial indicators | Feature table |
+| Medium | Document data issues | Data quality notes |
+
+## Chirag
+
+*[Table view](https://miro.com/app/board/uXjVHBWCAl4=/?moveToWidget=3458764676722821419&cot=14)*
+
+| Priority | Task | Output |
+| --- | --- | --- |
+| High | Define scoring model | Priority score formula |
+| High | Define intervention rules | Recommendation logic |
+| High | Define RAG similarity metrics | Similarity framework |
+| High | Create sample JSON outputs | API\-ready responses |
+| Medium | Build explanation templates | Human\-readable reasoning |
+| Medium | Connect Patrick’s data to Julia’s frontend | Integration logic |
+
+# 8\. Stakeholder meeting preparation
+
+For the management call, the team should not pitch the whole system\. The goal should be validation\.
+
+Use this structure:
+
+## 1\. Show the user journey
+
+“Here is how we imagine someone at Menschen für Menschen would use the tool\.”
+
+## 2\. Ask who the real user is
+
+“Would this be used by management, field teams, technical staff, or all of them?”
+
+## 3\. Ask how decisions are made
+
+“Is restoration site selection done individually, in meetings, with local partners, or with government/donor involvement?”
+
+## 4\. Ask about data
+
+“Can you refine the dataset list? Do you have internal historical data from past interventions?”
+
+## 5\. Ask about failed cases
+
+“Do you have examples of interventions that did not work as expected? This would help us validate the recommendation logic\.”
+
+## 6\. Ask about design expectations
+
+“Do you already have reporting templates, map styles, dashboard expectations or internal guidelines?”
+
+# 9\. Important decisions to make now
+
+The team should decide these quickly:
+
+1. **Who is the primary end user for the MVP?**<br>Recommended assumption: programme manager or restoration planning officer\.
+2. **What region is used for the demo?**<br>Recommended: Southwest Ethiopia Peoples’ Region\.
+3. **What is the MVP output?**<br>Recommended: top 5 ranked restoration areas with intervention recommendation and explanation\.
+4. **Is the prototype live or Figma\-only?**<br>Recommended: Figma\-first, with backend logic shown using sample JSON/data\.
+5. **Do you use real data or mock data?**<br>Recommended: hybrid\. Use real dataset names and structure, but allow mock candidate areas if processing takes too long\.
+6. **Is RAG part of the MVP or future layer?**<br>Recommended: show RAG as a lightweight “similar cases” panel, even if the first version uses a small manually prepared case database\.
+
+# 10\. Best MVP scope
+
+Do not try to build the full system\.
+
+Build this:
+
+## MVP workflow
+
+**Select region → See ranked restoration areas → Click one area → See explanation → See recommended intervention → Export project brief**
+
+## MVP screens
+
+1. Region selection screen
+2. Map \+ layer overview
+3. Ranked candidate areas
+4. Area detail page
+5. Similar cases / RAG explanation panel
+6. Project brief export page
+
+## MVP backend logic
+
+1. Load processed candidate site table
+2. Calculate priority score
+3. Assign intervention type
+4. Generate explanation
+5. Return JSON to frontend
+
+# 11\. Final recommended ownership
+
+## Julia owns the product experience
+
+She makes sure the prototype looks understandable and useful for Menschen für Menschen\.
+
+## Patrick owns the data truth
+
+He makes sure the datasets are usable, documented and transformed into structured inputs\.
+
+## Chirag owns the intelligence layer
+
+He makes sure the tool can rank, recommend, explain and retrieve similar cases\.
+
+Together, the team should align through one shared contract:
+
+- **Patrick produces site data → Chirag produces recommendations → Julia displays the decision journey\.**
