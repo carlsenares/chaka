@@ -14,9 +14,9 @@
       "water": 0.952788,
       "other": 0.047212
     },
-    "ndvi_current": 0.43,
+    "ndvi_current": -0.373,
     "ndvi_trend_5y": -0.06,
-    "evi_current": 0.31,
+    "evi_current": -0.134,
     "forest_loss_score": 0,
     "rainfall_mean_mm": 700.262,
     "rainfall_reliability_score": 72,
@@ -31,9 +31,9 @@
     "safeguard_risk_score": 18,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_settlement_context_water_productivity_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_settlement_context_water_productivity_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, settlement_context, water_productivity, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_settlement_context_water_productivity_local_research_context_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_settlement_context_water_productivity_local_research_context_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, settlement_context, water_productivity, local_research_context, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -46,6 +46,24 @@
           "80": 0.952788,
           "90": 0.047212
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": -0.373,
+        "evi_current": -0.134,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 249021,
+        "sentinel2_valid_pixel_count_max": 249021,
+        "sentinel2_scene_ids": [
+          "S2A_36NZK_20260626_0_L2A",
+          "S2A_36NZK_20260616_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -189,6 +207,37 @@
         "wapor_valid_pixel_count_min": 2,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "no_valid_pixels"
@@ -226,9 +275,9 @@
       "water": 0,
       "other": 0.443152
     },
-    "ndvi_current": 0.34,
+    "ndvi_current": 0.549,
     "ndvi_trend_5y": -0.09,
-    "evi_current": 0.24,
+    "evi_current": 0.333,
     "forest_loss_score": 1,
     "rainfall_mean_mm": 957.741,
     "rainfall_reliability_score": 75,
@@ -243,9 +292,9 @@
     "safeguard_risk_score": 24,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -262,6 +311,24 @@
           "50": 0.000003,
           "60": 0.000075
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.549,
+        "evi_current": 0.333,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248974,
+        "sentinel2_valid_pixel_count_max": 248975,
+        "sentinel2_scene_ids": [
+          "S2A_36NZL_20260606_0_L2A",
+          "S2C_36NZL_20260604_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -478,6 +545,37 @@
         "wapor_valid_pixel_count_min": 2256,
         "wapor_valid_pixel_count_max": 2256
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -520,9 +618,9 @@
       "water": 0.000586,
       "other": 0.563961
     },
-    "ndvi_current": 0.55,
+    "ndvi_current": 0.707,
     "ndvi_trend_5y": -0.04,
-    "evi_current": 0.39,
+    "evi_current": 0.451,
     "forest_loss_score": 47,
     "rainfall_mean_mm": 1262.445,
     "rainfall_reliability_score": 79,
@@ -537,9 +635,9 @@
     "safeguard_risk_score": 48,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -557,6 +655,24 @@
           "60": 0.000257,
           "80": 0.000586
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.707,
+        "evi_current": 0.451,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 214314,
+        "sentinel2_valid_pixel_count_max": 248953,
+        "sentinel2_scene_ids": [
+          "S2A_36NZL_20260606_0_L2A",
+          "S2A_36NZM_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -742,6 +858,37 @@
         "wapor_valid_pixel_count_min": 2256,
         "wapor_valid_pixel_count_max": 2256
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -784,9 +931,9 @@
       "water": 0,
       "other": 0.471996
     },
-    "ndvi_current": 0.48,
+    "ndvi_current": 0.746,
     "ndvi_trend_5y": -0.02,
-    "evi_current": 0.34,
+    "evi_current": 0.525,
     "forest_loss_score": 85,
     "rainfall_mean_mm": 1391.143,
     "rainfall_reliability_score": 77,
@@ -801,9 +948,9 @@
     "safeguard_risk_score": 16,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -818,6 +965,24 @@
           "30": 0.276615,
           "40": 0.000027
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.746,
+        "evi_current": 0.525,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248618,
+        "sentinel2_valid_pixel_count_max": 248618,
+        "sentinel2_scene_ids": [
+          "S2A_36NZM_20260606_0_L2A",
+          "S2A_36NZM_20260616_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -1003,6 +1168,37 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1045,9 +1241,9 @@
       "water": 0,
       "other": 0.584839
     },
-    "ndvi_current": 0.27,
+    "ndvi_current": 0.738,
     "ndvi_trend_5y": -0.03,
-    "evi_current": 0.18,
+    "evi_current": 0.485,
     "forest_loss_score": 4,
     "rainfall_mean_mm": 1509.653,
     "rainfall_reliability_score": 78,
@@ -1062,9 +1258,9 @@
     "safeguard_risk_score": 12,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1078,6 +1274,24 @@
           "20": 0.584839,
           "30": 0.218721
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.738,
+        "evi_current": 0.485,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248500,
+        "sentinel2_valid_pixel_count_max": 248500,
+        "sentinel2_scene_ids": [
+          "S2A_36NZM_20260606_0_L2A",
+          "S2A_36NZM_20260616_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -1263,6 +1477,37 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1305,9 +1550,9 @@
       "water": 0,
       "other": 0.035713
     },
-    "ndvi_current": 0.61,
+    "ndvi_current": 0.496,
     "ndvi_trend_5y": -0.05,
-    "evi_current": 0.44,
+    "evi_current": 0.479,
     "forest_loss_score": 9,
     "rainfall_mean_mm": 2066.885,
     "rainfall_reliability_score": 79,
@@ -1322,9 +1567,9 @@
     "safeguard_risk_score": 36,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1338,6 +1583,23 @@
           "20": 0.035713,
           "30": 0.009407
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.496,
+        "evi_current": 0.479,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 1,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248467,
+        "sentinel2_valid_pixel_count_max": 248467,
+        "sentinel2_scene_ids": [
+          "S2A_36NZM_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -1552,6 +1814,37 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1594,9 +1887,9 @@
       "water": 0.017308,
       "other": 0.288056
     },
-    "ndvi_current": 0.37,
+    "ndvi_current": 0.762,
     "ndvi_trend_5y": -0.08,
-    "evi_current": 0.26,
+    "evi_current": 0.509,
     "forest_loss_score": 0,
     "rainfall_mean_mm": 1989.657,
     "rainfall_reliability_score": 80,
@@ -1611,9 +1904,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1630,6 +1923,24 @@
           "60": 0.001529,
           "80": 0.017308
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.762,
+        "evi_current": 0.509,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 247952,
+        "sentinel2_valid_pixel_count_max": 248444,
+        "sentinel2_scene_ids": [
+          "S2A_36NZN_20260616_0_L2A",
+          "S2A_37NBH_20260616_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -1844,6 +2155,37 @@
         "wapor_valid_pixel_count_min": 2254,
         "wapor_valid_pixel_count_max": 2256
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1886,9 +2228,9 @@
       "water": 0,
       "other": 0.222987
     },
-    "ndvi_current": 0.22,
+    "ndvi_current": 0.68,
     "ndvi_trend_5y": 0.01,
-    "evi_current": 0.15,
+    "evi_current": 0.394,
     "forest_loss_score": 1,
     "rainfall_mean_mm": 1422.677,
     "rainfall_reliability_score": 84,
@@ -1903,9 +2245,9 @@
     "safeguard_risk_score": 10,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -1923,6 +2265,24 @@
           "60": 0.00024,
           "90": 0.013107
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.68,
+        "evi_current": 0.394,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 174963,
+        "sentinel2_valid_pixel_count_max": 247295,
+        "sentinel2_scene_ids": [
+          "S2C_37NCJ_20260316_0_L2A",
+          "S2A_37NCH_20260606_1_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -2184,6 +2544,37 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 2,
+        "matched_sources": [
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2226,9 +2617,9 @@
       "water": 0,
       "other": 0.607483
     },
-    "ndvi_current": 0.43,
+    "ndvi_current": 0.294,
     "ndvi_trend_5y": -0.06,
-    "evi_current": 0.31,
+    "evi_current": 0.143,
     "forest_loss_score": 0,
     "rainfall_mean_mm": 819.03,
     "rainfall_reliability_score": 77,
@@ -2243,9 +2634,9 @@
     "safeguard_risk_score": 18,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2259,6 +2650,24 @@
           "20": 0.607483,
           "30": 0.392071
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.294,
+        "evi_current": 0.143,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248426,
+        "sentinel2_valid_pixel_count_max": 248428,
+        "sentinel2_scene_ids": [
+          "S2A_36NYL_20260616_0_L2A",
+          "S2A_36NYL_20260626_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -2444,6 +2853,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2486,9 +2936,9 @@
       "water": 0,
       "other": 0.142507
     },
-    "ndvi_current": 0.34,
+    "ndvi_current": 0.716,
     "ndvi_trend_5y": -0.09,
-    "evi_current": 0.24,
+    "evi_current": 0.487,
     "forest_loss_score": 14,
     "rainfall_mean_mm": 1338.829,
     "rainfall_reliability_score": 84,
@@ -2503,9 +2953,9 @@
     "safeguard_risk_score": 24,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2520,6 +2970,24 @@
           "30": 0.560662,
           "40": 0.001934
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.716,
+        "evi_current": 0.487,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 248160,
+        "sentinel2_valid_pixel_count_max": 248160,
+        "sentinel2_scene_ids": [
+          "S2B_36NYM_20260609_0_L2A",
+          "S2A_36NYM_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -2705,6 +3173,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2747,9 +3256,9 @@
       "water": 0.000072,
       "other": 0.042061
     },
-    "ndvi_current": 0.55,
+    "ndvi_current": 0.613,
     "ndvi_trend_5y": -0.04,
-    "evi_current": 0.39,
+    "evi_current": 0.421,
     "forest_loss_score": 21,
     "rainfall_mean_mm": 1644.003,
     "rainfall_reliability_score": 87,
@@ -2764,9 +3273,9 @@
     "safeguard_risk_score": 48,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -2783,6 +3292,24 @@
           "60": 0.000041,
           "80": 0.000072
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.613,
+        "evi_current": 0.421,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 247938,
+        "sentinel2_valid_pixel_count_max": 247938,
+        "sentinel2_scene_ids": [
+          "S2A_36NYN_20260606_0_L2A",
+          "S2A_36NYN_20260616_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -2968,6 +3495,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3010,9 +3578,9 @@
       "water": 0,
       "other": 0.330377
     },
-    "ndvi_current": 0.48,
+    "ndvi_current": 0.779,
     "ndvi_trend_5y": -0.02,
-    "evi_current": 0.34,
+    "evi_current": 0.515,
     "forest_loss_score": 5,
     "rainfall_mean_mm": 1613.354,
     "rainfall_reliability_score": 82,
@@ -3027,9 +3595,9 @@
     "safeguard_risk_score": 16,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3044,6 +3612,24 @@
           "30": 0.283831,
           "40": 0.02368
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.779,
+        "evi_current": 0.515,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 247681,
+        "sentinel2_valid_pixel_count_max": 247681,
+        "sentinel2_scene_ids": [
+          "S2A_37NBH_20260616_0_L2A",
+          "S2B_37NBH_20260410_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -3229,6 +3815,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3271,9 +3898,9 @@
       "water": 0,
       "other": 0.325686
     },
-    "ndvi_current": 0.27,
+    "ndvi_current": 0.783,
     "ndvi_trend_5y": -0.03,
-    "evi_current": 0.18,
+    "evi_current": 0.539,
     "forest_loss_score": 5,
     "rainfall_mean_mm": 1880.846,
     "rainfall_reliability_score": 91,
@@ -3288,9 +3915,9 @@
     "safeguard_risk_score": 12,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3308,6 +3935,24 @@
           "60": 0.000003,
           "90": 0.054328
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.783,
+        "evi_current": 0.539,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 28350,
+        "sentinel2_valid_pixel_count_max": 247879,
+        "sentinel2_scene_ids": [
+          "S2A_36NZN_20260616_0_L2A",
+          "S2A_36NYN_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -3493,6 +4138,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3535,9 +4221,9 @@
       "water": 0,
       "other": 0.324468
     },
-    "ndvi_current": 0.61,
+    "ndvi_current": 0.848,
     "ndvi_trend_5y": -0.05,
-    "evi_current": 0.44,
+    "evi_current": 0.677,
     "forest_loss_score": 0,
     "rainfall_mean_mm": 1671.969,
     "rainfall_reliability_score": 92,
@@ -3552,9 +4238,9 @@
     "safeguard_risk_score": 36,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3569,6 +4255,24 @@
           "30": 0.177212,
           "40": 0.017527
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.848,
+        "evi_current": 0.677,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 35127,
+        "sentinel2_valid_pixel_count_max": 247836,
+        "sentinel2_scene_ids": [
+          "S2A_36NZN_20260616_0_L2A",
+          "S2A_36NZP_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -3754,6 +4458,47 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3796,9 +4541,9 @@
       "water": 0,
       "other": 0.133783
     },
-    "ndvi_current": 0.37,
+    "ndvi_current": 0.381,
     "ndvi_trend_5y": -0.08,
-    "evi_current": 0.26,
+    "evi_current": 0.36,
     "forest_loss_score": 25,
     "rainfall_mean_mm": 1881.584,
     "rainfall_reliability_score": 90,
@@ -3813,9 +4558,9 @@
     "safeguard_risk_score": 21,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_soil_observations_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, soil_observations, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -3832,6 +4577,24 @@
           "50": 0.000182,
           "90": 0.006979
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.381,
+        "evi_current": 0.36,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 56734,
+        "sentinel2_valid_pixel_count_max": 247867,
+        "sentinel2_scene_ids": [
+          "S2C_37NBJ_20260316_0_L2A",
+          "S2A_36NZP_20260606_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -4074,6 +4837,57 @@
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
       },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 4,
+        "matched_sources": [
+          "Alemayehu Haile.pdf",
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "explicit_district",
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:alemayehu_haile:gimbo_soil_management_001",
+            "source_id": "Alemayehu Haile.pdf",
+            "match_type": "explicit_district",
+            "confidence": "medium",
+            "allowed_use": "site_specific_implementation_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -4116,9 +4930,9 @@
       "water": 0,
       "other": 0.004036
     },
-    "ndvi_current": 0.22,
+    "ndvi_current": 0.785,
     "ndvi_trend_5y": 0.01,
-    "evi_current": 0.15,
+    "evi_current": 0.483,
     "forest_loss_score": 2,
     "rainfall_mean_mm": 2112.452,
     "rainfall_reliability_score": 94,
@@ -4133,9 +4947,9 @@
     "safeguard_risk_score": 10,
     "data_quality_score": 100,
     "field_validation_required": true,
-    "feature_version": "mixed_land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_v0",
-    "feature_quality": "land_cover_terrain_forest_rainfall_soil_settlement_context_water_productivity_population_access_source_derived_other_fields_demo_mock",
-    "feature_note": "Source-derived feature groups: land_cover, terrain, forest, rainfall, soil, settlement_context, water_productivity, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
+    "feature_version": "mixed_land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_v0",
+    "feature_quality": "land_cover_vegetation_terrain_forest_rainfall_soil_settlement_context_water_productivity_local_research_context_population_access_source_derived_other_fields_demo_mock",
+    "feature_note": "Source-derived feature groups: land_cover, vegetation, terrain, forest, rainfall, soil, settlement_context, water_productivity, local_research_context, population, access. Remaining feature values are deterministic MVP placeholders pending source extraction.",
     "source_extracts": {
       "land_cover": {
         "dataset_id": "esa_worldcover",
@@ -4151,6 +4965,24 @@
           "40": 0.000254,
           "90": 0.000309
         }
+      },
+      "vegetation": {
+        "dataset_id": "vegetation_indices",
+        "status": "partial_source_derived",
+        "ndvi_current": 0.785,
+        "evi_current": 0.483,
+        "ndvi_trend_5y": null,
+        "sentinel2_scene_count": 2,
+        "sentinel2_candidate_scene_count": 2,
+        "sentinel2_valid_pixel_count_min": 10247,
+        "sentinel2_valid_pixel_count_max": 10247,
+        "sentinel2_scene_ids": [
+          "S2C_36PZQ_20260306_0_L2A",
+          "S2B_36PZQ_20260430_0_L2A"
+        ],
+        "landsat_ndvi_by_year": {},
+        "landsat_scene_count_by_year": {},
+        "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
       },
       "terrain": {
         "dataset_id": "srtm_dem",
@@ -4335,6 +5167,47 @@
         "wapor_productivity_context_score": 100,
         "wapor_valid_pixel_count_min": 2209,
         "wapor_valid_pixel_count_max": 2209
+      },
+      "local_research_context": {
+        "dataset_id": "local_research_context",
+        "status": "context_derived",
+        "matched_evidence_count": 3,
+        "matched_sources": [
+          "Wondimu Mamo.pdf",
+          "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+          "2026_submission_frel_frl_eth_final.pdf"
+        ],
+        "match_types": [
+          "comparable_western_ethiopia",
+          "national_context"
+        ],
+        "evidence_refs": [
+          {
+            "evidence_id": "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
+            "source_id": "Wondimu Mamo.pdf",
+            "match_type": "comparable_western_ethiopia",
+            "confidence": "medium_low",
+            "allowed_use": "comparable_landscape_caveat",
+            "review_status": "needs_manual_table_qa"
+          },
+          {
+            "evidence_id": "local_research:nbsap:safeguard_policy_context_001",
+            "source_id": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+            "match_type": "national_context",
+            "confidence": "medium_high",
+            "allowed_use": "national_policy_context",
+            "review_status": "needs_manual_section_qa"
+          },
+          {
+            "evidence_id": "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
+            "source_id": "2026_submission_frel_frl_eth_final.pdf",
+            "match_type": "national_context",
+            "confidence": "high",
+            "allowed_use": "methods_context",
+            "review_status": "needs_table_qa"
+          }
+        ],
+        "scoring_policy": "context_only_no_score_override"
       },
       "population": {
         "dataset_id": "worldpop_population",

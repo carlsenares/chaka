@@ -8,7 +8,7 @@ This document tracks which feature groups are source-derived and which are still
 | --- | --- | --- | --- | --- |
 | Geometry/admin labels | `site_id`, `region`, `zone`, `woreda`, `area_ha` | Source-derived | HDX/OCHA Ethiopia Admin 1-3 | Generated from downloaded HDX GeoJSON. |
 | Land cover | `land_cover_primary`, `land_cover_mix` | Source-derived | ESA WorldCover 2021 v200 | Extracted from public 10m WorldCover COG tiles. |
-| Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Placeholder | Pending Sentinel-2/Landsat | Requires Earth Engine auth or alternate public raster workflow. |
+| Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Partial source-derived for 16/16 sites | Sentinel-2 L2A via Element84 Earth Search; optional Landsat C2 L2 via Planetary Computer | Current NDVI/EVI are extracted from public Sentinel-2 COGs. Landsat 5-year trend is implemented as opt-in because signed COG reads are slow from this environment, so `ndvi_trend_5y` still falls back when trend is not run. |
 | Forest context | `forest_loss_score` | Source-derived for 16/16 sites | Hansen Global Forest Change / GFW v1.13 | Extracts tree-cover baseline and loss from official direct-download tiles. Default threshold is 30% tree cover; tree-cover loss is a disturbance proxy, not verified deforestation or carbon loss. |
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
 | Water/productivity context | `source_extracts.water_productivity` | Optional source-derived context | FAO WaPOR v3 L2 annual products | AETI, total biomass production, and biomass water productivity context. Does not overwrite rainfall, carbon, or livelihood scores. |
@@ -18,6 +18,7 @@ This document tracks which feature groups are source-derived and which are still
 | Population/livelihood | `population_pressure_score` | Source-derived for 15/16 sites | WorldPop Ethiopia 2020 UN-adjusted population counts | Extracted from official WorldPop 100m GeoTIFF. `SET-001` has no valid population pixels and falls back to OSM's zero-valued mapped population proxy. |
 | Access | `road_access_score`, `settlement_proximity_score` | Partial source-derived, reproducible local extract | OSM via Geofabrik Ethiopia `.osm.pbf` | Current Geofabrik artifact has road scores for 13/16 sites and settlement scores for 12/16 sites. Individual null fields still fall back to deterministic placeholders in `site_features.json`. |
 | Settlement context | `source_extracts.settlement_context` | Optional source-derived context | GHSL GHS-SMOD 2020 R2023A | Coarse 1 km settlement model context. Cross-checks WorldPop/OSM and does not overwrite access or population scores. |
+| Local research context | `source_extracts.local_research_context` | Context-derived for 16/16 sites | Curated local PDF bundle | Evidence-card matches for implementation caveats and policy/method context. Does not overwrite scoring fields. |
 | Safeguards | `protected_area_overlap_pct`, `safeguard_risk_score` | Placeholder | Pending WDPA | WDPA access terms must be checked before committing raw data. |
 
 ## Implemented Extraction
@@ -45,6 +46,42 @@ Land-cover raw cache:
 ```text
 data/raw/esa_worldcover/
 ```
+
+Vegetation dry-run command:
+
+```bash
+npm run data:vegetation:dry-run
+```
+
+Vegetation command:
+
+```bash
+npm run data:vegetation
+```
+
+Vegetation trend command, slower opt-in:
+
+```bash
+npm run data:vegetation:trend
+```
+
+Vegetation script:
+
+```text
+scripts/extract-vegetation-indices.py
+```
+
+Vegetation output:
+
+```text
+data/features/source_extracts/vegetation_indices.json
+```
+
+Current vegetation artifact coverage:
+
+- Sentinel-2 current NDVI/EVI extracted for 16/16 candidate sites.
+- Landsat NDVI trend extraction is implemented but not part of the default vegetation command because Planetary Computer signed COG reads were too slow for the PR workflow.
+- `ndvi_current` and `evi_current` are now source-derived from Sentinel-2 where valid scenes exist; `ndvi_trend_5y` remains fallback unless `npm run data:vegetation:trend` is run successfully.
 
 Rainfall command:
 
@@ -215,6 +252,37 @@ Current GBIF-derived artifact coverage:
 - Insufficient-record context rows: 16/16 sites.
 - `SWE-007` currently has 8 filtered occurrences across 8 species; the other candidate polygons have zero filtered GBIF records.
 - Records with missing or greater-than-5-km coordinate uncertainty, disallowed licenses, disallowed basis types, geospatial issues, non-present status, or dates before 2000 are filtered out before summarization.
+
+Local research context dry-run command:
+
+```bash
+npm run data:local-research:dry-run
+```
+
+Local research context command:
+
+```bash
+npm run data:local-research
+```
+
+Local research context script:
+
+```text
+scripts/extract-local-research-context.mjs
+```
+
+Local research context output:
+
+```text
+data/features/source_extracts/local_research_context.json
+```
+
+The local research lane turns curated PDF/source-matrix findings into evidence
+cards and candidate matches. It is context-only and cannot change priority
+scores. It currently provides national policy/method context for 16/16 sites,
+comparable western-Ethiopia context for 8/16 Southwest Ethiopia sites, and one
+explicit district-level match for `SWE-007` from the Gimbo soil-management
+paper.
 
 WorldPop population dry-run command:
 

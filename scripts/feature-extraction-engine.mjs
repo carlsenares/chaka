@@ -6,6 +6,7 @@ import path from "node:path";
 const root = process.cwd();
 const candidatesPath = path.join(root, "data/processed/candidate_sites.geojson");
 const worldCoverPath = path.join(root, "data/features/source_extracts/worldcover_land_cover.json");
+const vegetationIndicesPath = path.join(root, "data/features/source_extracts/vegetation_indices.json");
 const srtmPath = path.join(root, "data/features/source_extracts/srtm_terrain.json");
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
 const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfall.json");
@@ -14,6 +15,7 @@ const soilObservationsPath = path.join(root, "data/features/source_extracts/soil
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
 const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
 const waporWaterProductivityPath = path.join(root, "data/features/source_extracts/wapor_water_productivity.json");
+const localResearchContextPath = path.join(root, "data/features/source_extracts/local_research_context.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const jsonPath = path.join(root, "data/features/site_features.json");
@@ -182,6 +184,7 @@ function fail(message) {
 async function main() {
   const candidates = JSON.parse(await readFile(candidatesPath, "utf8"));
   const worldCoverBySite = await loadExtractBySite(worldCoverPath);
+  const vegetationIndicesBySite = await loadExtractBySite(vegetationIndicesPath, { optional: true });
   const srtmBySite = await loadExtractBySite(srtmPath, { optional: true });
   const gfwBySite = await loadExtractBySite(gfwPath, { optional: true });
   const chirpsBySite = await loadExtractBySite(chirpsPath);
@@ -190,11 +193,13 @@ async function main() {
   const gbifBiodiversityBySite = await loadExtractBySite(gbifBiodiversityPath, { optional: true });
   const ghslSettlementBySite = await loadExtractBySite(ghslSettlementPath, { optional: true });
   const waporWaterProductivityBySite = await loadExtractBySite(waporWaterProductivityPath, { optional: true });
+  const localResearchContextBySite = await loadExtractBySite(localResearchContextPath, { optional: true });
   const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
   const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
     buildFeature(candidate, index, {
       worldCover: worldCoverBySite.get(candidate.properties.site_id),
+      vegetationIndices: vegetationIndicesBySite.get(candidate.properties.site_id),
       srtm: srtmBySite.get(candidate.properties.site_id),
       gfw: gfwBySite.get(candidate.properties.site_id),
       chirps: chirpsBySite.get(candidate.properties.site_id),
@@ -203,6 +208,7 @@ async function main() {
       gbifBiodiversity: gbifBiodiversityBySite.get(candidate.properties.site_id),
       ghslSettlement: ghslSettlementBySite.get(candidate.properties.site_id),
       waporWaterProductivity: waporWaterProductivityBySite.get(candidate.properties.site_id),
+      localResearchContext: localResearchContextBySite.get(candidate.properties.site_id),
       worldPop: worldPopBySite.get(candidate.properties.site_id),
       osmAccess: osmAccessBySite.get(candidate.properties.site_id),
     })
@@ -233,6 +239,7 @@ function buildFeature(candidate, index, extracts) {
   const profile = profiles[index % profiles.length];
   const properties = candidate.properties;
   const worldCoverFeature = extracts.worldCover;
+  const vegetationIndicesFeature = extracts.vegetationIndices;
   const srtmFeature = extracts.srtm;
   const gfwFeature = extracts.gfw;
   const chirpsFeature = extracts.chirps;
@@ -241,9 +248,11 @@ function buildFeature(candidate, index, extracts) {
   const gbifBiodiversityFeature = extracts.gbifBiodiversity;
   const ghslSettlementFeature = extracts.ghslSettlement;
   const waporWaterProductivityFeature = extracts.waporWaterProductivity;
+  const localResearchContextFeature = extracts.localResearchContext;
   const worldPopFeature = extracts.worldPop;
   const osmAccessFeature = extracts.osmAccess;
   const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
+  const hasVegetationIndices = ["source_derived", "partial_source_derived"].includes(vegetationIndicesFeature?.source_status);
   const hasSrtm = srtmFeature?.source_status === "source_derived";
   const hasGfw = gfwFeature?.source_status === "source_derived";
   const hasChirps = chirpsFeature?.source_status === "source_derived";
@@ -252,10 +261,20 @@ function buildFeature(candidate, index, extracts) {
   const hasGbifBiodiversity = gbifBiodiversityFeature?.source_status === "source_derived";
   const hasGhslSettlement = ghslSettlementFeature?.source_status === "source_derived";
   const hasWaporWaterProductivity = ["source_derived", "partial_source_derived"].includes(waporWaterProductivityFeature?.source_status);
+  const hasLocalResearchContext = localResearchContextFeature?.source_status === "context_derived";
   const hasWorldPop = worldPopFeature?.source_status === "source_derived";
   const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
   const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
   const landCoverMix = hasWorldCover ? worldCoverFeature.land_cover_mix : profile.land_cover_mix;
+  const ndviCurrent = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.ndvi_current)
+    ? vegetationIndicesFeature.ndvi_current
+    : profile.ndvi_current;
+  const ndviTrend5y = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.ndvi_trend_5y)
+    ? vegetationIndicesFeature.ndvi_trend_5y
+    : profile.ndvi_trend_5y;
+  const eviCurrent = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.evi_current)
+    ? vegetationIndicesFeature.evi_current
+    : profile.evi_current;
   const slopeMeanDeg = hasSrtm ? srtmFeature.slope_mean_deg : profile.slope_mean_deg;
   const slopeRiskScore = hasSrtm ? srtmFeature.slope_risk_score : profile.slope_risk_score;
   const forestLossScore = hasGfw && isFiniteNumber(gfwFeature.forest_loss_score)
@@ -295,6 +314,7 @@ function buildFeature(candidate, index, extracts) {
   const dataQualityScore = Math.min(100,
     58 +
     (hasWorldCover ? 10 : 0) +
+    (hasVegetationIndices ? 6 : 0) +
     (hasSrtm ? 8 : 0) +
     (hasGfw ? 8 : 0) +
     (hasChirps ? 8 : 0) +
@@ -308,6 +328,7 @@ function buildFeature(candidate, index, extracts) {
   );
   const sourceDerivedGroups = [
     hasWorldCover ? "land_cover" : null,
+    hasVegetationIndices ? "vegetation" : null,
     hasSrtm ? "terrain" : null,
     hasGfw ? "forest" : null,
     hasChirps ? "rainfall" : null,
@@ -316,6 +337,7 @@ function buildFeature(candidate, index, extracts) {
     hasGbifBiodiversity ? "biodiversity_observations" : null,
     hasGhslSettlement ? "settlement_context" : null,
     hasWaporWaterProductivity ? "water_productivity" : null,
+    hasLocalResearchContext ? "local_research_context" : null,
     hasWorldPop ? "population" : null,
     hasUsableOsmAccess ? "access" : null,
   ].filter(Boolean);
@@ -329,6 +351,9 @@ function buildFeature(candidate, index, extracts) {
     ...profile,
     land_cover_primary: landCoverPrimary,
     land_cover_mix: landCoverMix,
+    ndvi_current: ndviCurrent,
+    ndvi_trend_5y: ndviTrend5y,
+    evi_current: eviCurrent,
     rainfall_mean_mm: rainfallMeanMm,
     rainfall_reliability_score: rainfallReliabilityScore,
     slope_mean_deg: slopeMeanDeg,
@@ -361,6 +386,27 @@ function buildFeature(candidate, index, extracts) {
           }
         : {
             dataset_id: "esa_worldcover",
+            status: "not_extracted",
+          },
+      vegetation: vegetationIndicesFeature
+        ? {
+            dataset_id: "vegetation_indices",
+            status: vegetationIndicesFeature.source_status,
+            ndvi_current: vegetationIndicesFeature.ndvi_current,
+            evi_current: vegetationIndicesFeature.evi_current,
+            ndvi_trend_5y: vegetationIndicesFeature.ndvi_trend_5y,
+            sentinel2_scene_count: vegetationIndicesFeature.sentinel2_scene_count,
+            sentinel2_candidate_scene_count: vegetationIndicesFeature.sentinel2_candidate_scene_count,
+            sentinel2_valid_pixel_count_min: vegetationIndicesFeature.sentinel2_valid_pixel_count_min,
+            sentinel2_valid_pixel_count_max: vegetationIndicesFeature.sentinel2_valid_pixel_count_max,
+            sentinel2_scene_ids: vegetationIndicesFeature.sentinel2_scene_ids,
+            landsat_ndvi_by_year: vegetationIndicesFeature.landsat_ndvi_by_year,
+            landsat_scene_count_by_year: vegetationIndicesFeature.landsat_scene_count_by_year,
+            note: vegetationIndicesFeature.note,
+            trend_note: vegetationIndicesFeature.trend_note,
+          }
+        : {
+            dataset_id: "vegetation_indices",
             status: "not_extracted",
           },
       terrain: hasSrtm
@@ -518,6 +564,20 @@ function buildFeature(candidate, index, extracts) {
           }
         : {
             dataset_id: "wapor_water_productivity",
+            status: "not_extracted",
+          },
+      local_research_context: localResearchContextFeature
+        ? {
+            dataset_id: "local_research_context",
+            status: localResearchContextFeature.source_status,
+            matched_evidence_count: localResearchContextFeature.matched_evidence_count,
+            matched_sources: localResearchContextFeature.matched_sources,
+            match_types: localResearchContextFeature.match_types,
+            evidence_refs: localResearchContextFeature.evidence_refs,
+            scoring_policy: "context_only_no_score_override",
+          }
+        : {
+            dataset_id: "local_research_context",
             status: "not_extracted",
           },
       population: hasWorldPop
