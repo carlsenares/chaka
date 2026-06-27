@@ -1,0 +1,53 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+/* NGO decision-support theme: warm paper base, grounded greens, restrained blue accent.
+   These tokens auto-generate utilities (bg-base, text-accent, …) in Tailwind v4. */
+@theme {
+  --color-base: oklch(0.97 0.025 91);
+  --color-surface: oklch(0.995 0.008 95);
+  --color-fg: oklch(0.25 0.045 150);
+  --color-muted: oklch(0.47 0.028 128);
+  --color-accent: oklch(0.45 0.095 169);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+.leaflet-container {
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-sans);
+  background: #edf2e7;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.priority-map-tooltip {
+  border: 1px solid #d9d0bd;
+  border-radius: 6px;
+  box-shadow: 0 8px 22px rgb(71 59 47 / 0.14);
+  color: #243f32;
+  font-family: var(--font-sans);
+}
+
+.priority-boundary-active {
+  filter: drop-shadow(0 0 5px rgb(15 95 70 / 0.45));
+  transition: fill-opacity 180ms ease, stroke-width 180ms ease, filter 180ms ease;
+}
+
+.priority-boundary {
+  transition: fill-opacity 180ms ease, stroke-width 180ms ease;
+}
