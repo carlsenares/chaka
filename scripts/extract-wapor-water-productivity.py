@@ -139,10 +139,7 @@ def load_raster_index(product, years, raw_dir):
     if cache_path.exists() and cache_path.stat().st_size > 0:
         items = json.loads(cache_path.read_text())
     else:
-        payload = fetch_json(f"{API_BASE}/mapsets/{product['mapset']}/rasters?size=100&sort=code:desc")
-        items = payload["response"]["items"]
-        cache_path.parent.mkdir(parents=True, exist_ok=True)
-        cache_path.write_text(json.dumps(items, indent=2) + "\n")
+        items = fetch_raster_items(product, cache_path)
 
     by_year = {}
     for item in items:
@@ -151,8 +148,24 @@ def load_raster_index(product, years, raw_dir):
             by_year[year] = item
     missing = [year for year in years if year not in by_year]
     if missing:
+        items = fetch_raster_items(product, cache_path)
+        by_year = {}
+        for item in items:
+            year = raster_year(item)
+            if year in years:
+                by_year[year] = item
+        missing = [year for year in years if year not in by_year]
+    if missing:
         raise SystemExit(f"WaPOR {product['mapset']} is missing requested years: {missing}")
     return by_year
+
+
+def fetch_raster_items(product, cache_path):
+    payload = fetch_json(f"{API_BASE}/mapsets/{product['mapset']}/rasters?size=100&sort=code:desc")
+    items = payload["response"]["items"]
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(json.dumps(items, indent=2) + "\n")
+    return items
 
 
 def fetch_json(url):
@@ -184,6 +197,8 @@ def extract_feature(feature, rasters, product_metadata, years):
             if summary["status"] != "source_derived":
                 missing_products.append(f"{product['mapset']}:{year}:{summary['status']}")
                 yearly_values[str(year)] = None
+                product_valid_counts.append(0)
+                valid_counts.append(0)
                 continue
             yearly_values[str(year)] = summary["mean"]
             product_valid_counts.append(summary["valid_pixel_count"])
@@ -228,6 +243,8 @@ def extract_features(features, rasters, product_metadata, years):
                     if summary["status"] != "source_derived":
                         missing_by_site[site_id].append(f"{product['mapset']}:{year}:{summary['status']}")
                         field_by_year[str(year)] = None
+                        rows_by_site[site_id][f"{product['field']}_valid_counts"].append(0)
+                        valid_counts_by_site[site_id].append(0)
                         continue
                     field_by_year[str(year)] = summary["mean"]
                     rows_by_site[site_id][f"{product['field']}_valid_counts"].append(summary["valid_pixel_count"])

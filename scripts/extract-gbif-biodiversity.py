@@ -28,6 +28,10 @@ SOURCE_DERIVED_MIN_SPECIES = 5
 EXTRACTOR_VERSION = "0.1.0"
 
 
+class UpstreamUnavailableError(RuntimeError):
+    pass
+
+
 def main():
     args = parse_args()
     candidates_text = args.candidates.read_text()
@@ -56,9 +60,12 @@ def main():
         try:
             raw_records, unfiltered_count, query_meta = fetch_site_records(feature, args, run_date)
             rows.append(summarize_site(feature, raw_records, unfiltered_count, query_meta, args))
-        except Exception as exc:
+        except UpstreamUnavailableError as exc:
             failures.append({"site_id": site_id, "error": f"{type(exc).__name__}: {exc}"})
             rows.append(blocked_feature(site_id, feature["properties"]["area_ha"], "blocked_source_unavailable"))
+        except Exception as exc:
+            failures.append({"site_id": site_id, "error": f"{type(exc).__name__}: {exc}"})
+            rows.append(blocked_feature(site_id, feature["properties"]["area_ha"], "source_error"))
         if index < len(features) - 1:
             time.sleep(args.throttle_seconds)
 
@@ -81,8 +88,8 @@ def main():
         }
 
     args.output.write_text(json.dumps(output, indent=2) + "\n")
-    if failures and len(failures) == len(features):
-        raise SystemExit(f"Blocked: all GBIF searches failed. Wrote {relative_path(args.output)}")
+    if failures:
+        raise SystemExit(f"Blocked: {len(failures)} GBIF searches failed. Wrote {relative_path(args.output)}")
     print(f"Wrote {relative_path(args.output)}")
 
 
@@ -135,12 +142,13 @@ def fetch_site_records(feature, args, run_date):
     while True:
         if offset >= args.max_records_per_site:
             raise RuntimeError(f"GBIF search exceeded max records per site ({args.max_records_per_site}); use async download mode")
-        page_params = {**params, "limit": args.page_limit, "offset": offset}
+        page_limit = min(args.page_limit, args.max_records_per_site - offset)
+        page_params = {**params, "limit": page_limit, "offset": offset}
         payload = fetch_json(page_params, args)
         records.extend(payload.get("results", []))
         if payload.get("endOfRecords", True):
             break
-        offset += args.page_limit
+        offset += page_limit
     return records, unfiltered_count, query_meta
 
 
@@ -169,13 +177,15 @@ def fetch_json(params, args):
             (cache_dir / "manifest.json").write_text(json.dumps({"url": url, "retrieved_at_utc": dt.datetime.now(dt.timezone.utc).isoformat()}, indent=2) + "\n")
             return payload
         except urllib.error.HTTPError as exc:
-            if exc.code not in (429, 500, 502, 503, 504) or attempt == args.retry_count - 1:
+            if exc.code in (429, 500, 502, 503, 504) and attempt == args.retry_count - 1:
+                raise UpstreamUnavailableError(f"GBIF HTTP {exc.code}") from exc
+            if exc.code not in (429, 500, 502, 503, 504):
                 raise
-        except urllib.error.URLError:
+        except urllib.error.URLError as exc:
             if attempt == args.retry_count - 1:
-                raise
+                raise UpstreamUnavailableError(str(exc.reason)) from exc
         time.sleep(2 ** attempt)
-    raise RuntimeError("GBIF request failed after retries")
+    raise UpstreamUnavailableError("GBIF request failed after retries")
 
 
 def build_url(params):
@@ -206,7 +216,11 @@ def summarize_site(feature, records, unfiltered_count, query_meta, args):
     eod_species = {record.get("speciesKey") for record in eod_records if record.get("speciesKey")}
     bale_plant_records = [record for record in records if record.get("datasetKey") == BALE_PLANTS_DATASET_KEY]
     bale_plant_species = {record.get("speciesKey") for record in bale_plant_records if record.get("speciesKey")}
-    plant_species = {record.get("speciesKey") for record in records if record.get("kingdomKey") == 6 or record.get("kingdom") == "Plantae"}
+    plant_species = {
+        record.get("speciesKey")
+        for record in records
+        if record.get("speciesKey") and (record.get("kingdomKey") == 6 or record.get("kingdom") == "Plantae")
+    }
     threatened_records = [record for record in records if threat_rank(record.get("iucnRedListCategory")) >= threat_rank("NT")]
     recent_records = [record for record in records if is_recent(record.get("eventDate"))]
     uncertainties = [float(record["coordinateUncertaintyInMeters"]) for record in records if is_number(record.get("coordinateUncertaintyInMeters"))]
@@ -323,10 +337,18 @@ def is_recent(event_date):
     if not event_date:
         return False
     try:
-        year = int(str(event_date)[:4])
+        observed = dt.date.fromisoformat(str(event_date)[:10])
     except ValueError:
-        return False
-    return year >= dt.date.today().year - 5
+        try:
+            observed = dt.date(int(str(event_date)[:4]), 1, 1)
+        except ValueError:
+            return False
+    today = dt.date.today()
+    try:
+        cutoff = today.replace(year=today.year - 5)
+    except ValueError:
+        cutoff = today.replace(month=2, day=28, year=today.year - 5)
+    return observed >= cutoff
 
 
 def threat_rank(category):

@@ -4,6 +4,7 @@ import argparse
 import json
 import shutil
 import sys
+import urllib.parse
 import urllib.request
 import zipfile
 from collections import Counter
@@ -28,6 +29,7 @@ DEFAULT_URL = (
     "GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.zip"
 )
 DEFAULT_TIF = "GHS_SMOD_E2020_GLOBE_R2023A_54009_1000_V1_0.tif"
+ALLOWED_DOWNLOAD_HOSTS = {"jeodpp.jrc.ec.europa.eu"}
 
 CLASS_LABELS = {
     10: "water",
@@ -75,6 +77,7 @@ def parse_args():
     parser.add_argument("--tif-member", default=DEFAULT_TIF)
     parser.add_argument("--year", type=int, default=DEFAULT_YEAR)
     parser.add_argument("--version", default=DEFAULT_VERSION)
+    parser.add_argument("--allow-unsafe-url", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -97,20 +100,34 @@ def print_plan(args, candidates):
 def ensure_zip(args):
     zip_path = args.raw_dir / args.zip_name
     if zip_path.exists() and zip_path.stat().st_size > 0:
-        validate_zip(zip_path, args.tif_member)
+        tif_member = find_tif_member(zip_path, args.tif_member)
+        validate_zip(zip_path, tif_member)
         return zip_path
 
+    validate_download_url(args.url, args.allow_unsafe_url)
     print(f"Downloading {args.url}", file=sys.stderr)
     temp_path = zip_path.with_name(f"{zip_path.stem}.tmp{zip_path.suffix}")
     try:
         with urllib.request.urlopen(args.url, timeout=90) as response, temp_path.open("wb") as target:
             shutil.copyfileobj(response, target)
-        validate_zip(temp_path, args.tif_member)
+        tif_member = find_tif_member(temp_path, args.tif_member)
+        validate_zip(temp_path, tif_member)
         temp_path.replace(zip_path)
     finally:
         if temp_path.exists():
             temp_path.unlink()
     return zip_path
+
+
+def validate_download_url(url, allow_unsafe_url):
+    if allow_unsafe_url:
+        return
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in ALLOWED_DOWNLOAD_HOSTS:
+        raise SystemExit(
+            "Refusing non-official GHSL download URL. "
+            "Use the default JRC URL or pass --allow-unsafe-url for a manually verified mirror."
+        )
 
 
 def validate_zip(zip_path, tif_member):

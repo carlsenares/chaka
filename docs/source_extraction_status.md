@@ -243,8 +243,10 @@ when those GBIF dataset keys appear in candidate polygons.
 GBIF rows are embedded under `source_extracts.biodiversity_observations`.
 They are biodiversity observation context only. Sparse or missing records mean
 the source has insufficient local observations for this polygon, not that the
-site has low biodiversity. The current PR does not change the rule-based ranker
-or top-level feature fields from GBIF.
+site has low biodiversity. The current PR does not give GBIF a direct ranker
+weight and does not override top-level feature values from GBIF; GBIF can still
+appear in source provenance, quality/context groups, and the per-site source
+payload.
 
 Current GBIF-derived artifact coverage:
 

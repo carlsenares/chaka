@@ -71,5 +71,7 @@ Suggested row shape:
 }
 ```
 
-Do not let this artifact affect priority scores until the scoring role is
-reviewed explicitly.
+Do not let this artifact affect priority scores until a separate reviewed
+scoring decision explicitly promotes specific source facts into a scoring
+feature with geography, date, units, extraction method, citation, and QA
+recorded in the source artifact.

@@ -112,6 +112,16 @@ async function loadOptionalExtractBySite(filePath) {
     if (!Array.isArray(extract.features)) {
       throw new Error("missing features array");
     }
+    const seenIds = new Set();
+    for (const feature of extract.features) {
+      if (!feature || typeof feature.site_id !== "string" || feature.site_id.length === 0) {
+        throw new Error("feature row missing site_id");
+      }
+      if (seenIds.has(feature.site_id)) {
+        throw new Error(`duplicate site_id ${feature.site_id}`);
+      }
+      seenIds.add(feature.site_id);
+    }
     return new Map(extract.features.map((feature) => [feature.site_id, feature]));
   } catch (error) {
     throw new Error(`Could not read optional source extract ${path.relative(root, filePath)}: ${error.message}`);
@@ -424,7 +434,7 @@ function validateGbifBiodiversitySync(row, gbifBiodiversity) {
     return;
   }
 
-  const validStatuses = new Set(["source_derived", "insufficient_records", "blocked_source_unavailable", "not_processed_limit"]);
+  const validStatuses = new Set(["source_derived", "insufficient_records", "blocked_source_unavailable", "source_error", "not_processed_limit"]);
   if (!validStatuses.has(gbifBiodiversity.source_status)) {
     addError(`gbif biodiversity ${row.site_id}: invalid source_status`);
   }
@@ -539,8 +549,12 @@ function validateGhslSettlementSync(row, ghslSettlement) {
   if (!isPlainObject(ghslSettlement.ghsl_smod_class_fractions)) {
     addError(`ghsl settlement ${row.site_id}: ghsl_smod_class_fractions must be an object`);
   } else if (Object.keys(ghslSettlement.ghsl_smod_class_fractions).length > 0) {
-    const total = Object.values(ghslSettlement.ghsl_smod_class_fractions).reduce((sum, value) => sum + Number(value), 0);
-    if (Math.abs(total - 1) > 0.01) addError(`ghsl settlement ${row.site_id}: class fractions must sum to 1`);
+    const values = Object.values(ghslSettlement.ghsl_smod_class_fractions);
+    for (const value of values) {
+      if (!isUnitFraction(value)) addError(`ghsl settlement ${row.site_id}: class fractions must be finite 0-1 values`);
+    }
+    const total = values.reduce((sum, value) => sum + Number(value), 0);
+    if (Number.isFinite(total) && Math.abs(total - 1) > 0.01) addError(`ghsl settlement ${row.site_id}: class fractions must sum to 1`);
   }
 
   for (const field of [
@@ -633,7 +647,18 @@ function validateWaporWaterProductivitySync(row, waporWaterProductivity) {
   if (waporWaterProductivity.wapor_productivity_context_score !== null && !isScore(waporWaterProductivity.wapor_productivity_context_score)) {
     addError(`wapor ${row.site_id}: wapor_productivity_context_score must be null or 0-100`);
   }
-  for (const field of ["wapor_valid_pixel_count_min", "wapor_valid_pixel_count_max"]) {
+  for (const field of [
+    "wapor_aeti_mm_valid_pixel_count_min",
+    "wapor_aeti_mm_valid_pixel_count_max",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_min",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_max",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_valid_pixel_count_min",
+    "wapor_valid_pixel_count_max",
+  ]) {
     if (!Number.isInteger(Number(waporWaterProductivity[field])) || Number(waporWaterProductivity[field]) < 0) {
       addError(`wapor ${row.site_id}: ${field} must be a nonnegative integer`);
     }
@@ -655,6 +680,14 @@ function validateWaporWaterProductivitySync(row, waporWaterProductivity) {
     "wapor_gross_biomass_water_productivity_mean_kg_m3",
     "wapor_net_biomass_water_productivity_mean_kg_m3",
     "wapor_productivity_context_score",
+    "wapor_aeti_mm_valid_pixel_count_min",
+    "wapor_aeti_mm_valid_pixel_count_max",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_min",
+    "wapor_total_biomass_production_kg_ha_valid_pixel_count_max",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min",
+    "wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max",
     "wapor_valid_pixel_count_min",
     "wapor_valid_pixel_count_max",
   ]) {
