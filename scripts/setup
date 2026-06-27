@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Agent-agnostic setup. Installs shared skills + design deps and writes the MCP
+# config for whichever harness is detected. Idempotent — safe to re-run.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "==> Detecting harness…"
+HARNESS="unknown"
+if [ -n "${CLAUDECODE:-}" ] || [ -d ".claude" ]; then HARNESS="claude"; fi
+if [ -d ".codex" ] || [ -f "$HOME/.codex/config.toml" ]; then HARNESS="codex"; fi
+echo "    harness: $HARNESS"
+
+echo "==> Installing cross-agent skills…"
+# These ship their own multi-agent installers (Claude Code, Codex, Cursor, …).
+npx --yes skills add frontend-design web-interface-guidelines playwright 2>/dev/null \
+  || echo "    (skills CLI not available — install skills manually, see DESIGN.md)"
+npx --yes impeccable install 2>/dev/null \
+  || echo "    (impeccable not installed — run: npx impeccable install)"
+
+echo "==> Installing design deps…"
+if [ -f package.json ]; then
+  npm i framer-motion animejs lucide-react next-themes >/dev/null 2>&1 || true
+  npx --yes shadcn@latest init -y >/dev/null 2>&1 || true
+else
+  echo "    (no package.json yet — deps install once the Next.js app exists)"
+fi
+
+echo "==> Writing MCP config for: $HARNESS"
+case "$HARNESS" in
+  claude) echo "    Claude Code uses .mcp.json — add servers with: claude mcp add" ;;
+  codex)  echo "    Codex uses ~/.codex/config.toml [mcp_servers] — add servers there" ;;
+  *)      echo "    Unknown harness — configure MCP manually per your tool's docs" ;;
+esac
+
+echo "==> Done. Next: read AGENTS.md, run the kickoff audit, then build."

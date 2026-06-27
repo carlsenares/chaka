@@ -1,0 +1,13 @@
+# App container for a hackathon project. Publishes on a host port that the
+# shared insureai_nginx gateway proxies to via 172.18.0.1:${PORT}.
+services:
+  app:
+    build: .
+    container_name: ${APP_NAME:-hackapp}
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      # bind to the insureai bridge gateway so nginx (on that network) can reach
+      # it, while staying off the public interface. Matches the arestoteles pattern.
+      - "${NGINX_GATEWAY:-172.18.0.1}:${PORT:-5190}:3000"

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Server deploy onto the shared insureai_nginx gateway. Additive & idempotent.
+# Existing ares vhosts are never touched. Run ON the box (CI SSHes in to run it).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+# --- config -----------------------------------------------------------------
+[ -f .env.deploy ] && set -a && . ./.env.deploy && set +a
+: "${APP_NAME:?set APP_NAME in .env.deploy}"
+: "${DOMAIN:?set DOMAIN in .env.deploy}"
+: "${PORT:?set PORT in .env.deploy}"
+
+NGINX_CONTAINER="insureai_nginx"
+CERTBOT_CONTAINER="insureai_certbot"
+CONF_DIR="/root/insureai/InsureAI/backend/nginx/conf.d"
+VHOST="$CONF_DIR/${APP_NAME}.conf"
+
+echo "==> [1/5] Building & starting app container ($APP_NAME → 127.0.0.1:$PORT)"
+docker compose up -d --build
+
+reload_nginx() { docker exec "$NGINX_CONTAINER" nginx -t && docker exec "$NGINX_CONTAINER" nginx -s reload; }
+
+# --- 2. HTTP-only vhost so certbot can solve the ACME challenge --------------
+echo "==> [2/5] Installing HTTP challenge vhost"
+cat > "$VHOST" <<EOF
+# ${APP_NAME} — hackathon deploy (additive vhost, do not touch ares vhosts)
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ${DOMAIN};
+    location /.well-known/acme-challenge/ { root /var/www/certbot; }
+    location / { return 301 https://\$host\$request_uri; }
+}
+EOF
+reload_nginx
+
+# --- 3. Issue cert (skip if present) ----------------------------------------
+echo "==> [3/5] Ensuring TLS cert for $DOMAIN"
+if docker exec "$CERTBOT_CONTAINER" test -d "/etc/letsencrypt/live/${DOMAIN}"; then
+  echo "    cert already exists — skipping issuance"
+else
+  docker exec "$CERTBOT_CONTAINER" certbot certonly --webroot -w /var/www/certbot \
+    -d "${DOMAIN}" --non-interactive --agree-tos --register-unsafely-without-email
+fi
+
+# --- 4. Full HTTPS vhost ----------------------------------------------------
+echo "==> [4/5] Installing HTTPS vhost"
+sed -e "s/{{DOMAIN}}/${DOMAIN}/g" \
+    -e "s/{{APP_NAME}}/${APP_NAME}/g" \
+    -e "s/{{PORT}}/${PORT}/g" \
+    nginx/vhost.conf.template > "$VHOST"
+
+# --- 5. Reload --------------------------------------------------------------
+echo "==> [5/5] Reloading nginx"
+reload_nginx
+echo "==> Live: https://${DOMAIN}"

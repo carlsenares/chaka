@@ -1,0 +1,21 @@
+# secrets
+.env
+.env.deploy
+.env*.local
+
+# node / next
+node_modules/
+.next/
+out/
+dist/
+*.log
+npm-debug.log*
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/
+
+# local box config (init-deploy reads this; never commit)
+.config/
+deploy.env

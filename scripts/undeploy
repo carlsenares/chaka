@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Reverse scripts/deploy: stop the app container, remove its vhost, reload nginx.
+# Additive-safe — only touches this app's container + vhost. Cert is left in place
+# (harmless, auto-renews). Pass --rm-cert to also delete the cert.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+[ -f .env.deploy ] && set -a && . ./.env.deploy && set +a
+: "${APP_NAME:?set APP_NAME in .env.deploy}"
+: "${DOMAIN:?set DOMAIN in .env.deploy}"
+
+NGINX_CONTAINER="insureai_nginx"
+CERTBOT_CONTAINER="insureai_certbot"
+CONF_DIR="/root/insureai/InsureAI/backend/nginx/conf.d"
+
+echo "==> Stopping app container ($APP_NAME)"
+docker compose down || true
+
+echo "==> Removing vhost ${APP_NAME}.conf"
+rm -f "$CONF_DIR/${APP_NAME}.conf"
+docker exec "$NGINX_CONTAINER" nginx -t && docker exec "$NGINX_CONTAINER" nginx -s reload
+
+if [ "${1:-}" = "--rm-cert" ]; then
+  echo "==> Deleting cert for $DOMAIN"
+  docker exec "$CERTBOT_CONTAINER" certbot delete --cert-name "${DOMAIN}" --non-interactive || true
+fi
+
+echo "==> Torn down: ${APP_NAME}"

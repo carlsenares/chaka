@@ -1,0 +1,27 @@
+{
+  "//": "OPT-IN hackathon autonomy. Activate per repo: `mv .claude/settings.json.example .claude/settings.json`. acceptEdits auto-accepts file edits IN THIS REPO ONLY; the allowlist runs common dev commands without prompting. Review before enabling — it widens what runs without asking.",
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(sed:*)",
+      "Bash(curl:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(pnpm:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(docker:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(./scripts/setup:*)",
+      "Bash(./scripts/init-deploy:*)",
+      "Bash(./scripts/deploy:*)",
+      "Bash(./scripts/tunnel:*)"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+# Push to main → SSH into the box → run ./scripts/deploy.
+# Gives the team Vercel-style push-to-live WITHOUT anyone getting server access.
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   SSH_HOST   — server IP / hostname
+#   SSH_USER   — deploy user (scoped; ideally can only run scripts/deploy)
+#   SSH_KEY    — private key for that user
+#   DEPLOY_DIR — absolute path to the checked-out repo on the box
+#
+# Hardening option: replace SSH with a self-hosted runner on the box (no inbound
+# SSH, no key in GitHub). See DEPLOY.md.
+name: deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Skip cleanly when the repo has no deploy target configured (e.g. the
+      # template itself, or a fresh clone before scripts/init-deploy runs).
+      # Without this the SSH step fails on every push and spams failure emails.
+      - name: Check deploy config
+        id: gate
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          if [ -z "$SSH_HOST" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No SSH_HOST secret set — skipping deploy (run scripts/init-deploy to configure)."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy over SSH
+        if: steps.gate.outputs.configured == 'true'
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.DEPLOY_DIR }}
+            git pull --ff-only
+            ./scripts/deploy

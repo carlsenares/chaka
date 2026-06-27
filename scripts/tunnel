@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Dev-only: expose localhost over a public HTTPS URL so external services
+# (webhooks, mobile testing) can reach your machine before you deploy.
+set -euo pipefail
+PORT="${1:-3000}"
+echo "==> Tunneling https → localhost:$PORT (Ctrl-C to stop)"
+if command -v cloudflared >/dev/null 2>&1; then
+  cloudflared tunnel --url "http://localhost:$PORT"
+else
+  echo "cloudflared not found. Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/"
+  echo "Or use ngrok: ngrok http $PORT"
+  exit 1
+fi

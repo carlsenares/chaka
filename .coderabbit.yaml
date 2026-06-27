@@ -1,0 +1,18 @@
+# CodeRabbit — automated AI PR review. Less ship-error risk for zero effort.
+# Pairs with the push→main auto-deploy: review on the PR, ship on merge.
+# Docs: https://docs.coderabbit.ai/
+language: en-US
+reviews:
+  profile: chill            # hackathon pace — signal over nitpicks
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!**/*.lock"
+    - "!**/.next/**"
+    - "!**/node_modules/**"
+chat:
+  auto_reply: true

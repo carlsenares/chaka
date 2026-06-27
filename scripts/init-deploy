@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# One-shot: set the 4 GitHub Actions deploy secrets on a hackathon repo.
+# Usage: ./scripts/init-deploy <owner/repo> [deploy-dir]
+#
+# Box-specific values live OUTSIDE git so every repo made from this template is
+# safe to make public. Provide them via env, or once in a gitignored local file
+# (default ~/.config/ares/deploy.env), e.g.:
+#   SSH_HOST=1.2.3.4
+#   SSH_USER=root
+#   SSH_KEY_FILE=~/.ssh/ci_deploy
+# See DEPLOY.md.
+set -euo pipefail
+
+# Load local box config if present (gitignored — never committed).
+DEPLOY_ENV="${DEPLOY_ENV:-$HOME/.config/ares/deploy.env}"
+# shellcheck disable=SC1090
+[ -f "$DEPLOY_ENV" ] && . "$DEPLOY_ENV"
+
+REPO="${1:?usage: ./scripts/init-deploy <owner/repo> [deploy-dir]}"
+SSH_HOST="${SSH_HOST:?set SSH_HOST (env, or $DEPLOY_ENV) — the deploy box IP/host; see DEPLOY.md}"
+SSH_USER="${SSH_USER:-root}"
+SSH_KEY_FILE="${SSH_KEY_FILE:-$HOME/.ssh/ci_deploy}"
+DEPLOY_DIR="${2:-/root/deploys/${REPO##*/}}"
+
+[ -f "$SSH_KEY_FILE" ] || { echo "CI key not found at $SSH_KEY_FILE — see DEPLOY.md one-time setup"; exit 1; }
+
+echo "==> Setting deploy secrets on $REPO"
+gh secret set SSH_HOST   -R "$REPO" -b "$SSH_HOST"
+gh secret set SSH_USER   -R "$REPO" -b "$SSH_USER"
+gh secret set SSH_KEY    -R "$REPO" < "$SSH_KEY_FILE"
+gh secret set DEPLOY_DIR -R "$REPO" -b "$DEPLOY_DIR"
+echo "==> Done. $REPO deploys to $DEPLOY_DIR on push to main."
