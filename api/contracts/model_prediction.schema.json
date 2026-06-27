@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/api/contracts/model_prediction.schema.json",
+  "title": "ModelPrediction",
+  "description": "Suitability ranker output from the model layer, read by Chirag's reasoning layer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "model_version",
+    "priority_score",
+    "carbon_potential",
+    "biodiversity_benefit",
+    "livelihood_benefit",
+    "water_soil_benefit",
+    "implementation_feasibility",
+    "risk_level",
+    "recommended_intervention_seed",
+    "top_feature_contributions",
+    "prediction_quality"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[0-9]{3}$"
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "priority_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "carbon_potential": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "biodiversity_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "livelihood_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "water_soil_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "implementation_feasibility": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "risk_level": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "recommended_intervention_seed": {
+      "$ref": "#/$defs/interventionCode"
+    },
+    "top_feature_contributions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "feature",
+          "direction",
+          "weight"
+        ],
+        "properties": {
+          "feature": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "positive",
+              "negative"
+            ]
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "prediction_quality": {
+      "type": "string",
+      "enum": [
+        "expert_labeled",
+        "atlas_labeled",
+        "weak_supervised_demo",
+        "rule_based_fallback"
+      ]
+    }
+  },
+  "$defs": {
+    "benefitLabel": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "interventionCode": {
+      "type": "string",
+      "enum": [
+        "fmnr_agroforestry",
+        "assisted_natural_regeneration",
+        "riparian_restoration",
+        "native_tree_planting",
+        "erosion_control_exclosures",
+        "field_validation_before_investment"
+      ]
+    }
+  }
+}

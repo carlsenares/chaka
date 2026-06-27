@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/api/contracts/site_feature.schema.json",
+  "title": "SiteFeature",
+  "description": "Canonical flat feature object produced by the data layer and consumed by Chirag's reasoning layer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "region",
+    "area_ha",
+    "land_cover_primary",
+    "ndvi_current",
+    "ndvi_trend_5y",
+    "rainfall_reliability_score",
+    "slope_risk_score",
+    "soil_organic_carbon_score",
+    "population_pressure_score",
+    "road_access_score",
+    "protected_area_overlap_pct",
+    "safeguard_risk_score",
+    "data_quality_score",
+    "field_validation_required"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[0-9]{3}$",
+      "description": "Stable cross-layer site ID, for example SWE-001 or SET-001."
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1
+    },
+    "zone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": "Unknown"
+    },
+    "woreda": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": "Unknown"
+    },
+    "area_ha": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "candidate_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geometry_quality": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "real_boundary",
+        "derived_grid",
+        "mock_demo",
+        null
+      ]
+    },
+    "land_cover_primary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary land-cover class or null when unavailable."
+    },
+    "land_cover_mix": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tree_cover": {
+          "$ref": "#/$defs/proportionOrNull"
+        },
+        "cropland": {
+          "$ref": "#/$defs/proportionOrNull"
+        },
+        "grassland": {
+          "$ref": "#/$defs/proportionOrNull"
+        },
+        "built_up": {
+          "$ref": "#/$defs/proportionOrNull"
+        },
+        "water": {
+          "$ref": "#/$defs/proportionOrNull"
+        },
+        "other": {
+          "$ref": "#/$defs/proportionOrNull"
+        }
+      }
+    },
+    "ndvi_current": {
+      "$ref": "#/$defs/indexValueOrNull"
+    },
+    "ndvi_trend_5y": {
+      "$ref": "#/$defs/indexDeltaOrNull"
+    },
+    "evi_current": {
+      "$ref": "#/$defs/indexValueOrNull"
+    },
+    "forest_loss_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "tree_cover_context_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "rainfall_mean_mm": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "rainfall_reliability_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "slope_mean_deg": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 90
+    },
+    "slope_risk_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "soil_organic_carbon_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "soil_ph_suitability_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "population_pressure_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "road_access_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "settlement_proximity_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "protected_area_overlap_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "safeguard_risk_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "data_quality_score": {
+      "$ref": "#/$defs/scoreOrNull"
+    },
+    "field_validation_required": {
+      "type": "boolean"
+    },
+    "feature_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_quality_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Optional field-level source references keyed by feature name."
+    }
+  },
+  "$defs": {
+    "scoreOrNull": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "proportionOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "indexValueOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -1,
+      "maximum": 1
+    },
+    "indexDeltaOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -1,
+      "maximum": 1
+    }
+  }
+}

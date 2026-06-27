@@ -1,0 +1,156 @@
+{
+  "region": "All demo regions",
+  "generated_at": "2026-06-27T16:32:19.833Z",
+  "sites": [
+    {
+      "site_id": "SET-010",
+      "name": "Watershed Woreda",
+      "rank": 1,
+      "priority_score": 75,
+      "recommended_intervention": "FMNR + agroforestry",
+      "risk_level": "low",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "high",
+      "data_quality_score": 74,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-009",
+      "name": "Agroforestry Woreda",
+      "rank": 2,
+      "priority_score": 73,
+      "recommended_intervention": "FMNR + agroforestry",
+      "risk_level": "low",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "high",
+      "data_quality_score": 80,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-001",
+      "name": "Example Woreda",
+      "rank": 3,
+      "priority_score": 69,
+      "recommended_intervention": "FMNR + agroforestry",
+      "risk_level": "medium",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "high",
+      "data_quality_score": 73,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-004",
+      "name": "Forest Edge Woreda",
+      "rank": 4,
+      "priority_score": 69,
+      "recommended_intervention": "Native tree restoration",
+      "risk_level": "medium",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "medium",
+      "data_quality_score": 72,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-003",
+      "name": "River Buffer Woreda",
+      "rank": 5,
+      "priority_score": 65,
+      "recommended_intervention": "Riparian restoration",
+      "risk_level": "low",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "medium",
+      "data_quality_score": 78,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-002",
+      "name": "Hillside Woreda",
+      "rank": 6,
+      "priority_score": 62,
+      "recommended_intervention": "Assisted natural regeneration + soil and water conservation",
+      "risk_level": "medium",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "medium",
+      "data_quality_score": 71,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SET-007",
+      "name": "Carbon Candidate Woreda",
+      "rank": 7,
+      "priority_score": 61,
+      "recommended_intervention": "Field validation before investment",
+      "risk_level": "medium",
+      "carbon_potential": "high",
+      "livelihood_benefit": "medium",
+      "data_quality_score": 63,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SET-008",
+      "name": "Dryland Woreda",
+      "rank": 8,
+      "priority_score": 45,
+      "recommended_intervention": "Erosion control + exclosures",
+      "risk_level": "high",
+      "carbon_potential": "low",
+      "livelihood_benefit": "medium",
+      "data_quality_score": 68,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SET-005",
+      "name": "Settlement Edge Woreda",
+      "rank": 9,
+      "priority_score": 44,
+      "recommended_intervention": "Field validation before investment",
+      "risk_level": "high",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "high",
+      "data_quality_score": 70,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "site_id": "SWE-006",
+      "name": "Protected Buffer Woreda",
+      "rank": 10,
+      "priority_score": 29,
+      "recommended_intervention": "Field validation before investment",
+      "risk_level": "high",
+      "carbon_potential": "medium",
+      "livelihood_benefit": "low",
+      "data_quality_score": 61,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    }
+  ]
+}

@@ -8,19 +8,21 @@
     "data:aoi": "node scripts/aoi-boundary-builder.mjs",
     "data:candidates": "npm run data:aoi && node scripts/candidate-site-generator.mjs",
     "data:candidates:validate": "node scripts/validate-candidate-sites.mjs",
-    "dev": "next dev frontend --webpack",
-    "build": "next build frontend --webpack",
-    "start": "next start frontend"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
-    "next": "^16.2.9",
+    "animejs": "^4.5.0",
+    "framer-motion": "^12.42.0",
+    "lucide-react": "^1.21.0",
+    "next": "^15.3.0",
+    "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
-    "@types/leaflet": "^1.9.21",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
