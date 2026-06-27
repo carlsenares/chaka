@@ -12,6 +12,7 @@ const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
+const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -65,10 +66,11 @@ async function main() {
   const worldPopBySite = await loadOptionalExtractBySite(worldPopPath);
   const gfwBySite = await loadOptionalExtractBySite(gfwPath);
   const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
+  const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
   validateRows("feature", features, candidateIds, (row) =>
-    validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite, soilGridsBySite })
+    validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite, soilGridsBySite, soilObservationsBySite })
   );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
 
@@ -152,6 +154,7 @@ function validateFeature(row, extracts) {
   validateWorldPopSync(row, extracts.worldPopBySite.get(row.site_id));
   validateGfwSync(row, extracts.gfwBySite.get(row.site_id));
   validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
+  validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -299,6 +302,87 @@ function validateSoilGridsSync(row, soilGrids) {
   }
   if (!sameNullableNumber(soilGrids.soilgrids_ph_h2o_0_30cm_mean, integrated.soilgrids_ph_h2o_0_30cm_mean)) {
     addError(`feature ${row.site_id}: integrated SoilGrids pH mean is stale`);
+  }
+}
+
+function validateSoilObservationsSync(row, soilObservations) {
+  if (!soilObservations) {
+    if (row.source_extracts?.soil_observations?.status && row.source_extracts.soil_observations.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing soil_observations source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "partial_source_derived", "no_observations", "blocked_source_unavailable"]);
+  if (!validStatuses.has(soilObservations.source_status)) {
+    addError(`soil observations ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "soil_observation_count_total",
+    "soil_observation_count_wosis",
+    "soil_observation_count_afsis",
+    "soil_observation_profile_count",
+  ]) {
+    if (!Number.isInteger(Number(soilObservations[field])) || Number(soilObservations[field]) < 0) {
+      addError(`soil observations ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  if (!isScore(soilObservations.soil_observation_support_score)) {
+    addError(`soil observations ${row.site_id}: soil_observation_support_score must be 0-100`);
+  }
+  if (soilObservations.soil_observation_nearest_distance_km !== null) {
+    if (!isNonNegativeNumber(soilObservations.soil_observation_nearest_distance_km)) {
+      addError(`soil observations ${row.site_id}: nearest distance must be nonnegative`);
+    }
+    if (Number(soilObservations.soil_observation_nearest_distance_km) > Number(soilObservations.soil_observation_radius_km)) {
+      addError(`soil observations ${row.site_id}: nearest distance exceeds observation radius`);
+    }
+  }
+  if (soilObservations.observed_soc_0_30cm_g_kg_mean !== null) {
+    const value = Number(soilObservations.observed_soc_0_30cm_g_kg_mean);
+    if (!Number.isFinite(value) || value < 0 || value > 300) addError(`soil observations ${row.site_id}: SOC mean is implausible`);
+  }
+  if (soilObservations.observed_ph_h2o_0_30cm_mean !== null) {
+    const value = Number(soilObservations.observed_ph_h2o_0_30cm_mean);
+    if (!Number.isFinite(value) || value < 0 || value > 14) addError(`soil observations ${row.site_id}: pH mean must be 0-14`);
+  }
+  for (const field of ["observed_sand_pct_mean", "observed_silt_pct_mean", "observed_clay_pct_mean"]) {
+    if (soilObservations[field] !== null && !isScore(soilObservations[field])) {
+      addError(`soil observations ${row.site_id}: ${field} must be 0-100`);
+    }
+  }
+  const textureValues = ["observed_sand_pct_mean", "observed_silt_pct_mean", "observed_clay_pct_mean"]
+    .map((field) => soilObservations[field])
+    .filter((value) => value !== null && value !== undefined)
+    .map(Number);
+  if (textureValues.length === 3) {
+    const textureSum = textureValues.reduce((sum, value) => sum + value, 0);
+    if (Math.abs(textureSum - 100) > 10) addError(`soil observations ${row.site_id}: texture means should sum near 100`);
+  }
+
+  const integrated = row.source_extracts?.soil_observations;
+  if (!integrated || integrated.dataset_id !== "soil_observations") {
+    addError(`feature ${row.site_id}: missing integrated soil_observations source extract`);
+    return;
+  }
+
+  for (const field of [
+    "soil_observation_count_total",
+    "soil_observation_nearest_distance_km",
+    "observed_soc_0_30cm_g_kg_mean",
+    "observed_ph_h2o_0_30cm_mean",
+    "observed_sand_pct_mean",
+    "observed_silt_pct_mean",
+    "observed_clay_pct_mean",
+    "soil_observation_support_score",
+    "soilgrids_soc_delta_g_kg",
+    "soilgrids_ph_delta",
+  ]) {
+    if (!sameNullableNumber(soilObservations[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated soil_observations ${field} is stale`);
+    }
   }
 }
 

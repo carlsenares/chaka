@@ -10,6 +10,7 @@ const srtmPath = path.join(root, "data/features/source_extracts/srtm_terrain.jso
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
 const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfall.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
+const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const jsonPath = path.join(root, "data/features/site_features.json");
@@ -182,6 +183,7 @@ async function main() {
   const gfwBySite = await loadExtractBySite(gfwPath, { optional: true });
   const chirpsBySite = await loadExtractBySite(chirpsPath);
   const soilGridsBySite = await loadExtractBySite(soilGridsPath);
+  const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
   const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
   const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
@@ -191,6 +193,7 @@ async function main() {
       gfw: gfwBySite.get(candidate.properties.site_id),
       chirps: chirpsBySite.get(candidate.properties.site_id),
       soilGrids: soilGridsBySite.get(candidate.properties.site_id),
+      soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
       worldPop: worldPopBySite.get(candidate.properties.site_id),
       osmAccess: osmAccessBySite.get(candidate.properties.site_id),
     })
@@ -225,6 +228,7 @@ function buildFeature(candidate, index, extracts) {
   const gfwFeature = extracts.gfw;
   const chirpsFeature = extracts.chirps;
   const soilGridsFeature = extracts.soilGrids;
+  const soilObservationsFeature = extracts.soilObservations;
   const worldPopFeature = extracts.worldPop;
   const osmAccessFeature = extracts.osmAccess;
   const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
@@ -232,6 +236,7 @@ function buildFeature(candidate, index, extracts) {
   const hasGfw = gfwFeature?.source_status === "source_derived";
   const hasChirps = chirpsFeature?.source_status === "source_derived";
   const hasSoilGrids = soilGridsFeature?.source_status === "source_derived";
+  const hasSoilObservations = ["source_derived", "partial_source_derived"].includes(soilObservationsFeature?.source_status);
   const hasWorldPop = worldPopFeature?.source_status === "source_derived";
   const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
   const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
@@ -279,6 +284,7 @@ function buildFeature(candidate, index, extracts) {
     (hasGfw ? 8 : 0) +
     (hasChirps ? 8 : 0) +
     (hasSoilGrids ? 8 : 0) +
+    (hasSoilObservations && soilObservationsFeature.soil_observation_support_score >= 50 ? 3 : 0) +
     (hasWorldPop ? 6 : 0) +
     (hasUsableOsmAccess ? 4 : 0)
   );
@@ -288,6 +294,7 @@ function buildFeature(candidate, index, extracts) {
     hasGfw ? "forest" : null,
     hasChirps ? "rainfall" : null,
     hasSoilGrids ? "soil" : null,
+    hasSoilObservations ? "soil_observations" : null,
     hasWorldPop ? "population" : null,
     hasUsableOsmAccess ? "access" : null,
   ].filter(Boolean);
@@ -401,6 +408,30 @@ function buildFeature(candidate, index, extracts) {
         : {
             dataset_id: "soilgrids",
             status: soilGridsFeature?.source_status ?? "not_extracted",
+          },
+      soil_observations: soilObservationsFeature
+        ? {
+            dataset_id: "soil_observations",
+            status: soilObservationsFeature.source_status,
+            soil_observation_count_total: soilObservationsFeature.soil_observation_count_total,
+            soil_observation_count_wosis: soilObservationsFeature.soil_observation_count_wosis,
+            soil_observation_count_afsis: soilObservationsFeature.soil_observation_count_afsis,
+            soil_observation_profile_count: soilObservationsFeature.soil_observation_profile_count,
+            soil_observation_nearest_distance_km: soilObservationsFeature.soil_observation_nearest_distance_km,
+            soil_observation_radius_km: soilObservationsFeature.soil_observation_radius_km,
+            observed_soc_0_30cm_g_kg_mean: soilObservationsFeature.observed_soc_0_30cm_g_kg_mean,
+            observed_ph_h2o_0_30cm_mean: soilObservationsFeature.observed_ph_h2o_0_30cm_mean,
+            observed_sand_pct_mean: soilObservationsFeature.observed_sand_pct_mean,
+            observed_silt_pct_mean: soilObservationsFeature.observed_silt_pct_mean,
+            observed_clay_pct_mean: soilObservationsFeature.observed_clay_pct_mean,
+            soil_observation_support_score: soilObservationsFeature.soil_observation_support_score,
+            soilgrids_soc_delta_g_kg: soilObservationsFeature.soilgrids_soc_delta_g_kg,
+            soilgrids_ph_delta: soilObservationsFeature.soilgrids_ph_delta,
+            nearest_observations: soilObservationsFeature.nearest_observations,
+          }
+        : {
+            dataset_id: "soil_observations",
+            status: soilObservationsFeature?.source_status ?? "not_extracted",
           },
       population: hasWorldPop
         ? {

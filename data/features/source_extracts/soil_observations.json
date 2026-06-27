@@ -1,0 +1,573 @@
+{
+  "source": {
+    "dataset_id": "soil_observations",
+    "name": "WoSIS latest and AfSIS Phase I nearby soil observations",
+    "sources": {
+      "wosis_latest": {
+        "access_url_template": "https://maps.isric.org/mapserv?map=/map/wosis_latest.map&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME={layer}&OUTPUTFORMAT=geojson&BBOX={bbox}&MAXFEATURES=10000",
+        "layers": [
+          "wosis_latest_orgc",
+          "wosis_latest_phaq",
+          "wosis_latest_sand",
+          "wosis_latest_silt",
+          "wosis_latest_clay"
+        ]
+      },
+      "afsis_phase1": {
+        "access_urls": [
+          "https://afsis.s3.amazonaws.com/2009-2013/Georeferences/georeferences.csv",
+          "https://afsis.s3.amazonaws.com/2009-2013/Wet_Chemistry/ICRAF/Wet_Chemistry_ICRAF.csv",
+          "https://afsis.s3.amazonaws.com/2009-2013/Wet_Chemistry/CROPNUTS/Wet_Chemistry_CROPNUTS.csv",
+          "https://afsis.s3.amazonaws.com/2009-2013/Wet_Chemistry/RRES/Wet_Chemistry_RRES.csv"
+        ]
+      }
+    },
+    "observation_radius_km": 25.0,
+    "depth_target_cm": "0-30",
+    "raw_cache": "data/raw/soil_observations",
+    "extraction_method": "bounded point-observation lookup; distance-filtered candidate summaries using candidate centroids",
+    "note": "Nearby observations support SoilGrids interpretation but are not field validation of candidate sites."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SET-002",
+      "source_status": "source_derived",
+      "soil_observation_count_total": 10,
+      "soil_observation_count_wosis": 10,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 2,
+      "soil_observation_nearest_distance_km": 12.829,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": 4.75,
+      "observed_ph_h2o_0_30cm_mean": 7.6,
+      "observed_sand_pct_mean": 47.5,
+      "observed_silt_pct_mean": 20.0,
+      "observed_clay_pct_mean": 32.5,
+      "soil_observation_support_score": 43,
+      "soilgrids_soc_delta_g_kg": -12.683,
+      "soilgrids_ph_delta": 0.508,
+      "nearest_observations": [
+        {
+          "source": "wosis",
+          "source_id": "100730",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 12.829,
+          "lon": 36.49333,
+          "lat": 4.93389,
+          "fields": [
+            "orgc"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100730",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 12.829,
+          "lon": 36.49333,
+          "lat": 4.93389,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100730",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 12.829,
+          "lon": 36.49333,
+          "lat": 4.93389,
+          "fields": [
+            "sand"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100730",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 12.829,
+          "lon": 36.49333,
+          "lat": 4.93389,
+          "fields": [
+            "silt"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100730",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 12.829,
+          "lon": 36.49333,
+          "lat": 4.93389,
+          "fields": [
+            "clay"
+          ]
+        }
+      ]
+    },
+    {
+      "site_id": "SET-003",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SET-004",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SET-005",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SET-006",
+      "source_status": "source_derived",
+      "soil_observation_count_total": 8,
+      "soil_observation_count_wosis": 8,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 1,
+      "soil_observation_nearest_distance_km": 23.418,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": 7.3,
+      "observed_sand_pct_mean": 35.0,
+      "observed_silt_pct_mean": 10.0,
+      "observed_clay_pct_mean": 55.0,
+      "soil_observation_support_score": 15,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": 1.768,
+      "nearest_observations": [
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.418,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100540",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.418,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.418,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "sand"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100540",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.418,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "sand"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.418,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "silt"
+          ]
+        }
+      ]
+    },
+    {
+      "site_id": "SET-007",
+      "source_status": "source_derived",
+      "soil_observation_count_total": 8,
+      "soil_observation_count_wosis": 8,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 1,
+      "soil_observation_nearest_distance_km": 23.248,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": 7.3,
+      "observed_sand_pct_mean": 35.0,
+      "observed_silt_pct_mean": 10.0,
+      "observed_clay_pct_mean": 55.0,
+      "soil_observation_support_score": 15,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": 0.878,
+      "nearest_observations": [
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.248,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100540",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.248,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.248,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "sand"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100540",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.248,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "sand"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "100539",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 23.248,
+          "lon": 36.31389,
+          "lat": 6.42194,
+          "fields": [
+            "silt"
+          ]
+        }
+      ]
+    },
+    {
+      "site_id": "SET-008",
+      "source_status": "source_derived",
+      "soil_observation_count_total": 95,
+      "soil_observation_count_wosis": 95,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 10,
+      "soil_observation_nearest_distance_km": 9.882,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": 30.026,
+      "observed_ph_h2o_0_30cm_mean": 5.226,
+      "observed_sand_pct_mean": 36.895,
+      "observed_silt_pct_mean": 38.632,
+      "observed_clay_pct_mean": 24.474,
+      "soil_observation_support_score": 84,
+      "soilgrids_soc_delta_g_kg": 2.592,
+      "soilgrids_ph_delta": -0.349,
+      "nearest_observations": [
+        {
+          "source": "wosis",
+          "source_id": "102973",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 9.882,
+          "lon": 37.68761,
+          "lat": 7.07061,
+          "fields": [
+            "orgc"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "102974",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 9.882,
+          "lon": 37.68761,
+          "lat": 7.07061,
+          "fields": [
+            "orgc"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "102973",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 9.882,
+          "lon": 37.68761,
+          "lat": 7.07061,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "102974",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 9.882,
+          "lon": 37.68761,
+          "lat": 7.07061,
+          "fields": [
+            "ph_h2o"
+          ]
+        },
+        {
+          "source": "wosis",
+          "source_id": "102973",
+          "dataset_id": "AF-AfSP",
+          "distance_km": 9.882,
+          "lon": 37.68761,
+          "lat": 7.07061,
+          "fields": [
+            "sand"
+          ]
+        }
+      ]
+    },
+    {
+      "site_id": "SWE-001",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-002",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-003",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-004",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-005",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-006",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    },
+    {
+      "site_id": "SWE-007",
+      "source_status": "source_derived",
+      "soil_observation_count_total": 1,
+      "soil_observation_count_wosis": 1,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 1,
+      "soil_observation_nearest_distance_km": 17.31,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": 21.1,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 24,
+      "soilgrids_soc_delta_g_kg": -12.2,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": [
+        {
+          "source": "wosis",
+          "source_id": "3178374",
+          "dataset_id": "WD-NWAFU-SCS",
+          "distance_km": 17.31,
+          "lon": 36.11666,
+          "lat": 7.31667,
+          "fields": [
+            "orgc"
+          ]
+        }
+      ]
+    },
+    {
+      "site_id": "SWE-008",
+      "source_status": "no_observations",
+      "soil_observation_count_total": 0,
+      "soil_observation_count_wosis": 0,
+      "soil_observation_count_afsis": 0,
+      "soil_observation_profile_count": 0,
+      "soil_observation_nearest_distance_km": null,
+      "soil_observation_radius_km": 25.0,
+      "observed_soc_0_30cm_g_kg_mean": null,
+      "observed_ph_h2o_0_30cm_mean": null,
+      "observed_sand_pct_mean": null,
+      "observed_silt_pct_mean": null,
+      "observed_clay_pct_mean": null,
+      "soil_observation_support_score": 0,
+      "soilgrids_soc_delta_g_kg": null,
+      "soilgrids_ph_delta": null,
+      "nearest_observations": []
+    }
+  ]
+}

@@ -115,6 +115,48 @@ SoilGrids source access:
 https://files.isric.org/soilgrids/latest/data/
 ```
 
+Soil observation dry-run command:
+
+```bash
+npm run data:soilobs:dry-run
+```
+
+Soil observation command:
+
+```bash
+npm run data:soilobs
+```
+
+Soil observation script:
+
+```text
+scripts/extract-soil-observations.py
+```
+
+Soil observation output:
+
+```text
+data/features/source_extracts/soil_observations.json
+```
+
+Soil observation source access:
+
+```text
+WoSIS latest WFS layers: orgc, phaq, sand, silt, clay
+AfSIS Phase I public georeference and wet-chemistry CSVs
+```
+
+The observation lane summarizes nearby measured soil observations within 25 km
+of each candidate centroid. These values are embedded under
+`source_extracts.soil_observations` and support interpretation of SoilGrids; they
+do not overwrite `soil_organic_carbon_score` or `soil_ph_suitability_score`.
+
+Current soil-observation artifact coverage:
+
+- Nearby observations found for 5/16 candidate sites.
+- Current nearby matches are from WoSIS; AfSIS Phase I data fetched successfully but had no topsoil observations within the default 25 km candidate radius.
+- Observation rows are context/provenance only and do not change current priority scores.
+
 WorldPop population dry-run command:
 
 ```bash
