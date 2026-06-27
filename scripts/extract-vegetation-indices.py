@@ -40,6 +40,8 @@ def main():
         print_plan(args, candidates, features)
         return
 
+    guard_partial_canonical_output(args)
+
     rows = [extract_feature(feature, args) for feature in features]
     if args.limit or args.site_id:
         processed_ids = {row["site_id"] for row in rows}
@@ -100,7 +102,7 @@ def extract_feature(feature, args):
     site_id = feature["properties"]["site_id"]
     bbox = bbox_for_feature(feature)
     sentinel_items = search_sentinel_items(bbox, args)
-    sentinel_summaries = [summarize_sentinel_scene(feature, item) for item in sentinel_items]
+    sentinel_summaries = [summarize_sentinel_scene(feature, item, args.min_valid_pixels) for item in sentinel_items]
     sentinel_summaries = [summary for summary in sentinel_summaries if summary["source_status"] == "source_derived"]
 
     landsat_by_year = {}
@@ -112,7 +114,7 @@ def extract_feature(feature, args):
             items = search_landsat_items(bbox, year, args)
             summaries = []
             for item in items:
-                summary = summarize_landsat_scene(feature, item)
+                summary = summarize_landsat_scene(feature, item, args.min_valid_pixels)
                 if summary["source_status"] == "source_derived":
                     summaries.append(summary)
                 elif summary.get("error"):
@@ -137,7 +139,7 @@ def extract_feature(feature, args):
         "sentinel2_scene_ids": [summary["scene_id"] for summary in sentinel_summaries],
         "landsat_ndvi_by_year": landsat_by_year,
         "landsat_scene_count_by_year": landsat_scene_count_by_year,
-        "source_status": "source_derived" if ndvi_current is not None and evi_current is not None and trend is not None else "partial_source_derived",
+        "source_status": vegetation_source_status(ndvi_current, evi_current, trend),
     }
     if landsat_errors:
         row["landsat_errors"] = sorted(set(landsat_errors))[:8]
@@ -173,59 +175,51 @@ def search_landsat_items(bbox, year, args):
         },
         "sortby": [{"field": "properties.eo:cloud_cover", "direction": "asc"}],
     }
-    try:
-        items = post_json(PLANETARY_COMPUTER_SEARCH_URL, payload).get("features", [])
-    except requests.RequestException:
-        return []
+    items = post_json(PLANETARY_COMPUTER_SEARCH_URL, payload).get("features", [])
     return items[: args.max_landsat_scenes_per_year]
 
 
-def summarize_sentinel_scene(feature, item):
-    try:
-        red = read_masked_asset(feature, item["assets"]["red"]["href"])
-        nir = read_masked_asset(feature, item["assets"]["nir"]["href"])
-        blue = read_masked_asset(feature, item["assets"]["blue"]["href"])
-        valid = red["valid"] & nir["valid"] & blue["valid"]
-        if "scl" in item["assets"]:
-            scl = read_masked_asset(feature, item["assets"]["scl"]["href"], indexes=1)
-            if scl["data"].shape == red["data"].shape:
-                valid &= scl["valid"] & ~np.isin(scl["data"], list(SENTINEL_SCL_EXCLUDE))
-        red_reflectance = red["data"].astype("float64") / 10000.0
-        nir_reflectance = nir["data"].astype("float64") / 10000.0
-        blue_reflectance = blue["data"].astype("float64") / 10000.0
-        return summarize_indices(
-            item["id"],
-            red_reflectance,
-            nir_reflectance,
-            blue_reflectance,
-            valid,
-        )
-    except Exception as error:
-        return {"scene_id": item.get("id"), "source_status": "failed", "error": str(error)[:160]}
+def summarize_sentinel_scene(feature, item, min_valid_pixels):
+    red = read_masked_asset(feature, item["assets"]["red"]["href"])
+    nir = read_masked_asset(feature, item["assets"]["nir"]["href"])
+    blue = read_masked_asset(feature, item["assets"]["blue"]["href"])
+    valid = red["valid"] & nir["valid"] & blue["valid"]
+    if "scl" in item["assets"]:
+        scl = read_masked_asset(feature, item["assets"]["scl"]["href"], indexes=1)
+        if scl["data"].shape == red["data"].shape:
+            valid &= scl["valid"] & ~np.isin(scl["data"], list(SENTINEL_SCL_EXCLUDE))
+    red_reflectance = red["data"].astype("float64") / 10000.0
+    nir_reflectance = nir["data"].astype("float64") / 10000.0
+    blue_reflectance = blue["data"].astype("float64") / 10000.0
+    return summarize_indices(
+        item["id"],
+        red_reflectance,
+        nir_reflectance,
+        blue_reflectance,
+        valid,
+        min_valid_pixels,
+    )
 
 
-def summarize_landsat_scene(feature, item):
-    try:
-        assets = item["assets"]
-        red_href = sign_pc_href(assets["red"]["href"])
-        nir_href = sign_pc_href(assets["nir08"]["href"])
-        qa_href = sign_pc_href(assets["qa_pixel"]["href"])
-        red = read_masked_asset(feature, red_href)
-        nir = read_masked_asset(feature, nir_href)
-        qa = read_masked_asset(feature, qa_href)
-        valid = red["valid"] & nir["valid"] & qa["valid"] & qa_pixel_clear_mask(qa["data"])
-        red_reflectance = red["data"].astype("float64") * 0.0000275 - 0.2
-        nir_reflectance = nir["data"].astype("float64") * 0.0000275 - 0.2
-        return summarize_indices(item["id"], red_reflectance, nir_reflectance, None, valid)
-    except Exception as error:
-        return {"scene_id": item.get("id"), "source_status": "failed", "error": str(error)[:160]}
+def summarize_landsat_scene(feature, item, min_valid_pixels):
+    assets = item["assets"]
+    red_href = sign_pc_href(assets["red"]["href"])
+    nir_href = sign_pc_href(assets["nir08"]["href"])
+    qa_href = sign_pc_href(assets["qa_pixel"]["href"])
+    red = read_masked_asset(feature, red_href)
+    nir = read_masked_asset(feature, nir_href)
+    qa = read_masked_asset(feature, qa_href)
+    valid = red["valid"] & nir["valid"] & qa["valid"] & qa_pixel_clear_mask(qa["data"])
+    red_reflectance = red["data"].astype("float64") * 0.0000275 - 0.2
+    nir_reflectance = nir["data"].astype("float64") * 0.0000275 - 0.2
+    return summarize_indices(item["id"], red_reflectance, nir_reflectance, None, valid, min_valid_pixels)
 
 
-def summarize_indices(scene_id, red, nir, blue, valid):
+def summarize_indices(scene_id, red, nir, blue, valid, min_valid_pixels):
     reflectance_valid = valid & np.isfinite(red) & np.isfinite(nir) & (red > 0) & (nir > 0)
     ndvi = safe_divide(nir - red, nir + red)
     ndvi_valid = reflectance_valid & np.isfinite(ndvi) & (ndvi >= -1) & (ndvi <= 1)
-    if int(np.count_nonzero(ndvi_valid)) < 10:
+    if int(np.count_nonzero(ndvi_valid)) < min_valid_pixels:
         return {"scene_id": scene_id, "source_status": "insufficient_valid_pixels", "valid_pixel_count": int(np.count_nonzero(ndvi_valid))}
 
     summary = {
@@ -352,6 +346,25 @@ def not_processed_feature(site_id):
         "landsat_scene_count_by_year": {},
         "source_status": "not_processed_limit",
     }
+
+
+def vegetation_source_status(ndvi_current, evi_current, trend):
+    if ndvi_current is not None and evi_current is not None and trend is not None:
+        return "source_derived"
+    if ndvi_current is not None or evi_current is not None or trend is not None:
+        return "partial_source_derived"
+    return "no_valid_observations"
+
+
+def guard_partial_canonical_output(args):
+    if not (args.limit or args.site_id):
+        return
+    if args.output.resolve() != OUTPUT_PATH.resolve():
+        return
+    raise SystemExit(
+        "Refusing to overwrite the canonical vegetation extract during a partial run; "
+        "pass --output to write a debug artifact."
+    )
 
 
 def source_metadata(args):

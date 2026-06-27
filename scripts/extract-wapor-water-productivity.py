@@ -62,6 +62,8 @@ def main():
         print_plan(args, candidates, features, years)
         return
 
+    guard_partial_canonical_output(args)
+
     product_metadata = {key: load_product_metadata(product, args.raw_dir) for key, product in PRODUCTS.items()}
     rasters = {
         key: load_raster_index(product, years, args.raw_dir)
@@ -80,6 +82,17 @@ def main():
     }
     args.output.write_text(json.dumps(output, indent=2) + "\n")
     print(f"Wrote {relative_path(args.output)}")
+
+
+def guard_partial_canonical_output(args):
+    if not (args.limit or args.site_id):
+        return
+    if args.output.resolve() != OUTPUT_PATH.resolve():
+        return
+    raise SystemExit(
+        "Refusing to overwrite the canonical WaPOR extract during a partial run; "
+        "pass --output to write a debug artifact."
+    )
 
 
 def parse_args():

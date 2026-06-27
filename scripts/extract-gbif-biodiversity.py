@@ -52,6 +52,8 @@ def main():
         print_plan(args, candidates, features, run_date)
         return
 
+    guard_partial_canonical_output(args)
+
     rows = []
     failures = []
     for index, feature in enumerate(features):
@@ -91,6 +93,17 @@ def main():
     if failures:
         raise SystemExit(f"Blocked: {len(failures)} GBIF searches failed. Wrote {relative_path(args.output)}")
     print(f"Wrote {relative_path(args.output)}")
+
+
+def guard_partial_canonical_output(args):
+    if not (args.limit or args.site_id):
+        return
+    if args.output.resolve() != OUTPUT_PATH.resolve():
+        return
+    raise SystemExit(
+        "Refusing to overwrite the canonical GBIF extract during a partial run; "
+        "pass --output to write a debug artifact."
+    )
 
 
 def parse_args():

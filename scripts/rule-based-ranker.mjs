@@ -8,6 +8,7 @@ const featuresPath = path.join(root, "data/features/site_features.json");
 const predictionsPath = path.join(root, "models/artifacts/site_predictions.json");
 const reportPath = path.join(root, "models/reports/model_report.md");
 const schemaPath = path.join(root, "models/schemas/feature_schema.json");
+const modelVersion = "ranker_rule_based_v0.2";
 
 const weights = {
   carbon: 0.35,
@@ -84,7 +85,7 @@ function buildPrediction(feature) {
 
   return {
     site_id: feature.site_id,
-    model_version: "ranker_rule_based_v0.1",
+    model_version: modelVersion,
     priority_score: priorityScore,
     carbon_potential: label(carbonScore),
     biodiversity_benefit: label(biodiversityScore),
@@ -140,6 +141,10 @@ function biodiversityBenefitScore(feature) {
   const observationContext = biodiversityObservationContextScore(feature);
   const pressurePenalty = biodiversityPressurePenalty(feature);
 
+  if (observationContext === null) {
+    return clampScore(habitatBase * 0.6 + restorationUplift * 0.4 - pressurePenalty);
+  }
+
   return clampScore(habitatBase * 0.55 + restorationUplift * 0.35 + observationContext * 0.1 - pressurePenalty);
 }
 
@@ -164,7 +169,7 @@ function biodiversityObservationContextScore(feature) {
     return contextScore;
   }
 
-  return 50;
+  return null;
 }
 
 function biodiversityPressurePenalty(feature) {
@@ -260,6 +265,7 @@ function topContributions(feature, scores) {
   return contributions
     .sort((a, b) => contributionStrength(b) - contributionStrength(a))
     .slice(0, 3)
+    .sort((a, b) => b.weight - a.weight)
     .map(({ feature, direction, weight }) => ({ feature, direction, weight }));
 }
 

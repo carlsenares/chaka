@@ -37,7 +37,8 @@ Each extracted paper/report fact should become a small evidence card:
 ```json
 {
   "evidence_id": "local_research:wondimu_mamo:erosion_001",
-  "source_id": "Wondimu Mamo.pdf",
+  "source_id": "local_research_source:wondimu_mamo",
+  "filename": "Wondimu Mamo.pdf",
   "source_type": "local_thesis_or_report",
   "title": "Short source title",
   "year": 2020,

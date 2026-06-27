@@ -11,7 +11,8 @@ const isDryRun = process.argv.includes("--dry-run");
 const evidenceCards = [
   {
     evidence_id: "local_research:alemayehu_haile:gimbo_soil_management_001",
-    source_id: "Alemayehu Haile.pdf",
+    source_id: "local_research_source:alemayehu_haile",
+    filename: "Alemayehu Haile.pdf",
     source_type: "local_thesis_or_report",
     geography: {
       country: "Ethiopia",
@@ -33,7 +34,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:wondimu_mamo:western_ethiopia_lulc_erosion_001",
-    source_id: "Wondimu Mamo.pdf",
+    source_id: "local_research_source:wondimu_mamo",
+    filename: "Wondimu Mamo.pdf",
     source_type: "local_dissertation",
     geography: {
       country: "Ethiopia",
@@ -55,7 +57,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:nbsap:safeguard_policy_context_001",
-    source_id: "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+    source_id: "local_research_source:ethiopia_nbsap_sixth_report",
+    filename: "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
     source_type: "official_national_report",
     geography: {
       country: "Ethiopia",
@@ -77,7 +80,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:ethiopia_frel_frl:forest_carbon_methods_001",
-    source_id: "2026_submission_frel_frl_eth_final.pdf",
+    source_id: "local_research_source:ethiopia_frel_frl_2026",
+    filename: "2026_submission_frel_frl_eth_final.pdf",
     source_type: "official_unfccc_submission",
     geography: {
       country: "Ethiopia",
@@ -99,7 +103,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:bale_migration_conservation:grazing_pressure_001",
-    source_id: "migration-conservation-bale-mountains-ecosystem-report.pdf",
+    source_id: "local_research_source:bale_migration_conservation",
+    filename: "migration-conservation-bale-mountains-ecosystem-report.pdf",
     source_type: "local_conservation_report",
     geography: {
       country: "Ethiopia",
@@ -121,7 +126,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:bale_livestock_settlement:wildlife_pressure_001",
-    source_id: "Livestock and settlement - peer reviewed research paper may be useful for grazing patterns etc.pdf",
+    source_id: "local_research_source:bale_livestock_settlement",
+    filename: "Livestock and settlement - peer reviewed research paper may be useful for grazing patterns etc.pdf",
     source_type: "peer_reviewed_local_conservation_paper",
     geography: {
       country: "Ethiopia",
@@ -143,7 +149,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:hagenia_abyssinica:local_species_value_001",
-    source_id: "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+    source_id: "local_research_source:hagenia_abyssinica_ethnobotany",
+    filename: "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
     source_type: "peer_reviewed_ethnobotany_paper",
     geography: {
       country: "Ethiopia",
@@ -165,7 +172,8 @@ const evidenceCards = [
   },
   {
     evidence_id: "local_research:konso_bundle:dryland_context_001",
-    source_id: "Konso-20260627T215313Z-3-001.zip",
+    source_id: "local_research_source:konso_context_bundle",
+    filename: "Konso-20260627T215313Z-3-001.zip",
     source_type: "zipped_local_context_bundle",
     geography: {
       country: "Ethiopia",
@@ -245,6 +253,7 @@ function summarizeCandidate(feature) {
       match_type: match.match_type,
       confidence: match.confidence,
       allowed_use: match.allowed_use,
+      not_allowed_use: match.not_allowed_use,
       review_status: match.review_status,
     })),
     source_status: matches.length > 0 ? "context_derived" : "no_local_match",
@@ -267,6 +276,7 @@ function toMatch(card, matchType) {
     match_type: matchType,
     confidence: card.confidence,
     allowed_use: card.allowed_use,
+    not_allowed_use: card.not_allowed_use,
     review_status: card.review_status,
   };
 }

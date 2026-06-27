@@ -34,12 +34,12 @@ ESA WorldCover land-cover extraction, Sentinel-2 current vegetation extraction, 
 | ---: | --- | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | SWE-007 | 65 | medium | medium | high | high | low | assisted_natural_regeneration |
 | 2 | SET-004 | 62 | medium | medium | high | medium | low | native_tree_planting |
-| 3 | SWE-005 | 59 | medium | low | high | high | low | assisted_natural_regeneration |
+| 3 | SWE-005 | 58 | medium | low | high | high | low | assisted_natural_regeneration |
 | 4 | SET-008 | 56 | low | low | high | high | low | assisted_natural_regeneration |
-| 5 | SET-003 | 55 | low | medium | high | medium | low | field_validation_before_investment |
+| 5 | SET-003 | 54 | low | medium | high | medium | low | field_validation_before_investment |
 | 6 | SET-006 | 53 | medium | medium | medium | low | high | erosion_control_exclosures |
-| 7 | SET-007 | 51 | medium | medium | high | low | medium | native_tree_planting |
-| 8 | SET-002 | 50 | low | medium | high | medium | low | field_validation_before_investment |
+| 7 | SET-002 | 50 | low | medium | high | medium | low | field_validation_before_investment |
+| 8 | SET-007 | 50 | medium | medium | high | low | medium | native_tree_planting |
 | 9 | SWE-003 | 50 | medium | medium | high | low | low | field_validation_before_investment |
 | 10 | SET-005 | 48 | low | low | high | medium | low | native_tree_planting |
 
