@@ -1,7 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
+import { FEATURES } from "@/config/features";
 import {
   atlasViewModels,
   rankAreas,
@@ -12,6 +15,8 @@ import {
   type RankedAreaViewModel,
   type RegionViewModel,
 } from "@/data/atlasViewModel";
+import { buildPriorityResultsForAreas } from "@/data/recommendationViewModel";
+import { defaultObjectiveWeights, objectives, scoreLabels } from "@/data/prioritizationConfig";
 import type { PriorityResult } from "@/mapRenderer";
 import {
   getPriorityScoreRange,
@@ -21,57 +26,20 @@ import {
   type PriorityScoreRange,
 } from "@/priorityColor";
 
+const ExplainableChatPanel = FEATURES.explainableChat
+  ? dynamic(() => import("@/chatbot").then((module) => module.ExplainableChatPanel), {
+      ssr: false,
+      loading: () => (
+        <section className="rounded-lg border border-[#d8e5dc] bg-[#f8fbf7] p-4 text-sm text-muted">
+          Loading explanation panel...
+        </section>
+      ),
+    })
+  : null;
+
 type Step = "landing" | "region" | "layers" | "loading" | "dashboard" | "detail" | "recommendation" | "export";
 
 const stepLabels = ["Start", "Region", "Weights", "Analysis", "Dashboard", "Detail", "Brief"];
-
-const defaultObjectiveWeights: ObjectiveWeights = {
-  biodiversity: 90,
-  carbon: 75,
-  water: 85,
-  livelihood: 80,
-};
-
-const objectives: Array<{
-  key: ObjectiveKey;
-  label: string;
-  description: string;
-  backendField: string;
-}> = [
-  {
-    key: "biodiversity",
-    label: "Biodiversity",
-    description: "Habitat connectivity, species value, and ecological uplift.",
-    backendField: "biodiversity_weight",
-  },
-  {
-    key: "carbon",
-    label: "Carbon Storage",
-    description: "Above-ground biomass recovery and long-term sequestration potential.",
-    backendField: "carbon_weight",
-  },
-  {
-    key: "water",
-    label: "Water Security",
-    description: "Watershed regulation, spring protection, and downstream water benefits.",
-    backendField: "water_weight",
-  },
-  {
-    key: "livelihood",
-    label: "Livelihood Impact",
-    description: "Household benefit, implementation feasibility, and community value.",
-    backendField: "livelihood_weight",
-  },
-];
-
-const scoreLabels = {
-  biodiversity: "Biodiversity uplift",
-  carbon: "Carbon storage potential",
-  water: "Water impact",
-  soil: "Soil stability",
-  livelihoods: "Livelihood benefit",
-  forestLoss: "Forest-loss risk",
-};
 
 export default function Home() {
   const [step, setStep] = useState<Step>("dashboard");
@@ -101,6 +69,13 @@ export default function Home() {
     [areas],
   );
   const selectedArea = areas.find((area) => area.id === selectedRankedAreaId) ?? areas[0];
+
+  useEffect(() => {
+    const source = new URLSearchParams(window.location.search).get("source");
+    if ((source === "demo" || source === "backend") && source !== dataSourceMode) {
+      changeDataSource(source);
+    }
+  }, []);
 
   function selectRegion(regionId: string) {
     const nextAreas = viewModel.areas
@@ -200,8 +175,6 @@ export default function Home() {
             onWeightChange={updateObjectiveWeight}
             onResetWeights={resetObjectiveWeights}
             onChangeDataSource={changeDataSource}
-            onDetail={() => setStep("detail")}
-            onBack={() => setStep("layers")}
           />
         )}
 
@@ -599,8 +572,6 @@ function Dashboard({
   onWeightChange,
   onResetWeights,
   onChangeDataSource,
-  onDetail,
-  onBack,
 }: {
   region: RegionViewModel;
   viewModel: AtlasViewModel;
@@ -617,8 +588,6 @@ function Dashboard({
   onWeightChange: (key: ObjectiveKey, value: number) => void;
   onResetWeights: () => void;
   onChangeDataSource: (mode: DataSourceMode) => void;
-  onDetail: () => void;
-  onBack: () => void;
 }) {
   const selectedMapResult = priorityResults.find((result) => result.pcode === selectedMapAreaId);
   const selectedMapArea = areas.find((area) => area.pcode === selectedMapAreaId);
@@ -632,11 +601,6 @@ function Dashboard({
           title={`${region.name} prioritization`}
           description={viewModel.dashboardDescription(objectiveWeights)}
         />
-        <div className="flex gap-3">
-          <button className="rounded-full bg-[#1f6f68] px-5 py-3 text-sm font-semibold text-white" onClick={onDetail}>
-            Open rationale
-          </button>
-        </div>
       </div>
 
       <div className="grid min-h-[720px] gap-5 lg:grid-cols-[minmax(0,1.75fr)_minmax(360px,0.9fr)]">
@@ -670,6 +634,7 @@ function Dashboard({
             <RankedCandidateList
               areas={areas}
               selectedRankedAreaId={selectedRankedAreaId}
+              dataSourceMode={dataSourceMode}
               priorityScoreRange={priorityScoreRange}
               onSelectArea={onSelectArea}
             />
@@ -680,8 +645,24 @@ function Dashboard({
             selectedMapArea={selectedMapArea}
             selectedMapResult={selectedMapResult}
             selectedMapIsRecommendation={selectedMapIsRecommendation}
+            dataSourceMode={dataSourceMode}
             priorityScoreRange={priorityScoreRange}
           />
+
+          {FEATURES.explainableChat && ExplainableChatPanel && (
+            <ExplainableChatPanel
+              selectedRankedArea={selectedArea}
+              rankedCandidateAreas={areas}
+              priorityResults={priorityResults}
+              dataSourceMode={dataSourceMode}
+              objectiveWeights={objectiveWeights}
+              backendSampleOutput={{
+                sourceName: viewModel.sourceName,
+                sourceBadge: viewModel.sourceBadge,
+                dashboardDataLabel: viewModel.dashboardDataLabel,
+              }}
+            />
+          )}
 
           <section className="rounded-lg border border-[#e7deca] bg-[#fbf7ee] p-4">
             <div className="mb-4 flex items-start justify-between gap-3">
@@ -727,11 +708,13 @@ function Dashboard({
 function RankedCandidateList({
   areas,
   selectedRankedAreaId,
+  dataSourceMode,
   priorityScoreRange,
   onSelectArea,
 }: {
   areas: RankedAreaViewModel[];
   selectedRankedAreaId: string;
+  dataSourceMode: DataSourceMode;
   priorityScoreRange: PriorityScoreRange;
   onSelectArea: (areaId: string) => void;
 }) {
@@ -743,9 +726,8 @@ function RankedCandidateList({
         const areaTextColor = priorityTextColor(area.priorityScore, priorityScoreRange);
 
         return (
-          <button
+          <div
             key={area.id}
-            onClick={() => onSelectArea(area.id)}
             className={`grid w-full gap-3 border-b border-[#e7deca] p-3 text-left transition last:border-b-0 hover:bg-[#fbf7ee] ${
               isSelected ? "bg-[#eef7f2]" : "bg-white"
             }`}
@@ -758,18 +740,18 @@ function RankedCandidateList({
                       priorityScoreRange,
                       0.16,
                     )} 0%, rgba(255,255,255,0) 46%)`,
-                  }
+              }
             }
           >
             <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
+              <button type="button" onClick={() => onSelectArea(area.id)} className="min-w-0 flex-1 text-left">
                 <div className="flex items-center gap-2">
                   <span className="size-3 shrink-0 rounded-sm" style={{ backgroundColor: areaColor }} />
                   <h4 className="truncate font-semibold text-fg">{area.name}</h4>
                 </div>
                 <p className="mt-1 text-xs text-muted">Rank #{area.weightedRank} · {area.confidence} confidence</p>
                 <p className="mt-1 line-clamp-2 text-sm text-muted">{area.intervention}</p>
-              </div>
+              </button>
               <span
                 className="inline-flex min-w-14 justify-center rounded-full px-2.5 py-1 text-lg font-semibold"
                 style={{ backgroundColor: areaColor, color: areaTextColor }}
@@ -777,7 +759,16 @@ function RankedCandidateList({
                 {area.priorityScore}
               </span>
             </div>
-          </button>
+            <div className="flex items-center justify-between gap-3">
+              <p className="line-clamp-1 text-xs text-muted">{area.rationale[0]}</p>
+              <Link
+                href={`/recommendations/${encodeURIComponent(area.id)}?source=${dataSourceMode}`}
+                className="shrink-0 rounded-full border border-[#1f6f68] bg-white px-3 py-1.5 text-xs font-semibold text-[#1f6f68] transition hover:bg-[#eef7f2]"
+              >
+                View Details
+              </Link>
+            </div>
+          </div>
         );
       })}
     </div>
@@ -789,12 +780,14 @@ function SelectedAreaSummary({
   selectedMapArea,
   selectedMapResult,
   selectedMapIsRecommendation,
+  dataSourceMode,
   priorityScoreRange,
 }: {
   selectedArea: RankedAreaViewModel;
   selectedMapArea?: RankedAreaViewModel;
   selectedMapResult?: PriorityResult;
   selectedMapIsRecommendation: boolean;
+  dataSourceMode: DataSourceMode;
   priorityScoreRange: PriorityScoreRange;
 }) {
   const hasMappedRecommendation = Boolean(selectedMapArea || selectedMapResult);
@@ -837,7 +830,7 @@ function SelectedAreaSummary({
       </div>
 
       <div className="mt-4 rounded-md border border-[#e7deca] bg-[#fbf7ee] p-3">
-        <p className="text-sm font-semibold text-fg">Priority explanation</p>
+        <p className="text-sm font-semibold text-fg">Compact rationale</p>
         <p className="mt-2 text-sm leading-6 text-muted">
           {selectedMapResult?.rationale ??
             (selectedMapArea
@@ -847,12 +840,12 @@ function SelectedAreaSummary({
       </div>
 
       {hasMappedRecommendation && (
-        <div className="mt-4 grid gap-3">
-          <ScoreBar label="Biodiversity uplift" value={selectedMapResult?.biodiversity_score ?? displayArea.scores.biodiversity} />
-          <ScoreBar label="Carbon storage potential" value={selectedMapResult?.carbon_score ?? displayArea.scores.carbon} />
-          <ScoreBar label="Water impact" value={selectedMapResult?.water_score ?? displayArea.scores.water} />
-          <ScoreBar label="Livelihood benefit" value={selectedMapResult?.livelihood_score ?? displayArea.scores.livelihoods} />
-        </div>
+        <Link
+          href={`/recommendations/${encodeURIComponent(displayArea.id)}?source=${dataSourceMode}`}
+          className="mt-4 inline-flex w-full justify-center rounded-full bg-[#1f6f68] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#185b55]"
+        >
+          Open Recommendation
+        </Link>
       )}
     </section>
   );
@@ -1116,42 +1109,6 @@ function getStepIndex(step: Step) {
   return map[step];
 }
 
-function buildPriorityResultsForAreas(priorityResults: PriorityResult[], areas: RankedAreaViewModel[]) {
-  const resultsByPcode = new Map(priorityResults.map((result) => [result.pcode, result]));
-
-  return areas.flatMap((area) => {
-    if (!area.pcode) return [];
-
-    const existingResult = resultsByPcode.get(area.pcode);
-
-    return [
-      {
-        admin_level: existingResult?.admin_level ?? 2,
-        pcode: area.pcode,
-        priority_score: area.priorityScore,
-        priority_level: toPriorityLevel(area.priorityScore),
-        biodiversity_score: area.scores.biodiversity,
-        carbon_score: area.scores.carbon,
-        water_score: area.scores.water,
-        livelihood_score: area.scores.livelihoods,
-        estimated_restoration_opportunity: area.hectares,
-        rationale:
-          area.rationale[0] ??
-          existingResult?.rationale ??
-          "Recommendation rationale will be populated by the prioritization pipeline.",
-        confidence: area.confidence,
-        evidence: area.evidenceStatus,
-      },
-    ] satisfies PriorityResult[];
-  });
-}
-
-function toPriorityLevel(score: number): PriorityResult["priority_level"] {
-  if (score >= 75) return "Highest";
-  if (score >= 65) return "High";
-  if (score >= 50) return "Medium";
-  return "Lower";
-}
 
 function toBackendWeights(weights: ObjectiveWeights) {
   return {

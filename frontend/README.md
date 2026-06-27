@@ -42,18 +42,45 @@ and `.next/`, scoped to the frontend app.
 
 The app opens directly into the interactive prioritization workspace, not a
 landing page. The workspace shows the Ethiopia map, ranked candidate areas,
-selected-area details, prioritization sliders, and the Demo/Backend data-source
-toggle on first load.
+compact selected-area details, prioritization sliders, and the Demo/Backend
+data-source toggle on first load.
 
 The old landing and step-flow components remain in `frontend/app/page.tsx` for
 future reuse, but the default `step` state is `dashboard`.
+
+## Recommendation Detail Pages
+
+Detailed rationale and evidence now live on dedicated recommendation pages:
+
+```text
+frontend/app/recommendations/[areaId]/
+```
+
+Dashboard ranked candidate cards link to:
+
+```text
+/recommendations/:areaId?source=demo
+/recommendations/:areaId?source=backend
+```
+
+The `source` query parameter preserves whether the user is viewing Demo
+(Mock Data) or Backend Preview. The detail page resolves areas through the
+shared view-model utilities in:
+
+```text
+frontend/data/recommendationViewModel.ts
+```
+
+Use `area.id` or `area.pcode` as stable identifiers when linking to a
+recommendation. Do not parse raw mock data or raw backend sample output directly
+inside route components.
 
 ## Changing Default Slider Values
 
 The restoration objective slider defaults live in:
 
 ```text
-frontend/app/page.tsx
+frontend/data/prioritizationConfig.ts
 ```
 
 Look for:
@@ -73,7 +100,7 @@ the "Reset to Recommended" button.
 ## Slider Objectives and Backend Payload
 
 The visible slider labels and future backend field names are defined in the
-`objectives` array in `frontend/app/page.tsx`.
+`objectives` array in `frontend/data/prioritizationConfig.ts`.
 
 The frontend currently converts slider values into this shape:
 
@@ -86,7 +113,7 @@ The frontend currently converts slider values into this shape:
 }
 ```
 
-That conversion happens in `toBackendWeights(...)`, also in `frontend/app/page.tsx`.
+That conversion happens in `toBackendWeights(...)` in `frontend/app/page.tsx`.
 This is the object that can later be sent to the prioritization agent.
 
 ## Mock Ranking Logic
@@ -121,6 +148,61 @@ legend, and side-panel score badges all use this shared utility.
 
 To adjust the palette, update `PRIORITY_COLOR_STOPS` in that file. Keep the
 array ordered from highest priority to lowest priority.
+
+## Explainable Chatbot
+
+The explainable chatbot is an optional explanation layer for the selected
+restoration recommendation. It answers questions about why an area ranks highly,
+which indicators contributed most, trade-offs across biodiversity/carbon/water/
+livelihood, methodology, assumptions, and limitations.
+
+The chatbot code lives in:
+
+```text
+frontend/chatbot/
+```
+
+The feature flag is configured in:
+
+```text
+frontend/config/features.ts
+```
+
+It reads:
+
+```text
+NEXT_PUBLIC_ENABLE_CHATBOT=false
+```
+
+The chatbot is disabled by default. To enable it locally, create `frontend/.env`
+from `frontend/.env.example` and set:
+
+```text
+NEXT_PUBLIC_ENABLE_CHATBOT=true
+OPENAI_API_KEY=your_server_side_key
+OPENAI_MODEL=gpt-4o-mini
+```
+
+`OPENAI_API_KEY` is used only by the server-side API route. The browser never
+calls OpenAI directly. The public flag only controls whether the lazy-loaded UI
+is mounted. When disabled, the chatbot component is not rendered and no chat
+state or API call is initialized.
+
+The public integration surface is the lazy-mounted component exported from:
+
+```text
+frontend/chatbot/index.ts
+```
+
+The Next.js route is:
+
+```text
+frontend/app/api/explainable-chat/route.ts
+```
+
+That route delegates to `frontend/chatbot/api/route.ts`, which streams grounded
+responses from the OpenAI API using the selected ranked area, ranked candidate
+areas, adapted backend/sample outputs, and methodology snippets.
 
 ## Data Flow: Mock Now, Backend Later
 

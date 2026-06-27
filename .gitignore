@@ -20,6 +20,7 @@ npm-debug.log*
 # local box config (init-deploy reads this; never commit)
 .config/
 deploy.env
+.env*
 
 # local data diagnostics
 data/catalog/source_url_checks.local.json

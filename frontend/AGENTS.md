@@ -92,6 +92,8 @@ Current important configuration locations:
 - Slider defaults: `frontend/app/page.tsx`, `defaultObjectiveWeights`
 - Slider labels and backend field names: `frontend/app/page.tsx`, `objectives`
 - Slider-to-agent payload: `frontend/app/page.tsx`, `toBackendWeights(...)`
+- Feature flags: `frontend/config/features.ts`
+- Explainable chatbot module: `frontend/chatbot/`, mounted through `frontend/chatbot/index.ts`
 - Shared frontend view model and data-source adapters: `frontend/data/atlasViewModel.ts`
 - Mock ranking logic: `frontend/data/atlasViewModel.ts`, `calculatePriorityScore(...)` and `rankAreas(...)`
 - Priority heatmap color scale: `frontend/priorityColor.ts`, `PRIORITY_COLOR_STOPS`
