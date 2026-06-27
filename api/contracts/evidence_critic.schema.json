@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/api/contracts/evidence_critic.schema.json",
+  "title": "EvidenceCriticObject",
+  "description": "Credibility audit for recommendation and brief claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "support_level",
+    "unsupported_claims",
+    "weak_claims",
+    "must_show_disclaimer",
+    "recommended_disclaimer"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[0-9]{3}$"
+    },
+    "support_level": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "supported_with_validation_needed",
+        "weak",
+        "unsupported"
+      ]
+    },
+    "unsupported_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claimFinding"
+      }
+    },
+    "weak_claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claimFinding"
+      }
+    },
+    "must_show_disclaimer": {
+      "type": "boolean"
+    },
+    "recommended_disclaimer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Required when must_show_disclaimer is true."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "must_show_disclaimer": {
+            "const": true
+          }
+        },
+        "required": [
+          "must_show_disclaimer"
+        ]
+      },
+      "then": {
+        "properties": {
+          "recommended_disclaimer": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "claimFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "reason"
+      ],
+      "properties": {
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        }
+      }
+    }
+  }
+}

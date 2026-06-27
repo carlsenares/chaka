@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/api/contracts/recommendation.schema.json",
+  "title": "RecommendationObject",
+  "description": "Planner-facing recommendation produced by the reasoning layer from features and model predictions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "rank",
+    "priority_score",
+    "recommended_intervention",
+    "intervention_code",
+    "carbon_potential",
+    "biodiversity_benefit",
+    "livelihood_benefit",
+    "water_soil_benefit",
+    "implementation_feasibility",
+    "risk_level",
+    "main_reasons",
+    "risk_flags",
+    "field_validation_questions",
+    "evidence_refs"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}-[0-9]{3}$"
+    },
+    "rank": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "priority_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "recommended_intervention": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intervention_code": {
+      "$ref": "#/$defs/interventionCode"
+    },
+    "carbon_potential": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "biodiversity_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "livelihood_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "water_soil_benefit": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "implementation_feasibility": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "risk_level": {
+      "$ref": "#/$defs/benefitLabel"
+    },
+    "main_reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "field_validation_questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Traceable reference such as site_features:SWE-001.population_pressure_score."
+      }
+    }
+  },
+  "$defs": {
+    "benefitLabel": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "interventionCode": {
+      "type": "string",
+      "enum": [
+        "fmnr_agroforestry",
+        "assisted_natural_regeneration",
+        "riparian_restoration",
+        "native_tree_planting",
+        "erosion_control_exclosures",
+        "field_validation_before_investment"
+      ]
+    }
+  }
+}

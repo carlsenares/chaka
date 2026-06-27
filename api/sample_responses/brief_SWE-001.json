@@ -1,0 +1,44 @@
+{
+  "brief": {
+    "site_id": "SWE-001",
+    "title": "FMNR + agroforestry Opportunity in Example Woreda, Bench Sheko",
+    "one_sentence_summary": "Example Woreda is promising for FMNR + agroforestry because it combines high livelihood relevance, medium carbon potential, and cropland tree mosaic land cover context.",
+    "recommended_actions": [
+      "Run community field validation",
+      "Assess land tenure and grazing pressure",
+      "Confirm locally suitable native and livelihood tree species",
+      "Prepare a small pilot intervention before carbon project development"
+    ],
+    "expected_benefits": {
+      "climate": "Moderate potential for vegetation recovery and future carbon storage, subject to field validation.",
+      "biodiversity": "High potential for native restoration value if species selection follows local ecology, subject to field validation.",
+      "livelihood": "High potential for household benefit through agroforestry, fodder, fruit, fuelwood, or soil restoration, subject to field validation.",
+      "water_soil": "High potential for soil and water resilience if slope and runoff risks are addressed, subject to field validation."
+    },
+    "data_evidence": [
+      "Sentinel-2 vegetation signal",
+      "CHIRPS rainfall suitability",
+      "ESA WorldCover land-cover class",
+      "WorldPop population pressure",
+      "SRTM slope proxy"
+    ],
+    "risks": [
+      "Field validation is required before project investment"
+    ],
+    "next_steps": [
+      "Field visit",
+      "Community consultation",
+      "Species validation",
+      "Pilot design"
+    ],
+    "disclaimer": "This is a pre-feasibility screening result. Field validation is required before project investment or carbon claims."
+  },
+  "critic": {
+    "site_id": "SWE-001",
+    "support_level": "supported_with_validation_needed",
+    "unsupported_claims": [],
+    "weak_claims": [],
+    "must_show_disclaimer": true,
+    "recommended_disclaimer": "This is a pre-feasibility screening result. Field validation is required before project investment or carbon claims."
+  }
+}

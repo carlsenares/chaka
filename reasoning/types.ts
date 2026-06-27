@@ -83,7 +83,75 @@ export type PatrickSiteInput = {
 export type ProcessedSite = PatrickSiteInput;
 
 export type ScoreLabel = "Low" | "Medium" | "High";
+export type CanonicalScoreLabel = "low" | "medium" | "high";
 export type RiskLevel = "Low" | "Medium" | "High";
+export type CanonicalRiskLevel = "low" | "medium" | "high";
+export type InterventionCode =
+  | "fmnr_agroforestry"
+  | "assisted_natural_regeneration"
+  | "riparian_restoration"
+  | "native_tree_planting"
+  | "erosion_control_exclosures"
+  | "field_validation_before_investment";
+export type PredictionQuality =
+  | "expert_labeled"
+  | "atlas_labeled"
+  | "weak_supervised_demo"
+  | "rule_based_fallback";
+
+export type SiteFeature = {
+  site_id: string;
+  region: string;
+  zone: string;
+  woreda: string;
+  area_ha: number;
+  land_cover_primary: string;
+  land_cover_mix: {
+    tree_cover: number;
+    cropland: number;
+    grassland: number;
+    built_up: number;
+    water: number;
+    other: number;
+  };
+  ndvi_current: number | null;
+  ndvi_trend_5y: number | null;
+  evi_current: number | null;
+  forest_loss_score: number | null;
+  rainfall_mean_mm: number | null;
+  rainfall_reliability_score: number | null;
+  slope_mean_deg: number | null;
+  slope_risk_score: number | null;
+  soil_organic_carbon_score: number | null;
+  soil_ph_suitability_score: number | null;
+  population_pressure_score: number | null;
+  road_access_score: number | null;
+  settlement_proximity_score: number | null;
+  protected_area_overlap_pct: number | null;
+  safeguard_risk_score: number | null;
+  data_quality_score: number | null;
+  field_validation_required: boolean;
+  feature_version: string;
+};
+
+export type ModelPrediction = {
+  site_id: string;
+  model_version: string;
+  priority_score: number;
+  carbon_potential: CanonicalScoreLabel;
+  biodiversity_benefit: CanonicalScoreLabel;
+  livelihood_benefit: CanonicalScoreLabel;
+  water_soil_benefit: CanonicalScoreLabel;
+  implementation_feasibility: CanonicalScoreLabel;
+  risk_level: CanonicalRiskLevel;
+  recommended_intervention_seed: InterventionCode;
+  top_feature_contributions: Array<{
+    feature: keyof SiteFeature | string;
+    direction: "positive" | "negative";
+    weight: number;
+  }>;
+  prediction_quality: PredictionQuality;
+};
 
 export type ComponentScores = {
   carbon_potential_score: number;
@@ -137,6 +205,20 @@ export type SimilarCaseMatch = Omit<RestorationCase, "case_id"> & {
   why_relevant?: string;
 };
 
+export type SimilarCasesObject = {
+  site_id: string;
+  similar_cases: Array<{
+    case_id: string;
+    title: string;
+    location: string;
+    intervention: string;
+    similarity_score: number;
+    why_similar: string[];
+    lesson: string;
+    source: "manual_demo_case" | "case_corpus" | "cifor_icraf_context";
+  }>;
+};
+
 export type Explanation = {
   summary: string;
   main_reasons: string[];
@@ -159,6 +241,85 @@ export type ProjectBrief = {
   expected_benefits: Explanation["expected_benefits"];
   risks_to_check: string[];
   next_steps: string[];
+};
+
+export type RecommendationObject = {
+  site_id: string;
+  rank?: number;
+  priority_score: number;
+  recommended_intervention: string;
+  intervention_code: InterventionCode;
+  carbon_potential: CanonicalScoreLabel;
+  biodiversity_benefit: CanonicalScoreLabel;
+  livelihood_benefit: CanonicalScoreLabel;
+  water_soil_benefit: CanonicalScoreLabel;
+  implementation_feasibility: CanonicalScoreLabel;
+  risk_level: CanonicalRiskLevel;
+  main_reasons: string[];
+  risk_flags: string[];
+  field_validation_questions: string[];
+  evidence_refs: string[];
+};
+
+export type EvidenceCriticObject = {
+  site_id: string;
+  support_level:
+    | "supported"
+    | "supported_with_validation_needed"
+    | "weak"
+    | "unsupported";
+  unsupported_claims: string[];
+  weak_claims: Array<{
+    claim: string;
+    reason: string;
+  }>;
+  must_show_disclaimer: boolean;
+  recommended_disclaimer: string;
+};
+
+export type ProjectBriefObject = {
+  site_id: string;
+  title: string;
+  one_sentence_summary: string;
+  recommended_actions: string[];
+  expected_benefits: {
+    climate: string;
+    biodiversity: string;
+    livelihood: string;
+    water_soil: string;
+  };
+  data_evidence: string[];
+  risks: string[];
+  next_steps: string[];
+  disclaimer?: string;
+};
+
+export type SiteListResponse = {
+  region: string;
+  generated_at: string;
+  sites: Array<{
+    site_id: string;
+    name: string;
+    rank: number;
+    priority_score: number;
+    recommended_intervention: string;
+    risk_level: CanonicalRiskLevel;
+    carbon_potential: CanonicalScoreLabel;
+    livelihood_benefit: CanonicalScoreLabel;
+    data_quality_score: number | null;
+    geometry: {
+      type: "Polygon";
+      coordinates: unknown[];
+    };
+  }>;
+};
+
+export type SiteDetailResponse = {
+  site_features: SiteFeature;
+  model_prediction: ModelPrediction;
+  recommendation: RecommendationObject;
+  critic: EvidenceCriticObject;
+  similar_cases: SimilarCasesObject["similar_cases"];
 };
 
 export type RecommendationResult = {

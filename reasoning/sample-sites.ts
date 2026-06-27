@@ -2,7 +2,7 @@ import type { ProcessedSite } from "@/reasoning/types";
 
 export const sampleSites: ProcessedSite[] = [
   {
-    site_id: "SW-001",
+    site_id: "SWE-001",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Bench Sheko",
@@ -69,7 +69,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-002",
+    site_id: "SWE-002",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Keffa",
@@ -131,7 +131,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-003",
+    site_id: "SWE-003",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Sheka",
@@ -196,7 +196,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-004",
+    site_id: "SWE-004",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Dawro",
@@ -258,7 +258,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-005",
+    site_id: "SET-005",
     admin: {
       region: "South Ethiopia Region",
       zone: "Gamo",
@@ -321,7 +321,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-006",
+    site_id: "SWE-006",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Sheka",
@@ -380,7 +380,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-007",
+    site_id: "SET-007",
     admin: {
       region: "South Ethiopia Region",
       zone: "Wolayita",
@@ -445,7 +445,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-008",
+    site_id: "SET-008",
     admin: {
       region: "South Ethiopia Region",
       zone: "Konso",
@@ -507,7 +507,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-009",
+    site_id: "SWE-009",
     admin: {
       region: "Southwest Ethiopia Peoples' Region",
       zone: "Bench Sheko",
@@ -573,7 +573,7 @@ export const sampleSites: ProcessedSite[] = [
     },
   },
   {
-    site_id: "SW-010",
+    site_id: "SET-010",
     admin: {
       region: "South Ethiopia Region",
       zone: "Gedeo",

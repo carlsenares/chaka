@@ -1,0 +1,35 @@
+{
+  "site_id": "SWE-001",
+  "model_version": "ranker_v0.1",
+  "priority_score": 69,
+  "carbon_potential": "medium",
+  "biodiversity_benefit": "high",
+  "livelihood_benefit": "high",
+  "water_soil_benefit": "high",
+  "implementation_feasibility": "medium",
+  "risk_level": "medium",
+  "recommended_intervention_seed": "fmnr_agroforestry",
+  "top_feature_contributions": [
+    {
+      "feature": "population_pressure_score",
+      "direction": "positive",
+      "weight": 0.18
+    },
+    {
+      "feature": "rainfall_reliability_score",
+      "direction": "positive",
+      "weight": 0.14
+    },
+    {
+      "feature": "slope_risk_score",
+      "direction": "positive",
+      "weight": 0.12
+    },
+    {
+      "feature": "safeguard_risk_score",
+      "direction": "negative",
+      "weight": 0.05
+    }
+  ],
+  "prediction_quality": "rule_based_fallback"
+}

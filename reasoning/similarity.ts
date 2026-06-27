@@ -2,8 +2,11 @@ import { restorationCases } from "@/reasoning/cases";
 import type {
   InterventionRecommendation,
   ProcessedSite,
+  RecommendationObject,
   RestorationCase,
   SimilarCaseMatch,
+  SimilarCasesObject,
+  SiteFeature,
 } from "@/reasoning/types";
 
 export function findSimilarCases(
@@ -15,6 +18,24 @@ export function findSimilarCases(
     .map((restorationCase) => scoreCase(site, intervention, restorationCase))
     .sort((a, b) => b.similarity_score - a.similarity_score)
     .slice(0, limit);
+}
+
+export function findCanonicalSimilarCases(
+  feature: SiteFeature,
+  recommendation: RecommendationObject,
+  limit = 3,
+): SimilarCasesObject {
+  const matches = restorationCases
+    .map((restorationCase) =>
+      scoreCanonicalCase(feature, recommendation, restorationCase),
+    )
+    .sort((a, b) => b.similarity_score - a.similarity_score)
+    .slice(0, limit);
+
+  return {
+    site_id: feature.site_id,
+    similar_cases: matches,
+  };
 }
 
 function scoreCase(
@@ -204,4 +225,85 @@ function buildWhyRelevant(
   return `Matched on ${matchedDimensions.join(", ")}. Lesson: ${
     restorationCase.lesson
   }`;
+}
+
+function scoreCanonicalCase(
+  feature: SiteFeature,
+  recommendation: RecommendationObject,
+  restorationCase: RestorationCase,
+): SimilarCasesObject["similar_cases"][number] {
+  const whySimilar: string[] = [];
+  let score = 0;
+
+  const [minRainfall, maxRainfall] = restorationCase.annual_rainfall_range_mm;
+  const rainfall = feature.rainfall_mean_mm ?? 0;
+  if (rainfall >= minRainfall && rainfall <= maxRainfall) {
+    score += 0.18;
+    whySimilar.push("rainfall suitability");
+  }
+
+  if (canonicalLandCoverMatches(feature, restorationCase)) {
+    score += 0.18;
+    whySimilar.push(feature.land_cover_primary.replaceAll("_", " "));
+  }
+
+  if (
+    restorationCase.intervention_type
+      .toLowerCase()
+      .includes(recommendation.recommended_intervention.toLowerCase().split(" ")[0])
+  ) {
+    score += 0.22;
+    whySimilar.push("recommended intervention");
+  }
+
+  if ((feature.population_pressure_score ?? 0) >= 70) {
+    score += 0.12;
+    whySimilar.push("livelihood pressure");
+  }
+
+  if ((feature.safeguard_risk_score ?? 0) >= 60) {
+    score += restorationCase.governance_tenure_context
+      .toLowerCase()
+      .includes("protected")
+      ? 0.14
+      : 0;
+    if (
+      restorationCase.governance_tenure_context
+        .toLowerCase()
+        .includes("protected")
+    ) {
+      whySimilar.push("governance/safeguard context");
+    }
+  }
+
+  if (restorationCase.country.toLowerCase() === "ethiopia") {
+    score += 0.12;
+    whySimilar.push("country/regional similarity");
+  } else if (isEastAfrica(restorationCase.country)) {
+    score += 0.06;
+    whySimilar.push("regional similarity");
+  }
+
+  return {
+    case_id: restorationCase.case_id,
+    title: `${restorationCase.intervention_type} in ${restorationCase.region}`,
+    location: `${restorationCase.region}, ${restorationCase.country}`,
+    intervention: restorationCase.intervention_type,
+    similarity_score: Number(Math.min(1, score).toFixed(2)),
+    why_similar: whySimilar.length ? whySimilar : ["manual demo case"],
+    lesson: restorationCase.lesson,
+    source: "manual_demo_case",
+  };
+}
+
+function canonicalLandCoverMatches(
+  feature: SiteFeature,
+  restorationCase: RestorationCase,
+) {
+  const caseCover = restorationCase.land_cover.toLowerCase();
+
+  return feature.land_cover_primary
+    .split("_")
+    .filter((token) => token.length > 3)
+    .some((token) => caseCover.includes(token));
 }
