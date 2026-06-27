@@ -85,11 +85,21 @@ def print_plan(args, required_tiles, candidates):
 def ensure_tile(args, layer, tile):
     path = local_tile_path(args.raw_dir, layer, tile)
     if path.exists() and path.stat().st_size > 0:
+        with rasterio.open(path):
+            pass
         return path
 
     url = tile_url(layer, tile)
     print(f"Downloading {url}", file=sys.stderr)
-    urllib.request.urlretrieve(url, path)
+    temp_path = path.with_suffix(path.suffix + ".tmp")
+    try:
+        urllib.request.urlretrieve(url, temp_path)
+        with rasterio.open(temp_path):
+            pass
+        temp_path.replace(path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
     return path
 
 

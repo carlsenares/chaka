@@ -1,6 +1,6 @@
 {
   "source": {
-    "dataset_id": "osm_geofabrik_ethiopia",
+    "dataset_id": "osm_access",
     "source_mode": "geofabrik_pbf",
     "name": "OpenStreetMap Ethiopia extract via Geofabrik",
     "source_url": "https://www.openstreetmap.org/copyright",
@@ -18,12 +18,13 @@
     "extractor_version": "osm_access_geofabrik_v0.1",
     "scoring_version": "osm_access_scores_v0.1",
     "processed_at_utc": "2026-06-27T19:26:31+00:00",
-    "note": "OSM completeness varies by location. Scores are source-derived mapped-access proxies, not community feasibility or field validation."
+    "note": "OSM completeness varies by location. Scores are source-derived mapped-access proxies, not community feasibility or field validation.",
+    "source_snapshot_identifier": "sha256:5e04be2a086c1c38e0b2ca2c8112ad5287685f3b9d39c6bd66457e1369015c6f"
   },
   "features": [
     {
       "site_id": "SET-001",
-      "road_access_score": null,
+      "road_access_score": 0,
       "settlement_proximity_score": 20,
       "population_pressure_proxy_score": 0,
       "nearest_road_distance_km": null,
@@ -239,8 +240,8 @@
     },
     {
       "site_id": "SWE-002",
-      "road_access_score": null,
-      "settlement_proximity_score": null,
+      "road_access_score": 0,
+      "settlement_proximity_score": 0,
       "population_pressure_proxy_score": 0,
       "nearest_road_distance_km": null,
       "nearest_road_highway": null,
@@ -264,7 +265,7 @@
     {
       "site_id": "SWE-003",
       "road_access_score": 53,
-      "settlement_proximity_score": null,
+      "settlement_proximity_score": 0,
       "population_pressure_proxy_score": 0,
       "nearest_road_distance_km": 4.898,
       "nearest_road_highway": "unclassified",
@@ -336,7 +337,7 @@
     {
       "site_id": "SWE-006",
       "road_access_score": 35,
-      "settlement_proximity_score": null,
+      "settlement_proximity_score": 0,
       "population_pressure_proxy_score": 0,
       "nearest_road_distance_km": 7.367,
       "nearest_road_highway": "unclassified",
@@ -383,8 +384,8 @@
     },
     {
       "site_id": "SWE-008",
-      "road_access_score": null,
-      "settlement_proximity_score": null,
+      "road_access_score": 0,
+      "settlement_proximity_score": 0,
       "population_pressure_proxy_score": 0,
       "nearest_road_distance_km": null,
       "nearest_road_highway": null,

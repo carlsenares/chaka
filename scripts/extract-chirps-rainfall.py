@@ -6,6 +6,7 @@ import json
 import math
 import shutil
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -43,7 +44,7 @@ def main():
     for year, month in periods:
         try:
             local_rasters[(year, month)] = ensure_raster(year, month)
-        except Exception as exc:
+        except SourceFetchError as exc:
             missing.append({"year": year, "month": month, "error": str(exc)})
 
     if missing:
@@ -80,17 +81,37 @@ def ensure_raster(year, month):
     gz_path = RAW_DIR / FILENAME_TEMPLATE.format(year=year, month=month)
     tif_path = gz_path.with_suffix("")
     if tif_path.exists() and tif_path.stat().st_size > 0:
+        with rasterio.open(tif_path):
+            pass
         return tif_path
 
     if not gz_path.exists() or gz_path.stat().st_size == 0:
         url = f"{BASE_URL}/{gz_path.name}"
         print(f"Downloading {url}", file=sys.stderr)
-        urllib.request.urlretrieve(url, gz_path)
+        temp_gz_path = gz_path.with_suffix(gz_path.suffix + ".tmp")
+        try:
+            urllib.request.urlretrieve(url, temp_gz_path)
+            with gzip.open(temp_gz_path, "rb") as source:
+                source.read(1)
+            temp_gz_path.replace(gz_path)
+        except (urllib.error.HTTPError, urllib.error.URLError) as exc:
+            raise SourceFetchError(str(exc)) from exc
+        finally:
+            if temp_gz_path.exists():
+                temp_gz_path.unlink()
 
-    with gzip.open(gz_path, "rb") as source, tif_path.open("wb") as target:
+    temp_tif_path = tif_path.with_suffix(tif_path.suffix + ".tmp")
+    with gzip.open(gz_path, "rb") as source, temp_tif_path.open("wb") as target:
         shutil.copyfileobj(source, target)
+    with rasterio.open(temp_tif_path):
+        pass
+    temp_tif_path.replace(tif_path)
 
     return tif_path
+
+
+class SourceFetchError(RuntimeError):
+    pass
 
 
 def extract_feature(feature, local_rasters, periods):

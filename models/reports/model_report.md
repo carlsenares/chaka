@@ -36,10 +36,10 @@ ESA WorldCover land-cover extraction, GFW/UMD forest-change extraction, CHIRPS r
 | 4 | SET-008 | 63 | medium | medium | high | high | low | assisted_natural_regeneration |
 | 5 | SET-003 | 58 | medium | medium | medium | medium | medium | field_validation_before_investment |
 | 6 | SET-005 | 56 | medium | low | high | medium | low | native_tree_planting |
-| 7 | SWE-008 | 56 | medium | medium | high | low | low | native_tree_planting |
-| 8 | SWE-002 | 55 | medium | medium | medium | low | medium | native_tree_planting |
-| 9 | SET-006 | 54 | medium | medium | medium | low | medium | native_tree_planting |
-| 10 | SET-007 | 54 | medium | low | high | low | medium | erosion_control_exclosures |
+| 7 | SET-006 | 54 | medium | medium | medium | low | medium | native_tree_planting |
+| 8 | SET-007 | 54 | medium | low | high | low | medium | erosion_control_exclosures |
+| 9 | SWE-004 | 54 | medium | medium | high | low | low | native_tree_planting |
+| 10 | SWE-008 | 53 | medium | medium | high | low | low | native_tree_planting |
 
 ## Limitation Statement
 

@@ -17,6 +17,7 @@ npm-debug.log*
 .vscode/
 __pycache__/
 *.py[cod]
+tsconfig.tsbuildinfo
 
 # local box config (init-deploy reads this; never commit)
 .config/

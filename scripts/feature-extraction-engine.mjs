@@ -178,12 +178,12 @@ function fail(message) {
 async function main() {
   const candidates = JSON.parse(await readFile(candidatesPath, "utf8"));
   const worldCoverBySite = await loadExtractBySite(worldCoverPath);
-  const srtmBySite = await loadExtractBySite(srtmPath);
-  const gfwBySite = await loadExtractBySite(gfwPath);
+  const srtmBySite = await loadExtractBySite(srtmPath, { optional: true });
+  const gfwBySite = await loadExtractBySite(gfwPath, { optional: true });
   const chirpsBySite = await loadExtractBySite(chirpsPath);
   const soilGridsBySite = await loadExtractBySite(soilGridsPath);
-  const worldPopBySite = await loadExtractBySite(worldPopPath);
-  const osmAccessBySite = await loadExtractBySite(osmAccessPath);
+  const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
+  const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
     buildFeature(candidate, index, {
       worldCover: worldCoverBySite.get(candidate.properties.site_id),
@@ -204,12 +204,16 @@ async function main() {
   console.log(`Wrote ${path.relative(root, csvPath)}`);
 }
 
-async function loadExtractBySite(filePath) {
+async function loadExtractBySite(filePath, { optional = false } = {}) {
   try {
     const extract = JSON.parse(await readFile(filePath, "utf8"));
+    if (!Array.isArray(extract.features)) {
+      throw new Error("missing features array");
+    }
     return new Map(extract.features.map((feature) => [feature.site_id, feature]));
-  } catch {
-    return new Map();
+  } catch (error) {
+    if (optional && error.code === "ENOENT") return new Map();
+    throw new Error(`Could not load source extract ${path.relative(root, filePath)}: ${error.message}`);
   }
 }
 
@@ -269,7 +273,7 @@ function buildFeature(candidate, index, extracts) {
       osmAccessFeature.population_pressure_proxy_score,
     ].some(isFiniteNumber);
   const dataQualityScore = Math.min(100,
-    (profile.land_cover_primary.includes("lower_priority") ? 52 : 58) +
+    58 +
     (hasWorldCover ? 10 : 0) +
     (hasSrtm ? 8 : 0) +
     (hasGfw ? 8 : 0) +
@@ -416,8 +420,10 @@ function buildFeature(candidate, index, extracts) {
         ? {
             dataset_id: "osm_access",
             status: "source_derived",
-            road_access_score: roadAccessScore,
-            settlement_proximity_score: settlementProximityScore,
+            road_access_score: isFiniteNumber(osmAccessFeature.road_access_score) ? osmAccessFeature.road_access_score : null,
+            settlement_proximity_score: isFiniteNumber(osmAccessFeature.settlement_proximity_score)
+              ? osmAccessFeature.settlement_proximity_score
+              : null,
             population_pressure_score: osmPopulationPressureScore,
             raw_road_access_score: osmAccessFeature.road_access_score,
             raw_settlement_proximity_score: osmAccessFeature.settlement_proximity_score,

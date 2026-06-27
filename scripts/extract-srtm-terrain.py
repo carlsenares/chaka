@@ -211,7 +211,11 @@ def extract_from_dataset(dataset, geometry):
     if not np.any(valid_mask):
         return None
 
-    slope = slope_degrees(elevation, transform)
+    filled_elevation = np.array(elevation, copy=True)
+    if np.any(~valid_mask):
+        replacement = float(np.mean(elevation[valid_mask]))
+        filled_elevation[~valid_mask] = replacement
+    slope = slope_degrees(filled_elevation, transform)
     valid_mask &= np.isfinite(slope)
     if not np.any(valid_mask):
         return None
@@ -242,9 +246,16 @@ def slope_risk_score(slope_mean_deg):
 
 def tiles_for_feature(feature):
     min_lon, min_lat, max_lon, max_lat = geometry_bounds(feature["geometry"])
-    lon_starts = range(math.floor(min_lon), math.floor(max_lon) + 1)
-    lat_starts = range(math.floor(min_lat), math.floor(max_lat) + 1)
+    lon_starts = degree_starts(min_lon, max_lon)
+    lat_starts = degree_starts(min_lat, max_lat)
     return [format_hgt_tile(lat, lon) for lat in lat_starts for lon in lon_starts]
+
+
+def degree_starts(min_value, max_value):
+    end = math.floor(max_value)
+    if max_value > min_value and float(max_value).is_integer():
+        end -= 1
+    return range(math.floor(min_value), end + 1)
 
 
 def geometry_bounds(geometry):

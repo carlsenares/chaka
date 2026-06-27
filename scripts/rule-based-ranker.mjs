@@ -102,6 +102,7 @@ function buildPrediction(feature) {
       waterSoilScore,
       livelihoodScore,
       feasibilityScore,
+      landCoverAdjustment,
     }),
     prediction_quality: "rule_based_fallback",
     scoring_note:
@@ -187,6 +188,15 @@ function topContributions(feature, scores) {
       value: feature.slope_risk_score,
     },
   ];
+
+  if (scores.landCoverAdjustment < 0) {
+    contributions.push({
+      feature: "land_cover_suitability_adjustment",
+      direction: "negative",
+      weight: Math.abs(scores.landCoverAdjustment) / 100,
+      value: Math.abs(scores.landCoverAdjustment),
+    });
+  }
 
   return contributions
     .sort((a, b) => contributionStrength(b) - contributionStrength(a))

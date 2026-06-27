@@ -75,11 +75,21 @@ def tiles_for_feature(feature):
 def ensure_tile(tile_id):
     local_path = RAW_DIR / TILE_TEMPLATE.format(lat=tile_id[:3], lon=tile_id[3:])
     if local_path.exists() and local_path.stat().st_size > 0:
+        with rasterio.open(local_path):
+            pass
         return local_path
 
     url = f"{BASE_URL}/{local_path.name}"
     print(f"Downloading {url}", file=sys.stderr)
-    urllib.request.urlretrieve(url, local_path)
+    temp_path = local_path.with_suffix(local_path.suffix + ".tmp")
+    try:
+        urllib.request.urlretrieve(url, temp_path)
+        with rasterio.open(temp_path):
+            pass
+        temp_path.replace(local_path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
     return local_path
 
 

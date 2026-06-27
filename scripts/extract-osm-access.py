@@ -84,10 +84,11 @@ def main():
         print(f"Fetching OSM access for {site_id} ({index + 1}/{len(features)})", file=sys.stderr)
         try:
             payload = fetch_site_payload(feature, args)
-            rows.append(extract_feature(feature, payload, args.buffer_degrees))
         except Exception as exc:
             blockers.append({"site_id": site_id, "error": str(exc)})
             rows.append(blocked_feature(site_id, "blocked_source_unavailable"))
+        else:
+            rows.append(extract_feature(feature, payload, args.buffer_degrees))
 
         if index < len(features) - 1:
             time.sleep(args.throttle_seconds)
@@ -434,7 +435,7 @@ def element_points(element):
 def road_access_score(nearest_road):
     distance = nearest_road["distance_km"]
     if distance is None:
-        return None
+        return 0
     highway = nearest_road["highway"]
     if distance <= 0.5:
         base = 90
@@ -455,7 +456,7 @@ def road_access_score(nearest_road):
 def settlement_proximity_score(nearest_settlement):
     distance = nearest_settlement["distance_km"]
     if distance is None:
-        return None
+        return 0
     if distance <= 1:
         return 88
     if distance <= 3:
@@ -492,7 +493,7 @@ def blocked_feature(site_id, status):
 
 def source_metadata(args, processed_count):
     return {
-        "dataset_id": "openstreetmap_overpass_access",
+        "dataset_id": "osm_access",
         "source_mode": "overpass",
         "name": "OpenStreetMap road and settlement access proxies via Overpass API",
         "source_url": "https://www.openstreetmap.org/copyright",
@@ -510,7 +511,7 @@ def source_metadata(args, processed_count):
 
 def geofabrik_source_metadata(args, processed_count, pbf_sha256, candidates):
     return {
-        "dataset_id": "osm_geofabrik_ethiopia",
+        "dataset_id": "osm_access",
         "source_mode": "geofabrik_pbf",
         "name": "OpenStreetMap Ethiopia extract via Geofabrik",
         "source_url": "https://www.openstreetmap.org/copyright",

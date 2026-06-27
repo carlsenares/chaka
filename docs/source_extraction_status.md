@@ -252,9 +252,13 @@ The raw cache is gitignored. The source-derived summary JSON is small enough to 
 `data/features/site_features.json` currently has mixed quality:
 
 ```text
-feature_version: mixed_land_cover_forest_rainfall_soil_population_access_v0
-feature_quality: land_cover_forest_rainfall_soil_population_access_source_derived_other_fields_demo_mock
+feature_version: mixed_<source-derived-groups>_v0
+feature_quality: <source-derived-groups>_source_derived_other_fields_demo_mock
 ```
+
+The exact `feature_version` and `feature_quality` values are row-dependent,
+because a candidate can have valid pixels or mapped features for some source
+groups and blocked/no-valid-pixel status for others.
 
 This means:
 

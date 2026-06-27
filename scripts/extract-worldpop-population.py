@@ -25,7 +25,8 @@ def main():
     args = parse_args()
     candidates = json.loads(args.candidates.read_text())
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    args.raw_path.parent.mkdir(parents=True, exist_ok=True)
+    validate_worldpop_source_args(args)
 
     if args.dry_run:
         print_plan(args, candidates)
@@ -70,11 +71,29 @@ def print_plan(args, candidates):
 
 def ensure_raster(args):
     if args.raw_path.exists() and args.raw_path.stat().st_size > 0:
+        with rasterio.open(args.raw_path):
+            pass
         return args.raw_path
 
     print(f"Downloading {args.url}", file=sys.stderr)
-    urllib.request.urlretrieve(args.url, args.raw_path)
+    temp_path = args.raw_path.with_suffix(args.raw_path.suffix + ".tmp")
+    try:
+        urllib.request.urlretrieve(args.url, temp_path)
+        with rasterio.open(temp_path):
+            pass
+        temp_path.replace(args.raw_path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
     return args.raw_path
+
+
+def validate_worldpop_source_args(args):
+    expected_year_token = str(args.year)
+    if expected_year_token not in args.url or expected_year_token not in args.raw_path.name:
+        raise SystemExit(
+            "--year must match both --url and --raw-path so metadata stays aligned with the raster source."
+        )
 
 
 def extract_feature(feature, raster_path):

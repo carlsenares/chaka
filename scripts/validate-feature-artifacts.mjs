@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
+import { constants } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -10,6 +11,7 @@ const predictionsPath = path.join(root, "models/artifacts/site_predictions.json"
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
+const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -62,9 +64,12 @@ async function main() {
   const osmAccessBySite = await loadOptionalExtractBySite(osmAccessPath);
   const worldPopBySite = await loadOptionalExtractBySite(worldPopPath);
   const gfwBySite = await loadOptionalExtractBySite(gfwPath);
+  const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
-  validateRows("feature", features, candidateIds, (row) => validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite }));
+  validateRows("feature", features, candidateIds, (row) =>
+    validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite, soilGridsBySite })
+  );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
 
   if (errors.length > 0) {
@@ -80,11 +85,19 @@ async function main() {
 
 async function loadOptionalExtractBySite(filePath) {
   try {
-    const extract = JSON.parse(await readFile(filePath, "utf8"));
-    if (!Array.isArray(extract.features)) return new Map();
-    return new Map(extract.features.map((feature) => [feature.site_id, feature]));
+    await access(filePath, constants.F_OK);
   } catch {
     return new Map();
+  }
+
+  try {
+    const extract = JSON.parse(await readFile(filePath, "utf8"));
+    if (!Array.isArray(extract.features)) {
+      throw new Error("missing features array");
+    }
+    return new Map(extract.features.map((feature) => [feature.site_id, feature]));
+  } catch (error) {
+    throw new Error(`Could not read optional source extract ${path.relative(root, filePath)}: ${error.message}`);
   }
 }
 
@@ -138,6 +151,7 @@ function validateFeature(row, extracts) {
   validateOsmAccessSync(row, extracts.osmAccessBySite.get(row.site_id));
   validateWorldPopSync(row, extracts.worldPopBySite.get(row.site_id));
   validateGfwSync(row, extracts.gfwBySite.get(row.site_id));
+  validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -245,6 +259,41 @@ function validateGfwSync(row, gfw) {
   }
   if (!sameNullableNumber(gfw.recent_loss_pct_of_baseline, integrated.recent_loss_pct_of_baseline)) {
     addError(`feature ${row.site_id}: integrated GFW recent_loss_pct_of_baseline is stale`);
+  }
+}
+
+function validateSoilGridsSync(row, soilGrids) {
+  if (!soilGrids) return;
+
+  if (soilGrids.source_status === "source_derived") {
+    if (!isScore(soilGrids.soil_organic_carbon_score)) {
+      addError(`soilgrids ${row.site_id}: soil_organic_carbon_score must be 0-100`);
+    }
+    if (!isScore(soilGrids.soil_ph_suitability_score)) {
+      addError(`soilgrids ${row.site_id}: soil_ph_suitability_score must be 0-100`);
+    }
+    if (!Number.isInteger(Number(soilGrids.soilgrids_valid_pixel_count_min)) || Number(soilGrids.soilgrids_valid_pixel_count_min) <= 0) {
+      addError(`soilgrids ${row.site_id}: soilgrids_valid_pixel_count_min must be a positive integer`);
+    }
+  }
+
+  const integrated = row.source_extracts?.soil;
+  if (!integrated || integrated.dataset_id !== "soilgrids") {
+    addError(`feature ${row.site_id}: missing integrated soilgrids source extract`);
+    return;
+  }
+
+  if (!sameNullableNumber(soilGrids.soil_organic_carbon_score, integrated.soil_organic_carbon_score)) {
+    addError(`feature ${row.site_id}: integrated SoilGrids soil_organic_carbon_score is stale`);
+  }
+  if (!sameNullableNumber(soilGrids.soil_ph_suitability_score, integrated.soil_ph_suitability_score)) {
+    addError(`feature ${row.site_id}: integrated SoilGrids soil_ph_suitability_score is stale`);
+  }
+  if (!sameNullableNumber(soilGrids.soilgrids_soc_0_30cm_g_kg_mean, integrated.soilgrids_soc_0_30cm_g_kg_mean)) {
+    addError(`feature ${row.site_id}: integrated SoilGrids SOC mean is stale`);
+  }
+  if (!sameNullableNumber(soilGrids.soilgrids_ph_h2o_0_30cm_mean, integrated.soilgrids_ph_h2o_0_30cm_mean)) {
+    addError(`feature ${row.site_id}: integrated SoilGrids pH mean is stale`);
   }
 }
 
