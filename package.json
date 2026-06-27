@@ -13,6 +13,8 @@
     "data:soilgrids": "python3 scripts/extract-soilgrids-soil.py",
     "data:soilobs:dry-run": "python3 scripts/extract-soil-observations.py --dry-run",
     "data:soilobs": "python3 scripts/extract-soil-observations.py",
+    "data:gbif:dry-run": "python3 scripts/extract-gbif-biodiversity.py --dry-run",
+    "data:gbif": "python3 scripts/extract-gbif-biodiversity.py",
     "data:worldpop:dry-run": "python3 scripts/extract-worldpop-population.py --dry-run",
     "data:worldpop": "python3 scripts/extract-worldpop-population.py",
     "data:gfw:dry-run": "python3 scripts/extract-gfw-umd-forest-change.py --dry-run",
@@ -32,6 +34,7 @@
     "data:pipeline:geofabrik": "npm run data:pipeline:full:noauth",
     "data:pipeline:full:noauth": "npm run data:registry && npm run data:candidates && npm run data:worldcover && npm run data:chirps && npm run data:soilgrids && npm run data:worldpop && npm run data:gfw && npm run data:osm:geofabrik && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
     "data:pipeline:soilobs": "npm run data:pipeline:full:noauth && npm run data:soilobs && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
+    "data:pipeline:gbif": "npm run data:gbif && npm run data:features && npm run data:rank && npm run data:candidates:validate && npm run data:artifacts:validate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

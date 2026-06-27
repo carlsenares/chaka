@@ -13,6 +13,7 @@ const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_pop
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
+const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
 
 const featureRequiredFields = [
   "site_id",
@@ -67,10 +68,18 @@ async function main() {
   const gfwBySite = await loadOptionalExtractBySite(gfwPath);
   const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
+  const gbifBiodiversityBySite = await loadOptionalExtractBySite(gbifBiodiversityPath);
 
   const candidateIds = new Set(candidates.features.map((feature) => feature.properties.site_id));
   validateRows("feature", features, candidateIds, (row) =>
-    validateFeature(row, { osmAccessBySite, worldPopBySite, gfwBySite, soilGridsBySite, soilObservationsBySite })
+    validateFeature(row, {
+      osmAccessBySite,
+      worldPopBySite,
+      gfwBySite,
+      soilGridsBySite,
+      soilObservationsBySite,
+      gbifBiodiversityBySite,
+    })
   );
   validateRows("prediction", predictions, candidateIds, validatePrediction);
 
@@ -155,6 +164,7 @@ function validateFeature(row, extracts) {
   validateGfwSync(row, extracts.gfwBySite.get(row.site_id));
   validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
   validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
+  validateGbifBiodiversitySync(row, extracts.gbifBiodiversityBySite.get(row.site_id));
 }
 
 function validateOsmAccessSync(row, osmAccess) {
@@ -398,6 +408,113 @@ function validateSoilObservationsSync(row, soilObservations) {
   }
 }
 
+function validateGbifBiodiversitySync(row, gbifBiodiversity) {
+  if (!gbifBiodiversity) {
+    if (row.source_extracts?.biodiversity_observations?.status && row.source_extracts.biodiversity_observations.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing gbif_biodiversity source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "insufficient_records", "blocked_source_unavailable", "not_processed_limit"]);
+  if (!validStatuses.has(gbifBiodiversity.source_status)) {
+    addError(`gbif biodiversity ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "occurrence_count",
+    "unfiltered_occurrence_count",
+    "rejected_or_filtered_occurrence_count",
+    "species_count",
+    "eod_ebird_occurrence_count",
+    "eod_ebird_species_count",
+    "bale_plant_occurrence_count",
+    "bale_plant_species_count",
+    "plant_species_count",
+    "threatened_or_near_threatened_species_count",
+    "recent_occurrence_count_5y",
+  ]) {
+    if (!Number.isInteger(Number(gbifBiodiversity[field])) || Number(gbifBiodiversity[field]) < 0) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  if (!isScore(gbifBiodiversity.sampling_bias_risk_score)) {
+    addError(`gbif biodiversity ${row.site_id}: sampling_bias_risk_score must be 0-100`);
+  }
+  if (gbifBiodiversity.biodiversity_context_score !== null && !isScore(gbifBiodiversity.biodiversity_context_score)) {
+    addError(`gbif biodiversity ${row.site_id}: biodiversity_context_score must be null or 0-100`);
+  }
+  if (gbifBiodiversity.observation_density_per_km2 !== null && !isNonNegativeNumber(gbifBiodiversity.observation_density_per_km2)) {
+    addError(`gbif biodiversity ${row.site_id}: observation_density_per_km2 must be nonnegative`);
+  }
+  for (const field of ["coordinate_uncertainty_median_m", "coordinate_uncertainty_p90_m"]) {
+    if (gbifBiodiversity[field] !== null && !isNonNegativeNumber(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be nonnegative`);
+    }
+  }
+  for (const field of ["gbif_query_hash", "gbif_query_url"]) {
+    if (gbifBiodiversity[field] !== null && typeof gbifBiodiversity[field] !== "string") {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be null or a string`);
+    }
+  }
+  for (const field of ["basis_counts", "license_counts"]) {
+    if (!isPlainObject(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be an object`);
+    }
+  }
+  for (const field of ["dataset_counts_top", "top_taxa"]) {
+    if (!Array.isArray(gbifBiodiversity[field])) {
+      addError(`gbif biodiversity ${row.site_id}: ${field} must be an array`);
+    }
+  }
+
+  const integrated = row.source_extracts?.biodiversity_observations;
+  if (!integrated || integrated.dataset_id !== "gbif_biodiversity") {
+    addError(`feature ${row.site_id}: missing integrated gbif_biodiversity source extract`);
+    return;
+  }
+
+  if (gbifBiodiversity.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated gbif_biodiversity status is stale`);
+  }
+
+  for (const field of ["gbif_query_hash", "gbif_query_url"]) {
+    if ((gbifBiodiversity[field] ?? null) !== (integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+
+  for (const field of [
+    "occurrence_count",
+    "unfiltered_occurrence_count",
+    "rejected_or_filtered_occurrence_count",
+    "species_count",
+    "eod_ebird_occurrence_count",
+    "eod_ebird_species_count",
+    "bale_plant_occurrence_count",
+    "bale_plant_species_count",
+    "plant_species_count",
+    "threatened_or_near_threatened_species_count",
+    "recent_occurrence_count_5y",
+    "observation_density_per_km2",
+    "coordinate_uncertainty_median_m",
+    "coordinate_uncertainty_p90_m",
+    "sampling_bias_risk_score",
+    "biodiversity_context_score",
+  ]) {
+    if (!sameNullableNumber(gbifBiodiversity[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+
+  for (const field of ["basis_counts", "license_counts", "dataset_counts_top", "top_taxa"]) {
+    if (JSON.stringify(gbifBiodiversity[field] ?? null) !== JSON.stringify(integrated[field] ?? null)) {
+      addError(`feature ${row.site_id}: integrated gbif_biodiversity ${field} is stale`);
+    }
+  }
+}
+
 function validatePrediction(row) {
   for (const field of predictionRequiredFields) {
     if (!(field in row)) addError(`prediction ${row.site_id}: missing "${field}"`);
@@ -431,6 +548,10 @@ function isScore(value) {
 
 function isNonNegativeNumber(value) {
   return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) && Number(value) >= 0;
+}
+
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function sameNullableNumber(left, right) {

@@ -11,6 +11,7 @@ const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_ch
 const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfall.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
+const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const jsonPath = path.join(root, "data/features/site_features.json");
@@ -184,6 +185,7 @@ async function main() {
   const chirpsBySite = await loadExtractBySite(chirpsPath);
   const soilGridsBySite = await loadExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
+  const gbifBiodiversityBySite = await loadExtractBySite(gbifBiodiversityPath, { optional: true });
   const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
   const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
   const features = candidates.features.map((candidate, index) =>
@@ -194,6 +196,7 @@ async function main() {
       chirps: chirpsBySite.get(candidate.properties.site_id),
       soilGrids: soilGridsBySite.get(candidate.properties.site_id),
       soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
+      gbifBiodiversity: gbifBiodiversityBySite.get(candidate.properties.site_id),
       worldPop: worldPopBySite.get(candidate.properties.site_id),
       osmAccess: osmAccessBySite.get(candidate.properties.site_id),
     })
@@ -229,6 +232,7 @@ function buildFeature(candidate, index, extracts) {
   const chirpsFeature = extracts.chirps;
   const soilGridsFeature = extracts.soilGrids;
   const soilObservationsFeature = extracts.soilObservations;
+  const gbifBiodiversityFeature = extracts.gbifBiodiversity;
   const worldPopFeature = extracts.worldPop;
   const osmAccessFeature = extracts.osmAccess;
   const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
@@ -237,6 +241,7 @@ function buildFeature(candidate, index, extracts) {
   const hasChirps = chirpsFeature?.source_status === "source_derived";
   const hasSoilGrids = soilGridsFeature?.source_status === "source_derived";
   const hasSoilObservations = ["source_derived", "partial_source_derived"].includes(soilObservationsFeature?.source_status);
+  const hasGbifBiodiversity = gbifBiodiversityFeature?.source_status === "source_derived";
   const hasWorldPop = worldPopFeature?.source_status === "source_derived";
   const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
   const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
@@ -285,6 +290,7 @@ function buildFeature(candidate, index, extracts) {
     (hasChirps ? 8 : 0) +
     (hasSoilGrids ? 8 : 0) +
     (hasSoilObservations && soilObservationsFeature.soil_observation_support_score >= 50 ? 3 : 0) +
+    (hasGbifBiodiversity ? 3 : 0) +
     (hasWorldPop ? 6 : 0) +
     (hasUsableOsmAccess ? 4 : 0)
   );
@@ -295,6 +301,7 @@ function buildFeature(candidate, index, extracts) {
     hasChirps ? "rainfall" : null,
     hasSoilGrids ? "soil" : null,
     hasSoilObservations ? "soil_observations" : null,
+    hasGbifBiodiversity ? "biodiversity_observations" : null,
     hasWorldPop ? "population" : null,
     hasUsableOsmAccess ? "access" : null,
   ].filter(Boolean);
@@ -432,6 +439,37 @@ function buildFeature(candidate, index, extracts) {
         : {
             dataset_id: "soil_observations",
             status: soilObservationsFeature?.source_status ?? "not_extracted",
+          },
+      biodiversity_observations: gbifBiodiversityFeature
+        ? {
+            dataset_id: "gbif_biodiversity",
+            status: gbifBiodiversityFeature.source_status,
+            gbif_query_hash: gbifBiodiversityFeature.gbif_query_hash,
+            gbif_query_url: gbifBiodiversityFeature.gbif_query_url,
+            occurrence_count: gbifBiodiversityFeature.occurrence_count,
+            unfiltered_occurrence_count: gbifBiodiversityFeature.unfiltered_occurrence_count,
+            rejected_or_filtered_occurrence_count: gbifBiodiversityFeature.rejected_or_filtered_occurrence_count,
+            species_count: gbifBiodiversityFeature.species_count,
+            eod_ebird_occurrence_count: gbifBiodiversityFeature.eod_ebird_occurrence_count,
+            eod_ebird_species_count: gbifBiodiversityFeature.eod_ebird_species_count,
+            bale_plant_occurrence_count: gbifBiodiversityFeature.bale_plant_occurrence_count,
+            bale_plant_species_count: gbifBiodiversityFeature.bale_plant_species_count,
+            plant_species_count: gbifBiodiversityFeature.plant_species_count,
+            threatened_or_near_threatened_species_count: gbifBiodiversityFeature.threatened_or_near_threatened_species_count,
+            recent_occurrence_count_5y: gbifBiodiversityFeature.recent_occurrence_count_5y,
+            observation_density_per_km2: gbifBiodiversityFeature.observation_density_per_km2,
+            basis_counts: gbifBiodiversityFeature.basis_counts,
+            license_counts: gbifBiodiversityFeature.license_counts,
+            dataset_counts_top: gbifBiodiversityFeature.dataset_counts_top,
+            top_taxa: gbifBiodiversityFeature.top_taxa,
+            coordinate_uncertainty_median_m: gbifBiodiversityFeature.coordinate_uncertainty_median_m,
+            coordinate_uncertainty_p90_m: gbifBiodiversityFeature.coordinate_uncertainty_p90_m,
+            sampling_bias_risk_score: gbifBiodiversityFeature.sampling_bias_risk_score,
+            biodiversity_context_score: gbifBiodiversityFeature.biodiversity_context_score,
+          }
+        : {
+            dataset_id: "gbif_biodiversity",
+            status: "not_extracted",
           },
       population: hasWorldPop
         ? {

@@ -13,6 +13,7 @@ This document tracks which feature groups are source-derived and which are still
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
 | Terrain | `slope_mean_deg`, `slope_risk_score` | Placeholder, extractor scaffolded | SRTMGL1 | Script lists required official tiles and extracts terrain once local official `.hgt`/`.hgt.zip` tiles are supplied. |
 | Soil | `soil_organic_carbon_score`, `soil_ph_suitability_score` | Source-derived for 15/16 sites | SoilGrids 2.0 topsoil SOC and pH | Extracted from official ISRIC WebDAV/VRT rasters. `SET-001` has no valid soil pixels, consistent with water-dominant WorldCover. |
+| Biodiversity observations | `source_extracts.biodiversity_observations` | Optional source-derived context | GBIF occurrence search API | Observation-density/species context only. Does not overwrite ranker fields or imply absence where records are sparse. |
 | Population/livelihood | `population_pressure_score` | Source-derived for 15/16 sites | WorldPop Ethiopia 2020 UN-adjusted population counts | Extracted from official WorldPop 100m GeoTIFF. `SET-001` has no valid population pixels and falls back to OSM's zero-valued mapped population proxy. |
 | Access | `road_access_score`, `settlement_proximity_score` | Partial source-derived, reproducible local extract | OSM via Geofabrik Ethiopia `.osm.pbf` | Current Geofabrik artifact has road scores for 13/16 sites and settlement scores for 12/16 sites. Individual null fields still fall back to deterministic placeholders in `site_features.json`. |
 | Safeguards | `protected_area_overlap_pct`, `safeguard_risk_score` | Placeholder | Pending WDPA | WDPA access terms must be checked before committing raw data. |
@@ -156,6 +157,56 @@ Current soil-observation artifact coverage:
 - Nearby observations found for 5/16 candidate sites.
 - Current nearby matches are from WoSIS; AfSIS Phase I data fetched successfully but had no topsoil observations within the default 25 km candidate radius.
 - Observation rows are context/provenance only and do not change current priority scores.
+
+GBIF biodiversity dry-run command:
+
+```bash
+npm run data:gbif:dry-run
+```
+
+GBIF biodiversity command:
+
+```bash
+npm run data:gbif
+```
+
+GBIF biodiversity script:
+
+```text
+scripts/extract-gbif-biodiversity.py
+```
+
+GBIF biodiversity output:
+
+```text
+data/features/source_extracts/gbif_biodiversity.json
+```
+
+GBIF raw cache:
+
+```text
+data/raw/gbif_biodiversity/
+```
+
+The GBIF lane queries candidate-site polygons through the public occurrence
+search API and filters to Ethiopia records with coordinates, no GBIF geospatial
+issue flag, present occurrence status, 2000-current event dates, coordinate
+uncertainty up to 5 km, accepted Creative Commons licenses, and observation or
+specimen basis types. It tags EOD/eBird and Bale Mountains plant-record subsets
+when those GBIF dataset keys appear in candidate polygons.
+
+GBIF rows are embedded under `source_extracts.biodiversity_observations`.
+They are biodiversity observation context only. Sparse or missing records mean
+the source has insufficient local observations for this polygon, not that the
+site has low biodiversity. The current PR does not change the rule-based ranker
+or top-level feature fields from GBIF.
+
+Current GBIF-derived artifact coverage:
+
+- Source-derived biodiversity context scores: 0/16 sites.
+- Insufficient-record context rows: 16/16 sites.
+- `SWE-007` currently has 8 filtered occurrences across 8 species; the other candidate polygons have zero filtered GBIF records.
+- Records with missing or greater-than-5-km coordinate uncertainty, disallowed licenses, disallowed basis types, geospatial issues, non-present status, or dates before 2000 are filtered out before summarization.
 
 WorldPop population dry-run command:
 
@@ -311,6 +362,7 @@ This means:
 - soil SOC and pH suitability fields are source-derived from SoilGrids where valid soil pixels exist,
 - population pressure is source-derived from WorldPop where valid population pixels exist,
 - OSM access fields are source-derived where Overpass or Geofabrik returned usable mapped features,
+- GBIF biodiversity observation context is source-derived where enough occurrence/species records exist,
 - all other numerical environmental/social fields are deterministic placeholders,
 - rankings remain `rule_based_fallback`,
 - the output is suitable for integration and demo scaffolding, not final evidence claims.

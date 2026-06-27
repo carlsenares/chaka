@@ -110,6 +110,32 @@
         "soilgrids_ph_delta": null,
         "nearest_observations": []
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "d81cc7853c0e5c53ffb550f0",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.02369+4.433851%2C+36.06869+4.433851%2C+36.06869+4.478851%2C+36.02369+4.478851%2C+36.02369+4.433851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "no_valid_pixels"
@@ -320,6 +346,32 @@
           }
         ]
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "1613cd916c408cc1a68c80ef",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.42869+5.018851%2C+36.47369+5.018851%2C+36.47369+5.063851%2C+36.42869+5.063851%2C+36.42869+5.018851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -505,6 +557,32 @@
         "soilgrids_ph_delta": null,
         "nearest_observations": []
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "0dc7def53f9b334d794f13e2",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.56369+5.378851%2C+36.60869+5.378851%2C+36.60869+5.423851%2C+36.56369+5.423851%2C+36.56369+5.378851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -687,6 +765,32 @@
         "soilgrids_ph_delta": null,
         "nearest_observations": []
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "125f839688f9e4f1d05c658c",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.11369+5.648851%2C+36.15869+5.648851%2C+36.15869+5.693851%2C+36.11369+5.693851%2C+36.11369+5.648851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -867,6 +971,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "ff6995daf61393ca70e0fca5",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.11369+5.918851%2C+36.15869+5.918851%2C+36.15869+5.963851%2C+36.11369+5.963851%2C+36.11369+5.918851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1077,6 +1207,32 @@
             ]
           }
         ]
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "1accd07a3b0b8033046e3c65",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.29369+6.188851%2C+36.33869+6.188851%2C+36.33869+6.233851%2C+36.29369+6.233851%2C+36.29369+6.188851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1290,6 +1446,32 @@
             ]
           }
         ]
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "b02b6a5727d4d0189d207429",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.47369+6.503851%2C+36.51869+6.503851%2C+36.51869+6.548851%2C+36.47369+6.548851%2C+36.47369+6.503851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1552,6 +1734,32 @@
           }
         ]
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "a502d41bd513010cab1ba6ad",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2837.68869+7.133851%2C+37.73369+7.133851%2C+37.73369+7.178851%2C+37.68869+7.178851%2C+37.68869+7.133851%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 1,
+        "rejected_or_filtered_occurrence_count": 1,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -1732,6 +1940,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "221b927cb010f536d84fde78",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.302923+5.345434%2C+35.347923+5.345434%2C+35.347923+5.390434%2C+35.302923+5.390434%2C+35.302923+5.345434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -1914,6 +2148,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "cc4ec9becf67673972f53c1c",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.302923+5.975434%2C+35.347923+5.975434%2C+35.347923+6.020434%2C+35.302923+6.020434%2C+35.302923+5.975434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -2099,6 +2359,32 @@
         "soilgrids_ph_delta": null,
         "nearest_observations": []
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "6fe358b1e8c2fd0ed5fc329d",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.302923+6.425434%2C+35.347923+6.425434%2C+35.347923+6.470434%2C+35.302923+6.470434%2C+35.302923+6.425434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 6,
+        "rejected_or_filtered_occurrence_count": 6,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2280,6 +2566,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "648f0f5d6bdd7721ab3354e2",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2837.102923+6.695434%2C+37.147923+6.695434%2C+37.147923+6.740434%2C+37.102923+6.740434%2C+37.102923+6.695434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -2466,6 +2778,32 @@
         "soilgrids_ph_delta": null,
         "nearest_observations": []
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "40fb133eb3203aa0081f4532",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.797923+6.920434%2C+35.842923+6.920434%2C+35.842923+6.965434%2C+35.797923+6.965434%2C+35.797923+6.920434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -2647,6 +2985,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "cc889af878754a8d6611630b",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.977923+7.100434%2C+36.022923+7.100434%2C+36.022923+7.145434%2C+35.977923+7.145434%2C+35.977923+7.100434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
@@ -2844,6 +3208,77 @@
           }
         ]
       },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "bb7270bfd0b6f725ba0cdc44",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2836.247923+7.325434%2C+36.292923+7.325434%2C+36.292923+7.370434%2C+36.247923+7.370434%2C+36.247923+7.325434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 8,
+        "unfiltered_occurrence_count": 140,
+        "rejected_or_filtered_occurrence_count": 132,
+        "species_count": 8,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 5,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 8,
+        "observation_density_per_km2": 0.321,
+        "basis_counts": {
+          "HUMAN_OBSERVATION": 8
+        },
+        "license_counts": {
+          "http://creativecommons.org/publicdomain/zero/1.0/legalcode": 8
+        },
+        "dataset_counts_top": [
+          {
+            "dataset_key": "50c9509d-22c7-4a22-a47d-8c48425ef4a7",
+            "dataset_title": "iNaturalist research-grade observations",
+            "publishing_org_key": "28eb1a3f-1c15-4a95-931a-4af90ecb574d",
+            "license": "http://creativecommons.org/publicdomain/zero/1.0/legalcode",
+            "count": 8
+          }
+        ],
+        "top_taxa": [
+          {
+            "taxon": "Momordica foetida",
+            "count": 1
+          },
+          {
+            "taxon": "Hygrophila auriculata",
+            "count": 1
+          },
+          {
+            "taxon": "Palpopleura lucia",
+            "count": 1
+          },
+          {
+            "taxon": "Palpopleura portia",
+            "count": 1
+          },
+          {
+            "taxon": "Veronica abyssinica",
+            "count": 1
+          },
+          {
+            "taxon": "Telchinia lycoa",
+            "count": 1
+          },
+          {
+            "taxon": "Cyperus distans",
+            "count": 1
+          },
+          {
+            "taxon": "Cyperus flavescens",
+            "count": 1
+          }
+        ],
+        "coordinate_uncertainty_median_m": 877,
+        "coordinate_uncertainty_p90_m": 1279.9,
+        "sampling_bias_risk_score": 80,
+        "biodiversity_context_score": null
+      },
       "population": {
         "dataset_id": "worldpop_population",
         "status": "source_derived",
@@ -3026,6 +3461,32 @@
         "soilgrids_soc_delta_g_kg": null,
         "soilgrids_ph_delta": null,
         "nearest_observations": []
+      },
+      "biodiversity_observations": {
+        "dataset_id": "gbif_biodiversity",
+        "status": "insufficient_records",
+        "gbif_query_hash": "00282eaa83594a2bdaaf414d",
+        "gbif_query_url": "https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&hasGeospatialIssue=false&occurrenceStatus=PRESENT&country=ET&geometry=POLYGON%28%2835.842923+8.000434%2C+35.887923+8.000434%2C+35.887923+8.045434%2C+35.842923+8.045434%2C+35.842923+8.000434%29%29&eventDate=2000-01-01%2C2026-06-27&coordinateUncertaintyInMeters=0%2C5000&license=CC0_1_0&license=CC_BY_4_0&license=CC_BY_NC_4_0&basisOfRecord=HUMAN_OBSERVATION&basisOfRecord=MACHINE_OBSERVATION&basisOfRecord=MATERIAL_SAMPLE&basisOfRecord=PRESERVED_SPECIMEN",
+        "occurrence_count": 0,
+        "unfiltered_occurrence_count": 0,
+        "rejected_or_filtered_occurrence_count": 0,
+        "species_count": 0,
+        "eod_ebird_occurrence_count": 0,
+        "eod_ebird_species_count": 0,
+        "bale_plant_occurrence_count": 0,
+        "bale_plant_species_count": 0,
+        "plant_species_count": 0,
+        "threatened_or_near_threatened_species_count": 0,
+        "recent_occurrence_count_5y": 0,
+        "observation_density_per_km2": 0,
+        "basis_counts": {},
+        "license_counts": {},
+        "dataset_counts_top": [],
+        "top_taxa": [],
+        "coordinate_uncertainty_median_m": null,
+        "coordinate_uncertainty_p90_m": null,
+        "sampling_bias_risk_score": 100,
+        "biodiversity_context_score": null
       },
       "population": {
         "dataset_id": "worldpop_population",
