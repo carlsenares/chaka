@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type * as Leaflet from "leaflet";
-import type { FeatureCollection, Geometry } from "geojson";
+import type { FeatureCollection, Geometry, Position } from "geojson";
 import {
   getAdminHierarchy,
   getAreaSqKm,
@@ -45,6 +45,20 @@ const ETHIOPIA_BOUNDS: Leaflet.LatLngBoundsExpression = [
 ];
 
 const ETHIOPIA_CENTER = { lat: 9.145, lng: 40.4897 };
+const WORLD_MASK_RING: Leaflet.LatLngExpression[] = [
+  [-89.9, -179.9],
+  [-89.9, 179.9],
+  [89.9, 179.9],
+  [89.9, -179.9],
+];
+const NEIGHBOR_COUNTRY_LABELS = [
+  { name: "Sudan", position: [13.2, 34.8] },
+  { name: "South Sudan", position: [6.9, 32.9] },
+  { name: "Kenya", position: [3.2, 38.4] },
+  { name: "Somalia", position: [6.3, 47.0] },
+  { name: "Eritrea", position: [14.8, 39.2] },
+  { name: "Djibouti", position: [11.7, 42.7] },
+] satisfies Array<{ name: string; position: [number, number] }>;
 
 const BASEMAPS = {
   map: {
@@ -74,6 +88,7 @@ export function EthiopiaPriorityMap({
 }: EthiopiaPriorityMapProps) {
   const [adminBoundaries, setAdminBoundaries] =
     useState<FeatureCollection<Geometry, AdminBoundaryProperties> | null>(null);
+  const [admin0Boundary, setAdmin0Boundary] = useState<FeatureCollection<Geometry> | null>(null);
   const [boundaryStatus, setBoundaryStatus] = useState<GeoDataStatus>("loading");
   const joinedBoundaries = useMemo(() => {
     if (!adminBoundaries) {
@@ -92,6 +107,8 @@ export function EthiopiaPriorityMap({
   const mapRef = useRef<Leaflet.Map | null>(null);
   const leafletRef = useRef<typeof Leaflet | null>(null);
   const tileLayerRef = useRef<Leaflet.TileLayer | null>(null);
+  const focusMaskLayerRef = useRef<Leaflet.Polygon | null>(null);
+  const countryLabelLayerRef = useRef<Leaflet.LayerGroup | null>(null);
   const boundaryLayerRef = useRef<Leaflet.GeoJSON | null>(null);
   const selectedLabelMarkerRef = useRef<Leaflet.Marker | null>(null);
 
@@ -171,6 +188,12 @@ export function EthiopiaPriorityMap({
         scrollWheelZoom: false,
         zoomControl: true,
       });
+      map.createPane("ethiopiaContextMaskPane");
+      const maskPane = map.getPane("ethiopiaContextMaskPane");
+      if (maskPane) {
+        maskPane.style.zIndex = "330";
+        maskPane.style.pointerEvents = "none";
+      }
 
       map.fitBounds(ETHIOPIA_BOUNDS, { padding: [18, 18] });
       mapRef.current = map;
@@ -188,9 +211,13 @@ export function EthiopiaPriorityMap({
       cancelled = true;
       if (mapRef.current) {
         selectedLabelMarkerRef.current?.remove();
+        focusMaskLayerRef.current?.remove();
+        countryLabelLayerRef.current?.remove();
         mapRef.current.remove();
         mapRef.current = null;
         tileLayerRef.current = null;
+        focusMaskLayerRef.current = null;
+        countryLabelLayerRef.current = null;
         boundaryLayerRef.current = null;
         selectedLabelMarkerRef.current = null;
       }
@@ -204,11 +231,15 @@ export function EthiopiaPriorityMap({
       try {
         setBoundaryStatus("loading");
         const response = await fetch("/ethiopia_admin_boundaries.geojson");
+        const admin0Response = await fetch("/ethiopia_admin0_boundary.geojson");
         if (!response.ok) throw new Error(`Boundary fetch failed: ${response.status}`);
+        if (!admin0Response.ok) throw new Error(`Admin 0 boundary fetch failed: ${admin0Response.status}`);
         const data = (await response.json()) as FeatureCollection<Geometry, AdminBoundaryProperties>;
+        const admin0Data = (await admin0Response.json()) as FeatureCollection<Geometry>;
         if (cancelled) return;
 
         setAdminBoundaries(data);
+        setAdmin0Boundary(admin0Data);
         setBoundaryStatus(data.features.length > 0 ? "ready" : "empty");
       } catch {
         if (!cancelled) setBoundaryStatus("error");
@@ -236,6 +267,81 @@ export function EthiopiaPriorityMap({
       maxZoom: 19,
     }).addTo(map);
   }, [mode]);
+
+  useEffect(() => {
+    const L = leafletRef.current;
+    const map = mapRef.current;
+    if (!L || !map) return;
+
+    focusMaskLayerRef.current?.remove();
+    countryLabelLayerRef.current?.remove();
+    focusMaskLayerRef.current = null;
+    countryLabelLayerRef.current = null;
+
+    if (effectiveStatus !== "ready" || !admin0Boundary) return;
+
+    const ethiopiaRings = getBoundaryOuterRings(admin0Boundary);
+    if (ethiopiaRings.length === 0) return;
+
+    focusMaskLayerRef.current = L.polygon([WORLD_MASK_RING, ...ethiopiaRings], {
+      pane: "ethiopiaContextMaskPane",
+      stroke: false,
+      fillColor: mode === "satellite" ? "#d4d7d1" : "#f0f1eb",
+      fillOpacity: mode === "satellite" ? 0.58 : 0.48,
+      interactive: false,
+      className: mode === "satellite" ? "ethiopia-context-mask satellite" : "ethiopia-context-mask",
+    }).addTo(map);
+
+    const labelLayer = L.layerGroup();
+    labelLayer.addLayer(
+      L.geoJSON(admin0Boundary, {
+        interactive: false,
+        style: {
+          color: mode === "satellite" ? "#d9eadf" : "#24533c",
+          fill: false,
+          opacity: mode === "satellite" ? 0.82 : 0.72,
+          weight: mode === "satellite" ? 2 : 1.5,
+          className: "ethiopia-country-outline",
+        },
+      }),
+    );
+    labelLayer.addLayer(
+      L.marker([ETHIOPIA_CENTER.lat, ETHIOPIA_CENTER.lng], {
+        interactive: false,
+        keyboard: false,
+        zIndexOffset: 560,
+        icon: L.divIcon({
+          className: "ethiopia-country-label-wrapper",
+          html: '<span class="ethiopia-country-label">Ethiopia</span>',
+        }),
+      }),
+    );
+
+    NEIGHBOR_COUNTRY_LABELS.forEach((label) => {
+      labelLayer.addLayer(
+        L.marker(label.position, {
+          interactive: false,
+          keyboard: false,
+          zIndexOffset: 420,
+          icon: L.divIcon({
+            className: "neighbor-country-label-wrapper",
+            html: `<span class="neighbor-country-label">${escapeHtml(label.name)}</span>`,
+          }),
+        }),
+      );
+    });
+
+    labelLayer.addTo(map);
+    countryLabelLayerRef.current = labelLayer;
+    boundaryLayerRef.current?.bringToFront();
+
+    return () => {
+      focusMaskLayerRef.current?.remove();
+      countryLabelLayerRef.current?.remove();
+      focusMaskLayerRef.current = null;
+      countryLabelLayerRef.current = null;
+    };
+  }, [admin0Boundary, effectiveStatus, mode]);
 
   useEffect(() => {
     const L = leafletRef.current;
@@ -462,6 +568,28 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function getBoundaryOuterRings(boundaries: FeatureCollection<Geometry>) {
+  return boundaries.features.flatMap((feature) => geometryToOuterRings(feature.geometry));
+}
+
+function geometryToOuterRings(geometry: Geometry): Leaflet.LatLngExpression[][] {
+  if (geometry.type === "Polygon") {
+    return geometry.coordinates[0] ? [positionRingToLatLngRing(geometry.coordinates[0])] : [];
+  }
+
+  if (geometry.type === "MultiPolygon") {
+    return geometry.coordinates.flatMap((polygon) =>
+      polygon[0] ? [positionRingToLatLngRing(polygon[0])] : [],
+    );
+  }
+
+  return [];
+}
+
+function positionRingToLatLngRing(ring: Position[]) {
+  return ring.map(([lng, lat]) => [lat, lng] as [number, number]);
 }
 
 function PriorityAreaPanel({

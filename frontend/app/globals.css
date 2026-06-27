@@ -127,6 +127,50 @@ a {
   transition: fill-opacity 220ms ease, stroke-width 220ms ease, stroke 220ms ease;
 }
 
+.ethiopia-context-mask {
+  mix-blend-mode: normal;
+  transition: fill-opacity 220ms ease;
+}
+
+.ethiopia-country-label-wrapper,
+.neighbor-country-label-wrapper {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+.ethiopia-country-label,
+.neighbor-country-label {
+  display: inline-block;
+  min-width: max-content;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ethiopia-country-label {
+  color: #173d2f;
+  font-size: 20px;
+  font-weight: 850;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 7px #fff,
+    0 1px 4px rgb(23 61 47 / 0.22);
+}
+
+.neighbor-country-label {
+  color: rgb(96 101 94 / 0.72);
+  font-size: 12px;
+  font-weight: 650;
+  text-shadow:
+    0 0 3px rgb(255 255 255 / 0.82),
+    0 1px 3px rgb(255 255 255 / 0.75);
+}
+
 .priority-selected-label-wrapper {
   background: transparent;
   border: 0;
@@ -159,6 +203,7 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .priority-boundary,
   .priority-boundary-active,
+  .ethiopia-context-mask,
   .priority-selected-label {
     transition: none;
   }

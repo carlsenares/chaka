@@ -253,6 +253,7 @@ These files are the main frontend data inputs today:
 ```text
 frontend/mockData.js
 frontend/mock_priority_results.json
+frontend/public/ethiopia_admin0_boundary.geojson
 frontend/public/ethiopia_admin_boundaries.geojson
 ```
 
@@ -262,6 +263,9 @@ Current responsibilities:
   impact scores, rationale text, interventions, and export-preview values.
 - `frontend/mock_priority_results.json`: map recommendation results shaped like
   future backend outputs.
+- `frontend/public/ethiopia_admin0_boundary.geojson`: Ethiopia Admin 0 country
+  boundary used only for the map focus mask, country outline, and national
+  visual hierarchy. Source: geoBoundaries ETH ADM0.
 - `frontend/public/ethiopia_admin_boundaries.geojson`: administrative boundary
   polygons used by the map.
 
