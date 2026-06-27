@@ -42,8 +42,9 @@ and `.next/`, scoped to the frontend app.
 
 The app opens directly into the interactive prioritization workspace, not a
 landing page. The workspace shows the Ethiopia map, ranked candidate areas,
-compact selected-area details, prioritization sliders, and the Demo/Backend
-data-source toggle on first load.
+compact selected-area details, a Change Priority Weights action, a collapsed
+Current Priority Weights toggle, and the Demo/Backend data-source toggle on
+first load.
 
 The old landing and step-flow components remain in `frontend/app/page.tsx` for
 future reuse, but the default `step` state is `dashboard`.
@@ -74,6 +75,45 @@ frontend/data/recommendationViewModel.ts
 Use `area.id` or `area.pcode` as stable identifiers when linking to a
 recommendation. Do not parse raw mock data or raw backend sample output directly
 inside route components.
+
+## Change Priority Weights
+
+Priority sliders now live on a dedicated configuration page:
+
+```text
+frontend/app/change-priority-weights/page.tsx
+```
+
+The dashboard links to:
+
+```text
+/change-priority-weights?source=demo
+/change-priority-weights?source=backend
+```
+
+Current weights are persisted in browser local storage with the key:
+
+```text
+chaka.priorityWeights
+```
+
+The shared read/write helpers live in:
+
+```text
+frontend/data/priorityWeightsStorage.ts
+frontend/hooks/usePriorityWeights.ts
+```
+
+The shared slider and compact summary UI live in:
+
+```text
+frontend/components/PriorityWeightControls.tsx
+```
+
+When the user clicks "Re-prioritize", the page saves the selected weights and
+returns to the dashboard. For now, the dashboard recomputes rankings locally for
+Demo mode and preserves Backend Preview sample scores. A TODO in the route marks
+where a future prioritization API call should replace local persistence.
 
 ## Changing Default Slider Values
 
@@ -113,8 +153,9 @@ The frontend currently converts slider values into this shape:
 }
 ```
 
-That conversion happens in `toBackendWeights(...)` in `frontend/app/page.tsx`.
-This is the object that can later be sent to the prioritization agent.
+That conversion happens in `toBackendWeights(...)` in
+`frontend/data/prioritizationConfig.ts`. This is the object that can later be
+sent to the prioritization agent.
 
 ## Mock Ranking Logic
 

@@ -47,3 +47,7 @@ export const scoreLabels = {
   livelihoods: "Livelihood benefit",
   forestLoss: "Forest-loss risk",
 };
+
+export function toBackendWeights(weights: ObjectiveWeights) {
+  return Object.fromEntries(objectives.map((objective) => [objective.backendField, weights[objective.key]]));
+}

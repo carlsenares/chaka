@@ -5,11 +5,13 @@ import { useEffect, useMemo, useState } from "react";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
 import type { DataSourceMode } from "@/data/atlasViewModel";
 import { findRecommendationArea, getRecommendationWorkspace } from "@/data/recommendationViewModel";
-import { defaultObjectiveWeights, scoreLabels } from "@/data/prioritizationConfig";
+import { scoreLabels } from "@/data/prioritizationConfig";
+import { usePriorityWeights } from "@/hooks/usePriorityWeights";
 import { getPriorityScoreRange, priorityColor, priorityTextColor } from "@/priorityColor";
 
 export function RecommendationDetailClient({ areaId }: { areaId: string }) {
   const [dataSourceMode, setDataSourceMode] = useState<DataSourceMode>("demo");
+  const { objectiveWeights } = usePriorityWeights();
   const decodedAreaId = decodeURIComponent(areaId);
 
   useEffect(() => {
@@ -20,8 +22,8 @@ export function RecommendationDetailClient({ areaId }: { areaId: string }) {
   }, []);
 
   const { viewModel, rankedAreas, priorityResults } = useMemo(
-    () => getRecommendationWorkspace(dataSourceMode, defaultObjectiveWeights),
-    [dataSourceMode],
+    () => getRecommendationWorkspace(dataSourceMode, objectiveWeights),
+    [dataSourceMode, objectiveWeights],
   );
   const area = findRecommendationArea(rankedAreas, decodedAreaId);
   const region = area ? viewModel.regions.find((item) => item.id === area.regionId) : undefined;

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
+import { PriorityWeightSliders } from "@/components/PriorityWeightControls";
 import { FEATURES } from "@/config/features";
 import {
   atlasViewModels,
@@ -16,7 +17,8 @@ import {
   type RegionViewModel,
 } from "@/data/atlasViewModel";
 import { buildPriorityResultsForAreas } from "@/data/recommendationViewModel";
-import { defaultObjectiveWeights, objectives, scoreLabels } from "@/data/prioritizationConfig";
+import { objectives, scoreLabels, toBackendWeights } from "@/data/prioritizationConfig";
+import { usePriorityWeights } from "@/hooks/usePriorityWeights";
 import type { PriorityResult } from "@/mapRenderer";
 import {
   getPriorityScoreRange,
@@ -44,7 +46,7 @@ const stepLabels = ["Start", "Region", "Weights", "Analysis", "Dashboard", "Deta
 export default function Home() {
   const [step, setStep] = useState<Step>("dashboard");
   const [dataSourceMode, setDataSourceMode] = useState<DataSourceMode>("demo");
-  const [objectiveWeights, setObjectiveWeights] = useState<ObjectiveWeights>(defaultObjectiveWeights);
+  const { objectiveWeights, updateObjectiveWeight, resetObjectiveWeights } = usePriorityWeights();
   const viewModel = atlasViewModels[dataSourceMode];
   const [selectedRegion, setSelectedRegion] = useState(viewModel.regions[1].id);
   const [selectedRankedAreaId, setSelectedRankedAreaId] = useState("maji-bench-forest-edge");
@@ -77,6 +79,14 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    const topArea = areas[0];
+    if (!topArea || selectedRankedAreaId === topArea.id) return;
+
+    setSelectedRankedAreaId(topArea.id);
+    setSelectedMapAreaId(topArea.pcode);
+  }, [areas]);
+
   function selectRegion(regionId: string) {
     const nextAreas = viewModel.areas
       .filter((area) => area.regionId === regionId)
@@ -94,15 +104,8 @@ export default function Home() {
     setSelectedMapAreaId(nextArea?.pcode);
   }
 
-  function updateObjectiveWeight(key: ObjectiveKey, value: number) {
-    setObjectiveWeights((current) => ({ ...current, [key]: value }));
-  }
-
-  function resetObjectiveWeights() {
-    setObjectiveWeights(defaultObjectiveWeights);
-  }
-
   function runAnalysis() {
+    // TODO: Replace this local scoring refresh with a backend prioritization request.
     setStep("loading");
     window.setTimeout(() => setStep("dashboard"), 900);
   }
@@ -172,8 +175,6 @@ export default function Home() {
             dataSourceMode={dataSourceMode}
             onSelectArea={selectArea}
             onSelectMapArea={setSelectedMapAreaId}
-            onWeightChange={updateObjectiveWeight}
-            onResetWeights={resetObjectiveWeights}
             onChangeDataSource={changeDataSource}
           />
         )}
@@ -451,16 +452,7 @@ function PreferenceSelection({
             </button>
           </div>
 
-          <div className="grid gap-6">
-            {objectives.map((objective) => (
-              <ObjectiveSlider
-                key={objective.key}
-                objective={objective}
-                value={objectiveWeights[objective.key]}
-                onChange={(value) => onWeightChange(objective.key, value)}
-              />
-            ))}
-          </div>
+          <PriorityWeightSliders objectiveWeights={objectiveWeights} onWeightChange={onWeightChange} />
         </div>
 
         <div className="rounded-lg border border-[#d9d0bd] bg-[#fbf7ee] p-5 shadow-sm sm:p-6">
@@ -487,51 +479,6 @@ function PreferenceSelection({
       </div>
       <PageActions onBack={onBack} onNext={onNext} nextLabel="Run weighted prototype analysis" />
     </section>
-  );
-}
-
-function ObjectiveSlider({
-  objective,
-  value,
-  onChange,
-}: {
-  objective: (typeof objectives)[number];
-  value: number;
-  onChange: (value: number) => void;
-}) {
-  const inputId = `objective-${objective.key}`;
-
-  return (
-    <div className="rounded-md border border-[#e7deca] bg-white p-4 transition hover:border-[#bfd3c6]">
-      <div className="mb-3 flex items-start justify-between gap-4">
-        <div>
-          <label htmlFor={inputId} className="font-semibold text-fg">
-            {objective.label}
-          </label>
-          <p className="mt-1 text-sm leading-6 text-muted">{objective.description}</p>
-        </div>
-        <output
-          htmlFor={inputId}
-          className="min-w-14 rounded-full bg-[#e7f0eb] px-3 py-1 text-center text-sm font-semibold text-[#1f6f68]"
-        >
-          {value}
-        </output>
-      </div>
-      <input
-        id={inputId}
-        className="objective-slider"
-        type="range"
-        min="0"
-        max="100"
-        value={value}
-        aria-label={`${objective.label} weight`}
-        onChange={(event) => onChange(Number(event.target.value))}
-      />
-      <div className="mt-2 flex justify-between text-xs text-muted">
-        <span>0</span>
-        <span>100</span>
-      </div>
-    </div>
   );
 }
 
@@ -569,8 +516,6 @@ function Dashboard({
   dataSourceMode,
   onSelectArea,
   onSelectMapArea,
-  onWeightChange,
-  onResetWeights,
   onChangeDataSource,
 }: {
   region: RegionViewModel;
@@ -585,8 +530,6 @@ function Dashboard({
   dataSourceMode: DataSourceMode;
   onSelectArea: (areaId: string) => void;
   onSelectMapArea: (pcode: string | undefined) => void;
-  onWeightChange: (key: ObjectiveKey, value: number) => void;
-  onResetWeights: () => void;
   onChangeDataSource: (mode: DataSourceMode) => void;
 }) {
   const selectedMapResult = priorityResults.find((result) => result.pcode === selectedMapAreaId);
@@ -622,32 +565,43 @@ function Dashboard({
           legendNote={`Thin grey outlines show all loaded Admin 2 boundaries. Heatmap colors are ${viewModel.sourceBadge.toLowerCase()} recommendations joined by PCODE.`}
         />
 
-        <aside className="flex max-h-[calc(100vh-9rem)] flex-col gap-4 overflow-y-auto rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-sm lg:sticky lg:top-4">
-          <section>
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div>
-                <h3 className="text-lg font-semibold text-fg">Ranked candidate areas</h3>
-                <p className="text-sm text-muted">{viewModel.dashboardDataLabel}</p>
-              </div>
-              <span className="rounded-full bg-[#fff9ed] px-3 py-1 text-xs text-muted">{areas.length} areas</span>
-            </div>
-            <RankedCandidateList
-              areas={areas}
-              selectedRankedAreaId={selectedRankedAreaId}
-              dataSourceMode={dataSourceMode}
-              priorityScoreRange={priorityScoreRange}
-              onSelectArea={onSelectArea}
-            />
-          </section>
+        <div className="flex flex-col gap-3 lg:sticky lg:top-4">
+          <aside className="flex max-h-[calc(100vh-12rem)] flex-col gap-4 overflow-y-auto rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-sm">
+            <section>
+              <Link
+                href={`/change-priority-weights?source=${dataSourceMode}`}
+                className="mb-4 inline-flex w-full justify-center rounded-full bg-[#1f6f68] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#185b55]"
+              >
+                Change Priority Weights
+              </Link>
 
-          <SelectedAreaSummary
-            selectedArea={selectedArea}
-            selectedMapArea={selectedMapArea}
-            selectedMapResult={selectedMapResult}
-            selectedMapIsRecommendation={selectedMapIsRecommendation}
-            dataSourceMode={dataSourceMode}
-            priorityScoreRange={priorityScoreRange}
-          />
+              <SelectedAreaSummary
+                selectedArea={selectedArea}
+                selectedMapArea={selectedMapArea}
+                selectedMapResult={selectedMapResult}
+                selectedMapIsRecommendation={selectedMapIsRecommendation}
+                dataSourceMode={dataSourceMode}
+                priorityScoreRange={priorityScoreRange}
+              />
+
+              <div className="mb-3 mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-fg">Ranked candidate areas</h3>
+                  <p className="text-sm text-muted">{viewModel.dashboardDataLabel}</p>
+                </div>
+                <div className="flex shrink-0 items-center gap-2">
+                  <span className="rounded-full bg-[#fff9ed] px-3 py-1 text-xs text-muted">{areas.length} areas</span>
+                </div>
+              </div>
+              <CurrentPriorityWeightsToggle objectiveWeights={objectiveWeights} />
+              <RankedCandidateList
+                areas={areas}
+                selectedRankedAreaId={selectedRankedAreaId}
+                dataSourceMode={dataSourceMode}
+                priorityScoreRange={priorityScoreRange}
+                onSelectArea={onSelectArea}
+              />
+            </section>
 
           {FEATURES.explainableChat && ExplainableChatPanel && (
             <ExplainableChatPanel
@@ -664,34 +618,6 @@ function Dashboard({
             />
           )}
 
-          <section className="rounded-lg border border-[#e7deca] bg-[#fbf7ee] p-4">
-            <div className="mb-4 flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-lg font-semibold text-fg">Prioritization controls</h3>
-                <p className="mt-1 text-sm leading-6 text-muted">
-                  Adjust objective weights. Demo rankings update immediately; Backend Preview shows pipeline sample scores.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={onResetWeights}
-                className="shrink-0 rounded-full border border-[#cfc2aa] bg-white px-3 py-1.5 text-xs font-semibold text-fg transition hover:bg-[#fbf7ee]"
-              >
-                Reset
-              </button>
-            </div>
-            <div className="grid gap-3">
-              {objectives.map((objective) => (
-                <ObjectiveSlider
-                  key={objective.key}
-                  objective={objective}
-                  value={objectiveWeights[objective.key]}
-                  onChange={(value) => onWeightChange(objective.key, value)}
-                />
-              ))}
-            </div>
-          </section>
-
           <section className="rounded-lg border border-[#e7deca] bg-white p-4">
             <h3 className="text-lg font-semibold text-fg">Data source</h3>
             <p className="mt-1 text-sm text-muted">Switch without changing the interface.</p>
@@ -699,9 +625,34 @@ function Dashboard({
               <DataSourceTabs activeMode={dataSourceMode} onChange={onChangeDataSource} />
             </div>
           </section>
-        </aside>
+          </aside>
+        </div>
       </div>
     </section>
+  );
+}
+
+function CurrentPriorityWeightsToggle({ objectiveWeights }: { objectiveWeights: ObjectiveWeights }) {
+  return (
+    <details className="mb-3 rounded-md border border-[#e7deca] bg-[#fbf7ee] px-3 py-2">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-fg marker:hidden">
+        <span className="flex items-center gap-2">
+          <span className="text-xs text-accent">▸</span>
+          Current Priority Weights
+        </span>
+        <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-muted">
+          {objectives.length} active weights
+        </span>
+      </summary>
+      <dl className="mt-3 grid gap-2 border-t border-[#e7deca] pt-3 sm:grid-cols-2">
+        {objectives.map((objective) => (
+          <div key={objective.key} className="flex items-center justify-between gap-3 rounded-md bg-white px-3 py-2">
+            <dt className="text-xs text-muted">{objective.label}</dt>
+            <dd className="text-sm font-semibold text-fg">{objectiveWeights[objective.key]}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
   );
 }
 
@@ -1107,14 +1058,4 @@ function getStepIndex(step: Step) {
   };
 
   return map[step];
-}
-
-
-function toBackendWeights(weights: ObjectiveWeights) {
-  return {
-    biodiversity_weight: weights.biodiversity,
-    carbon_weight: weights.carbon,
-    water_weight: weights.water,
-    livelihood_weight: weights.livelihood,
-  };
 }
