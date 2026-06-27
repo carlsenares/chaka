@@ -77,12 +77,16 @@ Initial fixed weighting assumption:
 | Factor | Weight |
 | --- | ---: |
 | Carbon potential | 35% |
-| Biodiversity improvement | 25% |
-| Water/soil resilience | 20% |
+| Biodiversity improvement | 30% |
+| Water/soil resilience | 15% |
 | Livelihood benefit | 15% |
 | Feasibility/risk adjustment | 5% |
 
-These weights are MVP defaults. Later, the frontend can expose sliders so users can adjust priorities for carbon, biodiversity, water/soil, and livelihood.
+These weights are MVP defaults. Carbon and biodiversity are emphasized because
+they are central challenge dimensions. Rainfall is not directly averaged into
+carbon; it is used as a carbon-establishment feasibility multiplier. Later, the
+frontend can expose sliders so users can adjust priorities for carbon,
+biodiversity, water/soil, and livelihood.
 
 ## Model Role
 

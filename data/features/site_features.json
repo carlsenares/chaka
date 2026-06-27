@@ -210,13 +210,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -234,6 +236,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -548,13 +558,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -572,6 +584,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -861,13 +881,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -885,6 +907,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -1171,13 +1201,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -1195,6 +1227,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -1480,13 +1520,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -1504,6 +1546,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -1817,13 +1867,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -1841,6 +1893,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -2158,13 +2218,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -2182,6 +2244,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -2547,13 +2617,15 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 2,
+        "matched_evidence_count": 3,
         "matched_sources": [
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -2571,6 +2643,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -2856,15 +2936,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -2890,6 +2972,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -3176,15 +3266,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -3210,6 +3302,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -3498,15 +3598,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -3532,6 +3634,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -3818,15 +3928,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -3852,6 +3964,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -4141,15 +4261,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -4175,6 +4297,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -4461,15 +4591,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -4495,6 +4627,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -4840,17 +4980,19 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 4,
+        "matched_evidence_count": 5,
         "matched_sources": [
           "Alemayehu Haile.pdf",
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "explicit_district",
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -4884,6 +5026,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"
@@ -5171,15 +5321,17 @@
       "local_research_context": {
         "dataset_id": "local_research_context",
         "status": "context_derived",
-        "matched_evidence_count": 3,
+        "matched_evidence_count": 4,
         "matched_sources": [
           "Wondimu Mamo.pdf",
           "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
-          "2026_submission_frel_frl_eth_final.pdf"
+          "2026_submission_frel_frl_eth_final.pdf",
+          "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf"
         ],
         "match_types": [
           "comparable_western_ethiopia",
-          "national_context"
+          "national_context",
+          "national_species_context"
         ],
         "evidence_refs": [
           {
@@ -5205,6 +5357,14 @@
             "confidence": "high",
             "allowed_use": "methods_context",
             "review_status": "needs_table_qa"
+          },
+          {
+            "evidence_id": "local_research:hagenia_abyssinica:local_species_value_001",
+            "source_id": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+            "match_type": "national_species_context",
+            "confidence": "medium",
+            "allowed_use": "species_selection_context",
+            "review_status": "needs_manual_species_qa"
           }
         ],
         "scoring_policy": "context_only_no_score_override"

@@ -17,29 +17,31 @@ The current model reads `data/features/site_features.json`, which currently cont
 | Factor | Weight |
 | --- | ---: |
 | Carbon potential | 0.35 |
-| Biodiversity improvement | 0.25 |
-| Water/soil resilience | 0.2 |
+| Biodiversity improvement | 0.3 |
+| Water/soil resilience | 0.15 |
 | Livelihood benefit | 0.15 |
 | Feasibility/risk adjustment | 0.05 |
 
-## Land-Cover Suitability Adjustment
+## Formula Notes
 
-ESA WorldCover land-cover extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, or otherwise high-risk, the ranker applies the relevant feature penalties and recommends field validation before investment. This prevents strong placeholder values in other feature groups from over-ranking areas that are visibly or physically unsuitable from source evidence.
+The formula is documented in `docs/formula.md`. Rainfall no longer enters carbon as a direct averaged input. Instead, carbon opportunity is multiplied by a rainfall feasibility factor so dry sites are not over-promoted for tree-carbon restoration. Biodiversity is scored from habitat structure, restoration uplift, limited positive observation context, and pressure penalties.
+
+ESA WorldCover land-cover extraction, Sentinel-2 current vegetation extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, or otherwise high-risk, the ranker applies the relevant feature penalties and recommends field validation before investment. This prevents strong values in other feature groups from over-ranking areas that are visibly or physically unsuitable from source evidence.
 
 ## Top Ranked Candidates
 
 | Rank | Site ID | Priority | Carbon | Biodiversity | Water/soil | Livelihood | Risk | Intervention seed |
 | ---: | --- | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | SET-004 | 73 | high | high | high | medium | low | native_tree_planting |
-| 2 | SWE-007 | 70 | medium | medium | high | high | low | assisted_natural_regeneration |
-| 3 | SWE-005 | 66 | medium | medium | high | high | low | assisted_natural_regeneration |
-| 4 | SET-008 | 63 | medium | medium | high | high | low | assisted_natural_regeneration |
-| 5 | SET-003 | 61 | medium | medium | high | medium | low | field_validation_before_investment |
-| 6 | SET-005 | 56 | medium | low | high | medium | low | native_tree_planting |
-| 7 | SET-007 | 55 | medium | low | high | low | medium | native_tree_planting |
-| 8 | SWE-001 | 54 | medium | low | high | low | low | native_tree_planting |
-| 9 | SWE-003 | 54 | medium | medium | high | low | low | field_validation_before_investment |
-| 10 | SWE-004 | 54 | medium | medium | high | low | low | native_tree_planting |
+| 1 | SWE-007 | 65 | medium | medium | high | high | low | assisted_natural_regeneration |
+| 2 | SET-004 | 62 | medium | medium | high | medium | low | native_tree_planting |
+| 3 | SWE-005 | 59 | medium | low | high | high | low | assisted_natural_regeneration |
+| 4 | SET-008 | 56 | low | low | high | high | low | assisted_natural_regeneration |
+| 5 | SET-003 | 55 | low | medium | high | medium | low | field_validation_before_investment |
+| 6 | SET-006 | 53 | medium | medium | medium | low | high | erosion_control_exclosures |
+| 7 | SET-007 | 51 | medium | medium | high | low | medium | native_tree_planting |
+| 8 | SET-002 | 50 | low | medium | high | medium | low | field_validation_before_investment |
+| 9 | SWE-003 | 50 | medium | medium | high | low | low | field_validation_before_investment |
+| 10 | SET-005 | 48 | low | low | high | medium | low | native_tree_planting |
 
 ## Limitation Statement
 

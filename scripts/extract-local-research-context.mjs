@@ -119,6 +119,72 @@ const evidenceCards = [
     review_status: "needs_manual_claim_qa",
     match_rules: [],
   },
+  {
+    evidence_id: "local_research:bale_livestock_settlement:wildlife_pressure_001",
+    source_id: "Livestock and settlement - peer reviewed research paper may be useful for grazing patterns etc.pdf",
+    source_type: "peer_reviewed_local_conservation_paper",
+    geography: {
+      country: "Ethiopia",
+      region: "Oromia",
+      zone: "Bale",
+      woreda: null,
+      place_names: ["Bale Mountains National Park"],
+    },
+    topics: ["livestock_pressure", "settlement_pressure", "wildlife_decline", "protected_area_management"],
+    intervention_tags: ["native_tree_planting", "assisted_natural_regeneration", "safeguard_screening"],
+    claim:
+      "Peer-reviewed Bale Mountains research documents how livestock and settlement pressure can affect wildlife and protected-area restoration outcomes; use as a general implementation caveat, not as candidate-site overlap evidence.",
+    citation_locator: "paper abstract and study-area sections; claim-level frontend quotes require manual page QA",
+    confidence: "medium",
+    allowed_use: "general_biodiversity_and_grazing_caveat",
+    not_allowed_use: "site_specific_warning_without_manual_approval",
+    review_status: "needs_manual_claim_qa",
+    match_rules: [],
+  },
+  {
+    evidence_id: "local_research:hagenia_abyssinica:local_species_value_001",
+    source_id: "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+    source_type: "peer_reviewed_ethnobotany_paper",
+    geography: {
+      country: "Ethiopia",
+      region: "Oromia/Amhara",
+      zone: "Bale and other highland sites",
+      woreda: null,
+      place_names: ["Bale", "Kofele", "Debark"],
+    },
+    topics: ["local_species_value", "medicinal_plants", "species_conservation", "traditional_knowledge"],
+    intervention_tags: ["native_tree_planting", "assisted_natural_regeneration", "species_selection"],
+    claim:
+      "Peer-reviewed ethnobotany research shows local cultural and medicinal value for Hagenia abyssinica and notes conservation pressure on the species; useful for species-selection caveats where agroecology matches.",
+    citation_locator: "paper abstract and methodology sections; species recommendation requires local ecological/manual QA",
+    confidence: "medium",
+    allowed_use: "species_selection_context",
+    not_allowed_use: "direct_species_prescription_or_score_override",
+    review_status: "needs_manual_species_qa",
+    match_rules: [{ field: "country", value: "Ethiopia", match_type: "national_species_context" }],
+  },
+  {
+    evidence_id: "local_research:konso_bundle:dryland_context_001",
+    source_id: "Konso-20260627T215313Z-3-001.zip",
+    source_type: "zipped_local_context_bundle",
+    geography: {
+      country: "Ethiopia",
+      region: "South Ethiopia",
+      zone: "Konso",
+      woreda: null,
+      place_names: ["Konso"],
+    },
+    topics: ["dryland_restoration", "terracing", "cultural_landscape", "local_governance"],
+    intervention_tags: ["erosion_control_exclosures", "soil_conservation", "field_validation_before_investment"],
+    claim:
+      "The Konso bundle is potentially useful for South Ethiopia dryland/soil-conservation context, but it is outside the current candidate zones and needs manual unpacking and QA.",
+    citation_locator: "zip bundle; inspect contained reports before frontend citation",
+    confidence: "low",
+    allowed_use: "use_later_context",
+    not_allowed_use: "candidate_scoring_or_site_specific_warning",
+    review_status: "needs_manual_bundle_qa",
+    match_rules: [],
+  },
 ];
 
 async function main() {
@@ -214,6 +280,7 @@ function matchRank(matchType) {
     explicit_district: 0,
     comparable_western_ethiopia: 1,
     national_context: 2,
+    national_species_context: 3,
   };
   return ranks[matchType] ?? 99;
 }

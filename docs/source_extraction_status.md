@@ -280,9 +280,11 @@ data/features/source_extracts/local_research_context.json
 The local research lane turns curated PDF/source-matrix findings into evidence
 cards and candidate matches. It is context-only and cannot change priority
 scores. It currently provides national policy/method context for 16/16 sites,
-comparable western-Ethiopia context for 8/16 Southwest Ethiopia sites, and one
-explicit district-level match for `SWE-007` from the Gimbo soil-management
-paper.
+national species-selection context for 16/16 sites, comparable
+western-Ethiopia context for 8/16 Southwest Ethiopia sites, and one explicit
+district-level match for `SWE-007` from the Gimbo soil-management paper. Newly
+pushed Bale/Konso/local plant papers are included as context/use-later evidence
+cards, not scoring layers.
 
 WorldPop population dry-run command:
 
