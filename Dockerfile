@@ -1,14 +1,14 @@
 # Production build for a Next.js (app router) app using standalone output.
 # Requires `output: 'standalone'` in next.config.js.
 FROM node:24-alpine AS deps
-WORKDIR /app/frontend
-COPY frontend/package.json frontend/package-lock.json* ./
+WORKDIR /app
+COPY package.json package-lock.json* ./
 RUN npm ci
 
 FROM node:24-alpine AS builder
-WORKDIR /app/frontend
-COPY --from=deps /app/frontend/node_modules ./node_modules
-COPY frontend/ ./
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 RUN npm run build
 
 FROM node:24-alpine AS runner
