@@ -24,7 +24,7 @@ export function PriorityWeightSliders({
 
 export function PriorityWeightsSummary({ objectiveWeights }: { objectiveWeights: ObjectiveWeights }) {
   return (
-    <div className="rounded-lg border border-[#e7deca] bg-[#fbf7ee] p-4">
+    <div className="rounded-lg border border-[#dfe7dc] bg-[#f8faf7] p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-lg font-semibold text-fg">Current Priority Weights</h3>
@@ -35,7 +35,7 @@ export function PriorityWeightsSummary({ objectiveWeights }: { objectiveWeights:
         {objectives.map((objective) => (
           <div
             key={objective.key}
-            className="flex items-center justify-between gap-3 rounded-md border border-[#e7deca] bg-white px-3 py-2"
+            className="flex items-center justify-between gap-3 rounded-md border border-[#dfe7dc] bg-white px-3 py-2"
           >
             <dt className="text-sm text-muted">{objective.label}</dt>
             <dd className="text-sm font-semibold text-fg">{objectiveWeights[objective.key]}</dd>
@@ -58,7 +58,7 @@ function ObjectiveSlider({
   const inputId = `objective-${objective.key}`;
 
   return (
-    <div className="rounded-md border border-[#e7deca] bg-white p-4 transition hover:border-[#bfd3c6]">
+    <div className="rounded-md border border-[#dfe7dc] bg-white p-4 transition hover:border-[#bfd3c6]">
       <div className="mb-3 flex items-start justify-between gap-4">
         <div>
           <label htmlFor={inputId} className="font-semibold text-fg">
@@ -68,7 +68,7 @@ function ObjectiveSlider({
         </div>
         <output
           htmlFor={inputId}
-          className="min-w-14 rounded-full bg-[#e7f0eb] px-3 py-1 text-center text-sm font-semibold text-[#1f6f68]"
+          className="min-w-14 rounded-full bg-[#edf5ee] px-3 py-1 text-center text-sm font-semibold text-[#236b44]"
         >
           {value}
         </output>

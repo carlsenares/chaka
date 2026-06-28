@@ -31,7 +31,7 @@ npm run dev
 Build check:
 
 ```bash
-cd frontend
+cd frontend◊
 npm run build
 ```
 

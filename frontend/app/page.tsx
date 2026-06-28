@@ -32,7 +32,7 @@ const ExplainableChatPanel = FEATURES.explainableChat
   ? dynamic(() => import("@/chatbot").then((module) => module.ExplainableChatPanel), {
       ssr: false,
       loading: () => (
-        <section className="rounded-lg border border-[#d8e5dc] bg-[#f8fbf7] p-4 text-sm text-muted">
+        <section className="rounded-lg border border-[#d9e4d8] bg-white p-4 text-sm text-muted">
           Loading explanation panel...
         </section>
       ),
@@ -127,7 +127,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-base text-fg">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-5 sm:px-8">
+      <div className="flex min-h-screen w-full flex-col px-5 py-5 sm:px-8">
         <PrototypeBanner notice={viewModel.prototypeNotice} />
         <WorkspaceHeader sourceBadge={viewModel.sourceBadge} sourceBadgeTone={viewModel.sourceBadgeTone} />
 
@@ -203,7 +203,7 @@ export default function Home() {
 
 function PrototypeBanner({ notice }: { notice: string }) {
   return (
-    <div className="mb-4 rounded-lg border border-[#d9d0bd] bg-[#fff9ed] px-4 py-3 text-sm text-muted">
+    <div className="mb-4 rounded-lg border border-[#dfe7dc] bg-white px-4 py-3 text-sm leading-6 text-muted">
       {notice}
     </div>
   );
@@ -217,9 +217,9 @@ function WorkspaceHeader({
   sourceBadgeTone: AtlasViewModel["sourceBadgeTone"];
 }) {
   return (
-    <header className="mb-5 flex flex-col gap-3 border-b border-[#d9d0bd] pb-5 lg:flex-row lg:items-end lg:justify-between">
+    <header className="mb-6 flex flex-col gap-3 border-b border-[#dfe7dc] pb-5 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <p className="text-xs font-semibold uppercase text-accent">Restoration decision support</p>
+        <p className="text-sm font-semibold text-accent">Restoration decision support</p>
         <div className="mt-1 flex flex-wrap items-center gap-3">
           <h1 className="text-2xl font-semibold text-fg">Chaka Priority Atlas</h1>
           <SourceBadge label={sourceBadge} tone={sourceBadgeTone} />
@@ -249,10 +249,10 @@ function TopNav({
   onReset: () => void;
 }) {
   return (
-    <header className="mb-8 flex flex-col gap-4 border-b border-[#d9d0bd] pb-5 lg:flex-row lg:items-center lg:justify-between">
+    <header className="mb-8 flex flex-col gap-4 border-b border-[#dfe7dc] pb-5 lg:flex-row lg:items-center lg:justify-between">
       <div className="flex flex-col gap-4">
         <button className="w-fit text-left" onClick={onReset}>
-          <p className="text-xs font-semibold uppercase text-accent">Restoration decision support</p>
+          <p className="text-sm font-semibold text-accent">Restoration decision support</p>
           <div className="mt-1 flex flex-wrap items-center gap-3">
             <h1 className="text-2xl font-semibold text-fg">Chaka Priority Atlas</h1>
             <SourceBadge label={sourceBadge} tone={sourceBadgeTone} />
@@ -266,8 +266,8 @@ function TopNav({
             key={label}
             className={`whitespace-nowrap rounded-full border px-3 py-1 text-xs ${
               index <= activeStepIndex
-                ? "border-[#1f6f68] bg-[#e7f0eb] text-[#1f6f68]"
-                : "border-[#d9d0bd] bg-white text-muted"
+                ? "border-[#236b44] bg-[#edf5ee] text-[#236b44]"
+                : "border-[#dfe7dc] bg-white text-muted"
             }`}
           >
             {label}
@@ -291,14 +291,14 @@ function DataSourceTabs({
   ];
 
   return (
-    <div className="flex w-full rounded-full border border-[#d9d0bd] bg-white p-1 sm:w-fit">
+    <div className="flex w-full rounded-full border border-[#dfe7dc] bg-white p-1 sm:w-fit">
       {tabs.map((tab) => (
         <button
           key={tab.mode}
           type="button"
           onClick={() => onChange(tab.mode)}
           className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold transition sm:flex-none ${
-            activeMode === tab.mode ? "bg-[#1f6f68] text-white" : "text-muted hover:bg-[#f3eadb]"
+            activeMode === tab.mode ? "bg-[#236b44] text-white" : "text-muted hover:bg-[#edf5ee]"
           }`}
         >
           {tab.label}
@@ -309,10 +309,10 @@ function DataSourceTabs({
 }
 
 function SourceBadge({ label, tone }: { label: string; tone: AtlasViewModel["sourceBadgeTone"] }) {
-  const dotColor = tone === "blue" ? "#2878a8" : "#2f7d4f";
+  const dotColor = tone === "blue" ? "#527d93" : "#2f7d4f";
 
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[#d9d0bd] bg-white px-3 py-1 text-xs font-semibold text-muted">
+    <span className="inline-flex items-center gap-2 rounded-full border border-[#dfe7dc] bg-white px-3 py-1 text-xs font-semibold text-muted">
       <span className="size-2.5 rounded-full" style={{ backgroundColor: dotColor }} />
       {label}
     </span>
@@ -331,7 +331,7 @@ function Landing({
   return (
     <section className="grid flex-1 items-center gap-10 py-8 lg:grid-cols-[0.92fr_1.08fr]">
       <div className="max-w-3xl">
-        <p className="mb-4 text-sm font-semibold uppercase text-accent">AI4GOOD Ethiopia restoration prototype</p>
+        <p className="mb-4 text-sm font-semibold text-accent">AI4GOOD Ethiopia restoration prototype</p>
         <h2 className="text-4xl font-semibold leading-tight text-fg sm:text-6xl">
           Prioritize restoration areas by ecological and livelihood impact.
         </h2>
@@ -340,10 +340,10 @@ function Landing({
           soil, forest-loss, and livelihood evidence. It supports expert review; it does not replace it.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <button className="rounded-full bg-[#1f6f68] px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-[#185b55]" onClick={onStart}>
+          <button className="rounded-full bg-[#236b44] px-6 py-3 font-semibold text-white transition hover:bg-[#1d5838]" onClick={onStart}>
             Start prioritization
           </button>
-          <button className="rounded-full border border-[#cfc2aa] bg-white px-6 py-3 font-semibold text-fg transition hover:bg-[#fbf7ee]" onClick={onJumpToDashboard}>
+          <button className="rounded-full border border-[#b9cabb] bg-white px-6 py-3 font-semibold text-fg transition hover:bg-[#edf5ee]" onClick={onJumpToDashboard}>
             View map dashboard
           </button>
         </div>
@@ -386,7 +386,7 @@ function RegionSelection({
             key={region.id}
             onClick={() => onSelect(region.id)}
             className={`rounded-lg border p-6 text-left shadow-sm transition ${
-              selectedRegion === region.id ? "border-[#1f6f68] bg-[#eef7f2]" : "border-[#d9d0bd] bg-surface hover:bg-[#fbf7ee]"
+              selectedRegion === region.id ? "border-[#236b44] bg-[#eef6ef]" : "border-[#dfe7dc] bg-surface hover:bg-[#f8faf7]"
             }`}
           >
             <div className="mb-6 flex items-start justify-between gap-4">
@@ -394,7 +394,7 @@ function RegionSelection({
                 <h3 className="text-2xl font-semibold text-fg">{region.name}</h3>
                 <p className="mt-3 leading-7 text-muted">{region.description}</p>
               </div>
-              <span className="rounded-full border border-[#d9d0bd] bg-white px-3 py-1 text-xs text-muted">
+              <span className="rounded-full border border-[#dfe7dc] bg-white px-3 py-1 text-xs text-muted">
                 {selectedRegion === region.id ? "Selected" : "Compare"}
               </span>
             </div>
@@ -403,7 +403,7 @@ function RegionSelection({
               <MetricCard label="Forest loss" value={region.stats.forestLoss} />
               <MetricCard label="Households" value={region.stats.households} />
             </div>
-            <p className="mt-5 rounded-md bg-[#fff9ed] px-4 py-3 text-sm text-muted">{region.signal}</p>
+            <p className="mt-5 rounded-md border border-[#e8eee6] bg-[#f8faf7] px-4 py-3 text-sm text-muted">{region.signal}</p>
           </button>
         ))}
       </div>
@@ -435,8 +435,8 @@ function PreferenceSelection({
         description="Adjust the importance of each restoration objective. The prioritization will update based on your selected preferences."
       />
       <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_0.72fr]">
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm sm:p-6">
-          <div className="mb-6 flex flex-col gap-3 border-b border-[#e7deca] pb-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="rounded-lg border border-[#dfe7dc] bg-surface p-5 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)] sm:p-6">
+          <div className="mb-6 flex flex-col gap-3 border-b border-[#e8eee6] pb-5 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h3 className="text-xl font-semibold text-fg">Preference weights</h3>
               <p className="mt-1 text-sm leading-6 text-muted">
@@ -446,7 +446,7 @@ function PreferenceSelection({
             <button
               type="button"
               onClick={onReset}
-              className="w-fit rounded-full border border-[#cfc2aa] bg-white px-4 py-2 text-sm font-semibold text-fg transition hover:bg-[#fbf7ee] focus:outline-none focus:ring-2 focus:ring-[#1f6f68] focus:ring-offset-2 focus:ring-offset-base"
+              className="w-fit rounded-full border border-[#b9cabb] bg-white px-4 py-2 text-sm font-semibold text-fg transition hover:bg-[#edf5ee] focus:outline-none focus:ring-2 focus:ring-[#236b44] focus:ring-offset-2 focus:ring-offset-base"
             >
               Reset to Recommended
             </button>
@@ -455,7 +455,7 @@ function PreferenceSelection({
           <PriorityWeightSliders objectiveWeights={objectiveWeights} onWeightChange={onWeightChange} />
         </div>
 
-        <div className="rounded-lg border border-[#d9d0bd] bg-[#fbf7ee] p-5 shadow-sm sm:p-6">
+        <div className="rounded-lg border border-[#dfe7dc] bg-[#f8faf7] p-5 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)] sm:p-6">
           <div className="flex items-start justify-between gap-3">
             <div>
               <h3 className="text-xl font-semibold text-fg">Agent input preview</h3>
@@ -463,13 +463,13 @@ function PreferenceSelection({
                 This structure is ready to pass to the backend when live prioritization is connected.
               </p>
             </div>
-            <span className="rounded-full bg-[#e7f0eb] px-3 py-1 text-xs font-semibold text-[#1f6f68]">
+            <span className="rounded-full bg-[#edf5ee] px-3 py-1 text-xs font-semibold text-[#236b44]">
               Mock scoring
             </span>
           </div>
           <dl className="mt-6 grid gap-3">
             {Object.entries(backendPayload).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between gap-4 rounded-md border border-[#e7deca] bg-white px-4 py-3">
+              <div key={key} className="flex items-center justify-between gap-4 rounded-md border border-[#dfe7dc] bg-white px-4 py-3">
                 <dt className="text-sm text-muted">{key}</dt>
                 <dd className="text-lg font-semibold text-fg">{value}</dd>
               </div>
@@ -485,15 +485,15 @@ function PreferenceSelection({
 function AnalysisLoading({ regionName }: { regionName: string }) {
   return (
     <section className="flex flex-1 items-center justify-center py-20">
-      <div className="w-full max-w-2xl rounded-lg border border-[#d9d0bd] bg-surface p-8 text-center shadow-sm">
-        <div className="mx-auto mb-7 flex size-20 items-center justify-center rounded-full border border-[#d9d0bd] bg-[#eef7f2]">
-          <div className="size-10 animate-spin rounded-full border-2 border-[#1f6f68] border-t-transparent" />
+      <div className="w-full max-w-2xl rounded-lg border border-[#dfe7dc] bg-surface p-8 text-center shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
+        <div className="mx-auto mb-7 flex size-20 items-center justify-center rounded-full border border-[#dfe7dc] bg-[#eef6ef]">
+          <div className="size-10 animate-spin rounded-full border-2 border-[#236b44] border-t-transparent" />
         </div>
-        <p className="text-sm font-semibold uppercase text-accent">Preparing prototype outputs</p>
+        <p className="text-sm font-semibold text-accent">Preparing prototype outputs</p>
         <h2 className="mt-3 text-3xl font-semibold text-fg">Ranking restoration opportunities in {regionName}</h2>
         <div className="mt-8 grid gap-3 text-left sm:grid-cols-3">
           {["Applying objective weights", "Scoring candidate areas", "Preparing map overlays"].map((item) => (
-            <div key={item} className="rounded-md border border-[#e7deca] bg-[#fbf7ee] px-4 py-3 text-sm text-muted">
+            <div key={item} className="rounded-md border border-[#dfe7dc] bg-[#f8faf7] px-4 py-3 text-sm text-muted">
               {item}
             </div>
           ))}
@@ -546,7 +546,7 @@ function Dashboard({
         />
       </div>
 
-      <div className="grid min-h-[720px] gap-5 lg:grid-cols-[minmax(0,1.75fr)_minmax(360px,0.9fr)]">
+      <div className="grid min-h-[720px] gap-6 lg:grid-cols-[minmax(0,1.75fr)_minmax(360px,0.9fr)]">
         <EthiopiaPriorityMap
           className="h-full"
           status="ready"
@@ -566,11 +566,11 @@ function Dashboard({
         />
 
         <div className="flex flex-col gap-3 lg:sticky lg:top-4">
-          <aside className="flex max-h-[calc(100vh-12rem)] flex-col gap-4 overflow-y-auto rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-sm">
+          <aside className="flex max-h-[calc(100vh-12rem)] flex-col gap-5 overflow-y-auto rounded-lg border border-[#dfe7dc] bg-white p-5 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
             <section>
               <Link
                 href={`/change-priority-weights?source=${dataSourceMode}`}
-                className="mb-4 inline-flex w-full justify-center rounded-full bg-[#1f6f68] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#185b55]"
+                className="mb-4 inline-flex w-full justify-center rounded-full bg-[#236b44] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1d5838] focus:outline-none focus:ring-2 focus:ring-[#236b44] focus:ring-offset-2 focus:ring-offset-base"
               >
                 Change Priority Weights
               </Link>
@@ -584,13 +584,13 @@ function Dashboard({
                 priorityScoreRange={priorityScoreRange}
               />
 
-              <div className="mb-3 mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div className="mb-3 mt-5 flex flex-col gap-3 border-t border-[#e8eee6] pt-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-fg">Ranked candidate areas</h3>
                   <p className="text-sm text-muted">{viewModel.dashboardDataLabel}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
-                  <span className="rounded-full bg-[#fff9ed] px-3 py-1 text-xs text-muted">{areas.length} areas</span>
+                  <span className="rounded-full border border-[#dfe7dc] bg-white px-3 py-1 text-xs text-muted">{areas.length} areas</span>
                 </div>
               </div>
               <CurrentPriorityWeightsToggle objectiveWeights={objectiveWeights} />
@@ -618,7 +618,7 @@ function Dashboard({
             />
           )}
 
-          <section className="rounded-lg border border-[#e7deca] bg-white p-4">
+          <section className="rounded-lg border border-[#dfe7dc] bg-white p-4">
             <h3 className="text-lg font-semibold text-fg">Data source</h3>
             <p className="mt-1 text-sm text-muted">Switch without changing the interface.</p>
             <div className="mt-4">
@@ -634,19 +634,19 @@ function Dashboard({
 
 function CurrentPriorityWeightsToggle({ objectiveWeights }: { objectiveWeights: ObjectiveWeights }) {
   return (
-    <details className="mb-3 rounded-md border border-[#e7deca] bg-[#fbf7ee] px-3 py-2">
+    <details className="mb-3 rounded-md border border-[#dfe7dc] bg-[#f8faf7] px-3 py-2">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-fg marker:hidden">
         <span className="flex items-center gap-2">
           <span className="text-xs text-accent">▸</span>
           Current Priority Weights
         </span>
-        <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-muted">
+        <span className="rounded-full border border-[#dfe7dc] bg-white px-2.5 py-1 text-xs font-medium text-muted">
           {objectives.length} active weights
         </span>
       </summary>
-      <dl className="mt-3 grid gap-2 border-t border-[#e7deca] pt-3 sm:grid-cols-2">
+      <dl className="mt-3 grid gap-2 border-t border-[#e8eee6] pt-3 sm:grid-cols-2">
         {objectives.map((objective) => (
-          <div key={objective.key} className="flex items-center justify-between gap-3 rounded-md bg-white px-3 py-2">
+          <div key={objective.key} className="flex items-center justify-between gap-3 rounded-md border border-[#eef2ec] bg-white px-3 py-2">
             <dt className="text-xs text-muted">{objective.label}</dt>
             <dd className="text-sm font-semibold text-fg">{objectiveWeights[objective.key]}</dd>
           </div>
@@ -670,7 +670,7 @@ function RankedCandidateList({
   onSelectArea: (areaId: string) => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-[#e7deca]">
+    <div className="overflow-hidden rounded-lg border border-[#dfe7dc] bg-white">
       {areas.map((area) => {
         const isSelected = selectedRankedAreaId === area.id;
         const areaColor = priorityColor(area.priorityScore, priorityScoreRange);
@@ -679,32 +679,29 @@ function RankedCandidateList({
         return (
           <div
             key={area.id}
-            className={`grid w-full gap-3 border-b border-[#e7deca] p-3 text-left transition last:border-b-0 hover:bg-[#fbf7ee] ${
-              isSelected ? "bg-[#eef7f2]" : "bg-white"
+            className={`grid w-full gap-3 border-b border-[#e8eee6] p-3 text-left transition last:border-b-0 hover:bg-[#f8faf7] ${
+              isSelected ? "bg-[#eef6ef]" : "bg-white"
             }`}
             style={
               isSelected
-                ? { boxShadow: `inset 0 0 0 1px ${priorityTint(area.priorityScore, priorityScoreRange, 0.38)}` }
-                : {
-                    backgroundImage: `linear-gradient(90deg, ${priorityTint(
-                      area.priorityScore,
-                      priorityScoreRange,
-                      0.16,
-                    )} 0%, rgba(255,255,255,0) 46%)`,
-              }
+                ? { boxShadow: `inset 0 0 0 1px ${priorityTint(area.priorityScore, priorityScoreRange, 0.35)}` }
+                : undefined
             }
           >
             <div className="flex items-start justify-between gap-3">
               <button type="button" onClick={() => onSelectArea(area.id)} className="min-w-0 flex-1 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="size-3 shrink-0 rounded-sm" style={{ backgroundColor: areaColor }} />
+                  <span
+                    className="size-3 shrink-0 rounded-sm border border-black/10"
+                    style={{ backgroundColor: areaColor }}
+                  />
                   <h4 className="truncate font-semibold text-fg">{area.name}</h4>
                 </div>
                 <p className="mt-1 text-xs text-muted">Rank #{area.weightedRank} · {area.confidence} confidence</p>
                 <p className="mt-1 line-clamp-2 text-sm text-muted">{area.intervention}</p>
               </button>
               <span
-                className="inline-flex min-w-14 justify-center rounded-full px-2.5 py-1 text-lg font-semibold"
+                className="inline-flex min-w-12 justify-center rounded-md px-2.5 py-1 text-sm font-semibold"
                 style={{ backgroundColor: areaColor, color: areaTextColor }}
               >
                 {area.priorityScore}
@@ -714,7 +711,7 @@ function RankedCandidateList({
               <p className="line-clamp-1 text-xs text-muted">{area.rationale[0]}</p>
               <Link
                 href={`/recommendations/${encodeURIComponent(area.id)}?source=${dataSourceMode}`}
-                className="shrink-0 rounded-full border border-[#1f6f68] bg-white px-3 py-1.5 text-xs font-semibold text-[#1f6f68] transition hover:bg-[#eef7f2]"
+                className="shrink-0 rounded-full border border-[#236b44] bg-white px-3 py-1.5 text-xs font-semibold text-[#236b44] transition hover:bg-[#edf5ee]"
               >
                 View Details
               </Link>
@@ -751,10 +748,10 @@ function SelectedAreaSummary({
   const scoreColor = priorityColor(displayScore, priorityScoreRange);
 
   return (
-    <section className="rounded-lg border border-[#e7deca] bg-white p-4">
+    <section className="rounded-lg border border-[#dfe7dc] bg-white p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase text-accent">
+          <p className="text-sm font-semibold text-accent">
             {selectedMapIsRecommendation ? "Selected recommendation" : "Map selection"}
           </p>
           <h3 className="mt-1 text-xl font-semibold text-fg">{displayTitle}</h3>
@@ -765,7 +762,7 @@ function SelectedAreaSummary({
           style={
             hasMappedRecommendation
               ? { backgroundColor: scoreColor, color: priorityTextColor(displayScore, priorityScoreRange) }
-              : { backgroundColor: "#f1eadc", color: "#5e584d" }
+          : { backgroundColor: "#eef2ec", color: "#4d5a50" }
           }
         >
           {hasMappedRecommendation ? displayScore : "No score"}
@@ -780,7 +777,7 @@ function SelectedAreaSummary({
         />
       </div>
 
-      <div className="mt-4 rounded-md border border-[#e7deca] bg-[#fbf7ee] p-3">
+      <div className="mt-4 rounded-md border border-[#e8eee6] bg-[#f8faf7] p-3">
         <p className="text-sm font-semibold text-fg">Compact rationale</p>
         <p className="mt-2 text-sm leading-6 text-muted">
           {selectedMapResult?.rationale ??
@@ -793,7 +790,7 @@ function SelectedAreaSummary({
       {hasMappedRecommendation && (
         <Link
           href={`/recommendations/${encodeURIComponent(displayArea.id)}?source=${dataSourceMode}`}
-          className="mt-4 inline-flex w-full justify-center rounded-full bg-[#1f6f68] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#185b55]"
+          className="mt-4 inline-flex w-full justify-center rounded-full bg-[#236b44] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1d5838]"
         >
           Open Recommendation
         </Link>
@@ -803,7 +800,7 @@ function SelectedAreaSummary({
 }
 function ImpactSummary({ area }: { area: RankedAreaViewModel }) {
   return (
-    <div className="rounded-lg border border-[#d9d0bd] bg-surface p-5 shadow-sm">
+    <div className="rounded-lg border border-[#dfe7dc] bg-surface p-5 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
       <h3 className="text-lg font-semibold text-fg">Impact indicators</h3>
       <p className="mt-1 text-sm text-muted">Current values come from the selected data source.</p>
       <div className="mt-5 grid gap-4">
@@ -818,7 +815,7 @@ function ImpactSummary({ area }: { area: RankedAreaViewModel }) {
 
 function PipelineStatesPreview() {
   return (
-    <div className="rounded-lg border border-[#d9d0bd] bg-[#fbf7ee] p-5 shadow-sm">
+    <div className="rounded-lg border border-[#dfe7dc] bg-[#f8faf7] p-5 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
       <h3 className="text-lg font-semibold text-fg">Future data states</h3>
       <div className="mt-4 grid gap-3 text-sm text-muted">
         <p><span className="font-semibold text-fg">Loading:</span> waiting for geospatial features from ingestion.</p>
@@ -838,9 +835,9 @@ function AreaDetail({ area, onBack, onNext }: { area: RankedAreaViewModel; onBac
         description={`${area.zone}. Ranked #${area.weightedRank} with ${area.confidence.toLowerCase()} confidence.`}
       />
       <div className="mt-8 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
+        <div className="rounded-lg border border-[#dfe7dc] bg-surface p-6 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
           <p className="text-sm text-muted">Priority score</p>
-          <p className="mt-2 text-6xl font-semibold text-[#1f6f68]">{area.priorityScore}</p>
+          <p className="mt-2 text-6xl font-semibold text-[#236b44]">{area.priorityScore}</p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             <MetricCard label="Area" value={area.hectares} />
             <MetricCard label="Households" value={area.households} />
@@ -848,12 +845,12 @@ function AreaDetail({ area, onBack, onNext }: { area: RankedAreaViewModel; onBac
             <MetricCard label="Budget" value={area.investment} />
           </div>
         </div>
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
+        <div className="rounded-lg border border-[#dfe7dc] bg-surface p-6 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
           <h3 className="text-xl font-semibold text-fg">Why this area ranks highly</h3>
           <div className="mt-5 grid gap-4">
             {area.rationale.map((item, index) => (
-              <div key={item} className="flex gap-4 rounded-md border border-[#e7deca] bg-[#fbf7ee] p-4">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#e7f0eb] text-sm text-[#1f6f68]">
+              <div key={item} className="flex gap-4 rounded-md border border-[#dfe7dc] bg-[#f8faf7] p-4">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#edf5ee] text-sm text-[#236b44]">
                   {index + 1}
                 </span>
                 <p className="text-sm leading-6 text-muted">{item}</p>
@@ -877,7 +874,7 @@ function Recommendation({ area, onBack, onNext }: { area: RankedAreaViewModel; o
         description="A suggested restoration approach for expert review, budget discussion, and field validation."
       />
       <div className="mt-8 grid gap-5 lg:grid-cols-3">
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm lg:col-span-2">
+        <div className="rounded-lg border border-[#dfe7dc] bg-surface p-6 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)] lg:col-span-2">
           <h3 className="text-2xl font-semibold text-fg">Suggested package</h3>
           <p className="mt-4 leading-7 text-muted">
             {area.decisionSummary ??
@@ -885,17 +882,17 @@ function Recommendation({ area, onBack, onNext }: { area: RankedAreaViewModel; o
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {area.outputs.map((output) => (
-              <div key={output} className="rounded-md border border-[#e7deca] bg-[#fbf7ee] p-4 text-sm text-fg">
+              <div key={output} className="rounded-md border border-[#dfe7dc] bg-[#f8faf7] p-4 text-sm text-fg">
                 {output}
               </div>
             ))}
           </div>
         </div>
-        <div className="rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
+        <div className="rounded-lg border border-[#dfe7dc] bg-surface p-6 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
           <h3 className="text-xl font-semibold text-fg">Evidence status</h3>
           <p className="mt-3 text-sm leading-6 text-muted">{area.evidenceStatus}</p>
           {area.fieldValidationQuestions.length > 0 && (
-            <div className="mt-4 border-t border-[#e7deca] pt-4">
+            <div className="mt-4 border-t border-[#e8eee6] pt-4">
               <p className="text-sm font-semibold text-fg">Field validation questions</p>
               <ul className="mt-2 grid gap-2 text-sm leading-6 text-muted">
                 {area.fieldValidationQuestions.map((question) => (
@@ -931,9 +928,9 @@ function ExportPreview({
         title="Project brief preview"
         description="A concise summary format for partner review. Values shown are prototype-only."
       />
-      <div className="mt-8 rounded-lg border border-[#d9d0bd] bg-surface p-5 text-fg shadow-sm sm:p-8">
-        <div className="border-b border-[#e7deca] pb-5">
-          <p className="text-sm font-semibold uppercase text-accent">Chaka Priority Atlas</p>
+      <div className="mt-8 rounded-lg border border-[#dfe7dc] bg-surface p-5 text-fg shadow-[0_1px_4px_rgb(34_54_42_/_0.05)] sm:p-8">
+        <div className="border-b border-[#e8eee6] pb-5">
+          <p className="text-sm font-semibold text-accent">Chaka Priority Atlas</p>
           <h3 className="mt-2 text-3xl font-semibold">{area.name}</h3>
           <p className="mt-2 text-muted">{region.name} | {area.zone} | {area.hectares}</p>
         </div>
@@ -947,7 +944,7 @@ function ExportPreview({
             <h4 className="mt-6 text-lg font-semibold">Objective weights used</h4>
             <div className="mt-3 flex flex-wrap gap-2">
               {objectives.map((objective) => (
-                <span key={objective.key} className="rounded-full bg-[#e7f0eb] px-3 py-1 text-sm text-[#1f6f68]">
+                <span key={objective.key} className="rounded-full bg-[#edf5ee] px-3 py-1 text-sm text-[#236b44]">
                   {objective.label}: {objectiveWeights[objective.key]}
                 </span>
               ))}
@@ -961,10 +958,10 @@ function ExportPreview({
         </div>
       </div>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
-        <button className="rounded-full border border-[#cfc2aa] bg-white px-5 py-3 font-semibold text-fg" onClick={onBack}>
+        <button className="rounded-full border border-[#b9cabb] bg-white px-5 py-3 font-semibold text-fg" onClick={onBack}>
           Back
         </button>
-        <button className="rounded-full bg-[#1f6f68] px-5 py-3 font-semibold text-white" onClick={onRestart}>
+        <button className="rounded-full bg-[#236b44] px-5 py-3 font-semibold text-white" onClick={onRestart}>
           Compare another region
         </button>
       </div>
@@ -975,7 +972,7 @@ function ExportPreview({
 function SectionHeader({ label, title, description }: { label: string; title: string; description: string }) {
   return (
     <div className="max-w-3xl">
-      <p className="text-sm font-semibold uppercase text-accent">{label}</p>
+      <p className="text-sm font-semibold text-accent">{label}</p>
       <h2 className="mt-2 text-3xl font-semibold leading-tight text-fg sm:text-5xl">{title}</h2>
       <p className="mt-4 leading-7 text-muted">{description}</p>
     </div>
@@ -995,11 +992,11 @@ function PageActions({
 }) {
   return (
     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
-      <button className="rounded-full border border-[#cfc2aa] bg-white px-5 py-3 font-semibold text-fg" onClick={onBack}>
+      <button className="rounded-full border border-[#b9cabb] bg-white px-5 py-3 font-semibold text-fg" onClick={onBack}>
         Back
       </button>
       <button
-        className="rounded-full bg-[#1f6f68] px-5 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
+        className="rounded-full bg-[#236b44] px-5 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
         onClick={onNext}
         disabled={disabled}
       >
@@ -1011,7 +1008,7 @@ function PageActions({
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-[#e7deca] bg-white p-4">
+    <div className="rounded-md border border-[#dfe7dc] bg-white p-4">
       <p className="text-xs text-muted">{label}</p>
       <p className="mt-2 text-lg font-semibold text-fg">{value}</p>
     </div>
@@ -1020,7 +1017,7 @@ function MetricCard({ label, value }: { label: string; value: string }) {
 
 function ScoreBreakdown({ scores }: { scores: Record<string, number> }) {
   return (
-    <div className="mt-5 rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
+    <div className="mt-5 rounded-lg border border-[#dfe7dc] bg-surface p-6 shadow-[0_1px_4px_rgb(34_54_42_/_0.05)]">
       <h3 className="text-xl font-semibold text-fg">Evidence score breakdown</h3>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Object.entries(scores).map(([key, value]) => (
@@ -1038,8 +1035,8 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
         <span className="text-muted">{label}</span>
         <span className="font-semibold text-fg">{value}</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-[#e5dcc9]">
-        <div className="h-full rounded-full bg-[#1f6f68]" style={{ width: `${value}%` }} />
+      <div className="h-2 overflow-hidden rounded-full bg-[#e5ebe3]">
+        <div className="h-full rounded-full bg-[#236b44]" style={{ width: `${value}%` }} />
       </div>
     </div>
   );

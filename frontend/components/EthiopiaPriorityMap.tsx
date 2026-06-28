@@ -445,12 +445,12 @@ export function EthiopiaPriorityMap({
   }, [effectivePriorityScoreRange, effectiveStatus, selectedMapFeature]);
 
   return (
-    <section className={`overflow-hidden rounded-lg border border-[#d9d0bd] bg-[#fffdf7] shadow-sm ${className}`}>
-      <div className="flex flex-col gap-4 border-b border-[#e7deca] bg-[#fbf7ee] p-4 md:flex-row md:items-center md:justify-between">
+    <section className={`overflow-hidden rounded-lg border border-[#dfe7dc] bg-white shadow-[0_1px_4px_rgb(34_54_42_/_0.05)] ${className}`}>
+      <div className="flex flex-col gap-4 border-b border-[#dfe7dc] bg-white p-5 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <p className="text-sm font-semibold uppercase text-accent">Ethiopia admin boundary map</p>
-            <span className="rounded-full border border-[#d9d0bd] bg-white px-2.5 py-1 text-xs text-muted">
+            <p className="text-sm font-semibold text-accent">Ethiopia administrative boundary map</p>
+            <span className="rounded-full border border-[#dfe7dc] bg-[#f8faf7] px-2.5 py-1 text-xs text-muted">
               {resultBadge}
             </span>
           </div>
@@ -458,12 +458,12 @@ export function EthiopiaPriorityMap({
           <p className="mt-1 text-sm text-muted">{resultDescription}</p>
         </div>
 
-        <div className="flex w-full rounded-full border border-[#d9d0bd] bg-white p-1 md:w-auto">
+        <div className="flex w-full rounded-full border border-[#dfe7dc] bg-white p-1 md:w-auto">
           <button
             type="button"
             onClick={() => setMode("map")}
             className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold transition md:flex-none ${
-              mode === "map" ? "bg-[#1f6f68] text-white" : "text-muted hover:bg-[#f3eadb]"
+              mode === "map" ? "bg-[#236b44] text-white" : "text-muted hover:bg-[#edf5ee]"
             }`}
           >
             2D map
@@ -472,7 +472,7 @@ export function EthiopiaPriorityMap({
             type="button"
             onClick={() => setMode("satellite")}
             className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold transition md:flex-none ${
-              mode === "satellite" ? "bg-[#1f6f68] text-white" : "text-muted hover:bg-[#f3eadb]"
+              mode === "satellite" ? "bg-[#236b44] text-white" : "text-muted hover:bg-[#edf5ee]"
             }`}
           >
             Satellite
@@ -481,15 +481,15 @@ export function EthiopiaPriorityMap({
       </div>
 
       <div className={`grid min-h-[600px] ${showDetailsPanel ? "lg:grid-cols-[1fr_360px]" : ""}`}>
-        <div className="relative min-h-[500px] overflow-hidden bg-[#edf2e7]">
+        <div className="relative min-h-[500px] overflow-hidden bg-[#eef3ed]">
           <div ref={mapElementRef} className="h-full min-h-[500px] w-full" aria-label="Interactive Leaflet map of Ethiopia administrative boundaries" />
 
           <MapStateOverlay status={effectiveStatus} hasFeatures={joinedBoundaries.features.length > 0} />
 
           {effectiveStatus === "ready" && joinedBoundaries.features.length > 0 && (
-            <div className="absolute bottom-4 left-4 right-4 z-[500] flex flex-col gap-3 rounded-lg border border-[#d9d0bd] bg-white/90 p-4 shadow-sm backdrop-blur md:left-auto md:w-72">
-              <p className="text-xs font-semibold uppercase text-muted">Priority legend</p>
-              <div className="h-3 rounded-full border border-[#d9d0bd]" style={{ background: PRIORITY_GRADIENT_CSS }} />
+            <div className="absolute bottom-4 left-4 right-4 z-[500] flex flex-col gap-3 rounded-lg border border-[#dfe7dc] bg-white/95 p-4 shadow-[0_1px_4px_rgb(34_54_42_/_0.08)] md:left-auto md:w-72">
+              <p className="text-xs font-semibold text-muted">Priority legend</p>
+              <div className="h-3 rounded-full border border-[#dfe7dc]" style={{ background: PRIORITY_GRADIENT_CSS }} />
               <div className="flex items-center justify-between text-xs font-semibold text-muted">
                 <span>High</span>
                 <span>Restoration Priority</span>
@@ -503,7 +503,7 @@ export function EthiopiaPriorityMap({
               <p className="text-xs leading-5 text-muted">
                 Colors indicate AI-computed restoration priority, normalized across displayed scores.
               </p>
-              <p className="border-t border-[#eee4d3] pt-3 text-xs leading-5 text-muted">
+              <p className="border-t border-[#e8eee6] pt-3 text-xs leading-5 text-muted">
                 {legendNote}
               </p>
             </div>
@@ -511,7 +511,7 @@ export function EthiopiaPriorityMap({
         </div>
 
         {showDetailsPanel && (
-          <aside className="border-t border-[#e7deca] bg-[#fffdf7] p-5 lg:border-l lg:border-t-0">
+          <aside className="border-t border-[#dfe7dc] bg-white p-5 lg:border-l lg:border-t-0">
             {panelFeature && effectiveStatus === "ready" ? (
               <PriorityAreaPanel
                 feature={panelFeature}
@@ -607,7 +607,7 @@ function PriorityAreaPanel({
 
   if (!recommendation) {
     return (
-      <div className="rounded-lg border border-dashed border-[#cfc2aa] bg-[#fbf7ee] p-5">
+      <div className="rounded-lg border border-dashed border-[#c8d6ca] bg-[#f8faf7] p-5">
         <p className="text-sm font-semibold text-fg">{panelLabel}</p>
         <p className="mt-2 text-sm leading-6 text-muted">
           {hierarchy.join(" → ")} has no prototype recommendation attached.
@@ -620,13 +620,13 @@ function PriorityAreaPanel({
     <div>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase text-accent">{panelLabel}</p>
+          <p className="text-sm font-semibold text-accent">{panelLabel}</p>
           <h4 className="mt-1 text-2xl font-semibold text-fg">{feature.properties.adm2_name}</h4>
           <p className="mt-2 text-sm leading-6 text-muted">{hierarchy.join(" → ")}</p>
           <p className="mt-1 text-xs text-muted">PCODE: {feature.properties.join_pcode}</p>
         </div>
         <div
-          className="rounded-lg border border-[#d9d0bd] px-3 py-2 text-center"
+          className="rounded-lg px-3 py-2 text-center"
           style={{
             backgroundColor: priorityColor(recommendation.priority_score, priorityScoreRange),
             color: priorityTextColor(recommendation.priority_score, priorityScoreRange),
@@ -651,12 +651,12 @@ function PriorityAreaPanel({
         <ImpactBar label="Livelihood benefit" value={recommendation.livelihood_score} />
       </div>
 
-      <div className="mt-5 rounded-lg border border-[#e3d8c4] bg-[#fbf7ee] p-4">
+      <div className="mt-5 rounded-lg border border-[#dfe7dc] bg-[#f8faf7] p-4">
         <p className="text-sm font-semibold text-fg">Recommendation rationale</p>
         <p className="mt-2 text-sm leading-6 text-muted">{recommendation.rationale}</p>
       </div>
 
-      <div className="mt-4 rounded-lg border border-[#d8e5dc] bg-[#f1f7f2] p-4">
+      <div className="mt-4 rounded-lg border border-[#d9e4d8] bg-[#f2f7f1] p-4">
         <p className="text-sm font-semibold text-fg">Evidence status</p>
         <p className="mt-2 text-sm leading-6 text-muted">{recommendation.evidence}</p>
       </div>
@@ -675,7 +675,7 @@ function LegendItem({ color, label }: { color: string; label: string }) {
 
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-[#e7deca] bg-white p-3">
+    <div className="rounded-md border border-[#dfe7dc] bg-white p-3">
       <p className="text-xs text-muted">{label}</p>
       <p className="mt-1 text-sm font-semibold text-fg">{value}</p>
     </div>
@@ -689,8 +689,8 @@ function ImpactBar({ label, value }: { label: string; value: number }) {
         <span className="text-muted">{label}</span>
         <span className="font-semibold text-fg">{value}/100</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-[#e5dcc9]">
-        <div className="h-full rounded-full bg-[#1f6f68]" style={{ width: `${value}%` }} />
+      <div className="h-2 overflow-hidden rounded-full bg-[#e5ebe3]">
+        <div className="h-full rounded-full bg-[#236b44]" style={{ width: `${value}%` }} />
       </div>
     </div>
   );
@@ -719,9 +719,9 @@ function MapStateOverlay({ status, hasFeatures }: { status: GeoDataStatus; hasFe
   } satisfies Record<GeoDataStatus, { title: string; body: string }>;
 
   return (
-    <div className="absolute inset-4 z-[600] flex items-center justify-center rounded-lg border border-dashed border-[#cfc2aa] bg-white/85 p-6 text-center backdrop-blur-sm">
+    <div className="absolute inset-4 z-[600] flex items-center justify-center rounded-lg border border-dashed border-[#c8d6ca] bg-white/90 p-6 text-center">
       <div className="max-w-sm">
-        {status === "loading" && <div className="mx-auto mb-4 size-10 animate-spin rounded-full border-2 border-[#1f6f68] border-t-transparent" />}
+        {status === "loading" && <div className="mx-auto mb-4 size-10 animate-spin rounded-full border-2 border-[#236b44] border-t-transparent" />}
         <h4 className="text-lg font-semibold text-fg">{stateCopy[status].title}</h4>
         <p className="mt-2 text-sm leading-6 text-muted">{stateCopy[status].body}</p>
       </div>
@@ -731,7 +731,7 @@ function MapStateOverlay({ status, hasFeatures }: { status: GeoDataStatus; hasFe
 
 function FutureDataPanel({ status }: { status: GeoDataStatus }) {
   return (
-    <div className="rounded-lg border border-dashed border-[#cfc2aa] bg-[#fbf7ee] p-5">
+    <div className="rounded-lg border border-dashed border-[#c8d6ca] bg-[#f8faf7] p-5">
       <p className="text-sm font-semibold text-fg">Future data panel</p>
       <p className="mt-2 text-sm leading-6 text-muted">
         Current status: {status}. The map renderer expects recommendation outputs with admin level,
