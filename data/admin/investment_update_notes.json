@@ -1,0 +1,28 @@
+[
+  {
+    "investment_id": "investment:gimbo-assisted-natural-regeneration-demo",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "site_id": "SWE-007",
+    "watched_artifacts": [
+      "data/features/site_features.json",
+      "models/artifacts/site_predictions.json",
+      "data/features/source_extracts/",
+      "data/local_knowledge/evidence_cards.json"
+    ],
+    "requested_update_logic": "When source-derived features, score, local evidence, or imagery change for this region, update the investment page with score delta, driver explanation, and visual timeline evidence.",
+    "created_at_utc": "2026-06-28T08:32:28.839Z"
+  },
+  {
+    "investment_id": "investment:south-ethiopia-soil-water-demo",
+    "region": "South Ethiopia",
+    "site_id": "SET-002",
+    "watched_artifacts": [
+      "data/features/site_features.json",
+      "models/artifacts/site_predictions.json",
+      "data/features/source_extracts/",
+      "data/local_knowledge/evidence_cards.json"
+    ],
+    "requested_update_logic": "When source-derived features, score, local evidence, or imagery change for this region, update the investment page with score delta, driver explanation, and visual timeline evidence.",
+    "created_at_utc": "2026-06-28T08:32:28.839Z"
+  }
+]

@@ -1,0 +1,39 @@
+# Melese Getinet - Doctoral Thesis semi useful for local knowledge.pdf - page 1
+
+Source ID: `local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_melese_getinet_doctoral_thesis`
+Page: 1
+Extraction quality: text_extracted
+
+```text
+ADDIS ABABA UNIVERSITY
+                 COLLEGE OF SOCIAL SCIENCES
+DEPARTMENT OF GEOGRAPHY AND ENVIRONMENTAL STUDIES
+
+
+ASSESSMENT OF LAND SUITABILITY USING A GIS-BASED MULTI-
+   CRITERIA ANALYSIS FOR RICE CULTIVATION IN FOGERA
+        WOREDA, AMHARA REGIONAL STATE, ETHIOPIA
+
+
+                                 BY
+                      MELESE GETINET KASSIE
+
+
+
+                    A THESIS SUBMITTED TO
+THE DEPARTMENT OF GEOGRAPHY AND ENVIRONMENTAL STUDIES OF ADDIS
+ABABA UNIVERSITY IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR THE
+DEGREE OF MASTER OF ARTS IN GEOGRAPHY AND ENVIRONMENTAL STUDIES
+(WITH SPECIALIZATION IN GIS, REMOTE SENSING AND DIGITAL CARTOGRAPHY)
+
+
+
+
+                    ADVISER: DEMIS MENGIST(PhD)
+
+
+
+
+                       ADDIS ABABA, ETHIOPIA
+                              JUNE 2024
+```

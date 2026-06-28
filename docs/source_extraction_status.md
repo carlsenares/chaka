@@ -4,12 +4,22 @@ This document tracks which feature groups are source-derived and which are still
 
 ## Current Status
 
+Expansion note: the candidate map now contains 32 screening cells: the original
+16 in South Ethiopia and Southwest Ethiopia, plus 16 additional cells in
+Tigray, Amhara, Oromia, and Gambela for broader demo coverage. Feature and
+prediction artifacts have been regenerated and validated for all 32 sites.
+Some source-extract artifacts were originally built for the first 16-site AOI;
+expanded-region rows may therefore use deterministic fallback values until the
+heavy geospatial extractors are rerun nationally.
+
 | Feature group | Fields | Source status | Source | Notes |
 | --- | --- | --- | --- | --- |
 | Geometry/admin labels | `site_id`, `region`, `zone`, `woreda`, `area_ha` | Source-derived | HDX/OCHA Ethiopia Admin 1-3 | Generated from downloaded HDX GeoJSON. |
 | Land cover | `land_cover_primary`, `land_cover_mix` | Source-derived | ESA WorldCover 2021 v200 | Extracted from public 10m WorldCover COG tiles. |
 | Vegetation | `ndvi_current`, `ndvi_trend_5y`, `evi_current` | Partial source-derived for 16/16 sites | Sentinel-2 L2A via Element84 Earth Search; optional Landsat C2 L2 via Planetary Computer | Current NDVI/EVI are extracted from public Sentinel-2 COGs. Landsat 5-year trend is implemented as opt-in because signed COG reads are slow from this environment, so `ndvi_trend_5y` still falls back when trend is not run. |
 | Forest context | `forest_loss_score` | Source-derived for 16/16 sites | Hansen Global Forest Change / GFW v1.13 | Extracts tree-cover baseline and loss from official direct-download tiles. Default threshold is 30% tree cover; tree-cover loss is a disturbance proxy, not verified deforestation or carbon loss. |
+| Carbon stock context | `source_extracts.carbon_stock_context` | Optional source-derived context for 16/16 sites | ESA CCI Biomass v7.0 2024 | Above-ground biomass and AGB uncertainty from 100m CEDA GeoTIFF tiles. Context-only; does not overwrite carbon score or convert biomass to verified carbon. |
+| Carbon flux context | `source_extracts.carbon_flux_context` | Optional metadata/blocker context | GFW/WRI forest carbon gross removals, gross emissions, net flux | Metadata and tile resources are discoverable, but raster downloads currently require a valid API key from this environment. Context-only; no score override. |
 | Rainfall | `rainfall_mean_mm`, `rainfall_reliability_score` | Source-derived | CHIRPS v2.0 Africa Monthly 2021-2025 | Extracted from official UCSB monthly GeoTIFFs. Reliability is normalized to 0-100 in `site_features.json`; raw 0-1 reliability is retained in `source_extracts`. |
 | Water/productivity context | `source_extracts.water_productivity` | Optional source-derived context | FAO WaPOR v3 L2 annual products | AETI, total biomass production, and biomass water productivity context. Does not overwrite rainfall, carbon, or livelihood scores. |
 | Terrain | `slope_mean_deg`, `slope_risk_score` | Source-derived for 16/16 sites | SRTMGL1 | Artifact imported from the coworker SRTM branch and normalized to the current source-extract schema. Raw official `.hgt` tiles remain gitignored. |
@@ -357,6 +367,79 @@ Current GFW/UMD-derived artifact coverage:
 - Forest loss scores: 16/16 sites.
 - Tree-cover context scores: 16/16 sites.
 - Hansen tile set: `10N_030E`.
+
+ESA CCI Biomass dry-run command:
+
+```bash
+npm run data:esa-biomass:dry-run
+```
+
+ESA CCI Biomass command:
+
+```bash
+npm run data:esa-biomass
+```
+
+ESA CCI Biomass script:
+
+```text
+scripts/extract-esa-cci-biomass.py
+```
+
+ESA CCI Biomass output:
+
+```text
+data/features/source_extracts/esa_cci_biomass.json
+```
+
+ESA CCI Biomass raw cache:
+
+```text
+data/raw/esa_cci_biomass/
+```
+
+The ESA CCI lane uses CEDA JSON listings to find the 2024 v7.0 100m AGB and
+AGB_SD GeoTIFF tiles for the candidate polygons. The current candidate set uses
+tile `N10E030`. The lane summarizes above-ground biomass and uncertainty under
+`source_extracts.carbon_stock_context`. It does not convert biomass to carbon
+and does not affect the current ranker.
+
+Current ESA CCI Biomass artifact coverage:
+
+- Source-derived AGB context rows: 16/16 sites.
+- Source-derived AGB uncertainty rows: 16/16 sites.
+- ESA tile set: `N10E030`.
+
+GFW carbon flux dry-run command:
+
+```bash
+npm run data:gfw-carbon:dry-run
+```
+
+GFW carbon flux command:
+
+```bash
+npm run data:gfw-carbon
+```
+
+GFW carbon flux script:
+
+```text
+scripts/extract-gfw-carbon-flux.py
+```
+
+GFW carbon flux output:
+
+```text
+data/features/source_extracts/gfw_carbon_flux.json
+```
+
+The GFW carbon flux lane discovers WRI/GFW gross removals, gross emissions, and
+net flux tile resources for the current candidate tile `10N_030E`. Raster
+downloads currently return `403` without a valid API key, so the extractor writes
+a blocked context artifact instead of fabricating values. If API-key access is
+added later, the same script can summarize the tiles into
+`source_extracts.carbon_flux_context`.
 
 WaPOR water/productivity dry-run command:
 

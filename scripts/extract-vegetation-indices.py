@@ -180,13 +180,19 @@ def search_landsat_items(bbox, year, args):
 
 
 def summarize_sentinel_scene(feature, item, min_valid_pixels):
-    red = read_masked_asset(feature, item["assets"]["red"]["href"])
-    nir = read_masked_asset(feature, item["assets"]["nir"]["href"])
-    blue = read_masked_asset(feature, item["assets"]["blue"]["href"])
+    try:
+        red = read_masked_asset(feature, item["assets"]["red"]["href"])
+        nir = read_masked_asset(feature, item["assets"]["nir"]["href"])
+        blue = read_masked_asset(feature, item["assets"]["blue"]["href"])
+    except ValueError as error:
+        return scene_error(item["id"], "no_asset_overlap", error)
     valid = red["valid"] & nir["valid"] & blue["valid"]
     if "scl" in item["assets"]:
-        scl = read_masked_asset(feature, item["assets"]["scl"]["href"], indexes=1)
-        if scl["data"].shape == red["data"].shape:
+        try:
+            scl = read_masked_asset(feature, item["assets"]["scl"]["href"], indexes=1)
+        except ValueError:
+            scl = None
+        if scl and scl["data"].shape == red["data"].shape:
             valid &= scl["valid"] & ~np.isin(scl["data"], list(SENTINEL_SCL_EXCLUDE))
     red_reflectance = red["data"].astype("float64") / 10000.0
     nir_reflectance = nir["data"].astype("float64") / 10000.0
@@ -206,9 +212,12 @@ def summarize_landsat_scene(feature, item, min_valid_pixels):
     red_href = sign_pc_href(assets["red"]["href"])
     nir_href = sign_pc_href(assets["nir08"]["href"])
     qa_href = sign_pc_href(assets["qa_pixel"]["href"])
-    red = read_masked_asset(feature, red_href)
-    nir = read_masked_asset(feature, nir_href)
-    qa = read_masked_asset(feature, qa_href)
+    try:
+        red = read_masked_asset(feature, red_href)
+        nir = read_masked_asset(feature, nir_href)
+        qa = read_masked_asset(feature, qa_href)
+    except ValueError as error:
+        return scene_error(item["id"], "no_asset_overlap", error)
     valid = red["valid"] & nir["valid"] & qa["valid"] & qa_pixel_clear_mask(qa["data"])
     red_reflectance = red["data"].astype("float64") * 0.0000275 - 0.2
     nir_reflectance = nir["data"].astype("float64") * 0.0000275 - 0.2
@@ -233,6 +242,15 @@ def summarize_indices(scene_id, red, nir, blue, valid, min_valid_pixels):
         evi_valid = ndvi_valid & np.isfinite(evi) & (evi >= -0.2) & (evi <= 1.0)
         summary["evi"] = float(np.median(evi[evi_valid])) if np.any(evi_valid) else None
     return summary
+
+
+def scene_error(scene_id, status, error):
+    return {
+        "scene_id": scene_id,
+        "source_status": status,
+        "valid_pixel_count": 0,
+        "error": str(error),
+    }
 
 
 def read_masked_asset(feature, href, indexes=1):

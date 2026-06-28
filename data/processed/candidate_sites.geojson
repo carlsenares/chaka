@@ -6,10 +6,574 @@
     "source_aoi": "data/processed/aoi_boundaries.geojson",
     "crs": "EPSG:4326",
     "cell_size_degrees": 0.045,
-    "candidate_count": 16,
+    "candidate_count": 32,
     "note": "MVP candidate sites are deterministic grid cells inside target AOIs. They preserve the AGENT_STRUCTURE.md GeoJSON contract and can scale to national grid generation later."
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "TIG-001",
+        "name": "Tigray Candidate 001",
+        "region": "Tigray",
+        "region_code": "TIG",
+        "zone": "Southern",
+        "woreda": "Raya Azebo",
+        "zone_pcode": "ET0104",
+        "woreda_pcode": "ET010406",
+        "area_ha": 2449.2,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET01",
+        "centroid_lon": 39.574329,
+        "centroid_lat": 12.572495,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.551829,
+              12.549995
+            ],
+            [
+              39.596829,
+              12.549995
+            ],
+            [
+              39.596829,
+              12.594995
+            ],
+            [
+              39.551829,
+              12.594995
+            ],
+            [
+              39.551829,
+              12.549995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "TIG-002",
+        "name": "Tigray Candidate 002",
+        "region": "Tigray",
+        "region_code": "TIG",
+        "zone": "Eastern",
+        "woreda": "Agulae",
+        "zone_pcode": "ET0103",
+        "woreda_pcode": "ET010316",
+        "area_ha": 2438,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET01",
+        "centroid_lon": 39.574329,
+        "centroid_lat": 13.697495,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.551829,
+              13.674995
+            ],
+            [
+              39.596829,
+              13.674995
+            ],
+            [
+              39.596829,
+              13.719995
+            ],
+            [
+              39.551829,
+              13.719995
+            ],
+            [
+              39.551829,
+              13.674995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "TIG-003",
+        "name": "Tigray Candidate 003",
+        "region": "Tigray",
+        "region_code": "TIG",
+        "zone": "Eastern",
+        "woreda": "Sebuha Saesie",
+        "zone_pcode": "ET0103",
+        "woreda_pcode": "ET010303",
+        "area_ha": 2433.3,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET01",
+        "centroid_lon": 39.574329,
+        "centroid_lat": 14.147495,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.551829,
+              14.124995
+            ],
+            [
+              39.596829,
+              14.124995
+            ],
+            [
+              39.596829,
+              14.169995
+            ],
+            [
+              39.551829,
+              14.169995
+            ],
+            [
+              39.551829,
+              14.124995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "TIG-004",
+        "name": "Tigray Candidate 004",
+        "region": "Tigray",
+        "region_code": "TIG",
+        "zone": "North Western",
+        "woreda": "Tahtay Adiyabo",
+        "zone_pcode": "ET0101",
+        "woreda_pcode": "ET010101",
+        "area_ha": 2425.9,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET01",
+        "centroid_lon": 37.954329,
+        "centroid_lat": 14.822495,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              37.931829,
+              14.799995
+            ],
+            [
+              37.976829,
+              14.799995
+            ],
+            [
+              37.976829,
+              14.844995
+            ],
+            [
+              37.931829,
+              14.844995
+            ],
+            [
+              37.931829,
+              14.799995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "AMH-001",
+        "name": "Amhara Candidate 001",
+        "region": "Amhara",
+        "region_code": "AMH",
+        "zone": "North Shewa (AM)",
+        "woreda": "Minjar Shenkora",
+        "zone_pcode": "ET0305",
+        "woreda_pcode": "ET030518",
+        "area_ha": 2480.3,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET03",
+        "centroid_lon": 39.288584,
+        "centroid_lat": 8.737313,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.266084,
+              8.714813
+            ],
+            [
+              39.311084,
+              8.714813
+            ],
+            [
+              39.311084,
+              8.759813
+            ],
+            [
+              39.266084,
+              8.759813
+            ],
+            [
+              39.266084,
+              8.714813
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "AMH-002",
+        "name": "Amhara Candidate 002",
+        "region": "Amhara",
+        "region_code": "AMH",
+        "zone": "South Wello",
+        "woreda": "Sayint",
+        "zone_pcode": "ET0304",
+        "woreda_pcode": "ET030411",
+        "area_ha": 2463,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET03",
+        "centroid_lon": 38.478584,
+        "centroid_lat": 11.032313,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              38.456084,
+              11.009813
+            ],
+            [
+              38.501084,
+              11.009813
+            ],
+            [
+              38.501084,
+              11.054813
+            ],
+            [
+              38.456084,
+              11.054813
+            ],
+            [
+              38.456084,
+              11.009813
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "AMH-003",
+        "name": "Amhara Candidate 003",
+        "region": "Amhara",
+        "region_code": "AMH",
+        "zone": "North Wello",
+        "woreda": "Raya Kobo",
+        "zone_pcode": "ET0303",
+        "woreda_pcode": "ET030302",
+        "area_ha": 2453.5,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET03",
+        "centroid_lon": 39.558584,
+        "centroid_lat": 12.112313,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.536084,
+              12.089813
+            ],
+            [
+              39.581084,
+              12.089813
+            ],
+            [
+              39.581084,
+              12.134813
+            ],
+            [
+              39.536084,
+              12.134813
+            ],
+            [
+              39.536084,
+              12.089813
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "AMH-004",
+        "name": "Amhara Candidate 004",
+        "region": "Amhara",
+        "region_code": "AMH",
+        "zone": "West Gondar",
+        "woreda": "Mirab Armacho",
+        "zone_pcode": "ET0312",
+        "woreda_pcode": "ET031206",
+        "area_ha": 2437.7,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET03",
+        "centroid_lon": 36.453584,
+        "centroid_lat": 13.732313,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.431084,
+              13.709813
+            ],
+            [
+              36.476084,
+              13.709813
+            ],
+            [
+              36.476084,
+              13.754813
+            ],
+            [
+              36.431084,
+              13.754813
+            ],
+            [
+              36.431084,
+              13.709813
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "ORO-001",
+        "name": "Oromia Candidate 001",
+        "region": "Oromia",
+        "region_code": "ORO",
+        "zone": "Borena",
+        "woreda": "Moyale (OR)",
+        "zone_pcode": "ET0412",
+        "woreda_pcode": "ET041210",
+        "area_ha": 2504.6,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET04",
+        "centroid_lon": 38.871746,
+        "centroid_lat": 3.53639,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              38.849246,
+              3.51389
+            ],
+            [
+              38.894246,
+              3.51389
+            ],
+            [
+              38.894246,
+              3.55889
+            ],
+            [
+              38.849246,
+              3.55889
+            ],
+            [
+              38.849246,
+              3.51389
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "ORO-002",
+        "name": "Oromia Candidate 002",
+        "region": "Oromia",
+        "region_code": "ORO",
+        "zone": "West Arsi",
+        "woreda": "Dodola",
+        "zone_pcode": "ET0417",
+        "woreda_pcode": "ET041707",
+        "area_ha": 2490.7,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET04",
+        "centroid_lon": 39.096746,
+        "centroid_lat": 7.00139,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              39.074246,
+              6.97889
+            ],
+            [
+              39.119246,
+              6.97889
+            ],
+            [
+              39.119246,
+              7.02389
+            ],
+            [
+              39.074246,
+              7.02389
+            ],
+            [
+              39.074246,
+              6.97889
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "ORO-003",
+        "name": "Oromia Candidate 003",
+        "region": "Oromia",
+        "region_code": "ORO",
+        "zone": "Kelem Wellega",
+        "woreda": "Anfilo",
+        "zone_pcode": "ET0418",
+        "woreda_pcode": "ET041807",
+        "area_ha": 2481,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET04",
+        "centroid_lon": 34.596746,
+        "centroid_lat": 8.62139,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.574246,
+              8.59889
+            ],
+            [
+              34.619246,
+              8.59889
+            ],
+            [
+              34.619246,
+              8.64389
+            ],
+            [
+              34.574246,
+              8.64389
+            ],
+            [
+              34.574246,
+              8.59889
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "ORO-004",
+        "name": "Oromia Candidate 004",
+        "region": "Oromia",
+        "region_code": "ORO",
+        "zone": "North Shewa (OR)",
+        "woreda": "Dera (OR)",
+        "zone_pcode": "ET0406",
+        "woreda_pcode": "ET040602",
+        "area_ha": 2468.7,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET04",
+        "centroid_lon": 38.826746,
+        "centroid_lat": 10.33139,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              38.804246,
+              10.30889
+            ],
+            [
+              38.849246,
+              10.30889
+            ],
+            [
+              38.849246,
+              10.35389
+            ],
+            [
+              38.804246,
+              10.35389
+            ],
+            [
+              38.804246,
+              10.30889
+            ]
+          ]
+        ]
+      }
+    },
     {
       "type": "Feature",
       "properties": {
@@ -757,6 +1321,194 @@
             [
               35.842923,
               8.000434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "GAM-001",
+        "name": "Gambela Candidate 001",
+        "region": "Gambela",
+        "region_code": "GAM",
+        "zone": "Agnewak",
+        "woreda": "Dima (GM)",
+        "zone_pcode": "ET1202",
+        "woreda_pcode": "ET120205",
+        "area_ha": 2494.2,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET12",
+        "centroid_lon": 34.9943,
+        "centroid_lat": 6.30276,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.9718,
+              6.28026
+            ],
+            [
+              35.0168,
+              6.28026
+            ],
+            [
+              35.0168,
+              6.32526
+            ],
+            [
+              34.9718,
+              6.32526
+            ],
+            [
+              34.9718,
+              6.28026
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "GAM-002",
+        "name": "Gambela Candidate 002",
+        "region": "Gambela",
+        "region_code": "GAM",
+        "zone": "Agnewak",
+        "woreda": "Dima (GM)",
+        "zone_pcode": "ET1202",
+        "woreda_pcode": "ET120205",
+        "area_ha": 2488.1,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET12",
+        "centroid_lon": 34.7243,
+        "centroid_lat": 7.47276,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.7018,
+              7.45026
+            ],
+            [
+              34.7468,
+              7.45026
+            ],
+            [
+              34.7468,
+              7.49526
+            ],
+            [
+              34.7018,
+              7.49526
+            ],
+            [
+              34.7018,
+              7.45026
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "GAM-003",
+        "name": "Gambela Candidate 003",
+        "region": "Gambela",
+        "region_code": "GAM",
+        "zone": "Nuwer",
+        "woreda": "Akobo",
+        "zone_pcode": "ET1201",
+        "woreda_pcode": "ET120101",
+        "area_ha": 2484.9,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET12",
+        "centroid_lon": 33.2393,
+        "centroid_lat": 8.01276,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              33.2168,
+              7.99026
+            ],
+            [
+              33.2618,
+              7.99026
+            ],
+            [
+              33.2618,
+              8.03526
+            ],
+            [
+              33.2168,
+              8.03526
+            ],
+            [
+              33.2168,
+              7.99026
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "GAM-004",
+        "name": "Gambela Candidate 004",
+        "region": "Gambela",
+        "region_code": "GAM",
+        "zone": "Itang Special",
+        "woreda": "Itang",
+        "zone_pcode": "ET1204",
+        "woreda_pcode": "ET120407",
+        "area_ha": 2480.9,
+        "candidate_method": "grid_5km_or_admin_unit",
+        "geometry_quality": "derived_grid",
+        "source_aoi": "ET12",
+        "centroid_lon": 34.3193,
+        "centroid_lat": 8.64276,
+        "data_coverage_basis": "Selected inside HDX/OCHA Admin 1 AOI; core registry sources have Ethiopia/global coverage. Feature extraction must still mark per-source nulls."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              34.2968,
+              8.62026
+            ],
+            [
+              34.3418,
+              8.62026
+            ],
+            [
+              34.3418,
+              8.66526
+            ],
+            [
+              34.2968,
+              8.66526
+            ],
+            [
+              34.2968,
+              8.62026
             ]
           ]
         ]

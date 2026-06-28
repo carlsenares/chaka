@@ -9,6 +9,8 @@ const worldCoverPath = path.join(root, "data/features/source_extracts/worldcover
 const vegetationIndicesPath = path.join(root, "data/features/source_extracts/vegetation_indices.json");
 const srtmPath = path.join(root, "data/features/source_extracts/srtm_terrain.json");
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
+const gfwCarbonFluxPath = path.join(root, "data/features/source_extracts/gfw_carbon_flux.json");
+const esaCciBiomassPath = path.join(root, "data/features/source_extracts/esa_cci_biomass.json");
 const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfall.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
@@ -187,6 +189,8 @@ async function main() {
   const vegetationIndicesBySite = await loadExtractBySite(vegetationIndicesPath, { optional: true });
   const srtmBySite = await loadExtractBySite(srtmPath, { optional: true });
   const gfwBySite = await loadExtractBySite(gfwPath, { optional: true });
+  const gfwCarbonFluxBySite = await loadExtractBySite(gfwCarbonFluxPath, { optional: true });
+  const esaCciBiomassBySite = await loadExtractBySite(esaCciBiomassPath, { optional: true });
   const chirpsBySite = await loadExtractBySite(chirpsPath);
   const soilGridsBySite = await loadExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
@@ -202,6 +206,8 @@ async function main() {
       vegetationIndices: vegetationIndicesBySite.get(candidate.properties.site_id),
       srtm: srtmBySite.get(candidate.properties.site_id),
       gfw: gfwBySite.get(candidate.properties.site_id),
+      gfwCarbonFlux: gfwCarbonFluxBySite.get(candidate.properties.site_id),
+      esaCciBiomass: esaCciBiomassBySite.get(candidate.properties.site_id),
       chirps: chirpsBySite.get(candidate.properties.site_id),
       soilGrids: soilGridsBySite.get(candidate.properties.site_id),
       soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
@@ -242,6 +248,8 @@ function buildFeature(candidate, index, extracts) {
   const vegetationIndicesFeature = extracts.vegetationIndices;
   const srtmFeature = extracts.srtm;
   const gfwFeature = extracts.gfw;
+  const gfwCarbonFluxFeature = extracts.gfwCarbonFlux;
+  const esaCciBiomassFeature = extracts.esaCciBiomass;
   const chirpsFeature = extracts.chirps;
   const soilGridsFeature = extracts.soilGrids;
   const soilObservationsFeature = extracts.soilObservations;
@@ -443,6 +451,53 @@ function buildFeature(candidate, index, extracts) {
         : {
             dataset_id: "gfw_umd_forest_change",
             status: gfwFeature?.source_status ?? "not_extracted",
+          },
+      carbon_flux_context: gfwCarbonFluxFeature
+        ? {
+            dataset_id: "gfw_carbon_flux",
+            status: gfwCarbonFluxFeature.source_status,
+            scoring_policy: gfwCarbonFluxFeature.scoring_policy ?? "context_only_no_score_override",
+            gfw_carbon_gross_removals_mean_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_gross_removals_mean_mg_co2e_ha,
+            gfw_carbon_gross_removals_median_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_gross_removals_median_mg_co2e_ha,
+            gfw_carbon_gross_removals_total_mg_co2e: gfwCarbonFluxFeature.gfw_carbon_gross_removals_total_mg_co2e,
+            gfw_carbon_gross_removals_valid_pixel_count: gfwCarbonFluxFeature.gfw_carbon_gross_removals_valid_pixel_count,
+            gfw_carbon_gross_emissions_mean_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_gross_emissions_mean_mg_co2e_ha,
+            gfw_carbon_gross_emissions_median_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_gross_emissions_median_mg_co2e_ha,
+            gfw_carbon_gross_emissions_total_mg_co2e: gfwCarbonFluxFeature.gfw_carbon_gross_emissions_total_mg_co2e,
+            gfw_carbon_gross_emissions_valid_pixel_count: gfwCarbonFluxFeature.gfw_carbon_gross_emissions_valid_pixel_count,
+            gfw_carbon_net_flux_mean_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_net_flux_mean_mg_co2e_ha,
+            gfw_carbon_net_flux_median_mg_co2e_ha: gfwCarbonFluxFeature.gfw_carbon_net_flux_median_mg_co2e_ha,
+            gfw_carbon_net_flux_total_mg_co2e: gfwCarbonFluxFeature.gfw_carbon_net_flux_total_mg_co2e,
+            gfw_carbon_net_flux_valid_pixel_count: gfwCarbonFluxFeature.gfw_carbon_net_flux_valid_pixel_count,
+            source_tiles: gfwCarbonFluxFeature.source_tiles,
+          }
+        : {
+            dataset_id: "gfw_carbon_flux",
+            status: "not_extracted",
+            scoring_policy: "context_only_no_score_override",
+          },
+      carbon_stock_context: esaCciBiomassFeature
+        ? {
+            dataset_id: "esa_cci_biomass",
+            status: esaCciBiomassFeature.source_status,
+            scoring_policy: esaCciBiomassFeature.scoring_policy ?? "context_only_no_score_override",
+            esa_cci_agb_mean_mg_ha: esaCciBiomassFeature.esa_cci_agb_mean_mg_ha,
+            esa_cci_agb_median_mg_ha: esaCciBiomassFeature.esa_cci_agb_median_mg_ha,
+            esa_cci_agb_p90_mg_ha: esaCciBiomassFeature.esa_cci_agb_p90_mg_ha,
+            esa_cci_agb_total_mg: esaCciBiomassFeature.esa_cci_agb_total_mg,
+            esa_cci_agb_valid_pixel_count: esaCciBiomassFeature.esa_cci_agb_valid_pixel_count,
+            esa_cci_agb_sd_mean_mg_ha: esaCciBiomassFeature.esa_cci_agb_sd_mean_mg_ha,
+            esa_cci_agb_sd_median_mg_ha: esaCciBiomassFeature.esa_cci_agb_sd_median_mg_ha,
+            esa_cci_agb_sd_p90_mg_ha: esaCciBiomassFeature.esa_cci_agb_sd_p90_mg_ha,
+            esa_cci_agb_sd_total_mg: esaCciBiomassFeature.esa_cci_agb_sd_total_mg,
+            esa_cci_agb_sd_valid_pixel_count: esaCciBiomassFeature.esa_cci_agb_sd_valid_pixel_count,
+            esa_cci_agb_relative_uncertainty_mean: esaCciBiomassFeature.esa_cci_agb_relative_uncertainty_mean,
+            source_tiles: esaCciBiomassFeature.source_tiles,
+          }
+        : {
+            dataset_id: "esa_cci_biomass",
+            status: "not_extracted",
+            scoring_policy: "context_only_no_score_override",
           },
       rainfall: hasChirps
         ? {

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-06-27T22:02:03.207Z",
+  "checked_at_utc": "2026-06-28T05:16:27.223Z",
   "note": "Quick access/update check only. It does not download large source datasets or accept restricted terms.",
   "results": [
     {
@@ -73,7 +73,7 @@
       "method": "GET_RANGE",
       "http_status": 403,
       "content_type": "text/html; charset=UTF-8",
-      "content_length": "6050",
+      "content_length": "6072",
       "access_status": "blocked_server_challenge"
     },
     {

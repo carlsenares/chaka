@@ -11,6 +11,21 @@ const lookupPath = path.join(root, "data/processed/aoi_lookup.csv");
 
 const targetRegions = [
   {
+    region_code: "TIG",
+    source_adm1_name: "Tigray",
+    canonical_name: "Tigray",
+  },
+  {
+    region_code: "AMH",
+    source_adm1_name: "Amhara",
+    canonical_name: "Amhara",
+  },
+  {
+    region_code: "ORO",
+    source_adm1_name: "Oromia",
+    canonical_name: "Oromia",
+  },
+  {
     region_code: "SET",
     source_adm1_name: "South Ethiopia",
     canonical_name: "South Ethiopia",
@@ -19,6 +34,11 @@ const targetRegions = [
     region_code: "SWE",
     source_adm1_name: "South West Ethiopia",
     canonical_name: "Southwest Ethiopia Peoples' Region",
+  },
+  {
+    region_code: "GAM",
+    source_adm1_name: "Gambela",
+    canonical_name: "Gambela",
   },
 ];
 
@@ -69,7 +89,7 @@ async function main() {
       source: "HDX/OCHA Ethiopia administrative boundaries COD-AB v04",
       source_file: "data/raw/hdx_ocha_eth_admin_boundaries/eth_admin1.geojson",
       crs: "EPSG:4326",
-      note: "MVP AOIs follow the data matrix guidance: South Ethiopia and Southwest Ethiopia Peoples' Region.",
+      note: "MVP AOIs include the original South Ethiopia/Southwest Ethiopia focus plus additional regional coverage for a fuller national demo map.",
     },
     features,
   };

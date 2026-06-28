@@ -17,8 +17,12 @@ const admin3Path = path.join(root, "data/raw/hdx_ocha_eth_admin_boundaries/eth_a
 const outputPath = path.join(root, "data/processed/candidate_sites.geojson");
 
 const targetCountByRegion = new Map([
+  ["TIG", 4],
+  ["AMH", 4],
+  ["ORO", 4],
   ["SWE", 8],
   ["SET", 8],
+  ["GAM", 4],
 ]);
 
 const cellSizeDegrees = 0.045; // About 5 km north-south at Ethiopia latitudes.

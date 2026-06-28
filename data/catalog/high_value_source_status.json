@@ -1,0 +1,220 @@
+{
+  "generated_at_utc": "2026-06-28T05:16:09.568Z",
+  "scanner_version": "0.1.0",
+  "purpose": "Tracks high-value source freshness and access status for future scoring/context ingestion.",
+  "interpretation": "This does not mean every source is safe to score directly. Use scoring_classification and caveat before integrating.",
+  "sources": [
+    {
+      "dataset_id": "gfw_forest_carbon_gross_removals",
+      "name": "GFW forest carbon gross removals",
+      "role": "carbon_flux_context",
+      "priority": "high",
+      "scoring_classification": "context_or_future_scoring",
+      "caveat": "Modeled forest carbon removals. Keep separate from carbon stock and divide cumulative removals by the stated period only when explicitly presenting annualized values.",
+      "status": "metadata_ok",
+      "provider_metadata_modified": "2025-10-22T20:45:59.723917",
+      "license_title": "Creative Commons Attribution",
+      "package_name": "gfw-forest-carbon-gross-removals",
+      "resource_count": 273,
+      "expected_tile_id": "10N_030E",
+      "expected_tile_resource_found": true,
+      "tile_download_probe": {
+        "ok": false,
+        "status_code": 403,
+        "content_type": "application/json",
+        "content_length": "174",
+        "status": "download_blocked_or_requires_terms"
+      },
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-removals"
+    },
+    {
+      "dataset_id": "gfw_forest_carbon_gross_emissions",
+      "name": "GFW forest carbon gross emissions",
+      "role": "carbon_flux_context",
+      "priority": "high",
+      "scoring_classification": "context_or_future_scoring",
+      "caveat": "Modeled forest carbon emissions. Use for carbon-risk context, not direct project carbon accounting.",
+      "status": "metadata_ok",
+      "provider_metadata_modified": "2025-10-22T20:39:54.978994",
+      "license_title": "Creative Commons Attribution",
+      "package_name": "gfw-forest-carbon-gross-emissions",
+      "resource_count": 259,
+      "expected_tile_id": "10N_030E",
+      "expected_tile_resource_found": true,
+      "tile_download_probe": {
+        "ok": false,
+        "status_code": 403,
+        "content_type": "application/json",
+        "content_length": "174",
+        "status": "download_blocked_or_requires_terms"
+      },
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-emissions"
+    },
+    {
+      "dataset_id": "gfw_forest_carbon_net_flux",
+      "name": "GFW forest carbon net flux",
+      "role": "carbon_flux_context",
+      "priority": "high",
+      "scoring_classification": "context_or_future_scoring",
+      "caveat": "Modeled net forest carbon flux. Do not mix with gross removals or emissions without naming the transformation.",
+      "status": "metadata_ok",
+      "provider_metadata_modified": "2025-10-15T18:35:22.965813",
+      "license_title": "Creative Commons Attribution",
+      "package_name": "gfw-forest-carbon-net-flux",
+      "resource_count": 273,
+      "expected_tile_id": "10N_030E",
+      "expected_tile_resource_found": true,
+      "tile_download_probe": {
+        "ok": false,
+        "status_code": 403,
+        "content_type": "application/json",
+        "content_length": "174",
+        "status": "download_blocked_or_requires_terms"
+      },
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-net-flux"
+    },
+    {
+      "dataset_id": "nhm_biodiversity_intactness_index",
+      "name": "Natural History Museum Biodiversity Intactness Index v2.1.1",
+      "role": "modeled_biodiversity_condition",
+      "priority": "medium_high",
+      "scoring_classification": "context_only_until_bias_review",
+      "caveat": "Modeled biodiversity intactness at coarse resolution. Use as ecosystem-condition context, not direct species evidence.",
+      "status": "metadata_ok",
+      "provider_metadata_modified": "2025-08-05T15:38:30.619503",
+      "license_title": "Other (Non-Commercial)",
+      "package_name": "bii-developed-by-nhm-v2-1-1-limited-release",
+      "resource_count": 1,
+      "primary_resource_name": "The Biodiversity Intactness Index developed by The Natural History Museum, London, v2.1.1 (Open Access, Limited Release)",
+      "primary_resource_size_bytes": 45890222,
+      "download_probe": {
+        "ok": false,
+        "status_code": 403,
+        "content_type": "text/html; charset=UTF-8",
+        "content_length": "6072",
+        "status": "download_blocked_or_requires_terms"
+      },
+      "source_url": "https://data.nhm.ac.uk/dataset/bii-developed-by-nhm-v2-1-1-limited-release"
+    },
+    {
+      "dataset_id": "gbif_ethiopia_occurrences",
+      "name": "GBIF Ethiopia georeferenced occurrences",
+      "role": "observed_biodiversity_context",
+      "priority": "high",
+      "scoring_classification": "context_only_until_sampling_bias_handled",
+      "caveat": "Raw occurrence counts are sampling effort, not biodiversity quality. Use filters and bias correction before scoring.",
+      "status": "metadata_ok",
+      "source_url": "https://api.gbif.org/v1/occurrence/search?country=ET&hasCoordinate=true&limit=0",
+      "count": 1066954,
+      "end_of_records": false
+    },
+    {
+      "dataset_id": "wosis_latest_soil_observations",
+      "name": "WoSIS latest measured soil observations",
+      "role": "observed_soil_anchor",
+      "priority": "medium_high",
+      "scoring_classification": "validation_anchor",
+      "caveat": "Measured soil observations are sparse and uneven. Use as confidence/validation context for SoilGrids, not full-coverage scoring.",
+      "status": "metadata_ok",
+      "source_url": "https://maps.isric.org/mapserv?map=/map/wosis_latest.map&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetCapabilities",
+      "access_probe": {
+        "ok": true,
+        "status_code": 200,
+        "content_type": "text/xml; charset=UTF-8",
+        "content_length": null,
+        "status": "reachable"
+      }
+    },
+    {
+      "dataset_id": "kba_world_database",
+      "name": "World Database of Key Biodiversity Areas",
+      "role": "conservation_priority_safeguard",
+      "priority": "high",
+      "scoring_classification": "blocked_until_license_or_partner_access",
+      "caveat": "High-value biodiversity safeguard layer, but GIS access and redistribution terms require manual approval.",
+      "status": "manual_or_license_required",
+      "source_url": "https://www.keybiodiversityareas.org/request-gis-data",
+      "access_probe": {
+        "ok": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "content_length": null,
+        "status": "reachable"
+      }
+    },
+    {
+      "dataset_id": "iucn_red_list_spatial",
+      "name": "IUCN Red List spatial data",
+      "role": "threatened_species_context",
+      "priority": "high",
+      "scoring_classification": "blocked_until_terms_accepted",
+      "caveat": "Range maps are not observations. Refine by habitat/elevation/land cover before using in scoring.",
+      "status": "manual_or_license_required",
+      "source_url": "https://www.iucnredlist.org/resources/spatial-data-download",
+      "access_probe": {
+        "ok": false,
+        "status_code": 403,
+        "content_type": "text/html; charset=UTF-8",
+        "content_length": "5631",
+        "status": "download_blocked_or_requires_terms"
+      }
+    },
+    {
+      "dataset_id": "nasa_gedi_l4b_agbd",
+      "name": "NASA GEDI L4B gridded aboveground biomass density",
+      "role": "carbon_stock_anchor",
+      "priority": "high",
+      "scoring_classification": "use_later_with_earthdata_access",
+      "caveat": "Useful biomass anchor with uncertainty, but access/product handling should preserve standard-error bands and quality metadata.",
+      "status": "portal_metadata_only",
+      "source_url": "https://www.earthdata.nasa.gov/data/catalog/ornl-cloud-gedi-l4b-gridded-biomass-v2-1-2299-2.1",
+      "access_probe": {
+        "ok": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "content_length": "254261",
+        "status": "reachable"
+      }
+    },
+    {
+      "dataset_id": "esa_cci_biomass_v7",
+      "name": "ESA CCI Biomass v7.0",
+      "role": "wall_to_wall_carbon_stock",
+      "priority": "high",
+      "scoring_classification": "context_or_future_scoring",
+      "caveat": "Wall-to-wall above-ground biomass with uncertainty. This is biomass stock context, not verified project carbon; convert to carbon only with an explicit factor and source.",
+      "status": "metadata_ok",
+      "source_url": "https://catalogue.ceda.ac.uk/uuid/6429d1aafe1e43b9b414e4a5a7f8b903",
+      "listing_url": "https://data.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/?json",
+      "year": 2024,
+      "expected_tile_id": "N10E030",
+      "expected_tile_resource_found": true,
+      "agb_resource": {
+        "name": "N10E030_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2024-fv7.0.tif",
+        "size": 98988456,
+        "last_modified": "2026-05-13T09:53:00",
+        "md5": "7e2d9c4addbe0a0826687ca723538f1c"
+      },
+      "agb_sd_resource": {
+        "name": "N10E030_ESACCI-BIOMASS-L4-AGB_SD-MERGED-100m-2024-fv7.0.tif",
+        "size": 87910240,
+        "last_modified": "2026-05-13T09:53:01",
+        "md5": "e6c7a7e38f32ea6c1d2205b914d965f8"
+      },
+      "agb_download_probe": {
+        "ok": true,
+        "status_code": 206,
+        "content_type": "image/tiff",
+        "content_length": "2",
+        "status": "reachable"
+      },
+      "agb_sd_download_probe": {
+        "ok": true,
+        "status_code": 206,
+        "content_type": "image/tiff",
+        "content_length": "2",
+        "status": "reachable"
+      }
+    }
+  ]
+}

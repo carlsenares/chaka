@@ -3,6 +3,7 @@ import { createProjectBrief } from "@/reasoning/brief";
 import { createEvidenceCritic } from "@/reasoning/critic";
 import { generateExplanation } from "@/reasoning/explanations";
 import { classifyIntervention } from "@/reasoning/interventions";
+import { getCandidateSite } from "@/reasoning/candidate-sites";
 import {
   getPredictionForFeature,
   getSiteFeature,
@@ -85,6 +86,7 @@ export function generateSiteDetail(
   feature: SiteFeature,
   rank?: number,
 ): SiteDetailResponse {
+  const candidateSite = getCandidateSite(feature.site_id);
   const prediction = getPredictionForFeature(feature);
   const recommendation = createRecommendationObject(feature, prediction, rank);
   const similarCases = findCanonicalSimilarCases(feature, recommendation);
@@ -98,6 +100,8 @@ export function generateSiteDetail(
 
   return {
     site_features: feature,
+    candidate: candidateSite?.properties ?? null,
+    geometry: candidateSite?.geometry ?? null,
     model_prediction: prediction,
     recommendation,
     critic,
@@ -133,21 +137,23 @@ export function getSiteListResponse(region?: string): SiteListResponse {
   return {
     region: region ?? "All demo regions",
     generated_at: new Date().toISOString(),
-    sites: ranked.map((detail, index) => ({
-      site_id: detail.site_features.site_id,
-      name: detail.site_features.woreda,
-      rank: index + 1,
-      priority_score: detail.recommendation.priority_score,
-      recommended_intervention: detail.recommendation.recommended_intervention,
-      risk_level: detail.recommendation.risk_level,
-      carbon_potential: detail.recommendation.carbon_potential,
-      livelihood_benefit: detail.recommendation.livelihood_benefit,
-      data_quality_score: detail.site_features.data_quality_score,
-      geometry: {
-        type: "Polygon",
-        coordinates: [],
-      },
-    })),
+    sites: ranked.map((detail, index) => {
+      const candidateSite = getCandidateSite(detail.site_features.site_id);
+
+      return {
+        site_id: detail.site_features.site_id,
+        name: candidateSite?.properties.name ?? detail.site_features.woreda,
+        rank: index + 1,
+        priority_score: detail.recommendation.priority_score,
+        recommended_intervention: detail.recommendation.recommended_intervention,
+        risk_level: detail.recommendation.risk_level,
+        carbon_potential: detail.recommendation.carbon_potential,
+        livelihood_benefit: detail.recommendation.livelihood_benefit,
+        data_quality_score: detail.site_features.data_quality_score,
+        candidate: candidateSite?.properties ?? null,
+        geometry: candidateSite?.geometry ?? null,
+      };
+    }),
   };
 }
 

@@ -1,3 +1,7 @@
 region_code,region,source_adm1_name,source_adm1_pcode,area_ha,geometry_quality,valid_on
+TIG,Tigray,Tigray,ET01,3413262.9,real_boundary,2025-01-01
+AMH,Amhara,Amhara,ET03,15660284.1,real_boundary,2025-01-01
+ORO,Oromia,Oromia,ET04,32513390.7,real_boundary,2025-01-01
 SET,South Ethiopia,South Ethiopia,ET08,4861138.5,real_boundary,2025-01-01
 SWE,Southwest Ethiopia Peoples' Region,South West Ethiopia,ET11,3929155.8,real_boundary,2025-01-01
+GAM,Gambela,Gambela,ET12,3144860.5,real_boundary,2025-01-01

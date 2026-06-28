@@ -23,6 +23,294 @@
   },
   "features": [
     {
+      "site_id": "TIG-001",
+      "land_cover_primary": "shrubland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.162901,
+        "cropland": 0.168632,
+        "grassland": 0.077589,
+        "built_up": 0.000151,
+        "water": 0.0,
+        "other": 0.590727
+      },
+      "worldcover_primary_class": 20,
+      "worldcover_primary_label": "Shrubland",
+      "worldcover_class_fractions": {
+        "10": 0.162901,
+        "20": 0.590432,
+        "30": 0.077589,
+        "40": 0.168632,
+        "50": 0.000151,
+        "60": 0.000295
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-002",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.001334,
+        "cropland": 0.529036,
+        "grassland": 0.220597,
+        "built_up": 0.039448,
+        "water": 0.0,
+        "other": 0.209585
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 0.001334,
+        "20": 0.191334,
+        "30": 0.220597,
+        "40": 0.529036,
+        "50": 0.039448,
+        "60": 0.018251
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-003",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.011591,
+        "cropland": 0.631972,
+        "grassland": 0.23405,
+        "built_up": 0.007171,
+        "water": 0.000151,
+        "other": 0.115065
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 0.011591,
+        "20": 0.085017,
+        "30": 0.23405,
+        "40": 0.631972,
+        "50": 0.007171,
+        "60": 0.02988,
+        "80": 0.000151,
+        "90": 0.000168
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-004",
+      "land_cover_primary": "shrubland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.028447,
+        "cropland": 0.061214,
+        "grassland": 0.265964,
+        "built_up": 0.0,
+        "water": 8.6e-05,
+        "other": 0.64429
+      },
+      "worldcover_primary_class": 20,
+      "worldcover_primary_label": "Shrubland",
+      "worldcover_class_fractions": {
+        "10": 0.028447,
+        "20": 0.590141,
+        "30": 0.265964,
+        "40": 0.061214,
+        "60": 0.05415,
+        "80": 8.6e-05
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-001",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.018224,
+        "cropland": 0.582301,
+        "grassland": 0.101063,
+        "built_up": 0.001344,
+        "water": 3.1e-05,
+        "other": 0.297037
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 0.018224,
+        "20": 0.296859,
+        "30": 0.101063,
+        "40": 0.582301,
+        "50": 0.001344,
+        "60": 0.000137,
+        "80": 3.1e-05,
+        "90": 4.1e-05
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-002",
+      "land_cover_primary": "grassland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.001509,
+        "cropland": 0.158745,
+        "grassland": 0.566139,
+        "built_up": 7e-06,
+        "water": 0.040957,
+        "other": 0.232644
+      },
+      "worldcover_primary_class": 30,
+      "worldcover_primary_label": "Grassland",
+      "worldcover_class_fractions": {
+        "10": 0.001509,
+        "20": 0.198042,
+        "30": 0.566139,
+        "40": 0.158745,
+        "50": 7e-06,
+        "60": 0.034602,
+        "80": 0.040957
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-003",
+      "land_cover_primary": "shrubland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.027346,
+        "cropland": 0.104921,
+        "grassland": 0.19988,
+        "built_up": 5.5e-05,
+        "water": 0.0,
+        "other": 0.667798
+      },
+      "worldcover_primary_class": 20,
+      "worldcover_primary_label": "Shrubland",
+      "worldcover_class_fractions": {
+        "10": 0.027346,
+        "20": 0.667325,
+        "30": 0.19988,
+        "40": 0.104921,
+        "50": 5.5e-05,
+        "60": 0.000473
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-004",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.004136,
+        "cropland": 0.539102,
+        "grassland": 0.390117,
+        "built_up": 5.1e-05,
+        "water": 0.003059,
+        "other": 0.063536
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 0.004136,
+        "20": 0.055645,
+        "30": 0.390117,
+        "40": 0.539102,
+        "50": 5.1e-05,
+        "60": 0.007891,
+        "80": 0.003059
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-001",
+      "land_cover_primary": "shrubland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.482092,
+        "cropland": 0.0,
+        "grassland": 0.007315,
+        "built_up": 0.0,
+        "water": 0.0,
+        "other": 0.510593
+      },
+      "worldcover_primary_class": 20,
+      "worldcover_primary_label": "Shrubland",
+      "worldcover_class_fractions": {
+        "10": 0.482092,
+        "20": 0.510593,
+        "30": 0.007315
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-002",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.000288,
+        "cropland": 0.983419,
+        "grassland": 0.013035,
+        "built_up": 0.002356,
+        "water": 0.0,
+        "other": 0.000902
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 0.000288,
+        "30": 0.013035,
+        "40": 0.983419,
+        "50": 0.002356,
+        "60": 0.000902
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-003",
+      "land_cover_primary": "tree_cover_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.930847,
+        "cropland": 0.006385,
+        "grassland": 0.051399,
+        "built_up": 0.000195,
+        "water": 0.0,
+        "other": 0.011173
+      },
+      "worldcover_primary_class": 10,
+      "worldcover_primary_label": "Tree cover",
+      "worldcover_class_fractions": {
+        "10": 0.930847,
+        "20": 0.011173,
+        "30": 0.051399,
+        "40": 0.006385,
+        "50": 0.000195
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-004",
+      "land_cover_primary": "cropland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 2.4e-05,
+        "cropland": 0.740267,
+        "grassland": 0.088676,
+        "built_up": 0.0,
+        "water": 0.0,
+        "other": 0.171032
+      },
+      "worldcover_primary_class": 40,
+      "worldcover_primary_label": "Cropland",
+      "worldcover_class_fractions": {
+        "10": 2.4e-05,
+        "20": 0.169283,
+        "30": 0.088676,
+        "40": 0.740267,
+        "60": 0.001749
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
       "site_id": "SET-001",
       "land_cover_primary": "water_dominant",
       "land_cover_mix": {
@@ -383,6 +671,92 @@
         "30": 0.000123,
         "40": 0.000254,
         "90": 0.000309
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-001",
+      "land_cover_primary": "grassland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.211313,
+        "cropland": 0.0,
+        "grassland": 0.706406,
+        "built_up": 0.0,
+        "water": 0.0,
+        "other": 0.082281
+      },
+      "worldcover_primary_class": 30,
+      "worldcover_primary_label": "Grassland",
+      "worldcover_class_fractions": {
+        "10": 0.211313,
+        "20": 0.082281,
+        "30": 0.706406
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-002",
+      "land_cover_primary": "tree_cover_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.926217,
+        "cropland": 0.0,
+        "grassland": 0.020055,
+        "built_up": 0.0,
+        "water": 0.0,
+        "other": 0.053728
+      },
+      "worldcover_primary_class": 10,
+      "worldcover_primary_label": "Tree cover",
+      "worldcover_class_fractions": {
+        "10": 0.926217,
+        "20": 0.053728,
+        "30": 0.020055
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-003",
+      "land_cover_primary": "grassland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.000199,
+        "cropland": 0.0,
+        "grassland": 0.771159,
+        "built_up": 0.0,
+        "water": 0.002486,
+        "other": 0.226156
+      },
+      "worldcover_primary_class": 30,
+      "worldcover_primary_label": "Grassland",
+      "worldcover_class_fractions": {
+        "10": 0.000199,
+        "20": 0.001289,
+        "30": 0.771159,
+        "80": 0.002486,
+        "90": 0.224866
+      },
+      "valid_pixel_count": 291600,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-004",
+      "land_cover_primary": "grassland_dominant",
+      "land_cover_mix": {
+        "tree_cover": 0.21655,
+        "cropland": 0.0,
+        "grassland": 0.770532,
+        "built_up": 0.0,
+        "water": 0.0,
+        "other": 0.012918
+      },
+      "worldcover_primary_class": 30,
+      "worldcover_primary_label": "Grassland",
+      "worldcover_class_fractions": {
+        "10": 0.21655,
+        "20": 0.012918,
+        "30": 0.770532
       },
       "valid_pixel_count": 291600,
       "source_status": "source_derived"

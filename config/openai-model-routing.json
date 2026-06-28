@@ -1,0 +1,23 @@
+{
+  "models": {
+    "cheap_classifier": "gpt-5.4-nano",
+    "structured_extractor": "gpt-5.4-mini",
+    "reasoning_synthesizer": "gpt-5.5",
+    "source_discovery_synthesizer": "gpt-5.4-mini",
+    "critic": "gpt-5.5",
+    "embedding": "text-embedding-3-small"
+  },
+  "fallbacks": {
+    "cheap_classifier": ["gpt-5.4-mini", "gpt-4.1-mini"],
+    "structured_extractor": ["gpt-4.1-mini", "gpt-4o-mini"],
+    "reasoning_synthesizer": ["gpt-5.4", "gpt-4.1"],
+    "source_discovery_synthesizer": ["gpt-4.1-mini", "gpt-4o-mini"],
+    "critic": ["gpt-5.4", "gpt-4.1"],
+    "embedding": ["text-embedding-3-small"]
+  },
+  "reasoning": {
+    "site_intelligence": "medium",
+    "source_discovery": "medium",
+    "critic": "medium"
+  }
+}

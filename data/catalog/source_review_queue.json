@@ -1,0 +1,526 @@
+{
+  "schema_version": "source_review_queue.v1",
+  "generated_at_utc": "2026-06-28T07:56:56.048Z",
+  "source_artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json",
+  "source_artifact_period": "2026-Q2",
+  "summary": {
+    "total": 10,
+    "pending_review": 7,
+    "approved": 0,
+    "rejected": 0,
+    "blocked": 0,
+    "monitored": 3,
+    "approval_can_trigger_ingestion": 0
+  },
+  "items": [
+    {
+      "review_item_id": "gfw_forest_carbon_gross_removals",
+      "source_kind": "known_source",
+      "source_ref": "gfw_forest_carbon_gross_removals",
+      "period": "2026-Q2",
+      "name": "GFW forest carbon gross removals",
+      "provider": "WRI/GFW",
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-removals",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Probe returned download_blocked_or_requires_terms; confirm terms before ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "open",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "manual_review",
+        "version_changed": false,
+        "current_observed_version": "2025-10-22T20:45:59.723917",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjoiMjAyNS0xMC0yMlQyMDo0NTo1OS43MjM5MTciLCJyZXNvdXJjZV9jb3VudCI6MjczLCJjb3VudCI6bnVsbCwiZXhwZWN0ZWRfdGlsZV9yZXNvdXJjZV9mb3VuZCI6dHJ1ZSwibGljZW5zZV90aXRsZSI6IkNyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24iLCJhZ2JfbWQ1IjpudWxsLCJhZ2Jfc2RfbWQ1IjpudWxsLCJhY2Nlc3Nfc3RhdHVzIjpudWxsLCJ0aWxlX3N0YXR1cyI6ImRvd25sb2FkX2Jsb2NrZWRfb3JfcmVxdWlyZXNfdGVybXMifQ",
+        "artifact_paths": [
+          "data/features/source_extracts/gfw_carbon_flux.json"
+        ],
+        "caveat": "Modeled forest carbon removals. Keep separate from carbon stock and divide cumulative removals by the stated period only when explicitly presenting annualized values.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-removals",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 403,
+            "note": "tile_download_probe: download_blocked_or_requires_terms"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "gfw_forest_carbon_gross_emissions",
+      "source_kind": "known_source",
+      "source_ref": "gfw_forest_carbon_gross_emissions",
+      "period": "2026-Q2",
+      "name": "GFW forest carbon gross emissions",
+      "provider": "WRI/GFW",
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-emissions",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Probe returned download_blocked_or_requires_terms; confirm terms before ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "open",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "manual_review",
+        "version_changed": false,
+        "current_observed_version": "2025-10-22T20:39:54.978994",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjoiMjAyNS0xMC0yMlQyMDozOTo1NC45Nzg5OTQiLCJyZXNvdXJjZV9jb3VudCI6MjU5LCJjb3VudCI6bnVsbCwiZXhwZWN0ZWRfdGlsZV9yZXNvdXJjZV9mb3VuZCI6dHJ1ZSwibGljZW5zZV90aXRsZSI6IkNyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24iLCJhZ2JfbWQ1IjpudWxsLCJhZ2Jfc2RfbWQ1IjpudWxsLCJhY2Nlc3Nfc3RhdHVzIjpudWxsLCJ0aWxlX3N0YXR1cyI6ImRvd25sb2FkX2Jsb2NrZWRfb3JfcmVxdWlyZXNfdGVybXMifQ",
+        "artifact_paths": [
+          "data/features/source_extracts/gfw_carbon_flux.json"
+        ],
+        "caveat": "Modeled forest carbon emissions. Use for carbon-risk context, not direct project carbon accounting.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://datasets.wri.org/datasets/gfw-forest-carbon-gross-emissions",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 403,
+            "note": "tile_download_probe: download_blocked_or_requires_terms"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "gfw_forest_carbon_net_flux",
+      "source_kind": "known_source",
+      "source_ref": "gfw_forest_carbon_net_flux",
+      "period": "2026-Q2",
+      "name": "GFW forest carbon net flux",
+      "provider": "WRI/GFW",
+      "source_url": "https://datasets.wri.org/datasets/gfw-forest-carbon-net-flux",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Probe returned download_blocked_or_requires_terms; confirm terms before ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "open",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "manual_review",
+        "version_changed": false,
+        "current_observed_version": "2025-10-15T18:35:22.965813",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjoiMjAyNS0xMC0xNVQxODozNToyMi45NjU4MTMiLCJyZXNvdXJjZV9jb3VudCI6MjczLCJjb3VudCI6bnVsbCwiZXhwZWN0ZWRfdGlsZV9yZXNvdXJjZV9mb3VuZCI6dHJ1ZSwibGljZW5zZV90aXRsZSI6IkNyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24iLCJhZ2JfbWQ1IjpudWxsLCJhZ2Jfc2RfbWQ1IjpudWxsLCJhY2Nlc3Nfc3RhdHVzIjpudWxsLCJ0aWxlX3N0YXR1cyI6ImRvd25sb2FkX2Jsb2NrZWRfb3JfcmVxdWlyZXNfdGVybXMifQ",
+        "artifact_paths": [
+          "data/features/source_extracts/gfw_carbon_flux.json"
+        ],
+        "caveat": "Modeled net forest carbon flux. Do not mix with gross removals or emissions without naming the transformation.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://datasets.wri.org/datasets/gfw-forest-carbon-net-flux",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 403,
+            "note": "tile_download_probe: download_blocked_or_requires_terms"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "nhm_biodiversity_intactness_index",
+      "source_kind": "known_source",
+      "source_ref": "nhm_biodiversity_intactness_index",
+      "period": "2026-Q2",
+      "name": "Natural History Museum Biodiversity Intactness Index v2.1.1",
+      "provider": "Natural History Museum",
+      "source_url": "https://data.nhm.ac.uk/dataset/bii-developed-by-nhm-v2-1-1-limited-release",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Probe returned download_blocked_or_requires_terms; confirm terms before ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "non_commercial",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "manual_review",
+        "version_changed": false,
+        "current_observed_version": "2025-08-05T15:38:30.619503",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjoiMjAyNS0wOC0wNVQxNTozODozMC42MTk1MDMiLCJyZXNvdXJjZV9jb3VudCI6MSwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOiJPdGhlciAoTm9uLUNvbW1lcmNpYWwpIiwiYWdiX21kNSI6bnVsbCwiYWdiX3NkX21kNSI6bnVsbCwiYWNjZXNzX3N0YXR1cyI6ImRvd25sb2FkX2Jsb2NrZWRfb3JfcmVxdWlyZXNfdGVybXMiLCJ0aWxlX3N0YXR1cyI6bnVsbH0",
+        "artifact_paths": [],
+        "caveat": "Modeled biodiversity intactness at coarse resolution. Use as ecosystem-condition context, not direct species evidence.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://data.nhm.ac.uk/dataset/bii-developed-by-nhm-v2-1-1-limited-release",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 403,
+            "note": "download_probe: download_blocked_or_requires_terms"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "gbif_ethiopia_occurrences",
+      "source_kind": "known_source",
+      "source_ref": "gbif_ethiopia_occurrences",
+      "period": "2026-Q2",
+      "name": "GBIF Ethiopia georeferenced occurrences",
+      "provider": "GBIF",
+      "source_url": "https://api.gbif.org/v1/occurrence/search?country=ET&hasCoordinate=true&limit=0",
+      "queue_status": "monitored",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "low",
+      "review_reason": null,
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "unknown",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "no_action",
+        "version_changed": false,
+        "current_observed_version": "1066954",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOjEwNjY5NTQsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOm51bGwsImFnYl9zZF9tZDUiOm51bGwsImFjY2Vzc19zdGF0dXMiOm51bGwsInRpbGVfc3RhdHVzIjpudWxsfQ",
+        "artifact_paths": [
+          "data/features/source_extracts/gbif_biodiversity.json"
+        ],
+        "caveat": "Raw occurrence counts are sampling effort, not biodiversity quality. Use filters and bias correction before scoring.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://api.gbif.org/v1/occurrence/search?country=ET&hasCoordinate=true&limit=0",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": null,
+            "note": "source checker status: metadata_ok"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "wosis_latest_soil_observations",
+      "source_kind": "known_source",
+      "source_ref": "wosis_latest_soil_observations",
+      "period": "2026-Q2",
+      "name": "WoSIS latest measured soil observations",
+      "provider": "ISRIC",
+      "source_url": "https://maps.isric.org/mapserv?map=/map/wosis_latest.map&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetCapabilities",
+      "queue_status": "monitored",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "low",
+      "review_reason": null,
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "unknown",
+        "scoring_classification": "validation_anchor",
+        "safe_pipeline_action": "no_action",
+        "version_changed": false,
+        "current_observed_version": "metadata_ok",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOm51bGwsImFnYl9zZF9tZDUiOm51bGwsImFjY2Vzc19zdGF0dXMiOiJyZWFjaGFibGUiLCJ0aWxlX3N0YXR1cyI6bnVsbH0",
+        "artifact_paths": [
+          "data/features/source_extracts/soil_observations.json"
+        ],
+        "caveat": "Measured soil observations are sparse and uneven. Use as confidence/validation context for SoilGrids, not full-coverage scoring.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://maps.isric.org/mapserv?map=/map/wosis_latest.map&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetCapabilities",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 200,
+            "note": "access_probe: reachable"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "kba_world_database",
+      "source_kind": "known_source",
+      "source_ref": "kba_world_database",
+      "period": "2026-Q2",
+      "name": "World Database of Key Biodiversity Areas",
+      "provider": "KBA Partnership",
+      "source_url": "https://www.keybiodiversityareas.org/request-gis-data",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Source requires license, account, or partner approval before automated ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "blocked_terms",
+        "license_status": "terms_required",
+        "scoring_classification": "blocked_review_required",
+        "safe_pipeline_action": "keep_blocked",
+        "version_changed": false,
+        "current_observed_version": "manual_or_license_required",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtYW51YWxfb3JfbGljZW5zZV9yZXF1aXJlZCIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOm51bGwsImFnYl9zZF9tZDUiOm51bGwsImFjY2Vzc19zdGF0dXMiOiJyZWFjaGFibGUiLCJ0aWxlX3N0YXR1cyI6bnVsbH0",
+        "artifact_paths": [],
+        "caveat": "High-value biodiversity safeguard layer, but GIS access and redistribution terms require manual approval.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://www.keybiodiversityareas.org/request-gis-data",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 200,
+            "note": "access_probe: reachable"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "iucn_red_list_spatial",
+      "source_kind": "known_source",
+      "source_ref": "iucn_red_list_spatial",
+      "period": "2026-Q2",
+      "name": "IUCN Red List spatial data",
+      "provider": "IUCN",
+      "source_url": "https://www.iucnredlist.org/resources/spatial-data-download",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Source requires license, account, or partner approval before automated ingestion.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "blocked_terms",
+        "license_status": "terms_required",
+        "scoring_classification": "blocked_review_required",
+        "safe_pipeline_action": "keep_blocked",
+        "version_changed": false,
+        "current_observed_version": "manual_or_license_required",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtYW51YWxfb3JfbGljZW5zZV9yZXF1aXJlZCIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOm51bGwsImFnYl9zZF9tZDUiOm51bGwsImFjY2Vzc19zdGF0dXMiOiJkb3dubG9hZF9ibG9ja2VkX29yX3JlcXVpcmVzX3Rlcm1zIiwidGlsZV9zdGF0dXMiOm51bGx9",
+        "artifact_paths": [],
+        "caveat": "Range maps are not observations. Refine by habitat/elevation/land cover before using in scoring.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://www.iucnredlist.org/resources/spatial-data-download",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 403,
+            "note": "access_probe: download_blocked_or_requires_terms"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "nasa_gedi_l4b_agbd",
+      "source_kind": "known_source",
+      "source_ref": "nasa_gedi_l4b_agbd",
+      "period": "2026-Q2",
+      "name": "NASA GEDI L4B gridded aboveground biomass density",
+      "provider": "NASA",
+      "source_url": "https://www.earthdata.nasa.gov/data/catalog/ornl-cloud-gedi-l4b-gridded-biomass-v2-1-2299-2.1",
+      "queue_status": "pending_review",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "high",
+      "review_reason": "Only landing-page or portal metadata is reachable; authenticated download flow needs review.",
+      "review": null,
+      "source_metadata": {
+        "access_status": "blocked_auth",
+        "license_status": "unknown",
+        "scoring_classification": "use_later_with_earthdata_access",
+        "safe_pipeline_action": "manual_review",
+        "version_changed": false,
+        "current_observed_version": "portal_metadata_only",
+        "current_fingerprint": "eyJzdGF0dXMiOiJwb3J0YWxfbWV0YWRhdGFfb25seSIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOm51bGwsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOm51bGwsImFnYl9zZF9tZDUiOm51bGwsImFjY2Vzc19zdGF0dXMiOiJyZWFjaGFibGUiLCJ0aWxlX3N0YXR1cyI6bnVsbH0",
+        "artifact_paths": [],
+        "caveat": "Useful biomass anchor with uncertainty, but access/product handling should preserve standard-error bands and quality metadata.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://www.earthdata.nasa.gov/data/catalog/ornl-cloud-gedi-l4b-gridded-biomass-v2-1-2299-2.1",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 200,
+            "note": "access_probe: reachable"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    },
+    {
+      "review_item_id": "esa_cci_biomass_v7",
+      "source_kind": "known_source",
+      "source_ref": "esa_cci_biomass_v7",
+      "period": "2026-Q2",
+      "name": "ESA CCI Biomass v7.0",
+      "provider": "ESA/CEDA",
+      "source_url": "https://catalogue.ceda.ac.uk/uuid/6429d1aafe1e43b9b414e4a5a7f8b903",
+      "queue_status": "monitored",
+      "created_at_utc": "2026-06-28T07:56:06.443Z",
+      "updated_at_utc": "2026-06-28T07:56:56.044Z",
+      "discovered_by": "quarterly_source_refresh",
+      "review_priority": "low",
+      "review_reason": null,
+      "review": null,
+      "source_metadata": {
+        "access_status": "metadata_ok",
+        "license_status": "unknown",
+        "scoring_classification": "context_only",
+        "safe_pipeline_action": "no_action",
+        "version_changed": false,
+        "current_observed_version": "2024",
+        "current_fingerprint": "eyJzdGF0dXMiOiJtZXRhZGF0YV9vayIsInByb3ZpZGVyX21ldGFkYXRhX21vZGlmaWVkIjpudWxsLCJyZXNvdXJjZV9jb3VudCI6bnVsbCwiY291bnQiOm51bGwsImV4cGVjdGVkX3RpbGVfcmVzb3VyY2VfZm91bmQiOnRydWUsImxpY2Vuc2VfdGl0bGUiOm51bGwsImFnYl9tZDUiOiI3ZTJkOWM0YWRkYmUwYTA4MjY2ODdjYTcyMzUzOGYxYyIsImFnYl9zZF9tZDUiOiJlNmM3YTdlMzhmMzJlYTZjMWQyMjA1YjkxNGQ5NjVmOCIsImFjY2Vzc19zdGF0dXMiOm51bGwsInRpbGVfc3RhdHVzIjpudWxsfQ",
+        "artifact_paths": [
+          "data/features/source_extracts/esa_cci_biomass.json"
+        ],
+        "caveat": "Wall-to-wall above-ground biomass with uncertainty. This is biomass stock context, not verified project carbon; convert to carbon only with an explicit factor and source.",
+        "evidence": [
+          {
+            "kind": "api_probe",
+            "url": "https://catalogue.ceda.ac.uk/uuid/6429d1aafe1e43b9b414e4a5a7f8b903",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 206,
+            "note": "agb_download_probe: reachable"
+          },
+          {
+            "kind": "api_probe",
+            "url": "https://catalogue.ceda.ac.uk/uuid/6429d1aafe1e43b9b414e4a5a7f8b903",
+            "observed_at_utc": "2026-06-28T05:15:58.139Z",
+            "status_code": 206,
+            "note": "agb_sd_download_probe: reachable"
+          }
+        ],
+        "artifact_path": "data/catalog/quarterly_source_refresh/2026-Q2.json"
+      },
+      "ingestion": {
+        "can_trigger": false,
+        "commands": [],
+        "post_update_commands": [
+          "npm run data:features",
+          "npm run data:rank",
+          "npm run data:candidates:validate",
+          "npm run data:artifacts:validate"
+        ],
+        "blocker": "Approval records the source decision; this source is not configured for automatic ingestion.",
+        "last_run": null
+      }
+    }
+  ]
+}

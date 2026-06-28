@@ -1,0 +1,3286 @@
+[
+  {
+    "source_id": "local_research_source:1746_4269_6_20_peer_reviewed_research_paper_on_local_plants_and_medicine_knowledge",
+    "filename": "1746-4269-6-20 - peer reviewed research paper on local plants and medicine knowledge.pdf",
+    "title": "Ethnomedicinal uses of Hagenia abyssinica among rural communities of Ethiopia",
+    "source_type": "peer_reviewed_research_paper",
+    "year": 2010,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "non_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Debark",
+        "Bale",
+        "Kofele",
+        "Amhara Regional State",
+        "North and Southeastern Ethiopia"
+      ]
+    },
+    "topics": [
+      "ethnomedicine",
+      "traditional ecological knowledge",
+      "medicinal plants",
+      "biodiversity conservation",
+      "community knowledge transfer",
+      "resource decline",
+      "species harvesting",
+      "public health"
+    ],
+    "intervention_tags": [
+      "traditional_medicine",
+      "medicinal_plant_use",
+      "community_conservation",
+      "knowledge_documentation",
+      "seedling_protection"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Study is clearly located in Ethiopia but in Debark, Bale, and Kofele, which do not match the provided South Ethiopia / Southwest Ethiopia candidate sites.",
+        "Findings are ethnobotanical and qualitative; useful for national/comparable context rather than site-specific investment scoring.",
+        "Several factual claims are self-reported by informants and should be treated as descriptive local knowledge rather than independently verified measures."
+      ]
+    },
+    "allowed_uses": [
+      "national context summarization",
+      "comparative ethnobotany context",
+      "methodology reference for semi-structured interviews and qualitative plant-use documentation",
+      "background on traditional medicine dependence and conservation pressures in Ethiopia"
+    ],
+    "blocked_uses": [
+      "site-specific scoring for the provided candidate sites",
+      "direct attribution of findings to South Ethiopia or Southwest Ethiopia candidate woredas",
+      "quantitative impact estimation for restoration investments",
+      "biodiversity/forest condition claims without corroborating local ecological data",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "traditional_medicine_dependence",
+        "page": 1,
+        "reason": "Abstract states rural Ethiopian communities highly depend on local plant resources for medicine; broad national-level context only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "species_decline_due_to_anthropogenic_pressure",
+        "page": 8,
+        "reason": "Informants report marked decline of Hagenia abyssinica due to human population growth, land clearing, and selective cutting; descriptive but not site-matched.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "community_interest_in_conservation_seedlings",
+        "page": 9,
+        "reason": "Respondents express desire to plant seedlings and request support; relevant to restoration framing but not a measured intervention outcome.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "traditional_knowledge_transfer_declining_among_youth",
+        "page": 7,
+        "reason": "Paper reports diminishing interest among younger generation; qualitative and context-specific.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a peer-reviewed ethnobotanical paper on Hagenia abyssinica in northern and southeastern Ethiopia (Debark, Bale, Kofele). It provides credible qualitative context on traditional medicinal plant use, harvesting practices, and conservation concerns, but it does not match the provided candidate sites and should not be used for site-specific scoring without manual QA and additional local evidence."
+  },
+  {
+    "source_id": "local_research_source:2026_submission_frel_frl_eth_final",
+    "filename": "2026_submission_frel_frl_eth_final.pdf",
+    "title": "Ethiopia’s Forest Reference Emission Level (FREL) and Forest Reference Level (FRL) Submission to the UNFCCC (January 2026)",
+    "source_type": "UNFCCC submission / national REDD+ reference level document",
+    "year": 2026,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country_only",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Ethiopia",
+        "Acacia-Commiphora biome",
+        "Combretum-Terminalia biome",
+        "Dry Afromontane biome",
+        "Moist Afromontane biome"
+      ]
+    },
+    "topics": [
+      "REDD+",
+      "forest reference emission level",
+      "forest reference level",
+      "deforestation",
+      "forest degradation",
+      "forest restoration",
+      "commercial forest planting",
+      "carbon accounting",
+      "forest inventory",
+      "remote sensing",
+      "map accuracy assessment",
+      "biomes",
+      "soil organic carbon",
+      "emission factors",
+      "removal factors"
+    ],
+    "intervention_tags": [
+      "restoration",
+      "afforestation",
+      "reforestation",
+      "assisted natural regeneration",
+      "commercial plantation",
+      "forest monitoring",
+      "carbon accounting"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Strong national-level policy/methods document with clear definitions, accounting methods, and summary figures.",
+        "Site-specific alignment to candidate woredas/zones is not established in the extracted pages; document is not suitable for local site attribution without additional spatial matching.",
+        "Contains technical estimates and national biome-level tables, but these should not be treated as project-site performance data.",
+        "Some pages were not sampled, so any fine-grained claims beyond the extracted text would benefit from manual QA if used in scoring."
+      ]
+    },
+    "allowed_uses": [
+      "national policy context",
+      "methodology reference",
+      "carbon accounting context",
+      "biome-level restoration/deforestation context",
+      "Ethiopia national baseline/reference level context",
+      "general intervention design context"
+    ],
+    "blocked_uses": [
+      "site-specific scoring",
+      "woreda-level attribution",
+      "project feasibility claims for candidate sites",
+      "local impact estimates",
+      "using as direct evidence of conditions in any candidate site without spatial corroboration",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "national_frel_emissions_tco2e_per_year",
+        "page": 6,
+        "reason": "Explicit national FREL value stated in summary; suitable only as national reference context, not site scoring.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "national_frl_removals_tco2e_per_year",
+        "page": 6,
+        "reason": "Explicit national FRL removals value stated in summary; useful as national context only.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "forest_definition_thresholds",
+        "page": 13,
+        "reason": "Clear national forest definition with thresholds and exclusions.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "included_carbon_pools",
+        "page": 12,
+        "reason": "Lists pools included in FRL; useful for methods context.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "excluded_non_co2_gases",
+        "page": 12,
+        "reason": "States only CO2 included; non-CO2 excluded due to data limits.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "drivers_of_deforestation_and_degradation",
+        "page": 16,
+        "reason": "National driver assessment summarized, but derived from prior study; should not be used for site attribution without local evidence.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "biome_level_gain_and_loss_tables",
+        "page": 38,
+        "reason": "Biome-specific annual areas are quantitative but require careful QA before any downstream use because they are not site-specific and the table extraction is partial.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "removal_factor_method_for_restoration",
+        "page": 43,
+        "reason": "Method description is clear, but values are not fully captured here; manual QA needed if used quantitatively.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a high-confidence national UNFCCC REDD+ reference level submission for Ethiopia. It provides clear national methodology, forest definitions, carbon pool scope, and biome-level accounting context, but it does not provide evidence for any specific candidate site. Use for national policy/methods and broad Ethiopia context only; do not use for local scoring or site attribution without separate spatial validation."
+  },
+  {
+    "source_id": "local_research_source:alemayehu_haile",
+    "filename": "Alemayehu Haile.pdf",
+    "title": "Assessment of Soil Fertility Degradation and Management Practices in Gimbo District, Southern Ethiopia",
+    "source_type": "academic_thesis",
+    "year": 2020,
+    "document_use_class": "local_implementation_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Southern Ethiopia",
+      "zone": "Kaffa Zone",
+      "woreda": "Gimbo District",
+      "places": [
+        "Gimbo district",
+        "Kafa Zone",
+        "Keja Araba",
+        "Kaya Kella",
+        "Woka Araba",
+        "Southern Ethiopia"
+      ]
+    },
+    "topics": [
+      "soil fertility degradation",
+      "soil erosion",
+      "soil and water conservation",
+      "farmer adoption",
+      "agricultural land management",
+      "household survey",
+      "extension services",
+      "compost",
+      "manure",
+      "green manure",
+      "inorganic fertilizer"
+    ],
+    "intervention_tags": [
+      "soil_conservation",
+      "land_management",
+      "agroforestry_or_cover_management",
+      "extension_training",
+      "fertility_management"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Strongly site-specific to Gimbo District, Kaffa Zone, Southern Ethiopia.",
+        "Candidate places provided in South Omo / Southwest Ethiopia do not match the document location.",
+        "Contains household survey and qualitative discussion; several findings are self-reported and should not be treated as externally validated measurements."
+      ]
+    },
+    "allowed_uses": [
+      "site-specific contextual understanding for Gimbo District",
+      "local implementation planning for soil conservation and fertility management in comparable southern Ethiopia highland settings",
+      "qualitative evidence on farmer perceptions and adoption barriers",
+      "background context on soil erosion causes and management practices"
+    ],
+    "blocked_uses": [
+      "geospatial scoring for provided candidate sites in South Omo or Southwest Ethiopia Peoples' Region",
+      "direct attribution of findings to any candidate site outside Gimbo District",
+      "precise impact estimation or causal claims without additional evidence",
+      "use as local evidence for Dasenech/Kuraz, Hamer, Bena Tsemay, Salamago, Melekoza, Boloso Sore, Surma, Gori Gesha, Disa, Shay Bench, Decha, Gimbo-candidate mismatch, or Saylem",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "district_location",
+        "page": 1,
+        "reason": "Title and content identify Gimbo District, Southern Ethiopia; relevant for document location but not for candidate sites supplied in South Omo/Southwest Ethiopia.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "kebele_names",
+        "page": 32,
+        "reason": "Keja Araba, Kaya Kella, and Woka Araba are named as sampled kebeles; useful only if matching a future Gimbo-bound geospatial entity, not the provided candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soil_erosion_severity_self_report",
+        "page": 45,
+        "reason": "Household responses report perceived erosion severity and crop productivity effects; self-reported and site-specific to Gimbo.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "management_practice_adoption",
+        "page": 49,
+        "reason": "Reported practice levels for inorganic fertilizer, compost, manure, green manure are based on respondent survey means; may inform context only, not scoreable without QA.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2020 Addis Ababa University master's thesis on soil fertility degradation and management practices in Gimbo District, Kaffa Zone, Southern Ethiopia. It provides solid local context on farmer perceptions, conservation practices, and adoption barriers, but it does not match the provided candidate sites in South Omo or Southwest Ethiopia and should not be used for direct site scoring without manual geographic QA."
+  },
+  {
+    "source_id": "local_research_source:belay_gurmessa_doctoral_thesis",
+    "filename": "Belay Gurmessa - Doctoral Thesis.pdf",
+    "title": "Assessing Climate Change Impacts and Adaptation Strategies Among Smallholder Farmers: The Case of Chiro Woreda, West Harerghe, Oromia Region, East Ethiopia",
+    "source_type": "doctoral_thesis",
+    "year": 2024,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Oromia",
+      "zone": "West Hararghe",
+      "woreda": "Chiro",
+      "places": [
+        "Chiro Woreda",
+        "West Hararghe",
+        "Oromia Region",
+        "East Ethiopia"
+      ]
+    },
+    "topics": [
+      "climate change impacts",
+      "adaptation strategies",
+      "smallholder agriculture",
+      "farm households",
+      "climate perception",
+      "adaptation constraints",
+      "information access",
+      "livelihood diversification",
+      "soil and water conservation"
+    ],
+    "intervention_tags": [
+      "climate adaptation",
+      "soil and water conservation",
+      "livelihood diversification",
+      "irrigation",
+      "tree planting",
+      "crop diversification",
+      "extension services",
+      "credit access"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "The thesis is clearly centered on Chiro Woreda in West Hararghe, Oromia, not on any of the provided candidate sites in South Ethiopia or Southwest Ethiopia Peoples' Region.",
+        "Use as national/comparable context only; do not treat as site-specific evidence for the supplied candidate places.",
+        "Some pages are sampled only, but the title, objectives, and repeated place references are consistent.",
+        "Several findings are based on self-reported survey data, so causal claims should be treated conservatively."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "national_policy_or_methods_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "local_implementation_context",
+      "scoring_for_candidate_sites",
+      "location_matching_to_provided_candidates",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "adaptation strategies used by smallholder farmers",
+        "page": 63,
+        "reason": "Lists common adaptation practices (early/late planting, soil and water conservation, drought-resistant crops, irrigation, mixed farming, reforestation) but is from Chiro Woreda and not applicable to the provided candidate sites without a different locality match.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "constraints to adaptation",
+        "page": 60,
+        "reason": "Reports lack of credit, knowledge, information, land, irrigation, extension, infrastructure, and tenure issues as barriers; useful as general context but not site-specific to candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "climate hazards",
+        "page": 60,
+        "reason": "Ranks high temperature, drought, short rain, livestock death, and erratic rainfall for Chiro Woreda; location-specific and not transferable to candidate sites without verification.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "information sources for adaptation",
+        "page": 49,
+        "reason": "Reports radio, television, fellow farmers, and extension officers as information sources; could inform comparable context only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "farm size / household size distributions",
+        "page": 48,
+        "reason": "Survey statistics are specific to Chiro Woreda sample households and should not be reused as site facts.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a 2024 doctoral thesis on climate change impacts and adaptation among smallholder farmers in Chiro Woreda, West Hararghe, Oromia, Ethiopia. It is not geographically aligned with any of the provided candidate sites in South Ethiopia or Southwest Ethiopia. The document is suitable only as comparable or national-level context, not for site-specific scoring or implementation claims."
+  },
+  {
+    "source_id": "local_research_source:biodiversity_indicators_for_ethiopia_english",
+    "filename": "Biodiversity-Indicators-for-Ethiopia-English.pdf",
+    "title": "Ethiopia: Overview of Selected Biodiversity Indicators",
+    "source_type": "report",
+    "year": 2010,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "national",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Ethiopia",
+        "Addis Ababa",
+        "Ashengie, Tigray",
+        "Bale Mountains"
+      ]
+    },
+    "topics": [
+      "biodiversity indicators",
+      "protected areas",
+      "land use",
+      "land cover",
+      "threatened species",
+      "conservation policy",
+      "national environmental monitoring"
+    ],
+    "intervention_tags": [
+      "policy_and_planning",
+      "monitoring_and_evaluation",
+      "protected_area_management",
+      "land_use_planning",
+      "biodiversity_conservation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "This is a national report on biodiversity indicators, not a site-specific assessment.",
+        "Several sampled pages are text-extracted; a few title/cover pages need OCR review.",
+        "Some place references are illustrative examples (e.g. Ashengie, Tigray; Bale Mountains) and should not be generalized to candidate sites without additional locality evidence.",
+        "Useful for national context, indicator definitions, and policy framing; weak for local investment scoring."
+      ]
+    },
+    "allowed_uses": [
+      "national biodiversity and conservation context",
+      "indicator framework and methods extraction",
+      "protected area and land-use policy context",
+      "background on Ethiopian threatened species and ecosystems"
+    ],
+    "blocked_uses": [
+      "site-level suitability scoring",
+      "project impact estimation for candidate woredas/zones",
+      "precise geospatial claims about candidate sites",
+      "claims of local biodiversity status without locality-specific evidence",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "national protected area share of land area",
+        "page": 37,
+        "reason": "States PA shares about 15 percent of total land area; useful as national context only, not site-specific.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "Ethiopian wolf habitat threat from subsistence agriculture and overgrazing",
+        "page": 16,
+        "reason": "Biology/conservation generalization for Ethiopia/Bale context; not tied to candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "indicator framework includes selected species and protected area coverage",
+        "page": 12,
+        "reason": "Useful methodological fact for national indicator design; not a direct scoring input.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "document is spatially and temporally bounded",
+        "page": 42,
+        "reason": "Important caveat affecting all extracted facts; supports conservative use.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "National-level Ethiopian biodiversity indicator report (2010) with clear policy and methods relevance. It supports background analysis on conservation, protected areas, land use, and threatened species, but does not provide reliable site-specific evidence for the listed candidate places. Use for national context only; any local ecological inference requires manual QA and additional local sources."
+  },
+  {
+    "source_id": "local_research_source:eth_forest_cover_deforestation_report_final_efd_june_2024",
+    "filename": "ETH_FOREST_COVER-_DEFORESTATION_report_final_EFD_JUNE_2024.pdf",
+    "title": "National Forest Cover Mapping Report for the Year 2023",
+    "source_type": "report",
+    "year": 2024,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "forest cover mapping",
+      "deforestation",
+      "land use/land cover change",
+      "accuracy assessment",
+      "bias-corrected area estimates",
+      "MRV / NFMS",
+      "remote sensing",
+      "carbon accounting",
+      "afforestation/reforestation"
+    ],
+    "intervention_tags": [
+      "forest monitoring",
+      "land cover mapping",
+      "deforestation monitoring",
+      "remote sensing classification",
+      "accuracy assessment"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "National-level report with clear methodology and results.",
+        "Geospatial specificity is at country scale; no evidence of applicability to listed subnational candidate sites.",
+        "Some pages are abbreviated in extraction, but key method and results pages are readable.",
+        "Contains policy/monitoring context and mapping methods rather than site-specific implementation detail."
+      ]
+    },
+    "allowed_uses": [
+      "national forestry monitoring context",
+      "methodological reference for forest cover / deforestation mapping",
+      "high-level Ethiopia forestry statistics",
+      "benchmarking of remote-sensing and accuracy-assessment methods"
+    ],
+    "blocked_uses": [
+      "site-specific scoring for candidate places",
+      "subnational project siting decisions",
+      "local intervention impact attribution",
+      "claims of woreda/zone-level forest cover or deforestation without external spatial validation",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "national_forest_deforestation_method",
+        "page": 13,
+        "reason": "Describes the mapping workflow, definitions of forest/deforestation, and use of Random Forest with SEPAL/CEO for national mapping; useful as a methodological reference but not for site scoring.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "national_deforestation_extent_or_rate",
+        "page": 8,
+        "reason": "Provides national annual deforestation rate and forest stock figures cited from prior sources; may be useful as background but not directly attributable to candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "national_deforestation_driver_cropland_share",
+        "page": 28,
+        "reason": "Reports national shares of post-deforestation land use (cropland, wetland, settlement, etc.); relevant for national context only and should be manually checked before any scoring use.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "national_map_accuracy",
+        "page": 28,
+        "reason": "States overall accuracy of the 2023 forest/non-forest map as 94%; suitable as a quality/context indicator, but any downstream scoring use should be manual-QA checked.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "reference_sample_size",
+        "page": 25,
+        "reason": "Reports accuracy-assessment sample counts and reference data collection approach; useful for methodological confidence assessment, not site-level scoring.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "This is a national Ethiopia forest-cover mapping report focused on 2020–2023 change detection, accuracy assessment, and bias-corrected area estimation. It is strong for national context and methods, but it does not provide credible site-level evidence for the listed candidate places and should not be used for subnational scoring without separate spatial validation."
+  },
+  {
+    "source_id": "local_research_source:ethiopia_first_bur",
+    "filename": "Ethiopia_First BUR.pdf",
+    "title": "Ethiopia’s First Biennial Update Report (FBUR) under the UNFCCC",
+    "source_type": "government report",
+    "year": 2024,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Addis Ababa",
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "climate change reporting",
+      "greenhouse gas inventory",
+      "AFOLU",
+      "energy sector",
+      "land use change",
+      "agriculture",
+      "adaptation",
+      "mitigation",
+      "national circumstances",
+      "waste sector"
+    ],
+    "intervention_tags": [
+      "policy",
+      "climate-finance-context",
+      "land-use",
+      "agriculture",
+      "energy",
+      "waste",
+      "restoration-context"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "National-level Biennial Update Report; useful for methods, national emissions context, and policy framing.",
+        "No reliable site-specific restoration project evidence in the sampled pages.",
+        "Mentions broad regional climate/agro-ecological patterns, but not enough for geospatial site matching to candidate places.",
+        "Contains Tier 1/IPCC methodology references and national inventory tables; appropriate for macro context only."
+      ]
+    },
+    "allowed_uses": [
+      "national policy context",
+      "national emissions and land-use methods context",
+      "comparative Ethiopia climate/AFOLU background",
+      "methodology reference for inventory approaches"
+    ],
+    "blocked_uses": [
+      "site-level investment scoring",
+      "site attribution to candidate woredas/zones",
+      "project feasibility or impact claims for specific locations",
+      "restoration outcome claims at local scale",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "country_level_climate_and_land_use_context",
+        "page": 23,
+        "reason": "Describes Ethiopia climate seasons, rainfall variability, droughts, and floods at national scale; relevant only as background context.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "national_afolu_emissions_and_land_use_change",
+        "page": 62,
+        "reason": "Reports AFOLU emissions and cites data sources/methodology; useful for national context but not local site scoring.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "land_use_conversion_tables",
+        "page": 85,
+        "reason": "Provides national land conversion areas and emissions estimates under Tier 1/IPCC methods; not site-specific and should not be used for local scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "grassland_conversion_and_emissions",
+        "page": 87,
+        "reason": "National grassland conversion/emissions figures are presented, but page text appears OCR-interpreted and not site-specific; QA needed before any quantitative reuse.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "other_land_conversion_and_emissions",
+        "page": 91,
+        "reason": "National conversion categories and emissions are listed; useful for macro analysis only, with some OCR ambiguity.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "waste_sector_national_emissions",
+        "page": 92,
+        "reason": "National waste-sector emissions summary; not relevant to candidate site selection beyond macro context.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "This is a high-confidence national government climate report for Ethiopia. It supports country-level policy, methodology, and emissions context, especially AFOLU, land-use change, energy, and waste. It does not provide dependable local project evidence or site-specific restoration facts for the listed candidate places, so it should not be used for geospatial scoring without additional local sources."
+  },
+  {
+    "source_id": "local_research_source:gbif_countryreport_et",
+    "filename": "GBIF_CountryReport_ET.pdf",
+    "title": "GBIF Country Report: Ethiopia",
+    "source_type": "activity report",
+    "year": 2026,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Ethiopia",
+        "Kafa Biosphere Reserve",
+        "Southwestern Ethiopia",
+        "Central Highland of Ethiopia",
+        "Bale Mountains National Park"
+      ]
+    },
+    "topics": [
+      "biodiversity data availability",
+      "species occurrence records",
+      "open-access species data",
+      "GBIF usage metrics",
+      "data mobilization",
+      "datasets and publishers",
+      "research citations",
+      "biodiversity information systems"
+    ],
+    "intervention_tags": [
+      "biodiversity monitoring",
+      "data infrastructure",
+      "research capacity",
+      "open-data platform"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Country-level GBIF activity report with summary metrics and project listings.",
+        "No evidence of site-level biophysical intervention outcomes for the provided candidate places.",
+        "Contains institutional and national-scale usage/data statistics rather than implementation details.",
+        "Project mention for Kafa Biosphere Reserve is informative but not sufficient for site scoring without additional local evidence."
+      ]
+    },
+    "allowed_uses": [
+      "country-level context",
+      "national biodiversity data baseline",
+      "methods/background citation",
+      "project landscape context",
+      "publisher/institution profiling"
+    ],
+    "blocked_uses": [
+      "site-level scoring",
+      "attributing outcomes to candidate sites",
+      "estimating intervention impact",
+      "claiming woreda-specific biodiversity conditions",
+      "asset-level investment justification",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "presence_of_biodiversity_data_platform_context",
+        "page": 1,
+        "reason": "GBIF report documents national participation in open-access species data and record counts for Ethiopia.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "project_reference_kafa_biosphere_reserve",
+        "page": 6,
+        "reason": "Mentions BIDERSE and Kafa Biosphere Reserve, which may be relevant to broader regional context but not to listed candidate sites directly.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A reliable national-level GBIF activity report for Ethiopia. Useful for country context, biodiversity data infrastructure, and research landscape, but not for site-specific scoring in South Ethiopia or Southwest Ethiopia candidates. The only place-specific mention is Kafa Biosphere Reserve in a GBIF project description, which is too coarse for direct site attribution."
+  },
+  {
+    "source_id": "local_research_source:gemechu_yigezu_doctoral_thesis_not_fully_the_region",
+    "filename": "Gemechu Yigezu - Doctoral Thesis (not fully the region).pdf",
+    "title": "Land-use Dynamics and Climate Variability: Local Processes, and Livelihood Implications on Small-scale Farmers in Anger Watershed, Southwestern Ethiopia",
+    "source_type": "doctoral_thesis",
+    "year": 2021,
+    "document_use_class": "local_implementation_context",
+    "geographic_scope": {
+      "match_level": "partial",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Southwest Ethiopia / Southwestern Ethiopia (broadly referenced)",
+      "zone": "Anger watershed / not clearly mapped to candidate zones",
+      "woreda": null,
+      "places": [
+        "Anger watershed",
+        "southwestern Ethiopia",
+        "kolla",
+        "highland"
+      ]
+    },
+    "topics": [
+      "land use/land cover change",
+      "climate variability",
+      "temperature and rainfall trends",
+      "livelihoods",
+      "adaptation and coping strategies",
+      "soil degradation",
+      "grazing land",
+      "small-scale farming",
+      "agricultural investment/tenure change"
+    ],
+    "intervention_tags": [
+      "land restoration context",
+      "climate adaptation context",
+      "livelihood adaptation",
+      "land use planning",
+      "watershed management"
+    ],
+    "validity": {
+      "overall_confidence": "medium",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "This is a site-specific dissertation for Anger watershed in southwestern Ethiopia, but the provided candidate places are in South and Southwest Ethiopia regions and do not clearly match the study area.",
+        "Useful for contextual/local-implementation insights on climate, land use, and livelihoods, but not for site attribution to the listed candidates without additional mapping.",
+        "Contains mixed methods and empirical analysis; however, most extracted evidence refers to a broader watershed rather than any candidate woreda.",
+        "Some statements about large-scale investments and state interventions are interpretive and should not be used as precise causal claims without review."
+      ]
+    },
+    "allowed_uses": [
+      "background context on land-use and climate variability in southwestern Ethiopia",
+      "methodological reference for mixed-methods climate/livelihood studies",
+      "comparative context on adaptation/coping strategies in agroecological zones",
+      "qualitative context on land tenure, investment pressure, and livelihood change"
+    ],
+    "blocked_uses": [
+      "site-level scoring for any listed candidate place",
+      "precise geospatial attribution to candidate woredas/zones",
+      "quantitative benchmarking against a candidate site without manual geographic reconciliation",
+      "high-confidence causal claims from interpretive discussion alone",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "study_area_identification",
+        "page": 1,
+        "reason": "Title and opening pages identify the study as Anger watershed in southwestern Ethiopia; useful for topical context but not a candidate-site match.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "land_use_change_direction",
+        "page": 49,
+        "reason": "States agricultural land and settlements increased while forest, grass/bushland, and wetlands decreased in the watershed.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "drivers_of_land_use_change",
+        "page": 50,
+        "reason": "Attributes land-use dynamics in the kolla partly to large-scale investments and state interventions.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "adaptation_strategy_differences_by_agroecology",
+        "page": 149,
+        "reason": "Compares strategies in highland versus kolla and notes differences in adaptation/coping practices.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "livelihood_impacts_of_climate_variability",
+        "page": 121,
+        "reason": "Describes effects of rainfall/temperature variability on crops, livestock, and resources.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2021 doctoral thesis on land-use dynamics, climate variability, and livelihood implications in Anger watershed, southwestern Ethiopia. It is valuable as broader regional and methodological context, but the study area does not clearly correspond to any of the provided candidate sites, so it should not be used for site-specific scoring without manual geographic reconciliation."
+  },
+  {
+    "source_id": "local_research_source:government_report",
+    "filename": "government report.pdf",
+    "title": "The Konso Cultural Landscape: World Heritage Nomination Dossier",
+    "source_type": "government_report",
+    "year": 2009,
+    "document_use_class": "site_specific_context",
+    "geographic_scope": {
+      "match_level": "site_specific",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "South Ethiopia",
+      "zone": "South Omo",
+      "woreda": "Konso Special Woreda",
+      "places": [
+        "Konso Cultural Landscape",
+        "Konso Special Woreda",
+        "southwestern Ethiopia"
+      ]
+    },
+    "topics": [
+      "cultural landscape",
+      "traditional agriculture",
+      "soil and water conservation",
+      "dry stone terraces",
+      "settlement morphology",
+      "sacred forests",
+      "ritual institutions",
+      "heritage management",
+      "agroecology",
+      "community governance"
+    ],
+    "intervention_tags": [
+      "terracing",
+      "soil_and_water_conservation",
+      "agroforestry",
+      "forest_protection",
+      "community_governance",
+      "heritage_conservation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "mixed",
+      "notes": [
+        "This is a World Heritage nomination dossier, useful for site context and traditional land-use description.",
+        "The document is highly Konso-specific and does not support the provided South Ethiopia/Southwest Ethiopia candidate sites beyond broad regional comparability.",
+        "Some passages are normative/advocacy-oriented and should not be treated as independent empirical measurement.",
+        "OCR is mixed with many low-text pages, but key sampled pages are readable."
+      ]
+    },
+    "allowed_uses": [
+      "site-specific narrative context for Konso Special Woreda",
+      "qualitative background on traditional land management and conservation practices",
+      "comparative landscape context for dryland terraces and community conservation systems",
+      "heritage and governance background"
+    ],
+    "blocked_uses": [
+      "direct scoring for the provided candidate sites",
+      "precise geospatial attribution to non-Konso candidate places",
+      "quantitative impact estimation",
+      "claims requiring independent empirical verification without corroborating sources",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "site_specificity_to_candidate_places",
+        "page": 1,
+        "reason": "Document is centered on Konso Cultural Landscape, which is not among the provided candidate places; geography does not match candidate sites.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "traditional_terracing_presence",
+        "page": 553,
+        "reason": "Describes extensive dry stone terraces as a dominant feature of the Konso countryside; potentially useful as contextual evidence for Konso only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "sacred_forest_protection",
+        "page": 553,
+        "reason": "States traditionally protected forests and ritual spots are maintained and protected by ritual leaders; qualitative and document-internal.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soil_and_water_conservation_practice",
+        "page": 680,
+        "reason": "Describes dry stone terraces and indigenous water/soil conservation techniques; useful as contextual practice evidence for Konso only.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A Konso-specific World Heritage nomination dossier providing strong qualitative context on traditional terraces, sacred forests, and community land management in Konso Special Woreda. It is not geographically aligned with the supplied candidate sites in South Ethiopia/Southwest Ethiopia, so it should be used only as comparative or site-context material for Konso and not for direct candidate scoring."
+  },
+  {
+    "source_id": "local_research_source:livestock_and_settlement_peer_reviewed_research_paper_may_be_useful_for_grazing_patterns_etc",
+    "filename": "Livestock and settlement - peer reviewed research paper may be useful for grazing patterns etc.pdf",
+    "title": "Impact of livestock and settlement on the large mammalian wildlife of Bale Mountains National Park, southern Ethiopia",
+    "source_type": "peer_reviewed_research_article",
+    "year": 2001,
+    "document_use_class": "comparable_landscape_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Southern Ethiopia",
+      "zone": "Bale Mountains National Park / Bale Mountains",
+      "woreda": null,
+      "places": [
+        "Bale Mountains National Park",
+        "Gaysay",
+        "Gojera",
+        "Upper Web Valley",
+        "Sanetti Plateau",
+        "Dinsho",
+        "Adaba"
+      ]
+    },
+    "topics": [
+      "livestock pressure",
+      "settlement impacts",
+      "wildlife decline",
+      "protected area management",
+      "grazing patterns",
+      "census methods",
+      "large mammals",
+      "pastoralism",
+      "Bale Mountains National Park"
+    ],
+    "intervention_tags": [
+      "monitoring",
+      "protected_area_management",
+      "grazing_pressure_assessment",
+      "livestock_impact"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Clear peer-reviewed ecological study with explicit methods and results.",
+        "Geography is specific to Bale Mountains National Park, not to any provided candidate site in South Ethiopia or Southwest Ethiopia Peoples' Region.",
+        "Useful for comparable landscape context and general methods only, not site-specific inference for candidate places."
+      ]
+    },
+    "allowed_uses": [
+      "comparative context for livestock/settlement impacts in Ethiopian protected areas",
+      "method reference for census/encounter-rate approaches",
+      "background on pastoral pressure and wildlife responses",
+      "general management lessons for grazing pressure and settlement encroachment"
+    ],
+    "blocked_uses": [
+      "site-specific scoring for any provided candidate place",
+      "direct inference of habitat condition or livestock intensity at candidate sites",
+      "claiming the study site matches any candidate woreda/zone/region",
+      "policy conclusions beyond Bale Mountains National Park without corroboration",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "livestock_pressure_effect_on_wildlife",
+        "page": 1,
+        "reason": "Article states livestock and settlement increased and wildlife declined in BMNP; usable only as comparable context, not local scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "grazing_conflict_in_protected_area",
+        "page": 14,
+        "reason": "Discussion links livestock numbers to negative impacts on wildlife and tourism in BMNP; not site-specific to candidates.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "census_methodology_usefulness",
+        "page": 4,
+        "reason": "Describes road counts, horseback counts, transects, FPS and distance sampling; method reference only.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "settlement_encroachment_impact",
+        "page": 2,
+        "reason": "Notes resettlement and increasing human population in BMNP after 1991; comparable context only.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A strong peer-reviewed source on livestock, settlement, and wildlife impacts in Bale Mountains National Park, southern Ethiopia. It is methodologically clear and reliable, but geographically unrelated to the provided candidate sites. Use for comparable landscape and methods context, not for direct site scoring."
+  },
+  {
+    "source_id": "local_research_source:mammalsofbalemountansnationapark_walia_specialedition",
+    "filename": "MammalsofBaleMountansNationaPark_Walia-SpecialEdition.pdf",
+    "title": "Mammals of Bale Mountains National Park (Walia Special Edition)",
+    "source_type": "pdf",
+    "year": null,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Bale Mountains National Park"
+      ]
+    },
+    "topics": [
+      "biodiversity",
+      "mammals",
+      "protected areas",
+      "wildlife"
+    ],
+    "intervention_tags": [
+      "baseline_ecology",
+      "species_presence"
+    ],
+    "validity": {
+      "overall_confidence": "blocked",
+      "subjectivity_risk": "low",
+      "method_clarity": "unclear",
+      "ocr_quality": "poor",
+      "notes": [
+        "Provided OCR/extraction has no usable text on sampled pages.",
+        "Geographic relevance to candidate sites in South Ethiopia / Southwest Ethiopia is not supported by the available extraction.",
+        "Document appears to concern Bale Mountains National Park, which is outside the listed candidate place set.",
+        "No defensible site-specific or implementation facts can be extracted without manual OCR/vision review."
+      ]
+    },
+    "allowed_uses": [
+      "high-level bibliographic cataloging only"
+    ],
+    "blocked_uses": [
+      "site scoring",
+      "site selection",
+      "investment screening",
+      "local implementation inference",
+      "claiming geographic fit to candidate sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [],
+    "summary": "Low-confidence, text-poor PDF about mammals in Bale Mountains National Park. Treat as blocked for scoring and site-specific use until manual OCR/vision review confirms content and geography."
+  },
+  {
+    "source_id": "local_research_source:migration_conservation_bale_mountains_ecosystem_report_government_report_semi_useful",
+    "filename": "migration-conservation-bale-mountains-ecosystem-report - government report semi useful.pdf",
+    "title": "Migration and Conservation in the Bale Mountains Ecosystem",
+    "source_type": "government_report",
+    "year": 2015,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Oromia",
+      "zone": "Bale",
+      "woreda": null,
+      "places": [
+        "Bale Mountains Ecosystem",
+        "Harenna Forest",
+        "Harenna Buluk",
+        "Delo Mena",
+        "Bale Mountains National Park"
+      ]
+    },
+    "topics": [
+      "migration",
+      "land use change",
+      "forest conservation",
+      "biodiversity",
+      "pastoralism",
+      "agriculture expansion",
+      "forest governance",
+      "participatory forest management",
+      "protected areas",
+      "livelihoods",
+      "human-wildlife conflict",
+      "fire management"
+    ],
+    "intervention_tags": [
+      "forest conservation",
+      "community-based natural resource management",
+      "land use regulation",
+      "migration management",
+      "protected area management",
+      "livelihood diversification",
+      "awareness raising",
+      "enforcement"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Geographically specific to Bale Mountains ecosystem in Oromia, but does not match any provided candidate sites in South Ethiopia/Southwest Ethiopia.",
+        "Useful for comparable landscape and national policy/methods context, not site-specific scoring for the listed candidates.",
+        "Contains substantial qualitative interpretation and policy recommendations; treat causal claims as author interpretation unless corroborated.",
+        "Some land-cover figures are based on remote sensing analysis and are more reliable than narrative stakeholder claims."
+      ]
+    },
+    "allowed_uses": [
+      "comparable_landscape_context",
+      "national_policy_or_methods_context",
+      "background_ecology_context"
+    ],
+    "blocked_uses": [
+      "site_specific_scoring",
+      "candidate_site_assignment",
+      "direct investment attribution to listed candidate sites",
+      "unreviewed causal inference for KPI/scoring variables",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "land_cover_change_remote_sensing",
+        "page": 31,
+        "reason": "Document describes satellite-image based land-cover change methodology for Harenna Buluk and Delo Mena; facts may be usable in comparative methods review but not directly for listed candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "forest_loss_and_agricultural_expansion_in_Harenna_Buluk",
+        "page": 23,
+        "reason": "Quantified changes are location-specific to Harenna Buluk and derived from remote sensing; may be informative for analogous forest-edge dynamics but not the candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "migration_driven_settlement_expansion",
+        "page": 17,
+        "reason": "Strongly tied to Harenna Buluk in Bale; useful as a precedent case only.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2015 IISD report on migration, land conversion, and conservation in the Bale Mountains ecosystem. It provides strong context on forest governance, migration impacts, and land-cover change in Harenna Buluk and Delo Mena, but it does not align with the supplied candidate sites. Use for comparable evidence and methods only, not site-level scoring."
+  },
+  {
+    "source_id": "local_research_source:national_forest_inventory_final_report_2018_compressed_compressed_compressed",
+    "filename": "National-Forest-Inventory-Final-Report_2018-compressed-compressed_compressed.pdf",
+    "title": "Ethiopia’s National Forest Inventory: Final Report",
+    "source_type": "government_report",
+    "year": 2018,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Addis Ababa",
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "forest inventory",
+      "forest condition",
+      "biomass",
+      "carbon",
+      "tree density",
+      "biodiversity",
+      "sampling methodology",
+      "REDD+",
+      "land cover / land use",
+      "disturbance"
+    ],
+    "intervention_tags": [
+      "monitoring_and_evaluation",
+      "baseline_assessment",
+      "forest_inventory",
+      "carbon_accounting"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "National-level government inventory report with clear methodology and results.",
+        "Sampled pages support national estimates and general forest/ecological patterns, not site-specific investment conditions.",
+        "Some pages are low-text/OCR-challenged, but key summary tables and conclusions are readable.",
+        "Regional tables are present, but the inventory design explicitly emphasizes national-level inference; subnational use should be treated cautiously."
+      ]
+    },
+    "allowed_uses": [
+      "national context and policy background",
+      "methodology reference for forest inventory / biomass / carbon estimation",
+      "country-level baseline indicators",
+      "comparative benchmarking within Ethiopia",
+      "high-level ecological and disturbance patterns"
+    ],
+    "blocked_uses": [
+      "site-level scoring or attribution to candidate woredas without direct location match",
+      "project feasibility or impact claims for specific candidate sites",
+      "precision geospatial inference at woreda level",
+      "using regional estimates as if they were sampled for the listed candidate sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "national_forest_condition_indicator",
+        "page": 17,
+        "reason": "Provides national-level disturbance and biomass summary, but not tied to candidate sites; useful only as background.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "regional_biomass_or_stock_estimates",
+        "page": 129,
+        "reason": "Regional/biome table exists, but the report states the first NFI was designed primarily for national-level results; subnational use needs caution.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "method_for_forest_inventory_biomass_carbon",
+        "page": 6,
+        "reason": "Table of methodology-related outputs and appendices supports use as a methods reference.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "degradation_or_disturbance_assessment",
+        "page": 17,
+        "reason": "General national conclusions about disturbance and degradation; not site-specific.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "This is a national-level Ethiopian government forest inventory report from 2018. It is strong for methods, national baselines, and broad country/ecosystem context, but it should not be used for site-specific scoring of the provided candidate woredas without additional local evidence. Regional statistics are available, yet the report itself cautions that the design was primarily for national inference."
+  },
+  {
+    "source_id": "local_research_source:r_pp_ethiopia_final_may_25_2011",
+    "filename": "R-PP Ethiopia-final May 25-2011.pdf",
+    "title": "Ethiopia Forest Carbon Partnership Facility Readiness Preparation Proposal (R-PP), re-submitted 25 May 2011",
+    "source_type": "policy_and_planning_document",
+    "year": 2011,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country",
+      "candidate_site_ids": [
+        "SET-001",
+        "SET-002",
+        "SET-003",
+        "SET-004",
+        "SET-005",
+        "SET-006",
+        "SET-007",
+        "SET-008",
+        "SWE-001",
+        "SWE-002",
+        "SWE-003",
+        "SWE-004",
+        "SWE-005",
+        "SWE-006",
+        "SWE-007",
+        "SWE-008"
+      ],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "South Omo",
+        "Wolayita",
+        "Bale Mountains",
+        "Humbo",
+        "Gambella",
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "REDD readiness planning",
+      "MRV design",
+      "forest monitoring",
+      "carbon accounting",
+      "land cover mapping",
+      "deforestation drivers",
+      "forest degradation",
+      "community based forest management",
+      "biodiversity monitoring",
+      "benefit sharing",
+      "institutional arrangements"
+    ],
+    "intervention_tags": [
+      "REDD+",
+      "forest monitoring",
+      "remote_sensing",
+      "forest_inventory",
+      "community_based_forest_management",
+      "reforestation",
+      "assisted_natural_regeneration",
+      "conservation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "National R-PP document with clear methodological sections and annex references.",
+        "Contains examples and pilots from specific projects, but most content is national strategy/methods rather than site-specific evidence.",
+        "Candidate places listed in the prompt are not directly evidenced in the extracted pages reviewed here except Humbo/Wolayita and broader southern Ethiopia references.",
+        "Some project examples are descriptive and may not transfer directly to candidate sites without local confirmation."
+      ]
+    },
+    "allowed_uses": [
+      "national_policy_context",
+      "methods_context",
+      "intervention_typology",
+      "country_level_background",
+      "candidate_site_screening_only"
+    ],
+    "blocked_uses": [
+      "site_specific_ecological_scoring",
+      "site_specific_financial_scoring",
+      "precise_local_suitability_claims",
+      "project impact attribution at candidate-site level",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "historical_land_cover_mapping_years",
+        "page": 115,
+        "reason": "The document states Phase 3.5a will create land cover maps of 2000, 2005 and 2010 and perform change detection; useful method reference but not site-specific.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "monitoring_frequency_pilot_areas",
+        "page": 136,
+        "reason": "The MRV system proposes annual or bi-annual monitoring for pilot areas; relevant to implementation planning, not location-specific.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "humbo_woreda_reforestation_project_location",
+        "page": 120,
+        "reason": "Humbo project is explicitly located in Humbo woreda in Wolayita zone in SNNPRS; this is a concrete local example but should be manually checked before scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "bale_mountains_national_park_project_area",
+        "page": 121,
+        "reason": "Bale Mountains National Park project has a defined area and management approach; location is specific but not one of the candidate sites and should not be generalized.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "landsat_based_national_mapping",
+        "page": 115,
+        "reason": "National-scale mapping using Landsat is clearly described and methodologically strong; candidate for methods scoring only, not local suitability.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "This is a national Ethiopian REDD readiness proposal focused on strategy, MRV, and monitoring methods. It provides strong country-level context and some specific project examples (e.g., Humbo, Bale Mountains), but it does not provide direct evidence for the listed candidate sites beyond broad regional references. Use for national methods/context and cautious screening, not for site-specific scoring without additional local sources."
+  },
+  {
+    "source_id": "local_research_source:sibilo_gashure_doctoral_thesis",
+    "filename": "Sibilo Gashure - Doctoral Thesis.pdf",
+    "title": "Indigenous climate-smart agricultural practices in a changing climate: Exploring adaptation strategies and impacts on crop production in the UNESCO designated cultural landscapes of Konso, Ethiopia",
+    "source_type": "doctoral_thesis",
+    "year": 2022,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "site_area_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Southern Nations, Nationalities, and Peoples' Region (historical Konso area)",
+      "zone": "Konso",
+      "woreda": "Konso",
+      "places": [
+        "Konso",
+        "Kolla",
+        "Woynadega"
+      ]
+    },
+    "topics": [
+      "climate-smart agriculture",
+      "indigenous agricultural practices",
+      "crop production",
+      "adaptation to climate variability",
+      "agroforestry",
+      "terracing",
+      "manure application",
+      "intercropping",
+      "irrigation",
+      "soil conservation",
+      "agricultural livelihoods"
+    ],
+    "intervention_tags": [
+      "terracing",
+      "agroforestry",
+      "manure_application",
+      "intercropping",
+      "small_scale_irrigation",
+      "crop_varieties",
+      "soil_bunds",
+      "reduced_tillage",
+      "water_conservation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Document is clearly focused on Konso, Ethiopia and provides place-specific evidence for Konso agroecologies.",
+        "No direct match to the provided South Ethiopia or Southwest Ethiopia candidate sites was found from sampled text; candidate places are not in the study area.",
+        "Some tables and qualitative statements are useful for comparable implementation context, but the study is not site-specific to the candidate locations.",
+        "Mixed-method dissertation with quantitative and qualitative components; many claims are self-reported or context-dependent."
+      ]
+    },
+    "allowed_uses": [
+      "comparable_landscape_context",
+      "national_policy_or_methods_context",
+      "national_or_comparable_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "local_implementation_context",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "adoption_rate_agroforestry",
+        "page": 79,
+        "reason": "Reports agroforestry adoption rates in Konso Kolla and Woynadega (97% and 45.5%); useful as comparable evidence but not transferable to candidate sites without QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "adoption_rate_terracing",
+        "page": 103,
+        "reason": "States terracing is essential for soil moisture and crop failure reduction; qualitative and quantitative evidence in Konso only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "adoption_rate_manure_application",
+        "page": 103,
+        "reason": "Reports manure as prominent CSA strategy in Konso agroecologies; could support comparable context only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "adoption_rate_intercropping",
+        "page": 103,
+        "reason": "Reports intercropping usage and perceived benefits in Konso; locality-specific and potentially useful as comparative evidence.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "adoption_rate_small_scale_irrigation",
+        "page": 103,
+        "reason": "Reports irrigation adoption in Konso agroecologies; should not be scored for other sites without manual confirmation.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "determinant_access_to_credit",
+        "page": 82,
+        "reason": "Model estimates show credit services influencing CSA adoption in Konso sample; may be a comparable determinant fact but not site-specific to candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "determinant_market_distance",
+        "page": 82,
+        "reason": "Model estimates include market distance effects on CSA adoption; analytical result is context-specific and may require QA before any use.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This doctoral thesis is a strong source for Konso-specific climate-smart agriculture and crop production context, especially terracing, agroforestry, manure use, intercropping, and irrigation. It does not appear to provide evidence for the provided candidate sites in South Ethiopia or Southwest Ethiopia, so it should not be used for site-specific scoring there. It is best treated as comparable landscape and methods context, with several candidate facts requiring manual QA if used in any downstream comparative analysis."
+  },
+  {
+    "source_id": "local_research_source:sixth_national_report_on_the_implementation_of_nbsap_2015_2020",
+    "filename": "Sixth-national-report-on-the-implementation-of-NBSAP-2015-2020.pdf",
+    "title": "Sixth National Report on the Implementation of Et_NBSAP 2015-2020",
+    "source_type": "government report",
+    "year": 2020,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "national",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Addis Ababa",
+        "Lake Tana Biosphere Reserve",
+        "Mekele",
+        "Dilla"
+      ]
+    },
+    "topics": [
+      "biodiversity policy",
+      "national conservation strategy",
+      "protected areas",
+      "invasive species management",
+      "ecosystem restoration",
+      "afforestation",
+      "wetlands",
+      "in situ conservation",
+      "ex situ conservation",
+      "genetic resources",
+      "access and benefit sharing",
+      "agricultural biodiversity",
+      "valuation of ecosystem services"
+    ],
+    "intervention_tags": [
+      "policy_and_planning",
+      "restoration",
+      "tree_planting",
+      "reforestation",
+      "afforestation",
+      "invasive_species_control",
+      "protected_area_management",
+      "wetland_management",
+      "ex_situ_conservation",
+      "in_situ_conservation",
+      "genetic_resource_governance",
+      "ecosystem_service_valuation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "partial",
+      "ocr_quality": "mixed",
+      "notes": [
+        "This is a national implementation report, suitable for national policy/methods context rather than site-specific investment evidence.",
+        "Some pages are low-text/OCR-limited, but several sampled pages provide clear national-level quantitative statements.",
+        "Place mentions such as Lake Tana Biosphere Reserve, Mekele, and Dilla are program examples, not sufficient to map to candidate sites in the provided list.",
+        "Reported outcome metrics are largely self-assessed implementation status and may reflect agency reporting bias."
+      ]
+    },
+    "allowed_uses": [
+      "national policy and strategy context",
+      "methodological reference for biodiversity/NBSAP implementation",
+      "high-level national outcome/indicator extraction",
+      "comparable landscape context for Ethiopia"
+    ],
+    "blocked_uses": [
+      "site-specific scoring",
+      "candidate site matching",
+      "attribution of project impact to any provided woreda/zone candidate without explicit site linkage",
+      "fine-grained geospatial inference from this report alone",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "forest_cover_change",
+        "page": 43,
+        "reason": "Provides national target framing and reported outputs (e.g., land planted with trees), but not a clean, independently verified site-level metric.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "restored_degraded_land_area",
+        "page": 43,
+        "reason": "National restoration quantity reported (18.4 million ha) is highly aggregate and self-reported; useful only as national context after QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "invasive_species_cleared_area",
+        "page": 38,
+        "reason": "Mentions cleared hectares including Lake Tana Biosphere Reserve, but not linked to candidate sites and likely unsuitable for direct scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "ex_situ_conservation_collection_size",
+        "page": 41,
+        "reason": "National ex situ conservation totals are reported and may be useful for program-level context only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "ABS_agreements_count",
+        "page": 44,
+        "reason": "National access and benefit-sharing counts are reported; not site-specific but potentially useful for policy-level scoring after manual QA.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A national Ethiopian biodiversity implementation report summarizing Et_NBSAP 2015-2020 progress, targets, and reported outputs. Strong for national policy/context; weak for site-level scoring or candidate matching because the evidence is aggregated and not tied to the provided sites."
+  },
+  {
+    "source_id": "local_research_source:unesco_report_semi_useful",
+    "filename": "unesco report - semi useful.pdf",
+    "title": "Ethiopia – Bale Mountains National Park: World Heritage Nomination – IUCN Technical Evaluation",
+    "source_type": "UNESCO/IUCN technical evaluation report",
+    "year": 2023,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Oromia National Regional State",
+      "zone": "Bale Zone",
+      "woreda": null,
+      "places": [
+        "Bale Mountains National Park",
+        "Bale-Arsi Massif",
+        "Sanetti Plateau",
+        "Harenna Forest",
+        "Tullu Dimtu"
+      ]
+    },
+    "topics": [
+      "protected areas",
+      "biodiversity",
+      "endemic species",
+      "world heritage evaluation",
+      "conservation management",
+      "buffer zones",
+      "community governance",
+      "grazing pressure",
+      "settlement pressure",
+      "landscape ecology"
+    ],
+    "intervention_tags": [
+      "protected_area_management",
+      "species_conservation",
+      "community_co_management",
+      "grazing_management",
+      "buffer_zone_management",
+      "land_use_planning"
+    ],
+    "validity": {
+      "overall_confidence": "medium",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "This is a high-quality institutional evaluation of a UNESCO World Heritage nomination, but it is site-specific to Bale Mountains National Park and not to any provided candidate sites.",
+        "Geographic scope is clear for Bale/Oromia, yet there is no reliable match to the South Ethiopia or Southwest Ethiopia candidate places provided.",
+        "Useful for comparable natural protected-area management context in Ethiopia, but not for direct site scoring.",
+        "Some extracted pages were low-text or required OCR review, so exact quotation-level use should be manual-checked if needed."
+      ]
+    },
+    "allowed_uses": [
+      "comparable_landscape_context",
+      "national_or_comparable_context",
+      "national_policy_or_methods_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "local_implementation_context",
+      "direct_scoring",
+      "geo-matching_to_candidate_sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "protected_area_size_ha",
+        "page": 3,
+        "reason": "Mentions BMNP covering 215,000 ha; could be useful only as a comparable benchmark, not site scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "buffer_zone_size_ha",
+        "page": 3,
+        "reason": "Mentions buffer zone of 235,121 ha; comparable benchmark only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "biodiversity_endemism_counts",
+        "page": 4,
+        "reason": "Lists species counts and endemics for BMNP; potentially useful for comparative analysis, not local scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "management_structure",
+        "page": 9,
+        "reason": "Describes park advisory committee, community dialogue forums, and participatory forest management in the Bale context; may inform methods only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "threats_grazing_settlement",
+        "page": 8,
+        "reason": "Notes grazing and settlement pressures in BMNP; only a comparable threat pattern, not site-specific to candidate places.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "An institutional UNESCO/IUCN technical evaluation focused on Bale Mountains National Park in Oromia, Ethiopia. It provides credible comparable context on protected-area designation, biodiversity values, buffer zones, and community/governance arrangements, but it does not match any of the supplied South Ethiopia or Southwest Ethiopia candidate sites and should not be used for direct site scoring without manual QA."
+  },
+  {
+    "source_id": "local_research_source:unesco_report",
+    "filename": "Unesco report.pdf",
+    "title": "Konso Cultural Landscape UNESCO nomination/evaluation report",
+    "source_type": "UNESCO World Heritage nomination/evaluation report",
+    "year": 2011,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Southern Nations, Nationalities and Peoples Regional State (historical SNNPRS)",
+      "zone": "Konso Administrative District / Konso wereda",
+      "woreda": "Konso",
+      "places": [
+        "Konso",
+        "Karat",
+        "Dokatu",
+        "Gamole",
+        "Derra",
+        "Jarso",
+        "Olanta",
+        "Mecheke",
+        "Burjo",
+        "Gaho",
+        "Fasha",
+        "Kulme"
+      ]
+    },
+    "topics": [
+      "cultural landscape",
+      "terraced agriculture",
+      "fortified settlements",
+      "sacred forests",
+      "traditional governance",
+      "heritage conservation",
+      "UNESCO criteria",
+      "landscape integrity",
+      "authenticity",
+      "community management"
+    ],
+    "intervention_tags": [
+      "agroforestry",
+      "soil_and_water_conservation",
+      "cultural_heritage_conservation",
+      "forest_protection",
+      "stone_terracing",
+      "settlement_planning"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Document is about Konso in Ethiopia and is not geographically aligned to the provided South Ethiopia/Southwest Ethiopia candidate sites.",
+        "Useful as national/comparable methods and heritage context only.",
+        "Contains some place names and conservation descriptions, but they should not be mapped to candidate sites outside Konso.",
+        "UNESCO evaluation language is partly normative and should not be treated as objective impact evidence."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "national_policy_or_methods_context",
+      "comparative_landscape_analysis"
+    ],
+    "blocked_uses": [
+      "site_specific_scoring",
+      "site_selection",
+      "local_implementation_evidence_for_candidate_sites",
+      "geo-matching_to_provided_candidates",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "terrace_agriculture_presence",
+        "page": 1,
+        "reason": "Konso terraced cultivation and water-management system are described clearly, but this is outside candidate geography and cannot be scored to provided sites without manual geospatial QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "traditional_forest_management",
+        "page": 6,
+        "reason": "Sacred forest conservation and management are described for Konso, but applicability to candidate sites is unverified.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "fortified_settlement_pattern",
+        "page": 3,
+        "reason": "Walled paletas and settlement morphology are described in detail, but not linked to candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "heritage_conservation_actions",
+        "page": 12,
+        "reason": "Conservation measures by NGOs and funding are mentioned, but these are programmatic and location-specific to Konso.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A UNESCO report on the Konso Cultural Landscape in Ethiopia. Strong source for comparable landscape and conservation methods context, but it does not match the provided candidate sites and should not be used for site-specific scoring without manual QA."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_final_report_ca_package_nabu_r",
+    "filename": "Final-Report-CA-package - NABU Report.pdf",
+    "title": "Development and Introduction of Conservation Agriculture at the Proposed Lake Tana Biosphere Reserve",
+    "source_type": "final_report",
+    "year": 2014,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara",
+      "zone": "Lake Tana basin / proposed Lake Tana Biosphere Reserve",
+      "woreda": null,
+      "places": [
+        "Lake Tana basin",
+        "Bahir Dar Zuria",
+        "North Achefer",
+        "Gonder Zuria",
+        "Dembia",
+        "Alefa",
+        "Takusa",
+        "Fogera",
+        "Bahir Dar",
+        "Woreta",
+        "Abuana Hokit"
+      ]
+    },
+    "topics": [
+      "conservation agriculture",
+      "tillage practices",
+      "soil erosion",
+      "soil fertility",
+      "vertisols",
+      "nitisols",
+      "crop residues",
+      "livestock feed",
+      "runoff control",
+      "soil and water conservation",
+      "demonstration pilots",
+      "agricultural extension"
+    ],
+    "intervention_tags": [
+      "reduced_tillage",
+      "mulching_or_residue_retention",
+      "rotational_cropping",
+      "broad_bed_furrow",
+      "soil_and_water_conservation",
+      "fodder_integration",
+      "manual_weed_control",
+      "demonstration_plot"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "good",
+      "notes": [
+        "Clear report-style source with dates, methods, and location references.",
+        "Geography is specific to the Lake Tana basin in Amhara, but it does not match the provided South Ethiopia/Southwest Ethiopia candidate sites.",
+        "Contains recommendations and proposed pilot implementation, so some findings are prescriptive rather than observed outcomes.",
+        "Suitable for broader contextual evidence on conservation agriculture in Ethiopia, not for site-specific scoring for the supplied candidate places."
+      ]
+    },
+    "allowed_uses": [
+      "national or comparable context for conservation agriculture in Ethiopia",
+      "background on CA practices, soil constraints, and implementation modes in the Lake Tana basin",
+      "methodological reference for mixed-method agricultural assessment",
+      "evidence on potential intervention packages and pilot design in similar Ethiopian highland contexts"
+    ],
+    "blocked_uses": [
+      "site-specific scoring for the supplied candidate sites",
+      "direct attribution of findings to South Ethiopia or Southwest Ethiopia candidate woredas",
+      "use as proof of implementation success beyond proposed/demonstration intentions",
+      "fine-grained local suitability claims for the candidate places",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "conservation agriculture package components",
+        "page": 21,
+        "reason": "The report defines proposed CA packages for red soils and black soils, but these are recommendations/pilots rather than independently verified outcomes.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "pilot implementation design",
+        "page": 25,
+        "reason": "Specifies nine pilot households and one FTC in Bahir Dar Zuria/North Achefer/Gonder Zuria; could inform similar implementation planning but is not site-matched to candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soil type-associated intervention logic",
+        "page": 19,
+        "reason": "Associates Vertisols with BBM and Nitisols with reduced tillage/residue retention in the Lake Tana basin; useful as comparable evidence but needs contextual QA before reuse.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soil erosion and residue pressure",
+        "page": 8,
+        "reason": "Discusses erosion, biomass shortage, and residue competition in the Lake Tana watershed; generally credible but context-specific to the basin.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "This is a 2014 report on proposed conservation agriculture packages for the Lake Tana biosphere reserve in Amhara, Ethiopia. It is strong for national/comparable context and methodological background, but it does not geographically match the supplied South Ethiopia or Southwest Ethiopia candidate sites. Use for broader CA context only; avoid site-specific scoring without manual QA and geographic matching."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_land_07_00130_peer_reviewed_re",
+    "filename": "land-07-00130 - peer reviewed research paper.pdf",
+    "title": "Institutional Functionality in Participatory Integrated Watershed Development of Tana Sub-Basin, Ethiopia",
+    "source_type": "peer_reviewed_research_paper",
+    "year": 2018,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "country_only",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara",
+      "zone": "West Gojam",
+      "woreda": null,
+      "places": [
+        "Lake Tana Basin",
+        "Tana Sub-Basin",
+        "Aba Gerima",
+        "Yinesu",
+        "Debre Mewi",
+        "Koti"
+      ]
+    },
+    "topics": [
+      "watershed management",
+      "soil and water conservation",
+      "institutional functionality",
+      "community participation",
+      "local governance",
+      "monitoring and evaluation",
+      "adaptive management",
+      "rural livelihoods"
+    ],
+    "intervention_tags": [
+      "integrated_watershed_management",
+      "soil_and_water_conservation",
+      "area_closure",
+      "graded_bund",
+      "level_bund",
+      "afforestation",
+      "community_mobilization",
+      "capacity_building"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Strong match to Ethiopia and Amhara/Lake Tana Basin, but not to provided South/Southwest Ethiopia candidate sites.",
+        "Empirical comparisons are between WLRC-supported model watersheds and community watersheds in West Gojam, Amhara.",
+        "Useful for methods, indicators, and broader Ethiopia watershed governance context; not site-specific to candidate places.",
+        "Some location references are basin-level or watershed names rather than administrative units, so manual QA is advisable before any geospatial scoring."
+      ]
+    },
+    "allowed_uses": [
+      "national_policy_or_methods_context",
+      "comparable_landscape_context",
+      "local_implementation_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "direct_candidate_site_scoring",
+      "place-based investment ranking for the provided candidate sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "study_location_amhara_west_gojam_lake_tana_basin",
+        "page": 4,
+        "reason": "Study area explicitly described as four micro-watersheds in West Gojam Zone of the Amhara Region within Lake Tana Basin.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "watershed_intervention_types",
+        "page": 4,
+        "reason": "Lists area closure, graded bund, level bund, and afforestation under WLRC support.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "institutional_indicator_framework",
+        "page": 3,
+        "reason": "Defines five institutional characteristics and seven rationalities for watershed assessment, useful as a methods reference.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "comparative_performance_wlrc_vs_community",
+        "page": 7,
+        "reason": "Reports statistically significant differences in several institutional characteristics between model and community watersheds.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "maintenance_follow_up_and_monitoring_gaps_in_community_watersheds",
+        "page": 10,
+        "reason": "Qualitative findings indicate weaker follow-up, maintenance, and monitoring in community watersheds.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a peer-reviewed 2018 Ethiopia watershed governance paper focused on four micro-watersheds in West Gojam Zone, Amhara Region, in the Lake Tana/Tana Sub-Basin. It provides strong methods and comparative institutional findings for watershed development, but it does not match the provided South Ethiopia or Southwest Ethiopia candidate sites. Use for national/comparable context and methodology, not site-specific scoring."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_livelihoods_pattern_of_negede_",
+    "filename": "Livelihoods_Pattern_of_Negede_Weyto_Community_in_L - peer reviewed research paper.pdf",
+    "title": "Livelihoods Pattern of “Negede Weyto” Community in Lake Tana Shore, Bahir Dar, Ethiopia",
+    "source_type": "peer reviewed research paper",
+    "year": 2008,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara",
+      "zone": "Bahir Dar special zone / Lake Tana shore",
+      "woreda": null,
+      "places": [
+        "Lake Tana shore",
+        "Bahir Dar",
+        "Negede Weyto community"
+      ]
+    },
+    "topics": [
+      "livelihoods",
+      "vulnerability",
+      "income sources",
+      "fishing",
+      "farming",
+      "petty trading",
+      "rural development",
+      "education",
+      "household survey"
+    ],
+    "intervention_tags": [
+      "livelihood diversification",
+      "fisheries",
+      "agriculture",
+      "social vulnerability",
+      "poverty"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Geography is clearly Lake Tana shore in Bahir Dar, Amhara, Ethiopia; none of the provided candidate sites in South Ethiopia/Southwest Ethiopia match.",
+        "Peer-reviewed and methodologically clear, but the paper is descriptive and not intervention-evaluation focused.",
+        "Useful for national/comparable livelihood context, not for site-specific scoring against the supplied candidate places."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "national_policy_or_methods_context",
+      "comparable_landscape_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "local_implementation_context",
+      "direct_site_scoring",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "livelihood mix (fishing, farming, petty trading)",
+        "page": 7,
+        "reason": "The paper reports livelihood activity shares for Negede Weyto households; could support comparable livelihood typologies after manual QA, but not site-specific to the provided candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "household income distribution",
+        "page": 7,
+        "reason": "Contains monthly income brackets and percentages from the surveyed community; potentially useful as benchmark context only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "education status / illiteracy prevalence",
+        "page": 11,
+        "reason": "Reports educational attainment distribution for the survey sample; could be a contextual vulnerability indicator, but not transferable without caution.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "regression relationships between income sources and total income",
+        "page": 12,
+        "reason": "Statistical results may inform methods/context, but require manual validation before any quantitative reuse.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A peer-reviewed livelihood survey of the Negede Weyto community on the Lake Tana shore in Bahir Dar, Amhara, Ethiopia. It is geographically clear but does not match the supplied candidate sites in South Ethiopia or Southwest Ethiopia. Best used as comparable context on livelihood diversification, poverty, and vulnerability rather than for local implementation or site scoring."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_melese_getinet_doctoral_thesis",
+    "filename": "Melese Getinet - Doctoral Thesis semi useful for local knowledge.pdf",
+    "title": "Assessment of land suitability using a GIS-based multi-criteria analysis for rice cultivation in Fogera Woreda, Amhara Regional State, Ethiopia",
+    "source_type": "doctoral_thesis",
+    "year": 2024,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara Regional State",
+      "zone": "unknown",
+      "woreda": "Fogera Woreda",
+      "places": [
+        "Fogera",
+        "Fogera Woreda",
+        "Amhara Regional State",
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "land suitability analysis",
+      "rice cultivation",
+      "GIS",
+      "multi-criteria decision analysis",
+      "AHP",
+      "LULC",
+      "soil",
+      "climate",
+      "topography"
+    ],
+    "intervention_tags": [
+      "agricultural land suitability mapping",
+      "GIS-based planning",
+      "rice cultivation suitability"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Document is a thesis focused on Fogera Woreda, not any of the provided South Ethiopia / Southwest Ethiopia candidate sites.",
+        "Uses GIS-based MCE/AHP with clearly described criteria and reported weights.",
+        "Site-specific geographic relevance is strong for Fogera only; no evidence supports transfer to candidate sites without separate local validation."
+      ]
+    },
+    "allowed_uses": [
+      "national_policy_or_methods_context",
+      "method_reference",
+      "comparative_agricultural_suitability_context",
+      "ethiopia_rice_land_suitability_context"
+    ],
+    "blocked_uses": [
+      "site_specific_scoring_for_provided_candidate_sites",
+      "local_place_fact_extraction_for_candidate_sites",
+      "direct_investment_screening_for_candidate_sites",
+      "regional_transfer_without_manual_validation",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "rice_suitability_high_share",
+        "page": 69,
+        "reason": "Reports 65.9% highly suitable land in Fogera Woreda, but this is local to the thesis study area and should not be transferred to other sites without manual QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "AHP_weights_climate_soil_lulc_topography",
+        "page": 66,
+        "reason": "Provides criterion weights for the Fogera model; potentially useful as a methods reference, not as a scoring input for other sites without validation.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "overall_classification_accuracy",
+        "page": 85,
+        "reason": "Reports overall classification accuracy and Kappa for LULC mapping; may inform method quality but is not a site suitability score.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2024 MA thesis on GIS-based rice land suitability assessment in Fogera Woreda, Amhara, Ethiopia. Strong for methodological reference and Ethiopia rice-suitability context, but it does not match any of the provided candidate sites in South Ethiopia or Southwest Ethiopia. Use only as comparable/national context, not for site-specific scoring of the candidate places."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_project_completion_report_marc",
+    "filename": "Project Completion Report March 2019 - project report semi useful because lack of local utterances.pdf",
+    "title": "Project Completion Report March 2019: Community-based Integrated Natural Resources Management Project",
+    "source_type": "project_completion_report",
+    "year": 2019,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara",
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Lake Tana Watersheds",
+        "Amhara National Regional State",
+        "Bahir Dar Zuria",
+        "North Achefer",
+        "South Achefer",
+        "Banja",
+        "Mecha",
+        "Dangila",
+        "Achefere",
+        "Marwonz",
+        "Agazi"
+      ]
+    },
+    "topics": [
+      "integrated natural resource management",
+      "watershed management",
+      "land degradation",
+      "soil and water conservation",
+      "reforestation",
+      "area closure",
+      "participatory forest management",
+      "land certification",
+      "food security",
+      "livelihoods",
+      "gender",
+      "climate change adaptation",
+      "carbon sequestration",
+      "wetland management",
+      "biogas",
+      "improved cookstoves",
+      "water harvesting"
+    ],
+    "intervention_tags": [
+      "watershed_restoration",
+      "landscape_restoration",
+      "soil_water_conservation",
+      "reforestation_afforestation",
+      "gully_rehabilitation",
+      "area_closure",
+      "participatory_forest_management",
+      "land_tenure",
+      "land_certification",
+      "livelihoods_support",
+      "climate_adaptation",
+      "water_access",
+      "clean_energy"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Well-structured project completion report with clear dates and quantified outputs.",
+        "Geography is clearly Lake Tana Watersheds in Amhara, which does not match the provided candidate sites in South Ethiopia or Southwest Ethiopia Peoples' Region.",
+        "Useful for national/comparable context and methods, not for site-specific scoring against candidate places.",
+        "Contains some self-reported impact claims and mission assessments; these should be treated as program evaluation evidence rather than independent measurement."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "methods_context",
+      "intervention_typology",
+      "benchmarking",
+      "background_literature"
+    ],
+    "blocked_uses": [
+      "site_specific_scoring",
+      "candidate_site_match",
+      "precise_geospatial_assignment_to_provided_sites",
+      "claims_requiring_independent_ground_validation_without_manual_review",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "project_area_geography",
+        "page": 15,
+        "reason": "Explicitly states the project target area is the Lake Tana Watersheds in Amhara National Regional State; useful if a Lake Tana/Amhara site were being scored, but not applicable to the provided candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "land_restoration_outputs",
+        "page": 21,
+        "reason": "Quantified hectares treated, terraces, area closure, and certification outputs are clearly stated and may be reusable as comparable implementation benchmarks.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "food_security_change",
+        "page": 24,
+        "reason": "Reports food security improvements and percentages from impact assessment and mission observations; self-reported and mixed-method evidence warrants manual QA before scoring use.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "carbon_sequestration",
+        "page": 12,
+        "reason": "Provides modeled tCO2eq estimates from impact assessment; should be used cautiously and only as model-based evidence after QA.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a 2019 IFAD project completion report for the Community-based Integrated Natural Resources Management Project in the Lake Tana Watersheds of Amhara, Ethiopia. It is strong for understanding restoration interventions, implementation modalities, and reported outcomes at a national/comparable level, but it does not match the supplied candidate sites in South Ethiopia or Southwest Ethiopia. It should not be used for site-specific scoring for those candidates without manual reassignment."
+  },
+  {
+    "source_id": "local_research_source:unpacked_lake_tana_amhara_20260627t215313z_3_001_lake_tana_amhara_report_ecological_evaluation_n",
+    "filename": "Report-Ecological-Evaluation - NABU Report.pdf",
+    "title": "Ecological Evaluation of the Status of the Wetlands of Lake Tana and Their Capacities to Provide Multiple Ecosystem Services",
+    "source_type": "report",
+    "year": 2013,
+    "document_use_class": "comparable_landscape_context",
+    "geographic_scope": {
+      "match_level": "non_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Amhara",
+      "zone": "Lake Tana basin / Bahir Dar / Gondar area",
+      "woreda": null,
+      "places": [
+        "Lake Tana",
+        "Bahir Dar",
+        "Gondar",
+        "Chimba wetland",
+        "Gilgel Abay",
+        "Fogera Floodplain",
+        "Dembia Floodplain",
+        "Dangela wetlands",
+        "Kunzula"
+      ]
+    },
+    "topics": [
+      "wetlands",
+      "ecological assessment",
+      "biodiversity",
+      "carbon sequestration",
+      "papyrus reedbeds",
+      "gallery forests",
+      "catchment erosion",
+      "siltation",
+      "water quality",
+      "agroforestry",
+      "reforestation",
+      "ecosystem services"
+    ],
+    "intervention_tags": [
+      "wetland restoration",
+      "reforestation",
+      "riparian restoration",
+      "papyrus conservation",
+      "catchment rehabilitation",
+      "erosion control",
+      "buffer zones",
+      "protected areas"
+    ],
+    "validity": {
+      "overall_confidence": "medium_high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "good",
+      "notes": [
+        "Strongly centered on Lake Tana wetlands in Amhara, but the provided candidate sites are in South/Southwest Ethiopia and do not match the document geography.",
+        "Primarily a narrative ecological evaluation with recommendations; includes some quantified estimates and fieldwork descriptions, but many statements are interpretive.",
+        "Useful for regional restoration context and methods, not for direct site-level scoring for the supplied candidate places.",
+        "Some site-specific Lake Tana figures and claims may require manual QA before any secondary use in modeling."
+      ]
+    },
+    "allowed_uses": [
+      "regional ecological context for Lake Tana basin",
+      "comparative wetland restoration and ecosystem-service framing",
+      "methodological background for papyrus swamp and riparian restoration",
+      "desktop reference for policy/recommendation themes"
+    ],
+    "blocked_uses": [
+      "direct site matching to supplied candidate places",
+      "site-specific investment scoring for the listed South/Southwest Ethiopia candidates",
+      "claims of local suitability for interventions outside the Lake Tana basin without additional evidence",
+      "precise cost/impact estimation without corroborating sources",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "papyrus_reed_area_ha",
+        "page": 50,
+        "reason": "The report states there is an area of about 8,400 ha of papyrus-reeds at Lake Tana; this is a useful quantitative fact but should be manually reviewed before scoring use.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "transect_site_chimba_area_ha",
+        "page": 38,
+        "reason": "Mentions a transect in the Chimba wetland and local farmers suggested the area to be 4 ha; highly local and likely not suitable for general scoring without QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "near_natural_forest_area_ha",
+        "page": 35,
+        "reason": "Provides a rough estimate of existing near-natural forests at roughly 4,000 ha; estimate is explicitly approximate and based on personal communication, so manual review is required.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "lake_tana_wetland_management_recommendations",
+        "page": 51,
+        "reason": "Contains actionable recommendations for protection, reforestation, grazing exclusion, and wetland restoration; relevant as qualitative guidance only.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2013 ecological evaluation of Lake Tana wetlands in Amhara, Ethiopia. It is best used as comparable landscape and methods context for wetland, riparian, and catchment restoration. It does not match the supplied South/Southwest Ethiopia candidate sites and should not be used for direct site-specific scoring without manual QA and additional geographically matching evidence."
+  },
+  {
+    "source_id": "local_research_source:unpacked_overall_govt_directives_20260627t215314z_3_001_overall_govt_directives_integrated_water",
+    "filename": "Integrated-Watershed-Managmnet-Data-Collection-National-Standard-2.pdf",
+    "title": "Guideline for Integrated Watershed Data Collection: National Standard",
+    "source_type": "government_guideline",
+    "year": 2025,
+    "document_use_class": "national_policy_or_methods_context",
+    "geographic_scope": {
+      "match_level": "national",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": null,
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "integrated watershed management",
+      "soil and water conservation",
+      "soil erosion measurement",
+      "sediment yield",
+      "runoff plots",
+      "agricultural land management",
+      "monitoring and evaluation",
+      "experimental plot methods"
+    ],
+    "intervention_tags": [
+      "watershed_management",
+      "soil_conservation",
+      "runoff_measurement",
+      "erosion_control",
+      "sediment_monitoring",
+      "land_management_practices"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "Appears to be a national technical guideline published by EIAR in 2025.",
+        "No site-specific place names or project locations were identified in the extracted pages provided.",
+        "Some pages have no or limited extractable text, but the sampled methodological content is clear enough for national-level use."
+      ]
+    },
+    "allowed_uses": [
+      "national methods context",
+      "methodology extraction",
+      "intervention taxonomy tagging",
+      "high-level Ethiopia context"
+    ],
+    "blocked_uses": [
+      "site-specific scoring",
+      "candidate place matching",
+      "claims of local implementation in any listed woreda/zone/region",
+      "attribution of project outcomes to specific sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "plot_size_for_runoff_measurement",
+        "page": 46,
+        "reason": "Guideline states plots of 4 m × 15 m for <20% slope and 4 m × 10 m for >20% slope; useful as method reference but not site scoring.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "experimental_plot_size_for_SWC_evaluation",
+        "page": 62,
+        "reason": "Guideline states EPs of 180 m2 (6 m × 30 m) and mentions flexible sizing in flat dryland areas; method detail only.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "sediment_yield_measurement_methods",
+        "page": 50,
+        "reason": "Lists fluvial monitoring, reservoir survey, and sediment yield models; general methods context.",
+        "manual_review_required": false
+      },
+      {
+        "variable": "land_management_practice_classification",
+        "page": 41,
+        "reason": "Table defines recording of mechanical, vegetative, agronomic, agroforestry, re-vegetation, and use-right practices; could support taxonomy but not site scoring.",
+        "manual_review_required": false
+      }
+    ],
+    "summary": "A 2025 Ethiopian national guideline for integrated watershed management data collection. Strong for methods, monitoring protocols, and intervention taxonomy. Not suitable for local site attribution or scoring without additional site-specific evidence."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_12539iied_may_not_be_verified_but_co",
+    "filename": "12539IIED - may not be verified but contains direct local quotes.pdf",
+    "title": "Trees are our backbone: Integrating environment and local development in Tigray Region of Ethiopia",
+    "source_type": "issue paper / research report",
+    "year": 2007,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray Region",
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Tigray Region",
+        "Eastern Tigray",
+        "Irob",
+        "Sengade",
+        "Sewne",
+        "Alitena",
+        "Weratle"
+      ]
+    },
+    "topics": [
+      "environmental management",
+      "soil and water conservation",
+      "land degradation",
+      "communal land governance",
+      "pastoralism",
+      "forest management",
+      "indigenous institutions",
+      "livelihoods",
+      "agroforestry",
+      "local innovation",
+      "policy implementation"
+    ],
+    "intervention_tags": [
+      "soil_and_water_conservation",
+      "grazing_management",
+      "forest_protection",
+      "communal_land_tenure",
+      "community_based_natural_resource_management",
+      "indigenous_knowledge",
+      "livelihood_diversification"
+    ],
+    "validity": {
+      "overall_confidence": "medium",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "mixed",
+      "notes": [
+        "Document is clearly about Tigray Region, but it does not match the provided candidate places in South Ethiopia or Southwest Ethiopia Peoples' Region.",
+        "Some local quotes and specific case examples appear to be from Eastern Tigray/Irob, but the exact page-level extraction for all relevant passages is incomplete.",
+        "Several pages are text-extracted, but some pages indicate need for OCR or vision review, so location-specific claims should be used cautiously.",
+        "Good for contextual/national or comparable evidence; not suitable as site-specific proof for the supplied candidate sites."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "background_context",
+      "thematic_evidence",
+      "hypothesis_generation",
+      "manual_review_queue"
+    ],
+    "blocked_uses": [
+      "site_selection_for_provided_candidates",
+      "site_specific_scoring",
+      "direct_investment_justification_for_provided_candidates",
+      "precise_geocoding_to_candidate_sites_without_manual_qc",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "presence_of_indigenous_resource_management_in_tigray",
+        "page": 21,
+        "reason": "Detailed example of the Irob Sengade pasture management institution with seasonal closure, guards, fines, and customary enforcement; likely useful as a comparable governance case after QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "customary_forest_protection_practices",
+        "page": 21,
+        "reason": "Box 4 describes community protection of forest resources in Sewne and cultural enforcement against wood removal; useful as a comparable local management case after QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "use_of_prickly_pear_for_food_security_and_erosion_control",
+        "page": 20,
+        "reason": "States prickly pear was introduced about 140 years ago and integrated into local food-security/environmental management in drier Tigray; useful thematic evidence but not candidate-site specific.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "policy_implementation_gap_in_environmental_governance",
+        "page": 14,
+        "reason": "Discusses weak public access to environmental information and implementation gaps in Tigray; potentially useful contextual fact, but subjective and region-wide.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "An IIED issue paper on environment and development in Tigray Region, Ethiopia. It provides useful qualitative context and a few detailed local cases from Eastern Tigray/Irob, but it does not match the supplied candidate sites in South Ethiopia or Southwest Ethiopia Peoples' Region. Treat as comparable/national context rather than site-specific evidence; any use of the local cases should undergo manual QA before scoring."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_agroforestry_peer_reviewed_research_",
+    "filename": "Agroforestry peer reviewed research paper.pdf",
+    "title": "Socio-Ecological Niche and Factors Affecting Agroforestry Practice Adoption in Different Agroecologies of Southern Tigray, Ethiopia",
+    "source_type": "peer_reviewed_research_article",
+    "year": 2019,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray",
+      "zone": "Southern Tigray",
+      "woreda": null,
+      "places": [
+        "Southern Tigray",
+        "Ofla",
+        "Endamohini",
+        "Raya Azebo"
+      ]
+    },
+    "topics": [
+      "agroforestry",
+      "adoption factors",
+      "home gardens",
+      "live fences",
+      "parkland agroforestry",
+      "silvopastoral systems",
+      "land degradation",
+      "climate variability",
+      "household livelihoods",
+      "soil and water conservation"
+    ],
+    "intervention_tags": [
+      "agroforestry",
+      "tree planting",
+      "home garden agroforestry",
+      "live fencing",
+      "soil conservation trees",
+      "woodlots",
+      "silvopastoral"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Peer-reviewed article with clear methods and location information.",
+        "Study area is Southern Tigray, Ethiopia; it does not match any provided candidate sites in South/Southwest Ethiopia.",
+        "Useful for national/comparable agroforestry context, but not for site-specific investment scoring for the supplied candidates.",
+        "Some OCR artifacts are present in names/terms, but core findings and location are clear."
+      ]
+    },
+    "allowed_uses": [
+      "national_policy_or_methods_context",
+      "national_or_comparable_context",
+      "comparable_landscape_context"
+    ],
+    "blocked_uses": [
+      "site_specific_context",
+      "local_implementation_context",
+      "scoring_candidate_facts",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "agroforestry adoption factors (sex, family size, education, landholding)",
+        "page": 1,
+        "reason": "Statistical associations reported for Southern Tigray households; not transferable to candidate sites without local QA and geographic match.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "dominant agroforestry niches (home garden, live fence, parkland)",
+        "page": 9,
+        "reason": "Descriptive findings from Southern Tigray only; could inform comparable practice typology but not site scoring here.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "agroecology-specific system prevalence (agri-silviculture, silvo-pastoral, agro-silvo-pasture)",
+        "page": 11,
+        "reason": "Region-specific cross-tabulation from study sample; not suitable for candidate-site scoring.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a 2019 peer-reviewed study on agroforestry adoption and practice typology in Southern Tigray, Ethiopia. It is methodologically clear and high-confidence as a source, but it does not geographically match the provided candidate sites in South/Southwest Ethiopia. Use it only for broader comparative or national context, not for site-specific scoring or implementation claims for the listed candidates."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_alemu_eshetu_doctoral_thesis_univers",
+    "filename": "Alemu Eshetu - doctoral thesis, university of addis abeba.pdf",
+    "title": "Land degradation, Seasonal Rural Out-Migration and Sustainable Land Management in the Dry Land of Upper Tekeze Basin, Northern Ethiopia",
+    "source_type": "doctoral thesis",
+    "year": 2024,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray / Waghimra (upper Tekeze basin)",
+      "zone": "Waghimra",
+      "woreda": null,
+      "places": [
+        "Upper Tekeze basin",
+        "Waghimra Zone",
+        "Tigray",
+        "Northern Ethiopia",
+        "Bella-Wuleh",
+        "Hamuset-chochorba",
+        "Asketema",
+        "Ziquala"
+      ]
+    },
+    "topics": [
+      "land degradation",
+      "soil erosion",
+      "land cover change",
+      "seasonal rural out-migration",
+      "sustainable land management",
+      "watershed management",
+      "drought",
+      "livelihoods",
+      "RUSLE modeling",
+      "agricultural productivity"
+    ],
+    "intervention_tags": [
+      "soil and water conservation",
+      "stone bunds",
+      "soil bunds",
+      "agroforestry",
+      "compost",
+      "manure application",
+      "improved seed",
+      "intercropping",
+      "crop rotation",
+      "area exclosure",
+      "integrated watershed management"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "Document is clearly about upper Tekeze basin in Waghimra Zone, not any provided South Ethiopia or Southwest Ethiopia candidate sites.",
+        "Contains a mix of empirical modeling (RUSLE-GEE, SPI) and self-reported qualitative findings; site-specific claims are not transferable to candidate places outside northern Ethiopia.",
+        "Useful for national/comparable context and methods, but not for direct site scoring of listed candidates.",
+        "Some local sub-watershed comparisons are internally specific to Waghimra and may require manual QA before reuse as benchmark facts."
+      ]
+    },
+    "allowed_uses": [
+      "national or comparable context",
+      "methods context for RUSLE-GEE, SPI, and SLM adoption studies",
+      "benchmarking land degradation / drought / migration relationships in northern Ethiopian drylands",
+      "background evidence on soil and water conservation practices and their reported effects"
+    ],
+    "blocked_uses": [
+      "site-specific scoring for candidate places in South Ethiopia or Southwest Ethiopia Peoples' Region",
+      "direct geographic attribution to any listed candidate site",
+      "precise quantitative benchmarking outside Waghimra/upper Tekeze without manual comparison QA",
+      "policy claims beyond the study area without supporting external sources",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "soil_loss_reduction_due_to_conservation",
+        "page": 150,
+        "reason": "Contains quantitative comparisons of protected vs unprotected sub-watersheds in Waghimra; potentially useful only as analog evidence, not site-specific evidence for candidate places.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "SLM_adoption_rates",
+        "page": 212,
+        "reason": "Reports percentages of SLM practices among farmers in upper Tekeze/Waghimra; useful for comparable context but not transferable to candidate sites without QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "drought_frequency_SPI",
+        "page": 171,
+        "reason": "Provides drought frequency statistics for the upper Tekeze basin; could be used as comparable climate context only after manual QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "LULC_change_land_degradation_trend",
+        "page": 76,
+        "reason": "Describes land cover transitions and degradation in the study area; potentially informative for comparable dryland context, but not directly scoreable for listed sites.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A doctoral dissertation on land degradation, seasonal rural out-migration, and sustainable land management in the upper Tekeze basin of northern Ethiopia (Waghimra Zone, Tigray). Strong for methods and comparable dryland evidence, but it does not match any provided candidate site in South Ethiopia or Southwest Ethiopia and should not be used for direct site scoring."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_ethiotrees_annual_report_2025_2026_r",
+    "filename": "Ethiotrees-Annual-Report-2025-2026 - recent NGO report.pdf",
+    "title": "EthioTrees Annual Report 2025-2026",
+    "source_type": "NGO annual report",
+    "year": 2025,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "country_only",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray Region",
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Tigray Region",
+        "Ethiopia"
+      ]
+    },
+    "topics": [
+      "ecosystem restoration",
+      "agroforestry",
+      "plan vivo",
+      "carbon finance",
+      "payments for ecosystem services",
+      "community participation",
+      "soil and water conservation",
+      "monitoring and evaluation",
+      "livelihood support",
+      "tree planting",
+      "biodiversity monitoring"
+    ],
+    "intervention_tags": [
+      "ecosystem_restoration",
+      "agroforestry",
+      "carbon_project",
+      "pes",
+      "community_based_restoration",
+      "soil_and_water_conservation",
+      "tree_planting"
+    ],
+    "validity": {
+      "overall_confidence": "medium",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "mixed",
+      "notes": [
+        "Clearly identifies a project annual report for EthioTrees in Tigray Region, Ethiopia.",
+        "Geographic scope is project-level and regional; no evidence in extracted text links this report to the provided South Ethiopia or Southwest Ethiopia candidate sites.",
+        "Some pages are OCR-extracted and a few have low text quality, so page-specific facts should be checked manually.",
+        "Monitoring tables and issuance figures appear internally specific, but claims about impacts and future developments are partly self-reported and should be treated cautiously."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "methods_and_program_design_context",
+      "general_restoration_and_carbon_finance_context",
+      "high_level_benchmarking"
+    ],
+    "blocked_uses": [
+      "site_specific_geographic_matching",
+      "candidate_site_scoring_without_manual_geographic_qa",
+      "claiming evidence for South Ethiopia or Southwest Ethiopia candidate places",
+      "precision siting or investment prioritization at woreda/site level",
+      "attributing local biophysical conditions to candidate sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "project_area_ha",
+        "page": 3,
+        "reason": "Reports total restoration area under management and agroforestry area, but this is project-level for Tigray Region and not linked to candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "households_participating",
+        "page": 3,
+        "reason": "Provides project-level household participation figures that may be useful as benchmark data only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "PES_payments_USD",
+        "page": 3,
+        "reason": "Specific financial totals are reported and appear internally coherent, but are project-level benchmarking facts rather than site-specific evidence.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "tree_seedlings_planted",
+        "page": 25,
+        "reason": "Contains quantified monitoring results for planting and survival, but locality is project-wide and page context should be reviewed before any scoring use.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "SWC_implementation_totals",
+        "page": 6,
+        "reason": "Provides summary of soil and water conservation works, but no precise site linkage to candidate places.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a project annual report for EthioTrees in Tigray Region, Ethiopia. It is useful for national/comparable context on ecosystem restoration, agroforestry, carbon finance, PES, and monitoring methods, but it does not provide reliable evidence for the supplied South Ethiopia or Southwest Ethiopia candidate sites. Use for benchmarking and methodology only unless additional QA establishes a site match."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_hailu_araya_doctoral_thesis",
+    "filename": "Hailu Araya - Doctoral Thesis.pdf",
+    "title": "Processes of Soil Erosion and Aspects of Community-Based Soil Conservation in Grahutsa-Korir Watershed in Eastern Tigray",
+    "source_type": "doctoral_thesis",
+    "year": 2001,
+    "document_use_class": "site_specific_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray",
+      "zone": "Eastern Tigray",
+      "woreda": null,
+      "places": [
+        "Grahutsa",
+        "Korir",
+        "Enda Selassie",
+        "Wukro"
+      ]
+    },
+    "topics": [
+      "soil erosion",
+      "gully erosion",
+      "soil and water conservation",
+      "community-based conservation",
+      "area closure",
+      "grazing land management",
+      "watershed rehabilitation",
+      "sedimentation",
+      "earth dams",
+      "crop yield decline"
+    ],
+    "intervention_tags": [
+      "area_closure",
+      "gully_control",
+      "terracing",
+      "contour_bunds",
+      "grazing_management",
+      "reforestation",
+      "soil_and_water_conservation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "Geographic content is specific to Eastern Tigray and the Grahutsa-Korir watershed, but does not match any provided candidate sites in South Ethiopia or Southwest Ethiopia.",
+        "The thesis contains field-based observations, questionnaires, and tables, but some pages have OCR noise.",
+        "Claims about local impacts and community approval are useful context, but site scoring should not use this source for the provided candidate places without a separate geographic match."
+      ]
+    },
+    "allowed_uses": [
+      "site-specific context for Grahutsa-Korir watershed in Eastern Tigray",
+      "national/comparable restoration methods context",
+      "background evidence on soil erosion and conservation interventions in Ethiopia"
+    ],
+    "blocked_uses": [
+      "scoring any provided candidate site IDs",
+      "claiming evidence for South Ethiopia or Southwest Ethiopia candidate places",
+      "precise KPI or impact attribution for unrelated sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "community_based_soil_conservation_presence",
+        "page": 119,
+        "reason": "Mentions biological conservation, grazing land development, and area closure with approximate area figures in the study watershed.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "area_closure_presence",
+        "page": 119,
+        "reason": "Describes area closure and protection of upper catchments for grass and vegetation rehabilitation.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "gully_erosion_severity",
+        "page": 77,
+        "reason": "Provides qualitative and survey-based evidence of severe gully erosion in the study area.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "earth_dam_siltation_or_damage",
+        "page": 82,
+        "reason": "States that the Grahutsa dam was silted and cut by the gully after 1986, but this is specific to the thesis area and should be manually checked before scoring use.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "crop_yield_decline_due_to_degradation",
+        "page": 82,
+        "reason": "Reports respondent perceptions of reduced agricultural yield linked to topsoil loss and gullying.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a site-specific doctoral thesis about soil erosion and community-based soil conservation in the Grahutsa-Korir watershed in Eastern Tigray, Ethiopia. It is strong for local process and intervention context in that watershed, but it does not match the provided candidate places in South Ethiopia or Southwest Ethiopia, so it should not be used for candidate-site scoring without manual geographic reconciliation."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_soil_and_water_conservation_in_tigra",
+    "filename": "Soil and water conservation in Tigray  Northern Ethiopia - semi useful because no direct local account.pdf",
+    "title": "Soil and water conservation in Tigray (Northern Ethiopia): The traditional daget technique and its integration with introduced techniques",
+    "source_type": "academic_paper",
+    "year": 2000,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray",
+      "zone": "Dogua Tembien / central Tigray",
+      "woreda": "Dogua Tembien",
+      "places": [
+        "Hagere Selam",
+        "Mehabere Selasse mountain",
+        "Daerere",
+        "Hechi",
+        "Dogua Tembien",
+        "Makalle"
+      ]
+    },
+    "topics": [
+      "soil and water conservation",
+      "terracing",
+      "stone bunds",
+      "lynchets",
+      "erosion control",
+      "agricultural land management",
+      "traditional conservation practices",
+      "land degradation"
+    ],
+    "intervention_tags": [
+      "soil and water conservation",
+      "stone bunds",
+      "terracing",
+      "vegetative barriers",
+      "land rehabilitation"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "low",
+      "method_clarity": "clear",
+      "ocr_quality": "mixed",
+      "notes": [
+        "Study area is in Tigray (Dogua Tembien), which does not match the provided candidate sites in South Ethiopia / Southwest Ethiopia.",
+        "The paper provides descriptive and quantitative evidence on conservation practices, but it is not site-specific to any candidate location.",
+        "OCR has minor noise but core findings and location names are legible.",
+        "Useful for general methods/background on traditional daget and stone bund integration in northern Ethiopia."
+      ]
+    },
+    "allowed_uses": [
+      "national_or_comparable_context",
+      "method_context",
+      "background_context",
+      "intervention_design_context"
+    ],
+    "blocked_uses": [
+      "site_specific_evidence_for_candidate_sites",
+      "claiming direct evidence for South Ethiopia or Southwest Ethiopia candidate locations",
+      "fine-grained scoring for local implementation status at candidate sites",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "traditional_soil_water_conservation_presence",
+        "page": 1,
+        "reason": "Describes daget lynchets and stone bunds in Dogua Tembien; may inform comparable-context evidence only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "stone_bunds_density_or_coverage",
+        "page": 7,
+        "reason": "Reports 30,498 m of new stone bunds and density of 56.1 m/ha in the analysed area; not transferable to candidate sites without QA.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "erosion_control_technique_integration",
+        "page": 7,
+        "reason": "Discusses integration of daget with introduced stone bunds and terrace formation; useful as comparative practice evidence.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This is a 2000 academic paper on soil and water conservation in Dogua Tembien, Tigray, northern Ethiopia. It documents traditional daget lynchets and introduced stone bunds, with quantitative descriptions of terrace density and land management effects. It is not locally matched to any provided candidate site in South Ethiopia or Southwest Ethiopia, so it should be used only as comparable/national context, not site-specific evidence."
+  },
+  {
+    "source_id": "local_research_source:unpacked_tigray_tekeze_20260627t215315z_3_001_tigray_tekeze_tlp_2_pra_report_useful_peer_reviewe",
+    "filename": "TLP_2_PRA_report - useful peer reviewed research report.pdf",
+    "title": "Participatory Rural Appraisal Report of Selected Villages in Tigray",
+    "source_type": "research_report",
+    "year": 2006,
+    "document_use_class": "blocked_or_low_confidence",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Tigray",
+      "zone": "Tekeze area / selected villages",
+      "woreda": null,
+      "places": [
+        "Tigray",
+        "Tekeze",
+        "Mekelle",
+        "Atsibi",
+        "Dera",
+        "Quiha",
+        "Hidmo",
+        "Shiguala",
+        "Awulo",
+        "Agewo",
+        "Samra",
+        "Agona"
+      ]
+    },
+    "topics": [
+      "livelihoods",
+      "agriculture",
+      "livestock",
+      "education",
+      "health",
+      "water",
+      "land degradation",
+      "deforestation",
+      "food security",
+      "transport"
+    ],
+    "intervention_tags": [
+      "participatory_rural_appraisal",
+      "baseline_context",
+      "livelihood_assessment",
+      "community_problem_analysis"
+    ],
+    "validity": {
+      "overall_confidence": "medium_high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "partial",
+      "ocr_quality": "good",
+      "notes": [
+        "The document is clearly about selected villages in Tigray, not the provided candidate sites in South/Southwest Ethiopia; therefore geographic match to candidate places is absent.",
+        "It is a participatory rural appraisal report with village-level qualitative findings, useful for contextual understanding but not for site-specific scoring in the provided candidate set.",
+        "Some village names and local problem rankings appear in the sampled pages, but they relate to Tigray villages and should not be transferred to candidate sites without strong corroboration.",
+        "OCR/text extraction appears generally good on sampled pages."
+      ]
+    },
+    "allowed_uses": [
+      "regional_context",
+      "methodology_context",
+      "livelihoods_background",
+      "comparison_with_other_tigray_rural_sites"
+    ],
+    "blocked_uses": [
+      "site_specific_scoring",
+      "candidate_site_assignment",
+      "direct_investment_eligibility_scoring",
+      "geographic_matching_to_provided_candidates",
+      "quantitative_parameter_extraction_without_manual_review",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "rural_livelihood_problems",
+        "page": 44,
+        "reason": "Lists ranked community problems (rainfall shortage, landlessness, schooling, health post, transport, grazing land) for a Tigray village context; potentially useful as contextual evidence only.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "education_access_grade_level",
+        "page": 97,
+        "reason": "Describes a school in one Tigray tabia with grade expansion plans and enrollment constraints; may inform comparable rural education context, not candidate sites.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "livestock_grazing_pressure",
+        "page": 158,
+        "reason": "Notes grazing land shortages and livestock pressure in a specific Tigray village area; comparable context only.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "A 2006 participatory rural appraisal report on selected villages in Tigray, offering rich qualitative livelihood and service-delivery context. It does not match the supplied South/Southwest Ethiopia candidate locations, so it should not be used for site-specific scoring or direct geographic assignment."
+  },
+  {
+    "source_id": "local_research_source:wondimu_mamo",
+    "filename": "Wondimu Mamo.pdf",
+    "title": "Land Use/Cover Dynamics and Its Impacts on Erosion Rate, Soil Quality, and Soil Organic Carbon and Total Nitrogen Stock at Bururi Catchment, Western Ethiopia",
+    "source_type": "academic dissertation",
+    "year": 2021,
+    "document_use_class": "national_or_comparable_context",
+    "geographic_scope": {
+      "match_level": "no_match",
+      "candidate_site_ids": [],
+      "country": "Ethiopia",
+      "region": "Western Ethiopia",
+      "zone": null,
+      "woreda": null,
+      "places": [
+        "Bururi Catchment"
+      ]
+    },
+    "topics": [
+      "land use/land cover change",
+      "soil erosion",
+      "soil quality",
+      "soil organic carbon",
+      "total nitrogen",
+      "remote sensing",
+      "topographic effects",
+      "soil conservation",
+      "watershed management"
+    ],
+    "intervention_tags": [
+      "land_use_change_assessment",
+      "soil_erosion_assessment",
+      "soil_carbon_assessment",
+      "soil_quality_assessment",
+      "remote_sensing_analysis",
+      "watershed_restoration"
+    ],
+    "validity": {
+      "overall_confidence": "high",
+      "subjectivity_risk": "medium",
+      "method_clarity": "clear",
+      "ocr_quality": "good",
+      "notes": [
+        "The document is clearly centered on Bururi Catchment in western Ethiopia, which does not match the provided South Ethiopia / Southwest Ethiopia candidate sites.",
+        "Strong methodological detail for land cover change, erosion estimation, and soil sampling, but findings are site-specific to Bururi and should not be transferred to candidate sites without additional evidence.",
+        "References to broader Ethiopian studies are present, but they are secondary citations rather than primary findings from this document."
+      ]
+    },
+    "allowed_uses": [
+      "national or regional literature context for Ethiopia",
+      "methodology reference for land use/land cover analysis and soil quality/soil carbon assessment",
+      "comparable watershed restoration and soil conservation context"
+    ],
+    "blocked_uses": [
+      "site-level scoring for any provided candidate place",
+      "direct attribution of Bururi findings to candidate sites",
+      "precise investment decisioning for candidate sites without local corroboration",
+      "direct_score_override"
+    ],
+    "scoring_candidate_facts": [
+      {
+        "variable": "land_use_land_cover_change_impacts_on_erosion",
+        "page": 78,
+        "reason": "Provides a quantitative site-specific relationship between LULC change and soil erosion in Bururi Catchment; not transferable to candidate sites without QA and local evidence.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soc_and_stn_stock_by_lulc",
+        "page": 97,
+        "reason": "Reports SOC stock reductions by land-use conversion in Bururi Catchment; potentially useful only as contextual evidence, not for direct site scoring.",
+        "manual_review_required": true
+      },
+      {
+        "variable": "soil_quality_parameters_under_lulc_and_elevation",
+        "page": 123,
+        "reason": "Identifies soil quality parameters affected by LULC and elevation in Bururi Catchment; candidate for methodology/context only, not direct scoring.",
+        "manual_review_required": true
+      }
+    ],
+    "summary": "This dissertation is a strong Ethiopia-based methodological and contextual source on land use/cover dynamics, erosion, soil quality, SOC, and STN, but it is geographically anchored in Bururi Catchment in western Ethiopia and does not match the provided candidate sites. Use it for national/comparable context and methods, not site-specific scoring."
+  }
+]

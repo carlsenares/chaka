@@ -10,9 +10,10 @@ export function createRecommendationObject(
   prediction: ModelPrediction,
   rank?: number,
 ): RecommendationObject {
-  const intervention = interventionNameFromCode(
-    prediction.recommended_intervention_seed,
-  );
+  const isLowPriority = prediction.priority_score < 35;
+  const intervention = isLowPriority
+    ? "Not recommended for investment yet"
+    : interventionNameFromCode(prediction.recommended_intervention_seed);
   const mainReasons = buildMainReasons(feature, prediction);
   const evidenceRefs = buildEvidenceRefs(feature, prediction, mainReasons.length);
 
@@ -38,33 +39,54 @@ export function createRecommendationObject(
 function buildMainReasons(feature: SiteFeature, prediction: ModelPrediction) {
   const reasons: string[] = [];
 
+  if (prediction.priority_score < 35) {
+    reasons.push(
+      "This area scores low compared with the other candidates, so it should not be a first investment choice right now.",
+    );
+
+    if (prediction.carbon_potential === "low") {
+      reasons.push("The available data suggests limited carbon storage potential.");
+    }
+
+    if (prediction.biodiversity_benefit === "low") {
+      reasons.push("The expected benefit for nature is lower than in stronger candidate areas.");
+    }
+
+    if (prediction.implementation_feasibility === "low") {
+      reasons.push("Starting work here may be harder than in other places.");
+    }
+
+    if (reasons.length < 3) {
+      reasons.push("Use this area only if local partners have extra evidence that is not yet in the system.");
+    }
+
+    return reasons.slice(0, 4);
+  }
+
   if ((feature.population_pressure_score ?? 0) >= 70) {
-    reasons.push("High livelihood pressure near farming communities");
+    reasons.push("Nearby communities may benefit from restoration work.");
   }
 
   if ((feature.rainfall_reliability_score ?? 0) >= 65) {
-    reasons.push("Rainfall suitability supports tree establishment");
+    reasons.push("Rainfall looks suitable enough to support new tree growth.");
   }
 
   if (feature.land_cover_primary.includes("cropland_tree_mosaic")) {
     reasons.push(
-      "Cropland-tree mosaic is appropriate for farmer-managed natural regeneration",
+      "The current land cover may fit farmer-managed natural regeneration.",
     );
   }
 
   if ((feature.slope_risk_score ?? 0) >= 75) {
-    reasons.push("Slope and erosion risk make soil and water resilience important");
+    reasons.push("Restoration could help reduce soil and water problems on sloped land.");
   }
 
   if ((feature.forest_loss_score ?? 0) >= 70) {
-    reasons.push("Forest-loss signal indicates a restoration opportunity");
+    reasons.push("Recent forest loss suggests a restoration opportunity.");
   }
 
-  if (prediction.top_feature_contributions.length) {
-    const top = prediction.top_feature_contributions[0];
-    reasons.push(
-      `Model ranking is strongly influenced by ${top.feature.replaceAll("_", " ")}`,
-    );
+  if (reasons.length === 0) {
+    reasons.push("This area ranks better than others when land, water, soil, access, and community factors are compared together.");
   }
 
   return reasons.slice(0, 5);
