@@ -21,8 +21,8 @@ export function getPriorityScoreRange(scores: number[]): PriorityScoreRange {
   }
 
   return {
-    min: Math.min(...finiteScores),
-    max: Math.max(...finiteScores),
+    min: Math.min(0, ...finiteScores),
+    max: Math.max(100, ...finiteScores),
   };
 }
 
@@ -59,7 +59,7 @@ export function priorityOutlineColor(score: number, range: PriorityScoreRange) {
 
 function normalizePriorityScore(score: number, range: PriorityScoreRange) {
   if (range.max === range.min) {
-    return 1;
+    return clamp(score / 100);
   }
 
   return clamp((score - range.min) / (range.max - range.min));

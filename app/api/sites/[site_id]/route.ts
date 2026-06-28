@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { localizeSiteDetailResponse } from "@/lib/i18n/server-localization";
 import { getCanonicalSiteDetail } from "@/reasoning";
 
 type RouteContext = {
@@ -7,7 +8,7 @@ type RouteContext = {
   }>;
 };
 
-export async function GET(_request: Request, context: RouteContext) {
+export async function GET(request: Request, context: RouteContext) {
   const { site_id } = await context.params;
   const detail = getCanonicalSiteDetail(site_id);
 
@@ -18,5 +19,7 @@ export async function GET(_request: Request, context: RouteContext) {
     );
   }
 
-  return NextResponse.json(detail);
+  const locale = new URL(request.url).searchParams.get("locale");
+
+  return NextResponse.json(await localizeSiteDetailResponse(detail, locale));
 }

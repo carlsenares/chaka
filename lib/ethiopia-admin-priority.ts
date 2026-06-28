@@ -28,12 +28,52 @@ export type AdminPriorityJoin = {
   pcodeToSiteId: Map<string, string>;
 };
 
+export type AdminAreaSummary = SiteDashboardItem & {
+  site_count: number;
+  member_site_ids: string[];
+};
+
+function getSiteAdminPcode(site: SiteDashboardItem) {
+  return zoneToPcode[site.zone] ?? regionToPcode[site.region] ?? null;
+}
+
+export function aggregateSitesByAdminArea(sites: SiteDashboardItem[]): AdminAreaSummary[] {
+  const pcodeToTopSite = new Map<string, SiteDashboardItem>();
+  const pcodeToMembers = new Map<string, SiteDashboardItem[]>();
+
+  for (const site of sites) {
+    const pcode = getSiteAdminPcode(site);
+    if (!pcode) continue;
+
+    const members = pcodeToMembers.get(pcode) ?? [];
+    members.push(site);
+    pcodeToMembers.set(pcode, members);
+
+    const current = pcodeToTopSite.get(pcode);
+    if (!current || site.priority_score > current.priority_score) {
+      pcodeToTopSite.set(pcode, site);
+    }
+  }
+
+  return [...pcodeToTopSite.entries()]
+    .map(([pcode, site]) => {
+      const members = pcodeToMembers.get(pcode) ?? [site];
+      return {
+        ...site,
+        site_count: members.length,
+        member_site_ids: members.map((member) => member.site_id),
+      };
+    })
+    .sort((a, b) => b.priority_score - a.priority_score || a.site_id.localeCompare(b.site_id))
+    .map((site, index) => ({ ...site, rank: index + 1 }));
+}
+
 export function buildAdminPriorityJoin(sites: SiteDashboardItem[]): AdminPriorityJoin {
   const siteIdToPcode = new Map<string, string>();
   const pcodeToTopSite = new Map<string, SiteDashboardItem>();
 
   for (const site of sites) {
-    const pcode = zoneToPcode[site.zone] ?? regionToPcode[site.region];
+    const pcode = getSiteAdminPcode(site);
     if (!pcode) continue;
 
     siteIdToPcode.set(site.site_id, pcode);
@@ -44,7 +84,7 @@ export function buildAdminPriorityJoin(sites: SiteDashboardItem[]): AdminPriorit
   }
 
   const priorityResults = [...pcodeToTopSite.entries()].map(([pcode, site]) => ({
-    admin_level: 2 as const,
+    admin_level: inferAdminLevel(pcode),
     pcode,
     priority_score: site.priority_score,
     priority_level: toPriorityLevel(site.priority_score),
@@ -67,6 +107,13 @@ export function buildAdminPriorityJoin(sites: SiteDashboardItem[]): AdminPriorit
       [...pcodeToTopSite.entries()].map(([pcode, site]) => [pcode, site.site_id]),
     ),
   };
+}
+
+function inferAdminLevel(pcode: string): PriorityResult["admin_level"] {
+  if (pcode === "ET") return 0;
+  if (/^ET\d{2}$/.test(pcode)) return 1;
+  if (/^ET\d{4}$/.test(pcode)) return 2;
+  return 3;
 }
 
 function toPriorityLevel(score: number): PriorityResult["priority_level"] {

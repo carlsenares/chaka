@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Ethiopian flag">
+  <defs>
+    <clipPath id="circle"><circle cx="60" cy="60" r="58"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle)">
+    <rect width="120" height="40" fill="#078930"/>
+    <rect y="40" width="120" height="40" fill="#fcd116"/>
+    <rect y="80" width="120" height="40" fill="#da121a"/>
+    <circle cx="60" cy="60" r="25" fill="#0f47af"/>
+    <path d="M60 38 66 57h20L70 69l6 19-16-12-16 12 6-19-16-12h20z" fill="#fcd116"/>
+    <path d="M60 45 64 58h14L67 66l4 13-11-8-11 8 4-13-11-8h14z" fill="#0f47af"/>
+  </g>
+  <circle cx="60" cy="60" r="58" fill="none" stroke="#ffffff" stroke-width="4"/>
+</svg>

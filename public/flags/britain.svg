@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="British flag">
+  <defs>
+    <clipPath id="circle"><circle cx="60" cy="60" r="58"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle)">
+    <rect width="120" height="120" fill="#012169"/>
+    <path d="M-8 0 120 128M128 0 0 128" stroke="#fff" stroke-width="24"/>
+    <path d="M-8 0 120 128M128 0 0 128" stroke="#c8102e" stroke-width="12"/>
+    <path d="M60 0v120M0 60h120" stroke="#fff" stroke-width="38"/>
+    <path d="M60 0v120M0 60h120" stroke="#c8102e" stroke-width="22"/>
+  </g>
+  <circle cx="60" cy="60" r="58" fill="none" stroke="#ffffff" stroke-width="4"/>
+</svg>

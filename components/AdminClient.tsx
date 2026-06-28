@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
-import { Check, FileUp, LinkIcon, RefreshCw, Shield, Trash2, X } from "lucide-react";
+import { Check, FileUp, LinkIcon, RefreshCw, Trash2, X } from "lucide-react";
 
 type SourceQueue = {
   summary: Record<string, number>;
@@ -103,11 +103,11 @@ export function AdminClient() {
       <main className="min-h-screen bg-base px-5 py-6 text-fg">
         <section className="mx-auto mt-24 max-w-md rounded-lg border border-[#d9d0bd] bg-surface p-6 shadow-sm">
           <div className="mb-5 flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-md bg-[#1f6f68] text-white">
-              <Shield size={22} />
-            </span>
+            <img className="brand-tree admin-login-tree" src="/brand/chaka-tree.png" alt="" />
             <div>
-              <p className="text-xs font-semibold uppercase text-accent">Admin</p>
+              <div className="brand-lockup">
+                <span className="brand-wordmark">chaka</span>
+              </div>
               <h1 className="text-2xl font-semibold">Chaka operations</h1>
             </div>
           </div>
@@ -137,7 +137,10 @@ export function AdminClient() {
       <div className="mx-auto grid max-w-7xl gap-5">
         <header className="flex flex-col gap-4 border-b border-[#d9d0bd] pb-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase text-accent">Admin dashboard</p>
+            <div className="brand-lockup">
+              <img className="brand-tree brand-tree-sm" src="/brand/chaka-tree.png" alt="" />
+              <span className="brand-wordmark">chaka</span>
+            </div>
             <h1 className="mt-1 text-3xl font-semibold leading-tight sm:text-4xl">Source and investment control</h1>
           </div>
           <nav className="flex flex-wrap gap-2">

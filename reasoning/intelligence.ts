@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import OpenAI from "openai";
+import { getLocale, locales, type Locale } from "@/lib/i18n/locales";
 import { getCanonicalSiteDetail } from "@/reasoning";
 import {
   getHybridLocalKnowledgeForSite,
@@ -16,12 +17,15 @@ const root = process.cwd();
 
 export async function generateSiteIntelligence(
   siteId: string,
+  localeInput: string | null | undefined = "en",
 ): Promise<SiteIntelligenceResponse | null> {
   const detail = getCanonicalSiteDetail(siteId);
   if (!detail) return null;
+  const locale = getLocale(localeInput);
+  const language = locales[locale];
 
   const apiKey = loadOpenAiKey();
-  const openAiSynthesisEnabled = process.env.OPENAI_SITE_INTELLIGENCE_ENABLED !== "false";
+  const openAiSynthesisEnabled = process.env.OPENAI_SITE_INTELLIGENCE_ENABLED === "true";
   if (!apiKey || !openAiSynthesisEnabled) {
     const retrieved = getLocalKnowledgeForSite(detail, 10);
     return createFallbackIntelligence(
@@ -69,6 +73,14 @@ export async function generateSiteIntelligence(
             content: JSON.stringify({
               site_detail: compactSiteDetail(detail),
               retrieved_evidence: retrieved.map(compactMatch),
+              response_language: {
+                locale,
+                target_language: language.targetLanguageName,
+                instructions:
+                  locale === "en"
+                    ? "Return all user-facing prose in English."
+                    : "Return all user-facing prose in the target language. Keep site IDs, place names, numeric scores, source filenames, page numbers, evidence IDs, and citations unchanged. Do not translate source quotes or PDFs verbatim; summarize their planning implication in the target language.",
+              },
               task:
                 "Explain the score, whether this area is worth funding now, and return a plain investment_summary with opportunity, investment, why_here, and expected_change. Draft practical investment ideas only when appropriate. Convert local evidence into clear implementation obstacles: describe what the PDF/source explains, why that can be a problem for this type of restoration investment, and what it implies for planning. Be concise, avoid repeated disclaimers, and cite evidence IDs in citations.",
             }),
@@ -283,28 +295,61 @@ function buildInvestmentSummary(detail: SiteDetailResponse, lowPriority: boolean
 
 function localEvidenceToCheck(match: LocalKnowledgeMatch) {
   const claim = match.card.claim.trim();
-  const topics = new Set(match.card.topics.map((topic) => topic.toLowerCase()));
+  const topicText = match.card.topics.join(" ").toLowerCase();
+  const tagText = match.card.intervention_tags.join(" ").toLowerCase();
+  const claimText = claim.toLowerCase();
   const allowedUse = match.card.allowed_use.toLowerCase();
   const locality =
     match.card.geography.woreda || match.card.geography.zone || match.card.geography.region || "the source area";
-  const confidencePrefix =
-    match.card.confidence === "low" || match.card.confidence === "medium_low"
-      ? "This is a possible implementation issue, not site-specific proof."
-      : "This is a planning-relevant implementation issue.";
+  const cautious =
+    match.card.confidence === "low" ||
+    match.card.confidence === "medium_low" ||
+    match.card.geography.match_level === "non_match";
+  const confidenceNote = cautious
+    ? "Use this as a planning warning, not as site-specific proof."
+    : "Check this directly during field design.";
+  const place = locality === "the source area" ? "the referenced area" : locality;
 
-  if (topics.has("fertility management") || topics.has("farm practices") || allowedUse.includes("fertility")) {
-    return `${confidencePrefix} The referenced source describes soil and farm-management practices in ${locality}, including the practical constraints around inputs, labor, livestock, and adoption. That can become an implementation obstacle if a restoration package assumes farmers will use compost, manure, crop rotation, intercropping, grass strips, contour farming, or residue management without matching their existing workload and input access. Source note: ${claim}`;
+  if (hasAny(topicText, claimText, allowedUse, ["fertility", "farm practice", "crop rotation", "intercropping", "compost", "manure", "residue"])) {
+    return `Farmer adoption is the local obstacle. The source points to existing soil-management choices in ${place}, so a restoration package may fail if it depends on extra labor, compost, manure, residue retention, or changed cropping routines that households cannot realistically maintain. ${confidenceNote} Evidence: ${claim}`;
   }
 
-  if (topics.has("soil erosion") || topics.has("soil conservation")) {
-    return `${confidencePrefix} The referenced source describes soil erosion or soil-conservation conditions relevant to ${locality}. That can be an obstacle because erosion problems are site-specific: contour work, grass strips, planting, grazing controls, or no intervention may be appropriate depending on where runoff is actually damaging farms, paths, grazing areas, or water flow. Source note: ${claim}`;
+  if (hasAny(topicText, claimText, tagText, ["erosion", "runoff", "soil conservation", "terrace", "grass strip", "contour", "slope"])) {
+    return `Erosion design is the local obstacle. The source suggests runoff or soil-loss problems around ${place}, but the right response depends on the exact slope, drainage line, grazing route, and farm boundary. Do not fund planting alone where contour work, grass strips, or exclosures are the real constraint. ${confidenceNote} Evidence: ${claim}`;
   }
 
-  if (topics.has("mrv design") || topics.has("co-benefits") || topics.has("biodiversity")) {
-    return `${confidencePrefix} The referenced source explains monitoring, co-benefits, or biodiversity considerations. That can be an obstacle if the project tracks planting activity but not the outcomes funders and communities actually care about, such as tree survival, biodiversity, water effects, and benefit sharing. Source note: ${claim}`;
+  if (hasAny(topicText, claimText, tagText, ["livestock", "grazing", "settlement pressure", "forest pressure", "migration"])) {
+    return `Pressure after planting is the local obstacle. The source describes livestock, settlement, or forest-use pressure near ${place}. Seedlings and natural regeneration will need protection agreements, grazing timing, and local enforcement; otherwise early gains can be lost quickly. ${confidenceNote} Evidence: ${claim}`;
   }
 
-  return `${confidencePrefix} The referenced source provides context that may not map perfectly onto the selected site. That can be an obstacle if the project treats broader evidence as site-specific proof without checking whether the place, people, and land use in the PDF match the actual implementation area. Source note: ${claim}`;
+  if (hasAny(topicText, claimText, allowedUse, ["tenure", "governance", "benefit sharing", "community", "household", "participation", "credit"])) {
+    return `Local coordination is the obstacle. The source highlights community or household conditions in ${place}. The investment should check who controls the land, who carries the work, and who receives benefits before assuming the restoration package will be accepted. ${confidenceNote} Evidence: ${claim}`;
+  }
+
+  if (hasAny(topicText, claimText, tagText, ["biodiversity", "wildlife", "species", "medicinal", "traditional knowledge", "protected area"])) {
+    return `Species and safeguard fit are the obstacle. The source points to biodiversity, local plant use, or conservation pressure around ${place}. Species selection should avoid a generic tree-planting list and confirm local ecological fit, cultural value, and protection needs. ${confidenceNote} Evidence: ${claim}`;
+  }
+
+  if (hasAny(topicText, claimText, tagText, ["mrv", "carbon", "redd", "forest reference", "removal factor", "accounting", "monitoring"])) {
+    return `Measurement credibility is the obstacle. The source is useful for carbon or monitoring rules, but it does not by itself prove site-level carbon gains. The investment page should separate activity tracking from verified survival, biomass, and carbon evidence. ${confidenceNote} Evidence: ${claim}`;
+  }
+
+  if (hasAny(topicText, claimText, tagText, ["rainfall", "water", "drought", "hydrology", "watershed", "dryland"])) {
+    return `Water reliability is the obstacle. The source raises water, rainfall, or dryland context for ${place}. Restoration plans should check establishment-season moisture, runoff concentration, and maintenance needs before promising tree survival or water benefits. ${confidenceNote} Evidence: ${claim}`;
+  }
+
+  if (hasAny(topicText, claimText, allowedUse, ["methodology", "sampling", "study area", "qualitative", "survey"])) {
+    return `Evidence transfer is the obstacle. The source mainly tells us how or where the study was done. Before using it for this investment, confirm the sampled places and people match the selected area closely enough to guide decisions. ${confidenceNote} Evidence: ${claim}`;
+  }
+
+  return `Local fit is the obstacle. The source adds context for ${place}, but the planning team still needs to check whether the same land use, livelihoods, and implementation constraints exist in the selected area. ${confidenceNote} Evidence: ${claim}`;
+}
+
+function hasAny(...groupsAndNeedles: Array<string | string[]>) {
+  const needles = groupsAndNeedles.at(-1);
+  const groups = groupsAndNeedles.slice(0, -1) as string[];
+  if (!Array.isArray(needles)) return false;
+  return needles.some((needle) => groups.some((group) => group.includes(needle)));
 }
 
 function compactSiteDetail(detail: SiteDetailResponse) {

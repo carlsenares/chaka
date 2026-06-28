@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type * as Leaflet from "leaflet";
-import type { Feature, FeatureCollection, Polygon } from "geojson";
-import { priorityColor, type PriorityScoreRange } from "@/lib/priority-color";
+import type { Feature, FeatureCollection, Geometry, Point } from "geojson";
+import { priorityColor, priorityOutlineColor, type PriorityScoreRange } from "@/lib/priority-color";
 import type { SiteDashboardItem } from "@/lib/site-view-model";
 
 type CandidateMapProps = {
@@ -11,6 +11,8 @@ type CandidateMapProps = {
   selectedSiteId: string;
   onSelectSite: (siteId: string) => void;
   scoreRange: PriorityScoreRange;
+  frameless?: boolean;
+  className?: string;
 };
 
 const ethiopiaBounds: Leaflet.LatLngBoundsExpression = [
@@ -23,6 +25,8 @@ export function CandidateMap({
   selectedSiteId,
   onSelectSite,
   scoreRange,
+  frameless = false,
+  className = "",
 }: CandidateMapProps) {
   const mapElementRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Leaflet.Map | null>(null);
@@ -33,7 +37,8 @@ export function CandidateMap({
   const featureCollection = useMemo(() => {
     const features = sites
       .flatMap((site) => {
-        if (!site.geometry) return [];
+        const geometry = site.geometry ?? centroidToPoint(site.centroid);
+        if (!geometry) return [];
 
         return [
           {
@@ -43,16 +48,17 @@ export function CandidateMap({
               name: site.name,
               score: site.priority_score,
               rank: site.rank,
+              geometry_source: site.geometry ? "polygon" : "centroid",
             },
-            geometry: site.geometry,
-          } satisfies Feature<Polygon>,
+            geometry,
+          } satisfies Feature<Geometry>,
         ];
       });
 
     return {
       type: "FeatureCollection",
       features,
-    } satisfies FeatureCollection<Polygon>;
+    } satisfies FeatureCollection<Geometry>;
   }, [sites]);
 
   useEffect(() => {
@@ -109,28 +115,47 @@ export function CandidateMap({
     }
 
     const layer = L.geoJSON(featureCollection, {
+      pointToLayer: (feature, latLng) => {
+        const siteId = String(feature?.properties?.site_id ?? "");
+        const score = Number(feature?.properties?.score ?? 0);
+        const selected = siteId === selectedSiteId;
+        const color = priorityColor(score, scoreRange);
+        const outline = priorityOutlineColor(score, scoreRange);
+
+        return L.circleMarker(latLng, {
+          radius: selected ? 10 : 7,
+          color: selected ? "#ffffff" : outline,
+          fillColor: color,
+          fillOpacity: selected ? 0.9 : 0.72,
+          opacity: 1,
+          weight: selected ? 3.4 : 1.4,
+        });
+      },
       style: (feature) => {
         const siteId = String(feature?.properties?.site_id ?? "");
         const score = Number(feature?.properties?.score ?? 0);
         const selected = siteId === selectedSiteId;
         const color = priorityColor(score, scoreRange);
+        const outline = priorityOutlineColor(score, scoreRange);
 
         return {
-          color: selected ? "#ffffff" : color,
+          color: selected ? "#ffffff" : outline,
           fillColor: color,
-          fillOpacity: selected ? 0.72 : 0.48,
+          fillOpacity: selected ? 0.78 : 0.54,
           opacity: 1,
-          weight: selected ? 3 : 1.5,
+          weight: selected ? 3.4 : 1.4,
         };
       },
       onEachFeature: (feature, layerInstance) => {
         const siteId = String(feature.properties?.site_id ?? "");
         const name = String(feature.properties?.name ?? siteId);
         const score = Number(feature.properties?.score ?? 0);
+        const source = feature.properties?.geometry_source === "centroid" ? "centroid" : "polygon";
 
-        layerInstance.bindTooltip(`${name} · ${score}`, {
+        layerInstance.bindTooltip(`${name} · score ${score} · ${source}`, {
           sticky: true,
           direction: "top",
+          className: "priority-map-tooltip",
         });
         layerInstance.on("click", () => onSelectSite(siteId));
       },
@@ -147,7 +172,7 @@ export function CandidateMap({
       });
 
     if (selectedLayer) {
-      const bounds = (selectedLayer as Leaflet.Polygon).getBounds();
+      const bounds = getLayerBounds(selectedLayer, L);
       if (bounds.isValid()) {
         map.fitBounds(bounds, { padding: [72, 72], maxZoom: 9 });
       }
@@ -155,17 +180,52 @@ export function CandidateMap({
   }, [featureCollection, onSelectSite, scoreRange, selectedSiteId]);
 
   return (
-    <section className="overflow-hidden rounded-lg border border-white/10 bg-surface shadow-xl shadow-black/20">
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-        <div>
-          <h2 className="font-semibold">Candidate polygons</h2>
-          <p className="text-xs text-muted">Joined by site_id from candidate_sites.geojson.</p>
+    <section className={`${frameless ? "h-full overflow-hidden bg-base" : "overflow-hidden rounded-lg border border-white/10 bg-surface shadow-xl shadow-black/20"} ${className}`}>
+      {!frameless && (
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <div>
+            <h2 className="font-semibold">Candidate sites</h2>
+            <p className="text-xs text-muted">Rendered by site_id from candidate geometry or centroid.</p>
+          </div>
+          <span className="rounded-md bg-white/10 px-2 py-1 text-xs uppercase text-muted">
+            {status}
+          </span>
         </div>
-        <span className="rounded-md bg-white/10 px-2 py-1 text-xs uppercase text-muted">
-          {status}
-        </span>
+      )}
+      <div className="relative">
+        {frameless && (
+          <div className="floating-control absolute left-4 top-4 z-[500] rounded-full px-3 py-1.5 text-xs font-semibold uppercase text-accent">
+            {status === "ready" ? `${featureCollection.features.length} candidate sites` : status}
+          </div>
+        )}
+        <div
+          ref={mapElementRef}
+          className={frameless ? "min-h-[calc(100vh-9.5rem)] w-full" : "h-[460px] w-full"}
+        />
       </div>
-      <div ref={mapElementRef} className="h-[460px] w-full" />
     </section>
   );
+}
+
+function centroidToPoint(centroid: SiteDashboardItem["centroid"]): Point | null {
+  if (!centroid) return null;
+  const [lat, lon] = centroid;
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+
+  return {
+    type: "Point",
+    coordinates: [lon, lat],
+  };
+}
+
+function getLayerBounds(layer: Leaflet.Layer, L: typeof Leaflet): Leaflet.LatLngBounds {
+  if ("getBounds" in layer && typeof layer.getBounds === "function") {
+    return layer.getBounds();
+  }
+
+  if ("getLatLng" in layer && typeof layer.getLatLng === "function") {
+    return L.latLngBounds([layer.getLatLng()]);
+  }
+
+  return L.latLngBounds([]);
 }

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import type { Locale } from "@/lib/i18n/locales";
+import { getChatCopy } from "@/lib/i18n/ui-copy";
 import type { SiteDashboardItem } from "@/lib/site-view-model";
 import type { PriorityWeights } from "@/lib/priority-scoring";
 
@@ -14,21 +16,18 @@ type ExplainableChatPanelProps = {
   selectedSite: SiteDashboardItem | null;
   rankedSites: SiteDashboardItem[];
   weights: PriorityWeights;
+  locale: Locale;
   embedded?: boolean;
 };
-
-const suggestedQuestions = [
-  "Why is this area ranked this way?",
-  "What local evidence matters most?",
-  "What should an NGO verify before investing?",
-];
 
 export function ExplainableChatPanel({
   selectedSite,
   rankedSites,
   weights,
+  locale,
   embedded = false,
 }: ExplainableChatPanelProps) {
+  const copy = getChatCopy(locale);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -55,6 +54,7 @@ export function ExplainableChatPanel({
         body: JSON.stringify({
           message: content,
           site_id: selectedSite.site_id,
+          locale,
           weights,
           ranked_site_ids: rankedSites.slice(0, 8).map((site) => site.site_id),
         }),
@@ -62,7 +62,7 @@ export function ExplainableChatPanel({
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(errorText || "Explanation request failed.");
+        throw new Error(errorText || copy.requestError);
       }
 
       const payload = (await response.json()) as { answer: string; model_used: string };
@@ -75,32 +75,31 @@ export function ExplainableChatPanel({
         },
       ]);
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Explanation failed.");
+      setError(requestError instanceof Error ? requestError.message : copy.sendError);
     } finally {
       setIsSending(false);
     }
   }
 
   return (
-    <section className={embedded ? "grid gap-4" : "rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-sm"}>
+    <section className={embedded ? "grid gap-4" : "rounded-[18px] border border-[var(--chaka-line)] bg-white/80 p-4 shadow-[var(--chaka-shadow-soft)]"}>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold uppercase text-accent">Grounded chat</p>
-          <h2 className="mt-1 text-lg font-semibold">Explain this recommendation</h2>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h2 className="mt-1 text-lg font-semibold">{copy.title}</h2>
           <p className="mt-2 text-sm leading-6 text-muted">
-            Ask about score drivers, local evidence, caveats, field checks, or comparisons.
+            {copy.description}
           </p>
         </div>
-        <span className="rounded-full border border-[#cfc2aa] px-2.5 py-1 text-xs text-muted">
-          OpenAI
+        <span className="rounded-full border border-[var(--chaka-line)] bg-white/70 px-2.5 py-1 text-xs font-medium text-muted">
+          {copy.sourceBadge}
         </span>
       </div>
 
       <div className="mt-4 grid gap-3">
         {messages.length === 0 ? (
-          <div className="rounded-md border border-dashed border-[#cfc2aa] bg-[#fbf7ee] p-3 text-sm leading-6 text-muted">
-            The assistant receives the selected site, current ranking context, local evidence
-            cards, and source-grounding rules. It should not invent data or change scores.
+          <div className="rounded-xl border border-dashed border-[var(--chaka-line-strong)] bg-[#f7faf4] p-3 text-sm leading-6 text-muted">
+            {copy.emptyState}
           </div>
         ) : (
           <div className="grid max-h-80 gap-3 overflow-y-auto pr-1">
@@ -109,12 +108,12 @@ export function ExplainableChatPanel({
                 key={message.id}
                 className={`rounded-md border p-3 text-sm leading-6 ${
                   message.role === "user"
-                    ? "border-[#cfc2aa] bg-[#fbf7ee] text-fg"
-                    : "border-[#d9d0bd] bg-[#eef7f2] text-muted"
+                    ? "border-[var(--chaka-line)] bg-white text-fg"
+                    : "border-[var(--chaka-line-strong)] bg-[#eef7f2] text-muted"
                 }`}
               >
                 <p className="mb-1 text-xs font-semibold uppercase text-accent">
-                  {message.role === "user" ? "Question" : "Answer"}
+                  {message.role === "user" ? copy.userLabel : copy.assistantLabel}
                 </p>
                 <p className="whitespace-pre-wrap">{message.content}</p>
               </article>
@@ -125,12 +124,12 @@ export function ExplainableChatPanel({
 
       {messages.length === 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
-          {suggestedQuestions.map((question) => (
+          {copy.suggestedQuestions.map((question) => (
             <button
               key={question}
               type="button"
               onClick={() => sendMessage(question)}
-              className="rounded-full border border-[#cfc2aa] px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-[#fbf7ee]"
+              className="rounded-full border border-[var(--chaka-line)] bg-white/70 px-3 py-1.5 text-xs font-semibold text-muted transition hover:border-[var(--chaka-line-strong)] hover:bg-white"
               disabled={!selectedSite || isSending}
             >
               {question}
@@ -147,26 +146,26 @@ export function ExplainableChatPanel({
         }}
       >
         <label className="text-sm font-semibold" htmlFor="explainable-chat-message">
-          Ask a question
+          {copy.inputLabel}
         </label>
         <textarea
           id="explainable-chat-message"
-          className="min-h-24 resize-y rounded-md border border-[#d9d0bd] bg-[#fbf7ee] px-3 py-2 text-sm leading-6 text-fg outline-none transition placeholder:text-muted/70 focus:border-accent"
+          className="min-h-24 resize-y rounded-xl border border-[var(--chaka-line)] bg-white/80 px-3 py-2 text-sm leading-6 text-fg outline-none transition placeholder:text-muted/70 focus:border-[var(--chaka-line-strong)] focus:bg-white"
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
-          placeholder={selectedSite ? `Ask about ${selectedSite.site_id}` : "Select a site first"}
+          placeholder={copy.placeholder(selectedSite?.site_id)}
         />
         {error && (
-          <p className="rounded-md border border-[#e7b9aa] bg-[#fff2ec] px-3 py-2 text-sm text-[#8c2f1b]">
+          <p className="rounded-xl border border-[#e7b9aa] bg-[#fff2ec] px-3 py-2 text-sm text-[#8c2f1b]">
             {error}
           </p>
         )}
         <button
           type="submit"
-          className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(31,111,104,0.22)] transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!selectedSite || isSending || draft.trim().length === 0}
         >
-          {isSending ? "Explaining..." : "Explain"}
+          {isSending ? copy.sending : copy.submit}
         </button>
       </form>
     </section>

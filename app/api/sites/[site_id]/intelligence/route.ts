@@ -7,9 +7,10 @@ type RouteContext = {
   }>;
 };
 
-export async function GET(_request: Request, context: RouteContext) {
+export async function GET(request: Request, context: RouteContext) {
   const { site_id } = await context.params;
-  const intelligence = await generateSiteIntelligence(decodeURIComponent(site_id));
+  const locale = new URL(request.url).searchParams.get("locale");
+  const intelligence = await generateSiteIntelligence(decodeURIComponent(site_id), locale);
 
   if (!intelligence) {
     return NextResponse.json(

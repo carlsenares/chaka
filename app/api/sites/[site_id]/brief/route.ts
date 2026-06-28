@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { localizeBriefResponse } from "@/lib/i18n/server-localization";
 import { createProjectBrief } from "@/reasoning/brief";
 import { getCanonicalSiteDetail } from "@/reasoning";
 
@@ -36,9 +37,7 @@ export async function POST(request: Request, context: RouteContext) {
     detail.recommendation,
     detail.critic,
   );
+  const locale = new URL(request.url).searchParams.get("locale");
 
-  return NextResponse.json({
-    brief,
-    critic: detail.critic,
-  });
+  return NextResponse.json(await localizeBriefResponse(brief, detail.critic, locale));
 }

@@ -485,8 +485,8 @@ export function EthiopiaPriorityMap({
       )}
 
       <div className={`grid ${frameless ? "min-h-[calc(100vh-5rem)]" : "min-h-[600px]"} ${showDetailsPanel ? "lg:grid-cols-[1fr_360px]" : ""}`}>
-        <div className={`relative overflow-hidden ${frameless ? "min-h-[calc(100vh-5rem)] bg-base" : "min-h-[500px] bg-[#edf2e7]"}`}>
-          <div ref={mapElementRef} className={`h-full w-full ${frameless ? "min-h-[calc(100vh-5rem)]" : "min-h-[500px]"}`} aria-label="Interactive Leaflet map of Ethiopia administrative boundaries" />
+        <div className={`relative overflow-hidden ${frameless ? "min-h-[calc(100vh-9.5rem)] bg-base" : "min-h-[500px] bg-[#edf2e7]"}`}>
+          <div ref={mapElementRef} className={`h-full w-full ${frameless ? "min-h-[calc(100vh-9.5rem)]" : "min-h-[500px]"}`} aria-label="Interactive Leaflet map of Ethiopia administrative boundaries" />
 
           <MapStateOverlay status={effectiveStatus} hasFeatures={joinedBoundaries.features.length > 0} />
 
@@ -535,7 +535,7 @@ function getBoundaryStyle(
   if (!recommendation) {
     return {
       color: isMapSelection ? "#4f6d5f" : "#8f8a7f",
-      fillColor: isMapSelection ? "#dceadf" : "#f7f1df",
+      fillColor: isMapSelection ? "#e8e1d3" : "#f7f1df",
       fillOpacity: isMapSelection ? 0.34 : hover ? 0.14 : 0.02,
       opacity: isMapSelection ? 0.96 : 0.56,
       weight: isMapSelection ? 4.2 : hover ? 1.2 : 0.7,
@@ -667,12 +667,12 @@ function MapModeToggle({
   onChange: (mode: MapMode) => void;
 }) {
   return (
-    <div className="flex rounded-full border border-[#d9d0bd] bg-white p-1 shadow-sm">
+    <div className="floating-control flex rounded-full p-1">
       <button
         type="button"
         onClick={() => onChange("map")}
         className={`min-w-20 rounded-full px-4 py-2 text-sm font-semibold transition ${
-          mode === "map" ? "bg-[#1f6f68] text-white" : "text-muted hover:bg-[#f3eadb]"
+          mode === "map" ? "bg-[#1f6f68] text-white shadow-sm" : "text-muted hover:bg-white"
         }`}
       >
         2D map
@@ -681,7 +681,7 @@ function MapModeToggle({
         type="button"
         onClick={() => onChange("satellite")}
         className={`min-w-24 rounded-full px-4 py-2 text-sm font-semibold transition ${
-          mode === "satellite" ? "bg-[#1f6f68] text-white" : "text-muted hover:bg-[#f3eadb]"
+          mode === "satellite" ? "bg-[#1f6f68] text-white shadow-sm" : "text-muted hover:bg-white"
         }`}
       >
         Satellite
@@ -692,9 +692,9 @@ function MapModeToggle({
 
 function PriorityLegend() {
   return (
-    <div className="absolute bottom-5 left-5 z-[500] w-64">
-      <div className="h-3 rounded-full shadow-sm ring-1 ring-white/70" style={{ background: PRIORITY_GRADIENT_CSS }} />
-      <div className="mt-1 flex items-center justify-between text-xs font-semibold text-[#243f32] drop-shadow-[0_1px_0_rgba(255,255,255,0.85)]">
+    <div className="floating-control absolute bottom-5 left-5 z-[500] w-64 rounded-2xl p-3">
+      <div className="h-2.5 rounded-full shadow-sm ring-1 ring-white/70" style={{ background: PRIORITY_GRADIENT_CSS }} />
+      <div className="mt-2 flex items-center justify-between text-xs font-semibold text-[#243f32]">
         <span>High</span>
         <span>Medium</span>
         <span>Low</span>
