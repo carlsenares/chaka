@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
-import { ExplainableChatPanel } from "@/components/ExplainableChatPanel";
+import { FloatingExplainableChat } from "@/components/FloatingExplainableChat";
 import { PriorityWeightControls } from "@/components/PriorityWeightControls";
 import { buildAdminPriorityJoin } from "@/lib/ethiopia-admin-priority";
 import {
@@ -29,7 +29,6 @@ export function DashboardClient({ initialSites }: DashboardClientProps) {
   const [selectedSiteId, setSelectedSiteId] = useState(initialSites[0]?.site_id ?? "");
   const [focusedPcode, setFocusedPcode] = useState<string | undefined>();
   const [sidePanelMode, setSidePanelMode] = useState<SidePanelMode>("ranking");
-  const [chatOpen, setChatOpen] = useState(false);
   const [languageMode, setLanguageMode] = useState<"EN" | "AM">("EN");
 
   const rankedSites = useMemo(() => {
@@ -143,47 +142,12 @@ export function DashboardClient({ initialSites }: DashboardClientProps) {
         </div>
       </div>
 
-      <div className="fixed right-4 top-4 z-[1000] flex items-start gap-24">
-        <LanguageToggle value={languageMode} onChange={setLanguageMode} />
-        <button
-          type="button"
-          className="group relative grid size-14 place-items-center rounded-full border border-[#cfc2aa] bg-[#1f6f68] text-lg font-semibold text-white shadow-lg shadow-black/15"
-          onClick={() => setChatOpen((open) => !open)}
-          aria-label={chatOpen ? "Close Chaka chat" : "Open Chaka chat"}
-        >
-          C
-          {!chatOpen && (
-            <span className="absolute right-16 top-2 whitespace-nowrap rounded-2xl border border-[#d9d0bd] bg-surface px-3 py-1.5 text-xs font-semibold text-fg shadow-sm after:absolute after:-right-1 after:top-1/2 after:size-2 after:-translate-y-1/2 after:rotate-45 after:border-r after:border-t after:border-[#d9d0bd] after:bg-surface">
-              Ask me
-            </span>
-          )}
-        </button>
-      </div>
-
-      {chatOpen && (
-        <aside className="fixed bottom-4 right-4 top-24 z-[999] w-[min(420px,calc(100vw-2rem))] overflow-y-auto rounded-lg border border-[#d9d0bd] bg-surface p-4 shadow-2xl shadow-black/20">
-          <div className="mb-3 flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase text-accent">Chaka assistant</p>
-              <p className="text-sm text-muted">Grounded in the selected area.</p>
-            </div>
-            <button
-              type="button"
-              className="grid size-8 place-items-center rounded-full border border-[#cfc2aa] bg-[#fbf7ee] text-sm font-semibold"
-              onClick={() => setChatOpen(false)}
-              aria-label="Close chat"
-            >
-              x
-            </button>
-          </div>
-          <ExplainableChatPanel
-            selectedSite={selectedSite}
-            rankedSites={rankedSites}
-            weights={weights}
-            embedded
-          />
-        </aside>
-      )}
+      <FloatingExplainableChat
+        selectedSite={selectedSite}
+        rankedSites={rankedSites}
+        weights={weights}
+        leadingControl={<LanguageToggle value={languageMode} onChange={setLanguageMode} />}
+      />
     </main>
   );
 }

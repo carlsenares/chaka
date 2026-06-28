@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EthiopiaPriorityMap } from "@/components/EthiopiaPriorityMap";
 import { ExpandableSummaryTiles } from "@/components/ExpandableSummaryTiles";
+import { FloatingExplainableChat } from "@/components/FloatingExplainableChat";
 import { buildAdminPriorityJoin } from "@/lib/ethiopia-admin-priority";
+import { defaultPriorityWeights } from "@/lib/priority-scoring";
 import { getPriorityScoreRange, priorityColor, priorityTextColor } from "@/lib/priority-color";
 import { detailToDashboardItem } from "@/lib/site-view-model";
 import { getCanonicalSiteDetail, rankSiteDetails } from "@/reasoning";
@@ -39,6 +41,8 @@ export default async function RecommendationPage({ params }: RecommendationPageP
   const localMatches = getLocalKnowledgeForSite(detail, 6);
   const intelligencePreview = createFallbackIntelligence(detail, localMatches, "local_preview");
   const dashboardItems = ranked.map(detailToDashboardItem);
+  const selectedDashboardItem =
+    dashboardItems.find((item) => item.site_id === detail.site_features.site_id) ?? null;
   const scoreRange = getPriorityScoreRange(
     dashboardItems.map((item) => item.priority_score),
   );
@@ -251,6 +255,12 @@ export default async function RecommendationPage({ params }: RecommendationPageP
           </aside>
         </section>
       </div>
+      <FloatingExplainableChat
+        selectedSite={selectedDashboardItem}
+        rankedSites={dashboardItems}
+        weights={defaultPriorityWeights}
+        panelSubtitle={`Grounded in ${detail.site_features.woreda}.`}
+      />
     </main>
   );
 }
