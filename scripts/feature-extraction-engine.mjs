@@ -1,0 +1,696 @@
+#!/usr/bin/env node
+
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+
+const root = process.cwd();
+const candidatesPath = path.join(root, "data/processed/candidate_sites.geojson");
+const worldCoverPath = path.join(root, "data/features/source_extracts/worldcover_land_cover.json");
+const vegetationIndicesPath = path.join(root, "data/features/source_extracts/vegetation_indices.json");
+const srtmPath = path.join(root, "data/features/source_extracts/srtm_terrain.json");
+const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
+const chirpsPath = path.join(root, "data/features/source_extracts/chirps_rainfall.json");
+const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
+const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
+const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
+const ghslSettlementPath = path.join(root, "data/features/source_extracts/ghsl_settlement.json");
+const waporWaterProductivityPath = path.join(root, "data/features/source_extracts/wapor_water_productivity.json");
+const localResearchContextPath = path.join(root, "data/features/source_extracts/local_research_context.json");
+const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
+const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
+const jsonPath = path.join(root, "data/features/site_features.json");
+const csvPath = path.join(root, "data/features/site_features.csv");
+
+const profiles = [
+  {
+    land_cover_primary: "cropland_tree_mosaic",
+    land_cover_mix: { tree_cover: 0.18, cropland: 0.52, grassland: 0.2, built_up: 0.02, water: 0.0, other: 0.08 },
+    ndvi_current: 0.43,
+    ndvi_trend_5y: -0.06,
+    evi_current: 0.31,
+    forest_loss_score: 68,
+    rainfall_mean_mm: 1320,
+    rainfall_reliability_score: 74,
+    slope_mean_deg: 8.4,
+    slope_risk_score: 42,
+    soil_organic_carbon_score: 66,
+    soil_ph_suitability_score: 72,
+    population_pressure_score: 78,
+    road_access_score: 69,
+    settlement_proximity_score: 63,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 18,
+  },
+  {
+    land_cover_primary: "degraded_grassland",
+    land_cover_mix: { tree_cover: 0.08, cropland: 0.28, grassland: 0.5, built_up: 0.01, water: 0.0, other: 0.13 },
+    ndvi_current: 0.34,
+    ndvi_trend_5y: -0.09,
+    evi_current: 0.24,
+    forest_loss_score: 52,
+    rainfall_mean_mm: 980,
+    rainfall_reliability_score: 58,
+    slope_mean_deg: 12.6,
+    slope_risk_score: 64,
+    soil_organic_carbon_score: 48,
+    soil_ph_suitability_score: 61,
+    population_pressure_score: 46,
+    road_access_score: 38,
+    settlement_proximity_score: 42,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 24,
+  },
+  {
+    land_cover_primary: "forest_agriculture_edge",
+    land_cover_mix: { tree_cover: 0.38, cropland: 0.32, grassland: 0.18, built_up: 0.01, water: 0.01, other: 0.1 },
+    ndvi_current: 0.55,
+    ndvi_trend_5y: -0.04,
+    evi_current: 0.39,
+    forest_loss_score: 76,
+    rainfall_mean_mm: 1460,
+    rainfall_reliability_score: 81,
+    slope_mean_deg: 15.2,
+    slope_risk_score: 69,
+    soil_organic_carbon_score: 74,
+    soil_ph_suitability_score: 68,
+    population_pressure_score: 55,
+    road_access_score: 44,
+    settlement_proximity_score: 47,
+    protected_area_overlap_pct: 6.5,
+    safeguard_risk_score: 48,
+  },
+  {
+    land_cover_primary: "highland_mixed_farming",
+    land_cover_mix: { tree_cover: 0.14, cropland: 0.58, grassland: 0.16, built_up: 0.04, water: 0.0, other: 0.08 },
+    ndvi_current: 0.48,
+    ndvi_trend_5y: -0.02,
+    evi_current: 0.34,
+    forest_loss_score: 42,
+    rainfall_mean_mm: 1180,
+    rainfall_reliability_score: 67,
+    slope_mean_deg: 9.8,
+    slope_risk_score: 46,
+    soil_organic_carbon_score: 58,
+    soil_ph_suitability_score: 70,
+    population_pressure_score: 84,
+    road_access_score: 82,
+    settlement_proximity_score: 76,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 16,
+  },
+  {
+    land_cover_primary: "dryland_shrub_grass_mosaic",
+    land_cover_mix: { tree_cover: 0.05, cropland: 0.18, grassland: 0.42, built_up: 0.01, water: 0.0, other: 0.34 },
+    ndvi_current: 0.27,
+    ndvi_trend_5y: -0.03,
+    evi_current: 0.18,
+    forest_loss_score: 28,
+    rainfall_mean_mm: 720,
+    rainfall_reliability_score: 36,
+    slope_mean_deg: 6.2,
+    slope_risk_score: 24,
+    soil_organic_carbon_score: 35,
+    soil_ph_suitability_score: 52,
+    population_pressure_score: 32,
+    road_access_score: 29,
+    settlement_proximity_score: 35,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 12,
+  },
+  {
+    land_cover_primary: "moist_forest_edge",
+    land_cover_mix: { tree_cover: 0.46, cropland: 0.26, grassland: 0.12, built_up: 0.01, water: 0.01, other: 0.14 },
+    ndvi_current: 0.61,
+    ndvi_trend_5y: -0.05,
+    evi_current: 0.44,
+    forest_loss_score: 82,
+    rainfall_mean_mm: 1580,
+    rainfall_reliability_score: 84,
+    slope_mean_deg: 11.4,
+    slope_risk_score: 53,
+    soil_organic_carbon_score: 79,
+    soil_ph_suitability_score: 65,
+    population_pressure_score: 48,
+    road_access_score: 51,
+    settlement_proximity_score: 46,
+    protected_area_overlap_pct: 3.2,
+    safeguard_risk_score: 36,
+  },
+  {
+    land_cover_primary: "cropland_degraded_slope",
+    land_cover_mix: { tree_cover: 0.1, cropland: 0.5, grassland: 0.25, built_up: 0.03, water: 0.0, other: 0.12 },
+    ndvi_current: 0.37,
+    ndvi_trend_5y: -0.08,
+    evi_current: 0.26,
+    forest_loss_score: 58,
+    rainfall_mean_mm: 1100,
+    rainfall_reliability_score: 63,
+    slope_mean_deg: 18.6,
+    slope_risk_score: 82,
+    soil_organic_carbon_score: 52,
+    soil_ph_suitability_score: 63,
+    population_pressure_score: 69,
+    road_access_score: 58,
+    settlement_proximity_score: 61,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 21,
+  },
+  {
+    land_cover_primary: "lower_priority_sparse_dryland",
+    land_cover_mix: { tree_cover: 0.04, cropland: 0.12, grassland: 0.36, built_up: 0.0, water: 0.0, other: 0.48 },
+    ndvi_current: 0.22,
+    ndvi_trend_5y: 0.01,
+    evi_current: 0.15,
+    forest_loss_score: 18,
+    rainfall_mean_mm: 640,
+    rainfall_reliability_score: 30,
+    slope_mean_deg: 5.1,
+    slope_risk_score: 20,
+    soil_organic_carbon_score: 28,
+    soil_ph_suitability_score: 49,
+    population_pressure_score: 24,
+    road_access_score: 22,
+    settlement_proximity_score: 26,
+    protected_area_overlap_pct: 0,
+    safeguard_risk_score: 10,
+  },
+];
+
+function fail(message) {
+  console.error(`feature-extraction-engine: ${message}`);
+  process.exit(1);
+}
+
+async function main() {
+  const candidates = JSON.parse(await readFile(candidatesPath, "utf8"));
+  const worldCoverBySite = await loadExtractBySite(worldCoverPath);
+  const vegetationIndicesBySite = await loadExtractBySite(vegetationIndicesPath, { optional: true });
+  const srtmBySite = await loadExtractBySite(srtmPath, { optional: true });
+  const gfwBySite = await loadExtractBySite(gfwPath, { optional: true });
+  const chirpsBySite = await loadExtractBySite(chirpsPath);
+  const soilGridsBySite = await loadExtractBySite(soilGridsPath);
+  const soilObservationsBySite = await loadExtractBySite(soilObservationsPath, { optional: true });
+  const gbifBiodiversityBySite = await loadExtractBySite(gbifBiodiversityPath, { optional: true });
+  const ghslSettlementBySite = await loadExtractBySite(ghslSettlementPath, { optional: true });
+  const waporWaterProductivityBySite = await loadExtractBySite(waporWaterProductivityPath, { optional: true });
+  const localResearchContextBySite = await loadExtractBySite(localResearchContextPath, { optional: true });
+  const worldPopBySite = await loadExtractBySite(worldPopPath, { optional: true });
+  const osmAccessBySite = await loadExtractBySite(osmAccessPath, { optional: true });
+  const features = candidates.features.map((candidate, index) =>
+    buildFeature(candidate, index, {
+      worldCover: worldCoverBySite.get(candidate.properties.site_id),
+      vegetationIndices: vegetationIndicesBySite.get(candidate.properties.site_id),
+      srtm: srtmBySite.get(candidate.properties.site_id),
+      gfw: gfwBySite.get(candidate.properties.site_id),
+      chirps: chirpsBySite.get(candidate.properties.site_id),
+      soilGrids: soilGridsBySite.get(candidate.properties.site_id),
+      soilObservations: soilObservationsBySite.get(candidate.properties.site_id),
+      gbifBiodiversity: gbifBiodiversityBySite.get(candidate.properties.site_id),
+      ghslSettlement: ghslSettlementBySite.get(candidate.properties.site_id),
+      waporWaterProductivity: waporWaterProductivityBySite.get(candidate.properties.site_id),
+      localResearchContext: localResearchContextBySite.get(candidate.properties.site_id),
+      worldPop: worldPopBySite.get(candidate.properties.site_id),
+      osmAccess: osmAccessBySite.get(candidate.properties.site_id),
+    })
+  );
+
+  await mkdir(path.dirname(jsonPath), { recursive: true });
+  await writeFile(jsonPath, `${JSON.stringify(features, null, 2)}\n`);
+  await writeFile(csvPath, renderCsv(features));
+
+  console.log(`Wrote ${path.relative(root, jsonPath)}`);
+  console.log(`Wrote ${path.relative(root, csvPath)}`);
+}
+
+async function loadExtractBySite(filePath, { optional = false } = {}) {
+  try {
+    const extract = JSON.parse(await readFile(filePath, "utf8"));
+    if (!Array.isArray(extract.features)) {
+      throw new Error("missing features array");
+    }
+    return new Map(extract.features.map((feature) => [feature.site_id, feature]));
+  } catch (error) {
+    if (optional && error.code === "ENOENT") return new Map();
+    throw new Error(`Could not load source extract ${path.relative(root, filePath)}: ${error.message}`);
+  }
+}
+
+function buildFeature(candidate, index, extracts) {
+  const profile = profiles[index % profiles.length];
+  const properties = candidate.properties;
+  const worldCoverFeature = extracts.worldCover;
+  const vegetationIndicesFeature = extracts.vegetationIndices;
+  const srtmFeature = extracts.srtm;
+  const gfwFeature = extracts.gfw;
+  const chirpsFeature = extracts.chirps;
+  const soilGridsFeature = extracts.soilGrids;
+  const soilObservationsFeature = extracts.soilObservations;
+  const gbifBiodiversityFeature = extracts.gbifBiodiversity;
+  const ghslSettlementFeature = extracts.ghslSettlement;
+  const waporWaterProductivityFeature = extracts.waporWaterProductivity;
+  const localResearchContextFeature = extracts.localResearchContext;
+  const worldPopFeature = extracts.worldPop;
+  const osmAccessFeature = extracts.osmAccess;
+  const hasWorldCover = worldCoverFeature?.source_status === "source_derived";
+  const hasVegetationIndices = ["source_derived", "partial_source_derived"].includes(vegetationIndicesFeature?.source_status);
+  const hasSrtm = srtmFeature?.source_status === "source_derived";
+  const hasGfw = gfwFeature?.source_status === "source_derived";
+  const hasChirps = chirpsFeature?.source_status === "source_derived";
+  const hasSoilGrids = soilGridsFeature?.source_status === "source_derived";
+  const hasSoilObservations = ["source_derived", "partial_source_derived"].includes(soilObservationsFeature?.source_status);
+  const hasGbifBiodiversity = gbifBiodiversityFeature?.source_status === "source_derived";
+  const hasGhslSettlement = ghslSettlementFeature?.source_status === "source_derived";
+  const hasWaporWaterProductivity = ["source_derived", "partial_source_derived"].includes(waporWaterProductivityFeature?.source_status);
+  const hasLocalResearchContext = localResearchContextFeature?.source_status === "context_derived";
+  const hasWorldPop = worldPopFeature?.source_status === "source_derived";
+  const hasOsmAccess = osmAccessFeature?.source_status === "source_derived";
+  const landCoverPrimary = hasWorldCover ? worldCoverFeature.land_cover_primary : profile.land_cover_primary;
+  const landCoverMix = hasWorldCover ? worldCoverFeature.land_cover_mix : profile.land_cover_mix;
+  const ndviCurrent = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.ndvi_current)
+    ? vegetationIndicesFeature.ndvi_current
+    : profile.ndvi_current;
+  const ndviTrend5y = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.ndvi_trend_5y)
+    ? vegetationIndicesFeature.ndvi_trend_5y
+    : profile.ndvi_trend_5y;
+  const eviCurrent = hasVegetationIndices && isFiniteNumber(vegetationIndicesFeature.evi_current)
+    ? vegetationIndicesFeature.evi_current
+    : profile.evi_current;
+  const slopeMeanDeg = hasSrtm ? srtmFeature.slope_mean_deg : profile.slope_mean_deg;
+  const slopeRiskScore = hasSrtm ? srtmFeature.slope_risk_score : profile.slope_risk_score;
+  const forestLossScore = hasGfw && isFiniteNumber(gfwFeature.forest_loss_score)
+    ? gfwFeature.forest_loss_score
+    : profile.forest_loss_score;
+  const rainfallMeanMm = hasChirps ? chirpsFeature.rainfall_mean_mm : profile.rainfall_mean_mm;
+  const rainfallReliabilityScore = hasChirps
+    ? normalizeChirpsReliability(chirpsFeature.rainfall_reliability_score)
+    : profile.rainfall_reliability_score;
+  const soilOrganicCarbonScore = hasSoilGrids
+    ? soilGridsFeature.soil_organic_carbon_score
+    : profile.soil_organic_carbon_score;
+  const soilPhSuitabilityScore = hasSoilGrids
+    ? soilGridsFeature.soil_ph_suitability_score
+    : profile.soil_ph_suitability_score;
+  const osmPopulationPressureScore = hasOsmAccess && isFiniteNumber(osmAccessFeature.population_pressure_proxy_score)
+    ? osmAccessFeature.population_pressure_proxy_score
+    : null;
+  const populationPressureScore = hasWorldPop && isFiniteNumber(worldPopFeature.population_pressure_score)
+    ? worldPopFeature.population_pressure_score
+    : osmPopulationPressureScore !== null
+    ? osmPopulationPressureScore
+    : profile.population_pressure_score;
+  const roadAccessScore = hasOsmAccess && isFiniteNumber(osmAccessFeature.road_access_score)
+    ? osmAccessFeature.road_access_score
+    : profile.road_access_score;
+  const settlementProximityScore = hasOsmAccess && isFiniteNumber(osmAccessFeature.settlement_proximity_score)
+    ? osmAccessFeature.settlement_proximity_score
+    : profile.settlement_proximity_score;
+  const hasUsableOsmAccess =
+    hasOsmAccess &&
+    [
+      osmAccessFeature.road_access_score,
+      osmAccessFeature.settlement_proximity_score,
+      osmAccessFeature.population_pressure_proxy_score,
+    ].some(isFiniteNumber);
+  const dataQualityScore = Math.min(100,
+    58 +
+    (hasWorldCover ? 10 : 0) +
+    (hasVegetationIndices ? 6 : 0) +
+    (hasSrtm ? 8 : 0) +
+    (hasGfw ? 8 : 0) +
+    (hasChirps ? 8 : 0) +
+    (hasSoilGrids ? 8 : 0) +
+    (hasSoilObservations && soilObservationsFeature.soil_observation_support_score >= 50 ? 3 : 0) +
+    (hasGbifBiodiversity ? 3 : 0) +
+    (hasGhslSettlement ? 2 : 0) +
+    (hasWaporWaterProductivity ? 3 : 0) +
+    (hasWorldPop ? 6 : 0) +
+    (hasUsableOsmAccess ? 4 : 0)
+  );
+  const sourceDerivedGroups = [
+    hasWorldCover ? "land_cover" : null,
+    hasVegetationIndices ? "vegetation" : null,
+    hasSrtm ? "terrain" : null,
+    hasGfw ? "forest" : null,
+    hasChirps ? "rainfall" : null,
+    hasSoilGrids ? "soil" : null,
+    hasSoilObservations ? "soil_observations" : null,
+    hasGbifBiodiversity ? "biodiversity_observations" : null,
+    hasGhslSettlement ? "settlement_context" : null,
+    hasWaporWaterProductivity ? "water_productivity" : null,
+    hasLocalResearchContext ? "local_research_context" : null,
+    hasWorldPop ? "population" : null,
+    hasUsableOsmAccess ? "access" : null,
+  ].filter(Boolean);
+
+  return {
+    site_id: properties.site_id,
+    region: properties.region,
+    zone: properties.zone,
+    woreda: properties.woreda,
+    area_ha: properties.area_ha,
+    ...profile,
+    land_cover_primary: landCoverPrimary,
+    land_cover_mix: landCoverMix,
+    ndvi_current: ndviCurrent,
+    ndvi_trend_5y: ndviTrend5y,
+    evi_current: eviCurrent,
+    rainfall_mean_mm: rainfallMeanMm,
+    rainfall_reliability_score: rainfallReliabilityScore,
+    slope_mean_deg: slopeMeanDeg,
+    slope_risk_score: slopeRiskScore,
+    forest_loss_score: forestLossScore,
+    soil_organic_carbon_score: soilOrganicCarbonScore,
+    soil_ph_suitability_score: soilPhSuitabilityScore,
+    population_pressure_score: populationPressureScore,
+    road_access_score: roadAccessScore,
+    settlement_proximity_score: settlementProximityScore,
+    data_quality_score: dataQualityScore,
+    field_validation_required: true,
+    feature_version: sourceDerivedGroups.length ? `mixed_${sourceDerivedGroups.join("_")}_v0` : "demo_mock_v0",
+    feature_quality: sourceDerivedGroups.length
+      ? `${sourceDerivedGroups.join("_")}_source_derived_other_fields_demo_mock`
+      : "demo_mock_pending_source_verification",
+    feature_note: sourceDerivedGroups.length
+      ? `Source-derived feature groups: ${sourceDerivedGroups.join(", ")}. Remaining feature values are deterministic MVP placeholders pending source extraction.`
+      : "MVP placeholder values based on plausible source ranges. Replace with source-derived extraction before making evidence claims.",
+    source_extracts: {
+      land_cover: hasWorldCover
+        ? {
+            dataset_id: "esa_worldcover",
+            version: "2021_v200",
+            status: "source_derived",
+            valid_pixel_count: worldCoverFeature.valid_pixel_count,
+            worldcover_primary_class: worldCoverFeature.worldcover_primary_class,
+            worldcover_primary_label: worldCoverFeature.worldcover_primary_label,
+            worldcover_class_fractions: worldCoverFeature.worldcover_class_fractions,
+          }
+        : {
+            dataset_id: "esa_worldcover",
+            status: "not_extracted",
+          },
+      vegetation: vegetationIndicesFeature
+        ? {
+            dataset_id: "vegetation_indices",
+            status: vegetationIndicesFeature.source_status,
+            ndvi_current: vegetationIndicesFeature.ndvi_current,
+            evi_current: vegetationIndicesFeature.evi_current,
+            ndvi_trend_5y: vegetationIndicesFeature.ndvi_trend_5y,
+            sentinel2_scene_count: vegetationIndicesFeature.sentinel2_scene_count,
+            sentinel2_candidate_scene_count: vegetationIndicesFeature.sentinel2_candidate_scene_count,
+            sentinel2_valid_pixel_count_min: vegetationIndicesFeature.sentinel2_valid_pixel_count_min,
+            sentinel2_valid_pixel_count_max: vegetationIndicesFeature.sentinel2_valid_pixel_count_max,
+            sentinel2_scene_ids: vegetationIndicesFeature.sentinel2_scene_ids,
+            landsat_ndvi_by_year: vegetationIndicesFeature.landsat_ndvi_by_year,
+            landsat_scene_count_by_year: vegetationIndicesFeature.landsat_scene_count_by_year,
+            note: vegetationIndicesFeature.note,
+            trend_note: vegetationIndicesFeature.trend_note,
+          }
+        : {
+            dataset_id: "vegetation_indices",
+            status: "not_extracted",
+          },
+      terrain: hasSrtm
+        ? {
+            dataset_id: "srtm_dem",
+            version: srtmFeature.version,
+            status: "source_derived",
+            elevation_mean_m: srtmFeature.elevation_mean_m,
+            slope_mean_deg: srtmFeature.slope_mean_deg,
+            valid_pixel_count: srtmFeature.valid_pixel_count,
+          }
+        : {
+            dataset_id: "srtm_dem",
+            status: "not_extracted",
+          },
+      forest: hasGfw
+        ? {
+            dataset_id: "gfw_umd_forest_change",
+            status: "source_derived",
+            forest_loss_score: forestLossScore,
+            raw_forest_loss_score: gfwFeature.forest_loss_score,
+            tree_cover_context_score: gfwFeature.tree_cover_context_score,
+            treecover2000_mean_pct: gfwFeature.treecover2000_mean_pct,
+            baseline_tree_cover_area_ha: gfwFeature.baseline_tree_cover_area_ha,
+            loss_area_ha_total: gfwFeature.loss_area_ha_total,
+            loss_area_ha_recent: gfwFeature.loss_area_ha_recent,
+            loss_pct_of_baseline: gfwFeature.loss_pct_of_baseline,
+            recent_loss_pct_of_baseline: gfwFeature.recent_loss_pct_of_baseline,
+            tree_cover_threshold_pct: gfwFeature.tree_cover_threshold_pct,
+            recent_loss_start_year: gfwFeature.recent_loss_start_year,
+            gfw_valid_pixel_count: gfwFeature.gfw_valid_pixel_count,
+            source_tiles: gfwFeature.source_tiles,
+          }
+        : {
+            dataset_id: "gfw_umd_forest_change",
+            status: gfwFeature?.source_status ?? "not_extracted",
+          },
+      rainfall: hasChirps
+        ? {
+            dataset_id: "chirps_v2_africa_monthly",
+            status: "source_derived",
+            rainfall_mean_mm: chirpsFeature.rainfall_mean_mm,
+            rainfall_reliability_score_0_100: rainfallReliabilityScore,
+            rainfall_reliability_raw_0_1: chirpsFeature.rainfall_reliability_score,
+            rainfall_annual_totals_mm: chirpsFeature.rainfall_annual_totals_mm,
+            chirps_valid_month_count: chirpsFeature.chirps_valid_month_count,
+            chirps_valid_pixel_count_min: chirpsFeature.chirps_valid_pixel_count_min,
+            chirps_valid_pixel_count_max: chirpsFeature.chirps_valid_pixel_count_max,
+          }
+        : {
+            dataset_id: "chirps_v2_africa_monthly",
+            status: "not_extracted",
+          },
+      soil: hasSoilGrids
+        ? {
+            dataset_id: "soilgrids",
+            status: "source_derived",
+            soil_organic_carbon_score: soilOrganicCarbonScore,
+            soil_ph_suitability_score: soilPhSuitabilityScore,
+            soilgrids_soc_0_30cm_g_kg_mean: soilGridsFeature.soilgrids_soc_0_30cm_g_kg_mean,
+            soilgrids_ph_h2o_0_30cm_mean: soilGridsFeature.soilgrids_ph_h2o_0_30cm_mean,
+            soilgrids_depth_means: soilGridsFeature.soilgrids_depth_means,
+            soilgrids_valid_pixel_count_min: soilGridsFeature.soilgrids_valid_pixel_count_min,
+            soilgrids_valid_pixel_count_max: soilGridsFeature.soilgrids_valid_pixel_count_max,
+          }
+        : {
+            dataset_id: "soilgrids",
+            status: soilGridsFeature?.source_status ?? "not_extracted",
+          },
+      soil_observations: soilObservationsFeature
+        ? {
+            dataset_id: "soil_observations",
+            status: soilObservationsFeature.source_status,
+            soil_observation_count_total: soilObservationsFeature.soil_observation_count_total,
+            soil_observation_count_wosis: soilObservationsFeature.soil_observation_count_wosis,
+            soil_observation_count_afsis: soilObservationsFeature.soil_observation_count_afsis,
+            soil_observation_profile_count: soilObservationsFeature.soil_observation_profile_count,
+            soil_observation_nearest_distance_km: soilObservationsFeature.soil_observation_nearest_distance_km,
+            soil_observation_radius_km: soilObservationsFeature.soil_observation_radius_km,
+            observed_soc_0_30cm_g_kg_mean: soilObservationsFeature.observed_soc_0_30cm_g_kg_mean,
+            observed_ph_h2o_0_30cm_mean: soilObservationsFeature.observed_ph_h2o_0_30cm_mean,
+            observed_sand_pct_mean: soilObservationsFeature.observed_sand_pct_mean,
+            observed_silt_pct_mean: soilObservationsFeature.observed_silt_pct_mean,
+            observed_clay_pct_mean: soilObservationsFeature.observed_clay_pct_mean,
+            soil_observation_support_score: soilObservationsFeature.soil_observation_support_score,
+            soilgrids_soc_delta_g_kg: soilObservationsFeature.soilgrids_soc_delta_g_kg,
+            soilgrids_ph_delta: soilObservationsFeature.soilgrids_ph_delta,
+            nearest_observations: soilObservationsFeature.nearest_observations,
+          }
+        : {
+            dataset_id: "soil_observations",
+            status: soilObservationsFeature?.source_status ?? "not_extracted",
+          },
+      biodiversity_observations: gbifBiodiversityFeature
+        ? {
+            dataset_id: "gbif_biodiversity",
+            status: gbifBiodiversityFeature.source_status,
+            gbif_query_hash: gbifBiodiversityFeature.gbif_query_hash,
+            gbif_query_url: gbifBiodiversityFeature.gbif_query_url,
+            occurrence_count: gbifBiodiversityFeature.occurrence_count,
+            unfiltered_occurrence_count: gbifBiodiversityFeature.unfiltered_occurrence_count,
+            rejected_or_filtered_occurrence_count: gbifBiodiversityFeature.rejected_or_filtered_occurrence_count,
+            species_count: gbifBiodiversityFeature.species_count,
+            eod_ebird_occurrence_count: gbifBiodiversityFeature.eod_ebird_occurrence_count,
+            eod_ebird_species_count: gbifBiodiversityFeature.eod_ebird_species_count,
+            bale_plant_occurrence_count: gbifBiodiversityFeature.bale_plant_occurrence_count,
+            bale_plant_species_count: gbifBiodiversityFeature.bale_plant_species_count,
+            plant_species_count: gbifBiodiversityFeature.plant_species_count,
+            threatened_or_near_threatened_species_count: gbifBiodiversityFeature.threatened_or_near_threatened_species_count,
+            recent_occurrence_count_5y: gbifBiodiversityFeature.recent_occurrence_count_5y,
+            observation_density_per_km2: gbifBiodiversityFeature.observation_density_per_km2,
+            basis_counts: gbifBiodiversityFeature.basis_counts,
+            license_counts: gbifBiodiversityFeature.license_counts,
+            dataset_counts_top: gbifBiodiversityFeature.dataset_counts_top,
+            top_taxa: gbifBiodiversityFeature.top_taxa,
+            coordinate_uncertainty_median_m: gbifBiodiversityFeature.coordinate_uncertainty_median_m,
+            coordinate_uncertainty_p90_m: gbifBiodiversityFeature.coordinate_uncertainty_p90_m,
+            sampling_bias_risk_score: gbifBiodiversityFeature.sampling_bias_risk_score,
+            biodiversity_context_score: gbifBiodiversityFeature.biodiversity_context_score,
+          }
+        : {
+            dataset_id: "gbif_biodiversity",
+            status: "not_extracted",
+          },
+      settlement_context: ghslSettlementFeature
+        ? {
+            dataset_id: "ghsl_settlement",
+            status: ghslSettlementFeature.source_status,
+            ghsl_smod_class_fractions: ghslSettlementFeature.ghsl_smod_class_fractions,
+            ghsl_urban_centre_fraction: ghslSettlementFeature.ghsl_urban_centre_fraction,
+            ghsl_dense_settlement_fraction: ghslSettlementFeature.ghsl_dense_settlement_fraction,
+            ghsl_rural_or_low_density_fraction: ghslSettlementFeature.ghsl_rural_or_low_density_fraction,
+            ghsl_settlement_context_score: ghslSettlementFeature.ghsl_settlement_context_score,
+            ghsl_valid_pixel_count: ghslSettlementFeature.ghsl_valid_pixel_count,
+          }
+        : {
+            dataset_id: "ghsl_settlement",
+            status: "not_extracted",
+          },
+      water_productivity: waporWaterProductivityFeature
+        ? {
+            dataset_id: "wapor_water_productivity",
+            status: waporWaterProductivityFeature.source_status,
+            wapor_aeti_mm_by_year: waporWaterProductivityFeature.wapor_aeti_mm_by_year,
+            wapor_aeti_annual_mean_mm: waporWaterProductivityFeature.wapor_aeti_annual_mean_mm,
+            wapor_aeti_mm_valid_pixel_count_min: waporWaterProductivityFeature.wapor_aeti_mm_valid_pixel_count_min,
+            wapor_aeti_mm_valid_pixel_count_max: waporWaterProductivityFeature.wapor_aeti_mm_valid_pixel_count_max,
+            wapor_total_biomass_production_kg_ha_by_year: waporWaterProductivityFeature.wapor_total_biomass_production_kg_ha_by_year,
+            wapor_total_biomass_production_mean_kg_ha: waporWaterProductivityFeature.wapor_total_biomass_production_mean_kg_ha,
+            wapor_total_biomass_production_kg_ha_valid_pixel_count_min: waporWaterProductivityFeature.wapor_total_biomass_production_kg_ha_valid_pixel_count_min,
+            wapor_total_biomass_production_kg_ha_valid_pixel_count_max: waporWaterProductivityFeature.wapor_total_biomass_production_kg_ha_valid_pixel_count_max,
+            wapor_gross_biomass_water_productivity_kg_m3_by_year: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_kg_m3_by_year,
+            wapor_gross_biomass_water_productivity_mean_kg_m3: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_mean_kg_m3,
+            wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_min,
+            wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max: waporWaterProductivityFeature.wapor_gross_biomass_water_productivity_kg_m3_valid_pixel_count_max,
+            wapor_net_biomass_water_productivity_kg_m3_by_year: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_kg_m3_by_year,
+            wapor_net_biomass_water_productivity_mean_kg_m3: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_mean_kg_m3,
+            wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_min,
+            wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max: waporWaterProductivityFeature.wapor_net_biomass_water_productivity_kg_m3_valid_pixel_count_max,
+            wapor_productivity_context_score: waporWaterProductivityFeature.wapor_productivity_context_score,
+            wapor_valid_pixel_count_min: waporWaterProductivityFeature.wapor_valid_pixel_count_min,
+            wapor_valid_pixel_count_max: waporWaterProductivityFeature.wapor_valid_pixel_count_max,
+          }
+        : {
+            dataset_id: "wapor_water_productivity",
+            status: "not_extracted",
+          },
+      local_research_context: localResearchContextFeature
+        ? {
+            dataset_id: "local_research_context",
+            status: localResearchContextFeature.source_status,
+            matched_evidence_count: localResearchContextFeature.matched_evidence_count,
+            matched_sources: localResearchContextFeature.matched_sources,
+            match_types: localResearchContextFeature.match_types,
+            evidence_refs: localResearchContextFeature.evidence_refs,
+            scoring_policy: "context_only_no_score_override",
+          }
+        : {
+            dataset_id: "local_research_context",
+            status: "not_extracted",
+          },
+      population: hasWorldPop
+        ? {
+            dataset_id: "worldpop_population",
+            status: "source_derived",
+            population_pressure_score: populationPressureScore,
+            raw_population_pressure_score: worldPopFeature.population_pressure_score,
+            worldpop_population_sum: worldPopFeature.worldpop_population_sum,
+            worldpop_population_density_per_km2: worldPopFeature.worldpop_population_density_per_km2,
+            worldpop_valid_pixel_count: worldPopFeature.worldpop_valid_pixel_count,
+          }
+        : {
+            dataset_id: "worldpop_population",
+            status: worldPopFeature?.source_status ?? "not_extracted",
+          },
+      access: hasOsmAccess
+        ? {
+            dataset_id: "osm_access",
+            status: "source_derived",
+            road_access_score: isFiniteNumber(osmAccessFeature.road_access_score) ? osmAccessFeature.road_access_score : null,
+            settlement_proximity_score: isFiniteNumber(osmAccessFeature.settlement_proximity_score)
+              ? osmAccessFeature.settlement_proximity_score
+              : null,
+            population_pressure_score: osmPopulationPressureScore,
+            raw_road_access_score: osmAccessFeature.road_access_score,
+            raw_settlement_proximity_score: osmAccessFeature.settlement_proximity_score,
+            raw_population_pressure_proxy_score: osmAccessFeature.population_pressure_proxy_score,
+            nearest_road_distance_km: osmAccessFeature.nearest_road_distance_km,
+            nearest_road_highway: osmAccessFeature.nearest_road_highway,
+            nearest_settlement_distance_km: osmAccessFeature.nearest_settlement_distance_km,
+            nearest_settlement_type: osmAccessFeature.nearest_settlement_type,
+            osm_road_way_count: osmAccessFeature.osm_road_way_count,
+            osm_settlement_element_count: osmAccessFeature.osm_settlement_element_count,
+          }
+        : {
+            dataset_id: "osm_access",
+            status: osmAccessFeature?.source_status ?? "not_extracted",
+          },
+    },
+  };
+}
+
+function normalizeChirpsReliability(value) {
+  if (!Number.isFinite(Number(value))) return null;
+  return Math.round(Math.max(0, Math.min(1, Number(value))) * 100);
+}
+
+function isFiniteNumber(value) {
+  return value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value));
+}
+
+function renderCsv(features) {
+  const columns = [
+    "site_id",
+    "region",
+    "zone",
+    "woreda",
+    "area_ha",
+    "land_cover_primary",
+    "tree_cover",
+    "cropland",
+    "grassland",
+    "built_up",
+    "water",
+    "other",
+    "ndvi_current",
+    "ndvi_trend_5y",
+    "evi_current",
+    "forest_loss_score",
+    "rainfall_mean_mm",
+    "rainfall_reliability_score",
+    "slope_mean_deg",
+    "slope_risk_score",
+    "soil_organic_carbon_score",
+    "soil_ph_suitability_score",
+    "population_pressure_score",
+    "road_access_score",
+    "settlement_proximity_score",
+    "protected_area_overlap_pct",
+    "safeguard_risk_score",
+    "data_quality_score",
+    "field_validation_required",
+    "feature_version",
+    "feature_quality",
+  ];
+
+  const rows = [
+    columns,
+    ...features.map((feature) =>
+      columns.map((column) =>
+        column in feature.land_cover_mix ? feature.land_cover_mix[column] : feature[column]
+      )
+    ),
+  ];
+
+  return `${rows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`;
+}
+
+function csvEscape(value) {
+  const text = String(value ?? "");
+  if (!/[",\n]/.test(text)) return text;
+  return `"${text.replaceAll('"', '""')}"`;
+}
+
+main().catch((error) => {
+  fail(error instanceof Error ? error.message : String(error));
+});

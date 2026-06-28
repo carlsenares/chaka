@@ -15,6 +15,16 @@ A generic, agent-agnostic starting point for AI hackathons. *Use this template*
    Server-default, real HTTPS URL. Push to `main` auto-deploys via CI.
 6. **Demo** — work through `DEMO.md` *before* the crunch (offline fallback!).
 
+## Data Pipeline Setup
+
+Install the Python geospatial dependencies before running source extractors such
+as `data:ghsl`, `data:wapor`, `data:gbif`, `data:gfw`, `data:worldpop`, and
+`data:vegetation`:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
 ## Files
 | File | Purpose |
 |---|---|

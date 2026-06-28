@@ -1,0 +1,515 @@
+{
+  "source": {
+    "dataset_id": "chirps_v2_africa_monthly",
+    "name": "CHIRPS v2.0 Africa Monthly Rainfall",
+    "source_url": "https://www.chc.ucsb.edu/data/chirps",
+    "access_url_template": "https://data.chc.ucsb.edu/products/CHIRPS-2.0/africa_monthly/tifs/chirps-v2.0.{year}.{month:02d}.tif.gz",
+    "spatial_resolution": "0.05 degree",
+    "units": "millimeters per month",
+    "year_range": [
+      2021,
+      2025
+    ],
+    "month_count": 60,
+    "extraction_method": "rasterio mask over candidate polygons; monthly mean rainfall per site, annual totals from monthly means",
+    "note": "Official no-auth CHIRPS monthly Africa GeoTIFFs from the UCSB Climate Hazards Center. Raw rasters are cached locally under data/raw/chirps and excluded from git."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "rainfall_mean_mm": 700.262,
+      "rainfall_annual_mean_mm": 700.262,
+      "rainfall_annual_totals_mm": {
+        "2021": 512.117,
+        "2022": 442.341,
+        "2023": 799.542,
+        "2024": 959.662,
+        "2025": 787.648
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 9.414,
+        "02": 14.688,
+        "03": 57.833,
+        "04": 213.538,
+        "05": 102.511,
+        "06": 13.816,
+        "07": 28.149,
+        "08": 30.962,
+        "09": 32.212,
+        "10": 110.393,
+        "11": 61.104,
+        "12": 25.642
+      },
+      "rainfall_reliability_score": 0.724,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-002",
+      "rainfall_mean_mm": 957.741,
+      "rainfall_annual_mean_mm": 957.741,
+      "rainfall_annual_totals_mm": {
+        "2021": 692.67,
+        "2022": 642.756,
+        "2023": 1087.141,
+        "2024": 1231.697,
+        "2025": 1134.439
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 21.464,
+        "02": 34.618,
+        "03": 86.353,
+        "04": 203.542,
+        "05": 155.143,
+        "06": 21.936,
+        "07": 45.366,
+        "08": 54.033,
+        "09": 83.183,
+        "10": 113.871,
+        "11": 101.632,
+        "12": 36.601
+      },
+      "rainfall_reliability_score": 0.747,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "rainfall_mean_mm": 1262.445,
+      "rainfall_annual_mean_mm": 1262.445,
+      "rainfall_annual_totals_mm": {
+        "2021": 945.064,
+        "2022": 949.167,
+        "2023": 1424.597,
+        "2024": 1559.438,
+        "2025": 1433.961
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 28.679,
+        "02": 48.9,
+        "03": 119.255,
+        "04": 246.156,
+        "05": 164.456,
+        "06": 47.691,
+        "07": 73.2,
+        "08": 88.625,
+        "09": 124.633,
+        "10": 157.283,
+        "11": 103.906,
+        "12": 59.66
+      },
+      "rainfall_reliability_score": 0.793,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "rainfall_mean_mm": 1391.143,
+      "rainfall_annual_mean_mm": 1391.143,
+      "rainfall_annual_totals_mm": {
+        "2021": 1028.152,
+        "2022": 1006.873,
+        "2023": 1550.058,
+        "2024": 1775.252,
+        "2025": 1595.379
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 28.362,
+        "02": 42.0,
+        "03": 128.554,
+        "04": 216.018,
+        "05": 186.815,
+        "06": 50.188,
+        "07": 101.661,
+        "08": 108.72,
+        "09": 145.375,
+        "10": 188.913,
+        "11": 143.31,
+        "12": 51.228
+      },
+      "rainfall_reliability_score": 0.774,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "rainfall_mean_mm": 1509.653,
+      "rainfall_annual_mean_mm": 1509.653,
+      "rainfall_annual_totals_mm": {
+        "2021": 1107.893,
+        "2022": 1097.159,
+        "2023": 1689.125,
+        "2024": 1869.082,
+        "2025": 1785.007
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 23.005,
+        "02": 28.164,
+        "03": 129.77,
+        "04": 232.449,
+        "05": 199.942,
+        "06": 69.196,
+        "07": 126.186,
+        "08": 138.479,
+        "09": 145.45,
+        "10": 233.979,
+        "11": 135.476,
+        "12": 47.557
+      },
+      "rainfall_reliability_score": 0.777,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "rainfall_mean_mm": 2066.885,
+      "rainfall_annual_mean_mm": 2066.885,
+      "rainfall_annual_totals_mm": {
+        "2021": 1545.727,
+        "2022": 1547.872,
+        "2023": 2322.385,
+        "2024": 2502.534,
+        "2025": 2415.907
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 47.291,
+        "02": 48.701,
+        "03": 195.469,
+        "04": 312.569,
+        "05": 250.124,
+        "06": 110.336,
+        "07": 174.546,
+        "08": 204.186,
+        "09": 199.423,
+        "10": 301.714,
+        "11": 160.947,
+        "12": 61.58
+      },
+      "rainfall_reliability_score": 0.793,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "rainfall_mean_mm": 1989.657,
+      "rainfall_annual_mean_mm": 1989.657,
+      "rainfall_annual_totals_mm": {
+        "2021": 1530.096,
+        "2022": 1499.257,
+        "2023": 2347.131,
+        "2024": 2393.359,
+        "2025": 2178.444
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 32.571,
+        "02": 53.973,
+        "03": 167.018,
+        "04": 327.831,
+        "05": 252.271,
+        "06": 115.697,
+        "07": 204.337,
+        "08": 216.272,
+        "09": 196.394,
+        "10": 269.71,
+        "11": 106.248,
+        "12": 47.335
+      },
+      "rainfall_reliability_score": 0.802,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "rainfall_mean_mm": 1422.677,
+      "rainfall_annual_mean_mm": 1422.677,
+      "rainfall_annual_totals_mm": {
+        "2021": 1133.48,
+        "2022": 1192.713,
+        "2023": 1459.949,
+        "2024": 1742.288,
+        "2025": 1584.953
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 21.518,
+        "02": 35.063,
+        "03": 132.875,
+        "04": 201.792,
+        "05": 156.927,
+        "06": 115.256,
+        "07": 141.098,
+        "08": 185.169,
+        "09": 167.618,
+        "10": 198.254,
+        "11": 38.072,
+        "12": 29.034
+      },
+      "rainfall_reliability_score": 0.838,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "rainfall_mean_mm": 819.03,
+      "rainfall_annual_mean_mm": 819.03,
+      "rainfall_annual_totals_mm": {
+        "2021": 607.713,
+        "2022": 624.906,
+        "2023": 827.728,
+        "2024": 1106.786,
+        "2025": 928.019
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 13.969,
+        "02": 30.288,
+        "03": 83.889,
+        "04": 137.484,
+        "05": 101.758,
+        "06": 33.571,
+        "07": 87.66,
+        "08": 81.51,
+        "09": 44.029,
+        "10": 93.78,
+        "11": 74.402,
+        "12": 36.689
+      },
+      "rainfall_reliability_score": 0.77,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "rainfall_mean_mm": 1338.829,
+      "rainfall_annual_mean_mm": 1338.829,
+      "rainfall_annual_totals_mm": {
+        "2021": 1088.767,
+        "2022": 1106.561,
+        "2023": 1343.93,
+        "2024": 1581.548,
+        "2025": 1573.338
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 24.921,
+        "02": 37.225,
+        "03": 110.115,
+        "04": 199.04,
+        "05": 171.294,
+        "06": 75.764,
+        "07": 168.676,
+        "08": 145.882,
+        "09": 129.075,
+        "10": 134.793,
+        "11": 93.64,
+        "12": 48.403
+      },
+      "rainfall_reliability_score": 0.84,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "rainfall_mean_mm": 1644.003,
+      "rainfall_annual_mean_mm": 1644.003,
+      "rainfall_annual_totals_mm": {
+        "2021": 1355.653,
+        "2022": 1446.768,
+        "2023": 1680.729,
+        "2024": 1781.775,
+        "2025": 1955.091
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 25.193,
+        "02": 37.902,
+        "03": 119.458,
+        "04": 181.281,
+        "05": 173.674,
+        "06": 137.347,
+        "07": 235.521,
+        "08": 213.044,
+        "09": 193.443,
+        "10": 165.673,
+        "11": 103.507,
+        "12": 57.961
+      },
+      "rainfall_reliability_score": 0.867,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "rainfall_mean_mm": 1613.354,
+      "rainfall_annual_mean_mm": 1613.354,
+      "rainfall_annual_totals_mm": {
+        "2021": 1255.744,
+        "2022": 1269.021,
+        "2023": 1905.876,
+        "2024": 1932.413,
+        "2025": 1703.717
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 25.801,
+        "02": 42.192,
+        "03": 121.51,
+        "04": 233.396,
+        "05": 215.48,
+        "06": 116.645,
+        "07": 192.994,
+        "08": 197.145,
+        "09": 144.969,
+        "10": 225.529,
+        "11": 59.953,
+        "12": 37.739
+      },
+      "rainfall_reliability_score": 0.816,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "rainfall_mean_mm": 1880.846,
+      "rainfall_annual_mean_mm": 1880.846,
+      "rainfall_annual_totals_mm": {
+        "2021": 1724.098,
+        "2022": 1624.769,
+        "2023": 2030.65,
+        "2024": 1954.746,
+        "2025": 2069.966
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 47.299,
+        "02": 59.68,
+        "03": 120.314,
+        "04": 237.992,
+        "05": 226.032,
+        "06": 202.329,
+        "07": 215.852,
+        "08": 203.443,
+        "09": 201.86,
+        "10": 204.539,
+        "11": 93.165,
+        "12": 68.341
+      },
+      "rainfall_reliability_score": 0.907,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "rainfall_mean_mm": 1671.969,
+      "rainfall_annual_mean_mm": 1671.969,
+      "rainfall_annual_totals_mm": {
+        "2021": 1544.239,
+        "2022": 1495.107,
+        "2023": 1869.308,
+        "2024": 1668.291,
+        "2025": 1782.902
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 29.721,
+        "02": 57.51,
+        "03": 114.766,
+        "04": 218.851,
+        "05": 213.419,
+        "06": 172.293,
+        "07": 186.648,
+        "08": 173.704,
+        "09": 176.889,
+        "10": 176.022,
+        "11": 84.476,
+        "12": 67.67
+      },
+      "rainfall_reliability_score": 0.916,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "rainfall_mean_mm": 1881.584,
+      "rainfall_annual_mean_mm": 1881.584,
+      "rainfall_annual_totals_mm": {
+        "2021": 1733.162,
+        "2022": 1633.737,
+        "2023": 2187.124,
+        "2024": 1869.598,
+        "2025": 1984.298
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 37.838,
+        "02": 73.737,
+        "03": 134.486,
+        "04": 231.275,
+        "05": 221.127,
+        "06": 206.75,
+        "07": 223.401,
+        "08": 198.144,
+        "09": 222.323,
+        "10": 180.205,
+        "11": 88.345,
+        "12": 63.951
+      },
+      "rainfall_reliability_score": 0.897,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 4,
+      "chirps_valid_pixel_count_max": 4,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "rainfall_mean_mm": 2112.452,
+      "rainfall_annual_mean_mm": 2112.452,
+      "rainfall_annual_totals_mm": {
+        "2021": 1960.762,
+        "2022": 2024.836,
+        "2023": 2320.348,
+        "2024": 2063.291,
+        "2025": 2193.021
+      },
+      "rainfall_monthly_mean_mm": {
+        "01": 28.6,
+        "02": 66.37,
+        "03": 102.542,
+        "04": 155.813,
+        "05": 229.902,
+        "06": 285.457,
+        "07": 288.072,
+        "08": 301.175,
+        "09": 313.222,
+        "10": 207.048,
+        "11": 86.295,
+        "12": 47.956
+      },
+      "rainfall_reliability_score": 0.939,
+      "chirps_valid_month_count": 60,
+      "chirps_valid_pixel_count_min": 2,
+      "chirps_valid_pixel_count_max": 2,
+      "source_status": "source_derived"
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "source": {
+    "dataset_id": "gfw_umd_forest_change",
+    "name": "Hansen Global Forest Change",
+    "version": "GFC-2025-v1.13",
+    "provider": "University of Maryland / Global Forest Watch",
+    "source_url": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2025-v1.13/download.html",
+    "access_url_template": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2025-v1.13/Hansen_GFC-2025-v1.13_{layer}_{tile}.tif",
+    "spatial_resolution": "approximately 30m",
+    "tree_cover_threshold_pct": 30,
+    "recent_loss_start_year": 2019,
+    "required_tiles": [
+      "10N_030E"
+    ],
+    "raw_cache": "data/raw/gfw_umd_forest_change",
+    "extraction_method": "rasterio polygon mask over Hansen treecover2000, lossyear, and datamask tiles; baseline tree-cover area uses configurable tree-cover threshold; forest_loss_score down-weights loss percentages when baseline tree-cover area is below 100 ha",
+    "note": "Tree-cover loss is a disturbance signal for woody vegetation at least about 5m tall. It is not direct carbon loss, confirmed deforestation, or field-verified degradation."
+  },
+  "features": [
+    {
+      "site_id": "SET-001",
+      "forest_loss_score": 0,
+      "tree_cover_context_score": 2,
+      "treecover2000_mean_pct": 3.467,
+      "treecover2000_forest_pixel_fraction": 7.9e-05,
+      "baseline_tree_cover_area_ha": 0.076,
+      "loss_area_ha_total": 0.076,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 100.0,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 12731,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-002",
+      "forest_loss_score": 1,
+      "tree_cover_context_score": 4,
+      "treecover2000_mean_pct": 5.53,
+      "treecover2000_forest_pixel_fraction": 0.000549,
+      "baseline_tree_cover_area_ha": 1.373,
+      "loss_area_ha_total": 0.686,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 50.0,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-003",
+      "forest_loss_score": 47,
+      "tree_cover_context_score": 10,
+      "treecover2000_mean_pct": 13.53,
+      "treecover2000_forest_pixel_fraction": 0.034309,
+      "baseline_tree_cover_area_ha": 85.732,
+      "loss_area_ha_total": 10.983,
+      "loss_area_ha_recent": 3.814,
+      "loss_pct_of_baseline": 12.811,
+      "recent_loss_pct_of_baseline": 4.448,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-004",
+      "forest_loss_score": 85,
+      "tree_cover_context_score": 11,
+      "treecover2000_mean_pct": 13.152,
+      "treecover2000_forest_pixel_fraction": 0.056073,
+      "baseline_tree_cover_area_ha": 140.116,
+      "loss_area_ha_total": 46.604,
+      "loss_area_ha_recent": 0.61,
+      "loss_pct_of_baseline": 33.261,
+      "recent_loss_pct_of_baseline": 0.435,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-005",
+      "forest_loss_score": 4,
+      "tree_cover_context_score": 8,
+      "treecover2000_mean_pct": 10.819,
+      "treecover2000_forest_pixel_fraction": 0.004884,
+      "baseline_tree_cover_area_ha": 12.204,
+      "loss_area_ha_total": 1.449,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 11.875,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-006",
+      "forest_loss_score": 9,
+      "tree_cover_context_score": 76,
+      "treecover2000_mean_pct": 69.337,
+      "treecover2000_forest_pixel_fraction": 0.902811,
+      "baseline_tree_cover_area_ha": 2255.964,
+      "loss_area_ha_total": 65.443,
+      "loss_area_ha_recent": 6.483,
+      "loss_pct_of_baseline": 2.901,
+      "recent_loss_pct_of_baseline": 0.287,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-007",
+      "forest_loss_score": 0,
+      "tree_cover_context_score": 20,
+      "treecover2000_mean_pct": 22.121,
+      "treecover2000_forest_pixel_fraction": 0.154728,
+      "baseline_tree_cover_area_ha": 386.177,
+      "loss_area_ha_total": 0.229,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 0.059,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32722,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SET-008",
+      "forest_loss_score": 1,
+      "tree_cover_context_score": 10,
+      "treecover2000_mean_pct": 14.161,
+      "treecover2000_forest_pixel_fraction": 0.002686,
+      "baseline_tree_cover_area_ha": 6.712,
+      "loss_area_ha_total": 0.381,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 5.682,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-001",
+      "forest_loss_score": 0,
+      "tree_cover_context_score": 3,
+      "treecover2000_mean_pct": 4.403,
+      "treecover2000_forest_pixel_fraction": 0.0,
+      "baseline_tree_cover_area_ha": 0.0,
+      "loss_area_ha_total": 0.0,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 0.0,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-002",
+      "forest_loss_score": 14,
+      "tree_cover_context_score": 13,
+      "treecover2000_mean_pct": 14.554,
+      "treecover2000_forest_pixel_fraction": 0.082842,
+      "baseline_tree_cover_area_ha": 207.008,
+      "loss_area_ha_total": 10.907,
+      "loss_area_ha_recent": 0.305,
+      "loss_pct_of_baseline": 5.269,
+      "recent_loss_pct_of_baseline": 0.147,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-003",
+      "forest_loss_score": 21,
+      "tree_cover_context_score": 14,
+      "treecover2000_mean_pct": 17.604,
+      "treecover2000_forest_pixel_fraction": 0.059247,
+      "baseline_tree_cover_area_ha": 148.048,
+      "loss_area_ha_total": 9.0,
+      "loss_area_ha_recent": 1.602,
+      "loss_pct_of_baseline": 6.079,
+      "recent_loss_pct_of_baseline": 1.082,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-004",
+      "forest_loss_score": 5,
+      "tree_cover_context_score": 18,
+      "treecover2000_mean_pct": 20.004,
+      "treecover2000_forest_pixel_fraction": 0.120814,
+      "baseline_tree_cover_area_ha": 301.894,
+      "loss_area_ha_total": 2.136,
+      "loss_area_ha_recent": 2.059,
+      "loss_pct_of_baseline": 0.707,
+      "recent_loss_pct_of_baseline": 0.682,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-005",
+      "forest_loss_score": 5,
+      "tree_cover_context_score": 34,
+      "treecover2000_mean_pct": 31.267,
+      "treecover2000_forest_pixel_fraction": 0.417966,
+      "baseline_tree_cover_area_ha": 1044.424,
+      "loss_area_ha_total": 10.526,
+      "loss_area_ha_recent": 5.339,
+      "loss_pct_of_baseline": 1.008,
+      "recent_loss_pct_of_baseline": 0.511,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-006",
+      "forest_loss_score": 0,
+      "tree_cover_context_score": 66,
+      "treecover2000_mean_pct": 51.57,
+      "treecover2000_forest_pixel_fraction": 0.990507,
+      "baseline_tree_cover_area_ha": 2475.1,
+      "loss_area_ha_total": 2.517,
+      "loss_area_ha_recent": 0.381,
+      "loss_pct_of_baseline": 0.102,
+      "recent_loss_pct_of_baseline": 0.015,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-007",
+      "forest_loss_score": 25,
+      "tree_cover_context_score": 61,
+      "treecover2000_mean_pct": 50.498,
+      "treecover2000_forest_pixel_fraction": 0.861451,
+      "baseline_tree_cover_area_ha": 2152.612,
+      "loss_area_ha_total": 103.504,
+      "loss_area_ha_recent": 57.282,
+      "loss_pct_of_baseline": 4.808,
+      "recent_loss_pct_of_baseline": 2.661,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "SWE-008",
+      "forest_loss_score": 2,
+      "tree_cover_context_score": 89,
+      "treecover2000_mean_pct": 84.718,
+      "treecover2000_forest_pixel_fraction": 1.0,
+      "baseline_tree_cover_area_ha": 2498.821,
+      "loss_area_ha_total": 17.391,
+      "loss_area_ha_recent": 0.0,
+      "loss_pct_of_baseline": 0.696,
+      "recent_loss_pct_of_baseline": 0.0,
+      "tree_cover_threshold_pct": 30,
+      "recent_loss_start_year": 2019,
+      "gfw_valid_pixel_count": 32761,
+      "source_tiles": [
+        "10N_030E"
+      ],
+      "source_status": "source_derived"
+    }
+  ]
+}
