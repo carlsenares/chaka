@@ -16,6 +16,102 @@
   },
   "features": [
     {
+      "site_id": "TIG-001",
+      "worldpop_population_sum": 2714.997,
+      "worldpop_population_density_per_km2": 110.852,
+      "population_pressure_score": 43,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-002",
+      "worldpop_population_sum": 8372.805,
+      "worldpop_population_density_per_km2": 343.429,
+      "population_pressure_score": 100,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-003",
+      "worldpop_population_sum": 12230.858,
+      "worldpop_population_density_per_km2": 502.645,
+      "population_pressure_score": 100,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "TIG-004",
+      "worldpop_population_sum": 1519.005,
+      "worldpop_population_density_per_km2": 62.616,
+      "population_pressure_score": 19,
+      "worldpop_valid_pixel_count": 2641,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-001",
+      "worldpop_population_sum": 2617.152,
+      "worldpop_population_density_per_km2": 105.518,
+      "population_pressure_score": 40,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-002",
+      "worldpop_population_sum": 1139.954,
+      "worldpop_population_density_per_km2": 46.283,
+      "population_pressure_score": 11,
+      "worldpop_valid_pixel_count": 3024,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-003",
+      "worldpop_population_sum": 2957.05,
+      "worldpop_population_density_per_km2": 120.524,
+      "population_pressure_score": 48,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "AMH-004",
+      "worldpop_population_sum": 714.424,
+      "worldpop_population_density_per_km2": 29.307,
+      "population_pressure_score": 2,
+      "worldpop_valid_pixel_count": 2868,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-001",
+      "worldpop_population_sum": 114.244,
+      "worldpop_population_density_per_km2": 4.561,
+      "population_pressure_score": 0,
+      "worldpop_valid_pixel_count": 1909,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-002",
+      "worldpop_population_sum": 8247.571,
+      "worldpop_population_density_per_km2": 331.135,
+      "population_pressure_score": 100,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-003",
+      "worldpop_population_sum": 4846.467,
+      "worldpop_population_density_per_km2": 195.343,
+      "population_pressure_score": 85,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "ORO-004",
+      "worldpop_population_sum": 2393.445,
+      "worldpop_population_density_per_km2": 96.952,
+      "population_pressure_score": 36,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
       "site_id": "SET-001",
       "worldpop_population_sum": null,
       "worldpop_population_density_per_km2": null,
@@ -139,6 +235,38 @@
       "site_id": "SWE-008",
       "worldpop_population_sum": 582.888,
       "worldpop_population_density_per_km2": 23.458,
+      "population_pressure_score": 0,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-001",
+      "worldpop_population_sum": 33.127,
+      "worldpop_population_density_per_km2": 1.328,
+      "population_pressure_score": 0,
+      "worldpop_valid_pixel_count": 2212,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-002",
+      "worldpop_population_sum": 21.916,
+      "worldpop_population_density_per_km2": 0.881,
+      "population_pressure_score": 0,
+      "worldpop_valid_pixel_count": 3025,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-003",
+      "worldpop_population_sum": 679.812,
+      "worldpop_population_density_per_km2": 27.358,
+      "population_pressure_score": 1,
+      "worldpop_valid_pixel_count": 2859,
+      "source_status": "source_derived"
+    },
+    {
+      "site_id": "GAM-004",
+      "worldpop_population_sum": 249.103,
+      "worldpop_population_density_per_km2": 10.041,
       "population_pressure_score": 0,
       "worldpop_valid_pixel_count": 3025,
       "source_status": "source_derived"

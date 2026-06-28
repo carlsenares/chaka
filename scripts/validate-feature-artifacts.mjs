@@ -11,6 +11,8 @@ const predictionsPath = path.join(root, "models/artifacts/site_predictions.json"
 const osmAccessPath = path.join(root, "data/features/source_extracts/osm_access.json");
 const worldPopPath = path.join(root, "data/features/source_extracts/worldpop_population.json");
 const gfwPath = path.join(root, "data/features/source_extracts/gfw_umd_forest_change.json");
+const gfwCarbonFluxPath = path.join(root, "data/features/source_extracts/gfw_carbon_flux.json");
+const esaCciBiomassPath = path.join(root, "data/features/source_extracts/esa_cci_biomass.json");
 const soilGridsPath = path.join(root, "data/features/source_extracts/soilgrids_soil.json");
 const soilObservationsPath = path.join(root, "data/features/source_extracts/soil_observations.json");
 const gbifBiodiversityPath = path.join(root, "data/features/source_extracts/gbif_biodiversity.json");
@@ -68,6 +70,8 @@ async function main() {
   const osmAccessBySite = await loadOptionalExtractBySite(osmAccessPath);
   const worldPopBySite = await loadOptionalExtractBySite(worldPopPath);
   const gfwBySite = await loadOptionalExtractBySite(gfwPath);
+  const gfwCarbonFluxBySite = await loadOptionalExtractBySite(gfwCarbonFluxPath);
+  const esaCciBiomassBySite = await loadOptionalExtractBySite(esaCciBiomassPath);
   const soilGridsBySite = await loadOptionalExtractBySite(soilGridsPath);
   const soilObservationsBySite = await loadOptionalExtractBySite(soilObservationsPath);
   const gbifBiodiversityBySite = await loadOptionalExtractBySite(gbifBiodiversityPath);
@@ -80,6 +84,8 @@ async function main() {
       osmAccessBySite,
       worldPopBySite,
       gfwBySite,
+      gfwCarbonFluxBySite,
+      esaCciBiomassBySite,
       soilGridsBySite,
       soilObservationsBySite,
       gbifBiodiversityBySite,
@@ -178,6 +184,8 @@ function validateFeature(row, extracts) {
   validateOsmAccessSync(row, extracts.osmAccessBySite.get(row.site_id));
   validateWorldPopSync(row, extracts.worldPopBySite.get(row.site_id));
   validateGfwSync(row, extracts.gfwBySite.get(row.site_id));
+  validateGfwCarbonFluxSync(row, extracts.gfwCarbonFluxBySite.get(row.site_id));
+  validateEsaCciBiomassSync(row, extracts.esaCciBiomassBySite.get(row.site_id));
   validateSoilGridsSync(row, extracts.soilGridsBySite.get(row.site_id));
   validateSoilObservationsSync(row, extracts.soilObservationsBySite.get(row.site_id));
   validateGbifBiodiversitySync(row, extracts.gbifBiodiversityBySite.get(row.site_id));
@@ -290,6 +298,156 @@ function validateGfwSync(row, gfw) {
   }
   if (!sameNullableNumber(gfw.recent_loss_pct_of_baseline, integrated.recent_loss_pct_of_baseline)) {
     addError(`feature ${row.site_id}: integrated GFW recent_loss_pct_of_baseline is stale`);
+  }
+}
+
+function validateGfwCarbonFluxSync(row, carbonFlux) {
+  if (!carbonFlux) {
+    if (row.source_extracts?.carbon_flux_context?.status && row.source_extracts.carbon_flux_context.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing gfw_carbon_flux source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "partial_source_derived", "no_valid_pixels", "blocked_download"]);
+  if (!validStatuses.has(carbonFlux.source_status)) {
+    addError(`gfw carbon flux ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "gfw_carbon_gross_removals_valid_pixel_count",
+    "gfw_carbon_gross_emissions_valid_pixel_count",
+    "gfw_carbon_net_flux_valid_pixel_count",
+  ]) {
+    if (!Number.isInteger(Number(carbonFlux[field])) || Number(carbonFlux[field]) < 0) {
+      addError(`gfw carbon flux ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  for (const field of [
+    "gfw_carbon_gross_removals_mean_mg_co2e_ha",
+    "gfw_carbon_gross_removals_median_mg_co2e_ha",
+    "gfw_carbon_gross_removals_total_mg_co2e",
+    "gfw_carbon_gross_emissions_mean_mg_co2e_ha",
+    "gfw_carbon_gross_emissions_median_mg_co2e_ha",
+    "gfw_carbon_gross_emissions_total_mg_co2e",
+    "gfw_carbon_net_flux_mean_mg_co2e_ha",
+    "gfw_carbon_net_flux_median_mg_co2e_ha",
+    "gfw_carbon_net_flux_total_mg_co2e",
+  ]) {
+    if (carbonFlux[field] !== null && !Number.isFinite(Number(carbonFlux[field]))) {
+      addError(`gfw carbon flux ${row.site_id}: ${field} must be null or finite`);
+    }
+  }
+
+  if (!Array.isArray(carbonFlux.source_tiles)) {
+    addError(`gfw carbon flux ${row.site_id}: source_tiles must be an array`);
+  }
+
+  const integrated = row.source_extracts?.carbon_flux_context;
+  if (!integrated || integrated.dataset_id !== "gfw_carbon_flux") {
+    addError(`feature ${row.site_id}: missing integrated gfw_carbon_flux source extract`);
+    return;
+  }
+
+  if (carbonFlux.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated gfw_carbon_flux status is stale`);
+  }
+  if (integrated.scoring_policy !== "context_only_no_score_override") {
+    addError(`feature ${row.site_id}: gfw_carbon_flux must be context-only`);
+  }
+
+  for (const field of [
+    "gfw_carbon_gross_removals_mean_mg_co2e_ha",
+    "gfw_carbon_gross_removals_median_mg_co2e_ha",
+    "gfw_carbon_gross_removals_total_mg_co2e",
+    "gfw_carbon_gross_removals_valid_pixel_count",
+    "gfw_carbon_gross_emissions_mean_mg_co2e_ha",
+    "gfw_carbon_gross_emissions_median_mg_co2e_ha",
+    "gfw_carbon_gross_emissions_total_mg_co2e",
+    "gfw_carbon_gross_emissions_valid_pixel_count",
+    "gfw_carbon_net_flux_mean_mg_co2e_ha",
+    "gfw_carbon_net_flux_median_mg_co2e_ha",
+    "gfw_carbon_net_flux_total_mg_co2e",
+    "gfw_carbon_net_flux_valid_pixel_count",
+  ]) {
+    if (!sameNullableNumber(carbonFlux[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated gfw_carbon_flux ${field} is stale`);
+    }
+  }
+}
+
+function validateEsaCciBiomassSync(row, biomass) {
+  if (!biomass) {
+    if (row.source_extracts?.carbon_stock_context?.status && row.source_extracts.carbon_stock_context.status !== "not_extracted") {
+      addError(`feature ${row.site_id}: missing esa_cci_biomass source extract row`);
+    }
+    return;
+  }
+
+  const validStatuses = new Set(["source_derived", "partial_source_derived", "no_valid_pixels", "blocked_download"]);
+  if (!validStatuses.has(biomass.source_status)) {
+    addError(`esa cci biomass ${row.site_id}: invalid source_status`);
+  }
+
+  for (const field of [
+    "esa_cci_agb_valid_pixel_count",
+    "esa_cci_agb_sd_valid_pixel_count",
+  ]) {
+    if (!Number.isInteger(Number(biomass[field])) || Number(biomass[field]) < 0) {
+      addError(`esa cci biomass ${row.site_id}: ${field} must be a nonnegative integer`);
+    }
+  }
+
+  for (const field of [
+    "esa_cci_agb_mean_mg_ha",
+    "esa_cci_agb_median_mg_ha",
+    "esa_cci_agb_p90_mg_ha",
+    "esa_cci_agb_total_mg",
+    "esa_cci_agb_sd_mean_mg_ha",
+    "esa_cci_agb_sd_median_mg_ha",
+    "esa_cci_agb_sd_p90_mg_ha",
+    "esa_cci_agb_sd_total_mg",
+    "esa_cci_agb_relative_uncertainty_mean",
+  ]) {
+    if (biomass[field] !== null && !isNonNegativeNumber(biomass[field])) {
+      addError(`esa cci biomass ${row.site_id}: ${field} must be null or nonnegative`);
+    }
+  }
+
+  if (!Array.isArray(biomass.source_tiles)) {
+    addError(`esa cci biomass ${row.site_id}: source_tiles must be an array`);
+  }
+
+  const integrated = row.source_extracts?.carbon_stock_context;
+  if (!integrated || integrated.dataset_id !== "esa_cci_biomass") {
+    addError(`feature ${row.site_id}: missing integrated esa_cci_biomass source extract`);
+    return;
+  }
+
+  if (biomass.source_status !== integrated.status) {
+    addError(`feature ${row.site_id}: integrated esa_cci_biomass status is stale`);
+  }
+  if (integrated.scoring_policy !== "context_only_no_score_override") {
+    addError(`feature ${row.site_id}: esa_cci_biomass must be context-only`);
+  }
+
+  for (const field of [
+    "esa_cci_agb_mean_mg_ha",
+    "esa_cci_agb_median_mg_ha",
+    "esa_cci_agb_p90_mg_ha",
+    "esa_cci_agb_total_mg",
+    "esa_cci_agb_valid_pixel_count",
+    "esa_cci_agb_sd_mean_mg_ha",
+    "esa_cci_agb_sd_median_mg_ha",
+    "esa_cci_agb_sd_p90_mg_ha",
+    "esa_cci_agb_sd_total_mg",
+    "esa_cci_agb_sd_valid_pixel_count",
+    "esa_cci_agb_relative_uncertainty_mean",
+  ]) {
+    if (!sameNullableNumber(biomass[field], integrated[field])) {
+      addError(`feature ${row.site_id}: integrated esa_cci_biomass ${field} is stale`);
+    }
   }
 }
 

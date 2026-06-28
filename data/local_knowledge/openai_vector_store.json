@@ -1,0 +1,16 @@
+{
+  "vector_store_id": "vs_6a408b5ea4f48191b73c58d8f3f7d90b",
+  "vector_store_file_id": "file-VBSWt9UgYLfTw5BRG9yEnG",
+  "name": "Chaka local knowledge 2026-06-28T02:47:58.249Z",
+  "status": "completed",
+  "file_counts": {
+    "in_progress": 0,
+    "completed": 1,
+    "failed": 0,
+    "cancelled": 0,
+    "total": 1
+  },
+  "created_at": 1782614879,
+  "synced_at": "2026-06-28T02:48:08.453Z",
+  "source_file": "data/local_knowledge/evidence_cards_openai.md"
+}

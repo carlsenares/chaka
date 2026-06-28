@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" role="img" aria-label="Mock dryland satellite tile in 2026 with restoration growth">
+  <rect width="900" height="540" fill="#9a8450"/>
+  <path d="M0 210c160-78 268-52 420-10 180 48 292-18 480-55v395H0z" fill="#687543"/>
+  <g fill="none" stroke="#c9b77c" stroke-width="6" opacity=".58">
+    <path d="M-20 100c200 70 318 72 500 38 170-32 282-2 440 66"/>
+    <path d="M0 465c164-34 268-94 410-91 190 4 320 92 520 50"/>
+  </g>
+  <g fill="#27613a" opacity=".82">
+    <circle cx="142" cy="192" r="32"/><circle cx="226" cy="250" r="30"/><circle cx="330" cy="232" r="28"/>
+    <circle cx="410" cy="176" r="34"/><circle cx="550" cy="285" r="30"/><circle cx="650" cy="296" r="28"/>
+    <circle cx="720" cy="240" r="36"/><circle cx="800" cy="340" r="30"/>
+  </g>
+</svg>

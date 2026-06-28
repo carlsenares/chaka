@@ -8,11 +8,11 @@ const featuresPath = path.join(root, "data/features/site_features.json");
 const predictionsPath = path.join(root, "models/artifacts/site_predictions.json");
 const reportPath = path.join(root, "models/reports/model_report.md");
 const schemaPath = path.join(root, "models/schemas/feature_schema.json");
-const modelVersion = "ranker_rule_based_v0.2";
+const modelVersion = "ranker_rule_based_v0.3";
 
 const weights = {
-  carbon: 0.35,
-  biodiversity: 0.3,
+  carbon: 0.425,
+  biodiversity: 0.225,
   water_soil: 0.15,
   livelihood: 0.15,
   feasibility: 0.05,
@@ -44,13 +44,8 @@ async function main() {
 }
 
 function buildPrediction(feature) {
-  const carbonOpportunityScore = average([
-    vegetationOpportunityScore(feature),
-    feature.forest_loss_score,
-    feature.soil_organic_carbon_score,
-    carbonLandCoverFitScore(feature),
-  ]);
-  const carbonScore = clampScore(carbonOpportunityScore * rainfallFeasibilityMultiplier(feature.rainfall_reliability_score));
+  const carbonScores = carbonComponentScores(feature);
+  const carbonScore = carbonScores.carbonScore;
 
   const biodiversityScore = biodiversityBenefitScore(feature);
 
@@ -74,7 +69,7 @@ function buildPrediction(feature) {
   ]);
 
   const landCoverAdjustment = landCoverSuitabilityAdjustment(feature);
-  const priorityScore = clampScore(
+  const basePriorityScore = clampScore(
     carbonScore * weights.carbon +
       biodiversityScore * weights.biodiversity +
       waterSoilScore * weights.water_soil +
@@ -82,6 +77,7 @@ function buildPrediction(feature) {
       feasibilityScore * weights.feasibility +
       landCoverAdjustment
   );
+  const priorityScore = clampScore(basePriorityScore * feasibilityGateMultiplier(feasibilityScore));
 
   return {
     site_id: feature.site_id,
@@ -96,16 +92,46 @@ function buildPrediction(feature) {
     recommended_intervention_seed: interventionFor(feature),
     top_feature_contributions: topContributions(feature, {
       carbonScore,
-      carbonOpportunityScore,
+      ...carbonScores,
       biodiversityScore,
       waterSoilScore,
       livelihoodScore,
       feasibilityScore,
       landCoverAdjustment,
+      feasibilityGateMultiplier: feasibilityGateMultiplier(feasibilityScore),
     }),
     prediction_quality: "rule_based_fallback",
     scoring_note:
       "Rule-based MVP score from mixed source-derived and placeholder feature values. Treat as pre-feasibility screening, not final evidence.",
+  };
+}
+
+function carbonComponentScores(feature) {
+  const carbonOpportunityRaw = average([
+    vegetationOpportunityScore(feature),
+    feature.forest_loss_score,
+    feature.soil_organic_carbon_score,
+    carbonLandCoverFitScore(feature),
+  ]);
+  const restorationOpportunityScore = clampScore(
+    carbonOpportunityRaw * rainfallFeasibilityMultiplier(feature.rainfall_reliability_score)
+  );
+  const carbonStockScoreValue = carbonStockScore(feature);
+  const carbonStockConfidenceValue = carbonStockConfidenceScore(feature);
+  const carbonScore = carbonStockScoreValue === null
+    ? restorationOpportunityScore
+    : clampScore(
+        restorationOpportunityScore * 0.65 +
+          carbonStockScoreValue * 0.25 +
+          carbonStockConfidenceValue * 0.1
+      );
+
+  return {
+    carbonScore,
+    carbonOpportunityScore: carbonOpportunityRaw,
+    restorationOpportunityScore,
+    carbonStockScore: carbonStockScoreValue,
+    carbonStockConfidenceScore: carbonStockConfidenceValue,
   };
 }
 
@@ -125,6 +151,25 @@ function carbonLandCoverFitScore(feature) {
       mix.built_up * 80 -
       mix.water * 80
   );
+}
+
+function carbonStockScore(feature) {
+  const stock = feature.source_extracts?.carbon_stock_context;
+  const agbMean = Number(stock?.esa_cci_agb_mean_mg_ha);
+  if (stock?.status !== "source_derived" || !Number.isFinite(agbMean)) return null;
+  const relativeUncertainty = Number(stock.esa_cci_agb_relative_uncertainty_mean);
+  const uncertaintyMultiplier = Number.isFinite(relativeUncertainty)
+    ? Math.max(0.65, Math.min(0.95, 1 - relativeUncertainty * 0.35))
+    : 0.75;
+  return clampScore((agbMean / 160) * 100 * uncertaintyMultiplier);
+}
+
+function carbonStockConfidenceScore(feature) {
+  const stock = feature.source_extracts?.carbon_stock_context;
+  const relativeUncertainty = Number(stock?.esa_cci_agb_relative_uncertainty_mean);
+  if (stock?.status !== "source_derived") return 45;
+  if (!Number.isFinite(relativeUncertainty)) return 55;
+  return clampScore(100 - relativeUncertainty * 60);
 }
 
 function rainfallFeasibilityMultiplier(rainfallReliabilityScore) {
@@ -206,6 +251,15 @@ function landCoverSuitabilityAdjustment(feature) {
   return 0;
 }
 
+function feasibilityGateMultiplier(feasibilityScore) {
+  const score = Number(feasibilityScore);
+  if (!Number.isFinite(score)) return 0.8;
+  if (score <= 35) return 0.55;
+  if (score <= 55) return 0.55 + ((score - 35) / 20) * 0.25;
+  if (score <= 75) return 0.8 + ((score - 55) / 20) * 0.2;
+  return 1;
+}
+
 function topContributions(feature, scores) {
   const contributions = [
     { feature: "carbon_potential_composite", direction: "positive", weight: weights.carbon, value: scores.carbonScore },
@@ -259,6 +313,24 @@ function topContributions(feature, scores) {
       direction: "negative",
       weight: Math.abs(scores.landCoverAdjustment) / 100,
       value: Math.abs(scores.landCoverAdjustment),
+    });
+  }
+
+  if (scores.carbonStockScore !== null) {
+    contributions.push({
+      feature: "esa_cci_biomass_stock_context",
+      direction: "positive",
+      weight: 0.11,
+      value: scores.carbonStockScore,
+    });
+  }
+
+  if (scores.feasibilityGateMultiplier < 1) {
+    contributions.push({
+      feature: "feasibility_gate_multiplier",
+      direction: "negative",
+      weight: 1 - scores.feasibilityGateMultiplier,
+      value: (1 - scores.feasibilityGateMultiplier) * 100,
     });
   }
 
@@ -316,7 +388,7 @@ Transparent rule-based fallback. This is not a trained model.
 
 \`rule_based_fallback\`
 
-The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality. Geometry/admin labels, ESA WorldCover land cover, Sentinel-2 current NDVI/EVI, SRTM terrain, GFW/UMD forest-change context, CHIRPS rainfall, SoilGrids soil, WorldPop population, partial OSM access, GHSL settlement context, WaPOR water/productivity context, nearby soil observations, and GBIF biodiversity observation context are source-derived where valid pixels, observations, or mapped features exist. Local research evidence cards are context-derived for caveats and implementation notes only. Remaining fields, especially vegetation trend and safeguards, are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
+The current model reads \`data/features/site_features.json\`, which currently contains mixed feature quality. Geometry/admin labels, ESA WorldCover land cover, Sentinel-2 current NDVI/EVI, SRTM terrain, GFW/UMD forest-change context, ESA CCI Biomass carbon-stock context, CHIRPS rainfall, SoilGrids soil, WorldPop population, partial OSM access, GHSL settlement context, WaPOR water/productivity context, nearby soil observations, and GBIF biodiversity observation context are source-derived where valid pixels, observations, or mapped features exist. Local research evidence cards are context-derived for caveats and implementation notes only. Remaining fields, especially vegetation trend and safeguards, are deterministic placeholders. The ranking is useful for frontend and reasoning-layer integration, but it must not be presented as fully source-derived evidence until the remaining feature groups are extracted from verified sources.
 
 ## Default Weights
 
@@ -330,9 +402,9 @@ The current model reads \`data/features/site_features.json\`, which currently co
 
 ## Formula Notes
 
-The formula is documented in \`docs/formula.md\`. Rainfall no longer enters carbon as a direct averaged input. Instead, carbon opportunity is multiplied by a rainfall feasibility factor so dry sites are not over-promoted for tree-carbon restoration. Biodiversity is scored from habitat structure, restoration uplift, limited positive observation context, and pressure penalties.
+The formula is documented in \`docs/formula.md\`. Carbon is now split into restoration opportunity, ESA CCI Biomass stock context, and stock-confidence context. Rainfall does not enter carbon as a direct averaged input; it multiplies restoration opportunity so dry sites are not over-promoted for tree-carbon restoration. Biodiversity is scored from habitat structure, restoration uplift, limited positive observation context, and pressure penalties. Feasibility is both a small weighted component and a gating multiplier, so low-feasibility sites cannot rank highly on carbon alone.
 
-ESA WorldCover land-cover extraction, Sentinel-2 current vegetation extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, or otherwise high-risk, the ranker applies the relevant feature penalties and recommends field validation before investment. This prevents strong values in other feature groups from over-ranking areas that are visibly or physically unsuitable from source evidence.
+ESA WorldCover land-cover extraction, Sentinel-2 current vegetation extraction, SRTM terrain extraction, GFW/UMD forest-change extraction, ESA CCI Biomass extraction, CHIRPS rainfall extraction, SoilGrids soil extraction, and WorldPop population extraction are currently source-derived where valid pixels exist. If a candidate is water-dominant, heavily built-up, very steep, low-feasibility, or otherwise high-risk, the ranker applies the relevant feature penalties/gates and recommends field validation before investment. This prevents strong values in other feature groups from over-ranking areas that are visibly or practically unsuitable from source evidence.
 
 ## Top Ranked Candidates
 

@@ -1,0 +1,109 @@
+[
+  {
+    "investment_id": "investment:gimbo-assisted-natural-regeneration-demo",
+    "name": "Gimbo forest recovery",
+    "region": "Southwest Ethiopia Peoples' Region",
+    "zone": "Kefa",
+    "woreda": "Gimbo",
+    "site_id": "SWE-007",
+    "created_at_utc": "2026-06-28T08:00:00.000Z",
+    "intervention": "Assisted natural regeneration with community protection",
+    "status": "monitoring",
+    "area_ha": 1280,
+    "summary": "Community protection and enrichment planting on degraded forest-edge slopes.",
+    "baseline_score": 50,
+    "current_score": 62,
+    "score_history": [
+      {
+        "year": 2019,
+        "score": 50,
+        "why_changed": "Baseline showed sparse tree cover and high slope risk."
+      },
+      {
+        "year": 2022,
+        "score": 56,
+        "why_changed": "Mock monitoring shows vegetation recovery and reduced bare-soil signal."
+      },
+      {
+        "year": 2026,
+        "score": 62,
+        "why_changed": "Current feature stack gives stronger forest-edge and rainfall context, but field validation is still required."
+      }
+    ],
+    "image_timeline": [
+      {
+        "year": 2019,
+        "label": "Baseline",
+        "image_url": "/admin-investments/satellite-gimbo-2019.svg",
+        "note": "Sparse green patches before protection."
+      },
+      {
+        "year": 2022,
+        "label": "Early recovery",
+        "image_url": "/admin-investments/satellite-gimbo-2022.svg",
+        "note": "More contiguous vegetation in protected gullies."
+      },
+      {
+        "year": 2026,
+        "label": "Current mock state",
+        "image_url": "/admin-investments/satellite-gimbo-2026.svg",
+        "note": "Denser canopy pattern in the investment area."
+      },
+      {
+        "year": 2026,
+        "label": "Field context",
+        "image_url": "/admin-investments/challenge-green-hillside.png",
+        "note": "Landscape image extracted from AI4goodChallenge.pdf for demo context."
+      }
+    ],
+    "update_note": "Needs automatic update when Gimbo source-derived score, NDVI trend, forest context, or local evidence changes."
+  },
+  {
+    "investment_id": "investment:south-ethiopia-soil-water-demo",
+    "name": "Hamer soil-water works",
+    "region": "South Ethiopia",
+    "zone": "South Omo",
+    "woreda": "Hamer",
+    "site_id": "SET-002",
+    "created_at_utc": "2026-06-28T08:05:00.000Z",
+    "intervention": "Terracing repair, exclosures, and native tree planting",
+    "status": "active",
+    "area_ha": 740,
+    "summary": "Dryland restoration package focused on erosion control and vegetation recovery.",
+    "baseline_score": 39,
+    "current_score": 48,
+    "score_history": [
+      {
+        "year": 2020,
+        "score": 39,
+        "why_changed": "Baseline dryland context had low vegetation cover and high erosion sensitivity."
+      },
+      {
+        "year": 2026,
+        "score": 48,
+        "why_changed": "Mock vegetation recovery improves implementation story, but source-derived trend data is still pending."
+      }
+    ],
+    "image_timeline": [
+      {
+        "year": 2020,
+        "label": "Dry baseline",
+        "image_url": "/admin-investments/satellite-konso-2020.svg",
+        "note": "Sparse vegetation and exposed soil pattern."
+      },
+      {
+        "year": 2026,
+        "label": "Restoration mock",
+        "image_url": "/admin-investments/satellite-konso-2026.svg",
+        "note": "Vegetation patches expand around restored terraces."
+      },
+      {
+        "year": 2026,
+        "label": "Forest-edge context",
+        "image_url": "/admin-investments/challenge-forest-ridge.png",
+        "note": "Landscape image extracted from AI4goodChallenge.pdf for demo context."
+      }
+    ],
+    "update_note": "Needs automatic update when regional rainfall, soil, slope, vegetation, or source imagery changes."
+  }
+]

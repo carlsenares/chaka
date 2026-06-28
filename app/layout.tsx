@@ -5,8 +5,8 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
-  title: "Hackathon App",
-  description: "Built on the default scaffold.",
+  title: "Chaka Restoration Atlas",
+  description: "Source-derived restoration candidate ranking for Ethiopia.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

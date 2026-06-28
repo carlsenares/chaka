@@ -65,12 +65,19 @@ export function nestedPatrickSiteToSiteFeature(site: ProcessedSite): SiteFeature
 }
 
 export function normalizeSiteId(siteId: string, region: string) {
-  if (/^(SWE|SET)-\d{3}$/.test(siteId)) {
+  if (/^[A-Z]{3}-\d{3}$/.test(siteId)) {
     return siteId;
   }
 
   const number = siteId.match(/\d{3}/)?.[0] ?? "001";
-  const code = region.toLowerCase().includes("southwest") ? "SWE" : "SET";
+  const normalized = region.toLowerCase();
+  const code =
+    normalized.includes("tigray") ? "TIG" :
+    normalized.includes("amhara") ? "AMH" :
+    normalized.includes("oromia") ? "ORO" :
+    normalized.includes("southwest") || normalized.includes("south west") ? "SWE" :
+    normalized.includes("gambela") ? "GAM" :
+    "SET";
 
   return `${code}-${number}`;
 }
