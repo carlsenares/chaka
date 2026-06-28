@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" role="img" aria-label="Mock satellite tile showing sparse vegetation in 2019">
+  <rect width="900" height="540" fill="#9b875e"/>
+  <path d="M0 80c130 55 200 20 322 65 124 45 216 128 578 82v313H0z" fill="#786947"/>
+  <path d="M0 310c100-60 225-35 330-18 160 26 325-32 570 18v230H0z" fill="#6d7346"/>
+  <g fill="#315d39" opacity=".64">
+    <circle cx="100" cy="125" r="18"/><circle cx="148" cy="168" r="12"/><circle cx="230" cy="210" r="16"/>
+    <circle cx="354" cy="156" r="14"/><circle cx="412" cy="252" r="22"/><circle cx="520" cy="194" r="16"/>
+    <circle cx="650" cy="254" r="19"/><circle cx="724" cy="180" r="15"/><circle cx="800" cy="310" r="18"/>
+    <circle cx="260" cy="386" r="20"/><circle cx="560" cy="390" r="17"/><circle cx="710" cy="430" r="14"/>
+  </g>
+  <g fill="none" stroke="#d0bd83" stroke-width="5" opacity=".7">
+    <path d="M-20 420c150-42 260-62 420-36 180 29 300 0 520-30"/>
+    <path d="M42 22c92 83 171 140 250 186 108 64 215 124 356 272"/>
+  </g>
+</svg>

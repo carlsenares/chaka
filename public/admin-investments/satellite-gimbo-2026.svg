@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" role="img" aria-label="Mock satellite tile showing denser vegetation in 2026">
+  <rect width="900" height="540" fill="#6b7145"/>
+  <path d="M0 92c128 38 216 10 338 50 136 44 244 100 562 62v336H0z" fill="#41683e"/>
+  <path d="M0 300c120-48 246-26 370-8 185 26 358-18 530 18v230H0z" fill="#2f6339"/>
+  <g fill="#1f5f38" opacity=".92">
+    <circle cx="88" cy="118" r="35"/><circle cx="150" cy="165" r="32"/><circle cx="230" cy="210" r="39"/>
+    <circle cx="330" cy="155" r="34"/><circle cx="420" cy="248" r="45"/><circle cx="518" cy="195" r="38"/>
+    <circle cx="640" cy="250" r="43"/><circle cx="715" cy="180" r="36"/><circle cx="805" cy="305" r="42"/>
+    <circle cx="260" cy="382" r="45"/><circle cx="390" cy="420" r="36"/><circle cx="560" cy="390" r="42"/>
+    <circle cx="708" cy="430" r="36"/><circle cx="825" cy="455" r="34"/>
+  </g>
+  <g fill="none" stroke="#b6aa7a" stroke-width="4" opacity=".42">
+    <path d="M-20 420c150-42 260-62 420-36 180 29 300 0 520-30"/>
+    <path d="M42 22c92 83 171 140 250 186 108 64 215 124 356 272"/>
+  </g>
+</svg>

@@ -1,0 +1,862 @@
+{
+  "source": {
+    "dataset_id": "esa_cci_biomass",
+    "name": "ESA CCI Biomass above-ground biomass",
+    "provider": "ESA Climate Change Initiative / CEDA",
+    "version": "v7.0",
+    "year": 2024,
+    "source_url": "https://catalogue.ceda.ac.uk/uuid/6429d1aafe1e43b9b414e4a5a7f8b903",
+    "listing_url": "https://data.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/?json",
+    "extractor_version": "0.1.0",
+    "spatial_resolution": "100m",
+    "units": {
+      "agb": "Mg ha-1",
+      "agb_sd": "Mg ha-1"
+    },
+    "required_tiles": [
+      "N10E030",
+      "N20E030"
+    ],
+    "tile_resources": {
+      "N10E030": {
+        "agb": {
+          "name": "N10E030_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2024-fv7.0.tif",
+          "size": 98988456,
+          "last_modified": "2026-05-13T09:53:00",
+          "md5": "7e2d9c4addbe0a0826687ca723538f1c",
+          "download": "https://dap.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/N10E030_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2024-fv7.0.tif?download=1"
+        },
+        "agb_sd": {
+          "name": "N10E030_ESACCI-BIOMASS-L4-AGB_SD-MERGED-100m-2024-fv7.0.tif",
+          "size": 87910240,
+          "last_modified": "2026-05-13T09:53:01",
+          "md5": "e6c7a7e38f32ea6c1d2205b914d965f8",
+          "download": "https://dap.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/N10E030_ESACCI-BIOMASS-L4-AGB_SD-MERGED-100m-2024-fv7.0.tif?download=1"
+        }
+      },
+      "N20E030": {
+        "agb": {
+          "name": "N20E030_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2024-fv7.0.tif",
+          "size": 37060686,
+          "last_modified": "2026-05-13T09:53:05",
+          "md5": "89974b342691930c21977e470f882d5b",
+          "download": "https://dap.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/N20E030_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2024-fv7.0.tif?download=1"
+        },
+        "agb_sd": {
+          "name": "N20E030_ESACCI-BIOMASS-L4-AGB_SD-MERGED-100m-2024-fv7.0.tif",
+          "size": 33543264,
+          "last_modified": "2026-05-13T09:53:05",
+          "md5": "0f28a8f83cb072884b754c3be9dac5a4",
+          "download": "https://dap.ceda.ac.uk/neodc/esacci/biomass/data/agb/maps/v7.0/geotiff/2024/N20E030_ESACCI-BIOMASS-L4-AGB_SD-MERGED-100m-2024-fv7.0.tif?download=1"
+        }
+      }
+    },
+    "raw_cache": "data/raw/esa_cci_biomass",
+    "candidate_sites_sha256": "08042cffdacb35a9322af2df414101e13084336f9a8cbb8bf077bf2c90674421",
+    "extraction_method": "CEDA JSON listing -> ESA CCI Biomass GeoTIFF tiles -> rasterio polygon mask over candidate polygons; summarizes AGB and AGB_SD separately.",
+    "scoring_policy": "context_only_no_score_override",
+    "note": "AGB is above-ground biomass, not verified project carbon. Convert to carbon only with an explicit factor and source."
+  },
+  "features": [
+    {
+      "site_id": "TIG-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 29.316,
+      "esa_cci_agb_median_mg_ha": 25.0,
+      "esa_cci_agb_p90_mg_ha": 64.0,
+      "esa_cci_agb_total_mg": 72935.212,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 23.981,
+      "esa_cci_agb_sd_median_mg_ha": 18.0,
+      "esa_cci_agb_sd_p90_mg_ha": 53.7,
+      "esa_cci_agb_sd_total_mg": 59662.973,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.818
+    },
+    {
+      "site_id": "TIG-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 6.632,
+      "esa_cci_agb_median_mg_ha": 3.0,
+      "esa_cci_agb_p90_mg_ha": 17.0,
+      "esa_cci_agb_total_mg": 16182.471,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 2.98,
+      "esa_cci_agb_sd_median_mg_ha": 1.0,
+      "esa_cci_agb_sd_p90_mg_ha": 7.0,
+      "esa_cci_agb_sd_total_mg": 7270.519,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.4493
+    },
+    {
+      "site_id": "TIG-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 3.583,
+      "esa_cci_agb_median_mg_ha": 3.0,
+      "esa_cci_agb_p90_mg_ha": 5.0,
+      "esa_cci_agb_total_mg": 8913.793,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 1.321,
+      "esa_cci_agb_sd_median_mg_ha": 1.0,
+      "esa_cci_agb_sd_p90_mg_ha": 2.0,
+      "esa_cci_agb_sd_total_mg": 3285.627,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.3687
+    },
+    {
+      "site_id": "TIG-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 26.354,
+      "esa_cci_agb_median_mg_ha": 25.0,
+      "esa_cci_agb_p90_mg_ha": 55.9,
+      "esa_cci_agb_total_mg": 64305.726,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 14.291,
+      "esa_cci_agb_sd_median_mg_ha": 13.0,
+      "esa_cci_agb_sd_p90_mg_ha": 31.0,
+      "esa_cci_agb_sd_total_mg": 34871.257,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5423
+    },
+    {
+      "site_id": "AMH-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 6.935,
+      "esa_cci_agb_median_mg_ha": 2.0,
+      "esa_cci_agb_p90_mg_ha": 19.0,
+      "esa_cci_agb_total_mg": 17392.328,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 4.408,
+      "esa_cci_agb_sd_median_mg_ha": 2.0,
+      "esa_cci_agb_sd_p90_mg_ha": 12.0,
+      "esa_cci_agb_sd_total_mg": 11055.222,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6356
+    },
+    {
+      "site_id": "AMH-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 10.949,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 39.0,
+      "esa_cci_agb_total_mg": 26203.127,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 10.061,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 36.0,
+      "esa_cci_agb_sd_total_mg": 24076.809,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.9189
+    },
+    {
+      "site_id": "AMH-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 41.322,
+      "esa_cci_agb_median_mg_ha": 31.0,
+      "esa_cci_agb_p90_mg_ha": 93.0,
+      "esa_cci_agb_total_mg": 98889.916,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 34.075,
+      "esa_cci_agb_sd_median_mg_ha": 22.0,
+      "esa_cci_agb_sd_p90_mg_ha": 81.0,
+      "esa_cci_agb_sd_total_mg": 81545.376,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.8246
+    },
+    {
+      "site_id": "AMH-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 0.609,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 0.0,
+      "esa_cci_agb_total_mg": 1514.461,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 0.395,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 0.0,
+      "esa_cci_agb_sd_total_mg": 981.732,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6486
+    },
+    {
+      "site_id": "ORO-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 27.424,
+      "esa_cci_agb_median_mg_ha": 24.0,
+      "esa_cci_agb_p90_mg_ha": 53.0,
+      "esa_cci_agb_total_mg": 70128.58,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 14.276,
+      "esa_cci_agb_sd_median_mg_ha": 12.0,
+      "esa_cci_agb_sd_p90_mg_ha": 29.0,
+      "esa_cci_agb_sd_total_mg": 36505.856,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5206
+    },
+    {
+      "site_id": "ORO-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 1.086,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 4.0,
+      "esa_cci_agb_total_mg": 2778.028,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 1.01,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 3.0,
+      "esa_cci_agb_sd_total_mg": 2583.248,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.93
+    },
+    {
+      "site_id": "ORO-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 134.923,
+      "esa_cci_agb_median_mg_ha": 145.0,
+      "esa_cci_agb_p90_mg_ha": 185.0,
+      "esa_cci_agb_total_mg": 345027.062,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 76.469,
+      "esa_cci_agb_sd_median_mg_ha": 82.0,
+      "esa_cci_agb_sd_p90_mg_ha": 104.0,
+      "esa_cci_agb_sd_total_mg": 195547.734,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5668
+    },
+    {
+      "site_id": "ORO-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N20E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 5.187,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 13.0,
+      "esa_cci_agb_total_mg": 12904.205,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 4.936,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 12.0,
+      "esa_cci_agb_sd_total_mg": 12280.387,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N20E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.9516
+    },
+    {
+      "site_id": "SET-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 0.0,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 0.0,
+      "esa_cci_agb_total_mg": 0.0,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 0.0,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 0.0,
+      "esa_cci_agb_sd_total_mg": 0.0,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": null
+    },
+    {
+      "site_id": "SET-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 32.086,
+      "esa_cci_agb_median_mg_ha": 5.0,
+      "esa_cci_agb_p90_mg_ha": 98.0,
+      "esa_cci_agb_total_mg": 80472.18,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 21.509,
+      "esa_cci_agb_sd_median_mg_ha": 3.0,
+      "esa_cci_agb_sd_p90_mg_ha": 68.0,
+      "esa_cci_agb_sd_total_mg": 53945.433,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6704
+    },
+    {
+      "site_id": "SET-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 19.177,
+      "esa_cci_agb_median_mg_ha": 12.0,
+      "esa_cci_agb_p90_mg_ha": 43.0,
+      "esa_cci_agb_total_mg": 48097.206,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 10.694,
+      "esa_cci_agb_sd_median_mg_ha": 7.0,
+      "esa_cci_agb_sd_p90_mg_ha": 24.0,
+      "esa_cci_agb_sd_total_mg": 26820.846,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5576
+    },
+    {
+      "site_id": "SET-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 16.043,
+      "esa_cci_agb_median_mg_ha": 14.0,
+      "esa_cci_agb_p90_mg_ha": 33.0,
+      "esa_cci_agb_total_mg": 41828.562,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 8.814,
+      "esa_cci_agb_sd_median_mg_ha": 7.0,
+      "esa_cci_agb_sd_p90_mg_ha": 19.0,
+      "esa_cci_agb_sd_total_mg": 22981.169,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5494
+    },
+    {
+      "site_id": "SET-005",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 24.276,
+      "esa_cci_agb_median_mg_ha": 20.0,
+      "esa_cci_agb_p90_mg_ha": 57.0,
+      "esa_cci_agb_total_mg": 63296.81,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 17.956,
+      "esa_cci_agb_sd_median_mg_ha": 13.0,
+      "esa_cci_agb_sd_p90_mg_ha": 45.0,
+      "esa_cci_agb_sd_total_mg": 46817.635,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.7397
+    },
+    {
+      "site_id": "SET-006",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 114.903,
+      "esa_cci_agb_median_mg_ha": 119.0,
+      "esa_cci_agb_p90_mg_ha": 147.7,
+      "esa_cci_agb_total_mg": 299593.137,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 68.386,
+      "esa_cci_agb_sd_median_mg_ha": 67.0,
+      "esa_cci_agb_sd_p90_mg_ha": 96.0,
+      "esa_cci_agb_sd_total_mg": 178305.831,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.5952
+    },
+    {
+      "site_id": "SET-007",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 27.495,
+      "esa_cci_agb_median_mg_ha": 22.0,
+      "esa_cci_agb_p90_mg_ha": 62.0,
+      "esa_cci_agb_total_mg": 71688.75,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 17.847,
+      "esa_cci_agb_sd_median_mg_ha": 13.0,
+      "esa_cci_agb_sd_p90_mg_ha": 41.0,
+      "esa_cci_agb_sd_total_mg": 46532.215,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6491
+    },
+    {
+      "site_id": "SET-008",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 33.711,
+      "esa_cci_agb_median_mg_ha": 33.0,
+      "esa_cci_agb_p90_mg_ha": 57.0,
+      "esa_cci_agb_total_mg": 87896.005,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 28.447,
+      "esa_cci_agb_sd_median_mg_ha": 28.0,
+      "esa_cci_agb_sd_p90_mg_ha": 48.0,
+      "esa_cci_agb_sd_total_mg": 74172.68,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.8438
+    },
+    {
+      "site_id": "SWE-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 17.624,
+      "esa_cci_agb_median_mg_ha": 18.0,
+      "esa_cci_agb_p90_mg_ha": 37.0,
+      "esa_cci_agb_total_mg": 45952.695,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 8.268,
+      "esa_cci_agb_sd_median_mg_ha": 8.0,
+      "esa_cci_agb_sd_p90_mg_ha": 18.0,
+      "esa_cci_agb_sd_total_mg": 21557.924,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.4691
+    },
+    {
+      "site_id": "SWE-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 20.076,
+      "esa_cci_agb_median_mg_ha": 16.0,
+      "esa_cci_agb_p90_mg_ha": 41.0,
+      "esa_cci_agb_total_mg": 51339.042,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 7.928,
+      "esa_cci_agb_sd_median_mg_ha": 6.0,
+      "esa_cci_agb_sd_p90_mg_ha": 16.0,
+      "esa_cci_agb_sd_total_mg": 20272.567,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.3949
+    },
+    {
+      "site_id": "SWE-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 9.799,
+      "esa_cci_agb_median_mg_ha": 6.0,
+      "esa_cci_agb_p90_mg_ha": 21.0,
+      "esa_cci_agb_total_mg": 25549.953,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 4.506,
+      "esa_cci_agb_sd_median_mg_ha": 2.0,
+      "esa_cci_agb_sd_p90_mg_ha": 11.0,
+      "esa_cci_agb_sd_total_mg": 11748.524,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.4598
+    },
+    {
+      "site_id": "SWE-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 37.119,
+      "esa_cci_agb_median_mg_ha": 30.0,
+      "esa_cci_agb_p90_mg_ha": 82.0,
+      "esa_cci_agb_total_mg": 94921.591,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 22.72,
+      "esa_cci_agb_sd_median_mg_ha": 18.0,
+      "esa_cci_agb_sd_p90_mg_ha": 50.0,
+      "esa_cci_agb_sd_total_mg": 58100.422,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6121
+    },
+    {
+      "site_id": "SWE-005",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 43.756,
+      "esa_cci_agb_median_mg_ha": 35.0,
+      "esa_cci_agb_p90_mg_ha": 93.0,
+      "esa_cci_agb_total_mg": 114086.225,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 35.454,
+      "esa_cci_agb_sd_median_mg_ha": 28.0,
+      "esa_cci_agb_sd_p90_mg_ha": 75.7,
+      "esa_cci_agb_sd_total_mg": 92440.554,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.8103
+    },
+    {
+      "site_id": "SWE-006",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 99.095,
+      "esa_cci_agb_median_mg_ha": 100.5,
+      "esa_cci_agb_p90_mg_ha": 142.0,
+      "esa_cci_agb_total_mg": 253406.127,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 61.29,
+      "esa_cci_agb_sd_median_mg_ha": 59.0,
+      "esa_cci_agb_sd_p90_mg_ha": 91.0,
+      "esa_cci_agb_sd_total_mg": 156730.55,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6185
+    },
+    {
+      "site_id": "SWE-007",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 86.422,
+      "esa_cci_agb_median_mg_ha": 76.0,
+      "esa_cci_agb_p90_mg_ha": 160.0,
+      "esa_cci_agb_total_mg": 220999.333,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 58.711,
+      "esa_cci_agb_sd_median_mg_ha": 52.0,
+      "esa_cci_agb_sd_p90_mg_ha": 105.0,
+      "esa_cci_agb_sd_total_mg": 150135.988,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6794
+    },
+    {
+      "site_id": "SWE-008",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 158.16,
+      "esa_cci_agb_median_mg_ha": 159.0,
+      "esa_cci_agb_p90_mg_ha": 199.0,
+      "esa_cci_agb_total_mg": 404447.553,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 127.559,
+      "esa_cci_agb_sd_median_mg_ha": 127.0,
+      "esa_cci_agb_sd_p90_mg_ha": 166.0,
+      "esa_cci_agb_sd_total_mg": 326196.061,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.8065
+    },
+    {
+      "site_id": "GAM-001",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 12.214,
+      "esa_cci_agb_median_mg_ha": 7.0,
+      "esa_cci_agb_p90_mg_ha": 30.0,
+      "esa_cci_agb_total_mg": 30632.559,
+      "esa_cci_agb_valid_pixel_count": 2601,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 7.639,
+      "esa_cci_agb_sd_median_mg_ha": 4.0,
+      "esa_cci_agb_sd_p90_mg_ha": 20.0,
+      "esa_cci_agb_sd_total_mg": 19159.813,
+      "esa_cci_agb_sd_valid_pixel_count": 2601,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6254
+    },
+    {
+      "site_id": "GAM-002",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 87.003,
+      "esa_cci_agb_median_mg_ha": 85.0,
+      "esa_cci_agb_p90_mg_ha": 125.0,
+      "esa_cci_agb_total_mg": 226848.524,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 65.776,
+      "esa_cci_agb_sd_median_mg_ha": 63.0,
+      "esa_cci_agb_sd_p90_mg_ha": 97.0,
+      "esa_cci_agb_sd_total_mg": 171500.095,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.756
+    },
+    {
+      "site_id": "GAM-003",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 1.798,
+      "esa_cci_agb_median_mg_ha": 0.0,
+      "esa_cci_agb_p90_mg_ha": 7.0,
+      "esa_cci_agb_total_mg": 4598.548,
+      "esa_cci_agb_valid_pixel_count": 2652,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 1.148,
+      "esa_cci_agb_sd_median_mg_ha": 0.0,
+      "esa_cci_agb_sd_p90_mg_ha": 4.0,
+      "esa_cci_agb_sd_total_mg": 2935.202,
+      "esa_cci_agb_sd_valid_pixel_count": 2652,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.6385
+    },
+    {
+      "site_id": "GAM-004",
+      "source_status": "source_derived",
+      "source_tiles": [
+        "N10E030"
+      ],
+      "scoring_policy": "context_only_no_score_override",
+      "esa_cci_agb_mean_mg_ha": 26.771,
+      "esa_cci_agb_median_mg_ha": 17.0,
+      "esa_cci_agb_p90_mg_ha": 63.0,
+      "esa_cci_agb_total_mg": 69800.733,
+      "esa_cci_agb_valid_pixel_count": 2704,
+      "esa_cci_agb_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_sd_mean_mg_ha": 19.648,
+      "esa_cci_agb_sd_median_mg_ha": 11.0,
+      "esa_cci_agb_sd_p90_mg_ha": 49.0,
+      "esa_cci_agb_sd_total_mg": 51228.153,
+      "esa_cci_agb_sd_valid_pixel_count": 2704,
+      "esa_cci_agb_sd_tiles": [
+        "N10E030"
+      ],
+      "esa_cci_agb_relative_uncertainty_mean": 0.7339
+    }
+  ]
+}

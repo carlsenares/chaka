@@ -36,6 +36,222 @@
   },
   "features": [
     {
+      "site_id": "TIG-001",
+      "ndvi_current": 0.374,
+      "evi_current": 0.201,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 108392,
+      "sentinel2_valid_pixel_count_max": 243265,
+      "sentinel2_scene_ids": [
+        "S2A_37PEQ_20260315_0_L2A",
+        "S2A_37PEP_20260315_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "TIG-002",
+      "ndvi_current": 0.154,
+      "evi_current": 0.113,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 242172,
+      "sentinel2_valid_pixel_count_max": 242172,
+      "sentinel2_scene_ids": [
+        "S2A_37PER_20260315_0_L2A",
+        "S2C_37PER_20260522_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "TIG-003",
+      "ndvi_current": 0.298,
+      "evi_current": 0.196,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 438,
+      "sentinel2_valid_pixel_count_max": 1812,
+      "sentinel2_scene_ids": [
+        "S2C_37PER_20260525_0_L2A",
+        "S2B_37PER_20260420_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "TIG-004",
+      "ndvi_current": 0.224,
+      "evi_current": 0.14,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 241080,
+      "sentinel2_valid_pixel_count_max": 241080,
+      "sentinel2_scene_ids": [
+        "S2A_37PCS_20260328_0_L2A",
+        "S2B_37PCS_20260430_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "AMH-001",
+      "ndvi_current": 0.253,
+      "evi_current": 0.152,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 246234,
+      "sentinel2_valid_pixel_count_max": 246234,
+      "sentinel2_scene_ids": [
+        "S2A_37PEK_20260613_0_L2A",
+        "S2A_37PEK_20260315_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "AMH-002",
+      "ndvi_current": 0.15,
+      "evi_current": 0.087,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 244570,
+      "sentinel2_valid_pixel_count_max": 244570,
+      "sentinel2_scene_ids": [
+        "S2C_37PDN_20260316_0_L2A",
+        "S2B_37PDN_20260520_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "AMH-003",
+      "ndvi_current": 0.414,
+      "evi_current": 0.235,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 243691,
+      "sentinel2_valid_pixel_count_max": 243693,
+      "sentinel2_scene_ids": [
+        "S2A_37PEP_20260315_0_L2A",
+        "S2C_37PEP_20260512_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "AMH-004",
+      "ndvi_current": 0.147,
+      "evi_current": 0.083,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 242572,
+      "sentinel2_valid_pixel_count_max": 242572,
+      "sentinel2_scene_ids": [
+        "S2A_37PBR_20260331_0_L2A",
+        "S2C_37PBR_20260309_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "ORO-001",
+      "ndvi_current": 0.12,
+      "evi_current": 0.332,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 248003,
+      "sentinel2_valid_pixel_count_max": 248003,
+      "sentinel2_scene_ids": [
+        "S2B_37NDD_20260606_0_L2A",
+        "S2A_37NDD_20260603_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "ORO-002",
+      "ndvi_current": 0.234,
+      "evi_current": 0.115,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 77532,
+      "sentinel2_valid_pixel_count_max": 247009,
+      "sentinel2_scene_ids": [
+        "S2B_37NDH_20260606_0_L2A",
+        "S2B_37NEH_20260606_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "ORO-003",
+      "ndvi_current": 0.78,
+      "evi_current": 0.445,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 246506,
+      "sentinel2_valid_pixel_count_max": 246506,
+      "sentinel2_scene_ids": [
+        "S2B_36PXQ_20260304_0_L2A",
+        "S2C_36PXQ_20260309_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "ORO-004",
+      "ndvi_current": 0.23,
+      "evi_current": 0.158,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 245113,
+      "sentinel2_valid_pixel_count_max": 245114,
+      "sentinel2_scene_ids": [
+        "S2C_37PDM_20260522_0_L2A",
+        "S2B_37PDM_20260507_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
       "site_id": "SET-001",
       "ndvi_current": -0.373,
       "evi_current": -0.134,
@@ -316,6 +532,78 @@
       "sentinel2_scene_ids": [
         "S2C_36PZQ_20260306_0_L2A",
         "S2B_36PZQ_20260430_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "GAM-001",
+      "ndvi_current": 0.474,
+      "evi_current": 0.274,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 247916,
+      "sentinel2_valid_pixel_count_max": 247916,
+      "sentinel2_scene_ids": [
+        "S2B_36NYM_20260304_0_L2A",
+        "S2A_36NYM_20260609_1_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "GAM-002",
+      "ndvi_current": 0.478,
+      "evi_current": 0.246,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 247240,
+      "sentinel2_valid_pixel_count_max": 247240,
+      "sentinel2_scene_ids": [
+        "S2B_36NXP_20260304_0_L2A",
+        "S2C_36NXP_20260329_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "GAM-003",
+      "ndvi_current": 0.332,
+      "evi_current": 0.204,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 246532,
+      "sentinel2_valid_pixel_count_max": 246532,
+      "sentinel2_scene_ids": [
+        "S2B_36NWP_20260304_0_L2A",
+        "S2C_36NWP_20260309_0_L2A"
+      ],
+      "landsat_ndvi_by_year": {},
+      "landsat_scene_count_by_year": {},
+      "source_status": "partial_source_derived",
+      "trend_note": "Landsat annual NDVI trend was not run or could not be computed for both first and last valid trend years."
+    },
+    {
+      "site_id": "GAM-004",
+      "ndvi_current": 0.32,
+      "evi_current": 0.183,
+      "ndvi_trend_5y": null,
+      "sentinel2_scene_count": 2,
+      "sentinel2_candidate_scene_count": 2,
+      "sentinel2_valid_pixel_count_min": 246391,
+      "sentinel2_valid_pixel_count_max": 246391,
+      "sentinel2_scene_ids": [
+        "S2B_36PXQ_20260304_0_L2A",
+        "S2C_36PXQ_20260309_0_L2A"
       ],
       "landsat_ndvi_by_year": {},
       "landsat_scene_count_by_year": {},

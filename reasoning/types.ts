@@ -99,6 +99,29 @@ export type PredictionQuality =
   | "weak_supervised_demo"
   | "rule_based_fallback";
 
+export type CandidateSiteMetadata = {
+  site_id: string;
+  name: string;
+  region: string;
+  region_code: string;
+  zone: string;
+  woreda: string;
+  zone_pcode: string;
+  woreda_pcode: string;
+  area_ha: number;
+  candidate_method: string;
+  geometry_quality: string;
+  source_aoi: string;
+  centroid_lon: number;
+  centroid_lat: number;
+  data_coverage_basis: string;
+};
+
+export type CandidateSiteGeometry = {
+  type: "Polygon";
+  coordinates: number[][][];
+};
+
 export type SiteFeature = {
   site_id: string;
   region: string;
@@ -307,19 +330,134 @@ export type SiteListResponse = {
     carbon_potential: CanonicalScoreLabel;
     livelihood_benefit: CanonicalScoreLabel;
     data_quality_score: number | null;
-    geometry: {
-      type: "Polygon";
-      coordinates: unknown[];
-    };
+    candidate: CandidateSiteMetadata | null;
+    geometry: CandidateSiteGeometry | null;
   }>;
 };
 
 export type SiteDetailResponse = {
   site_features: SiteFeature;
+  candidate: CandidateSiteMetadata | null;
+  geometry: CandidateSiteGeometry | null;
   model_prediction: ModelPrediction;
   recommendation: RecommendationObject;
   critic: EvidenceCriticObject;
   similar_cases: SimilarCasesObject["similar_cases"];
+};
+
+export type LocalKnowledgeConfidence =
+  | "blocked"
+  | "low"
+  | "medium_low"
+  | "medium"
+  | "medium_high"
+  | "high";
+
+export type LocalDocumentAnalysis = {
+  source_id: string;
+  filename: string;
+  title: string;
+  source_type: string;
+  year: number | null;
+  document_use_class: string;
+  geographic_scope: {
+    match_level: string;
+    candidate_site_ids: string[];
+    country: string;
+    region: string | null;
+    zone: string | null;
+    woreda: string | null;
+    places: string[];
+  };
+  topics: string[];
+  intervention_tags: string[];
+  validity: {
+    overall_confidence: LocalKnowledgeConfidence;
+    subjectivity_risk: "low" | "medium" | "high";
+    method_clarity: "clear" | "partial" | "unclear";
+    ocr_quality: "good" | "mixed" | "poor";
+    notes: string[];
+  };
+  allowed_uses: string[];
+  blocked_uses: string[];
+  scoring_candidate_facts: Array<{
+    variable: string;
+    page: number | null;
+    reason: string;
+    manual_review_required: boolean;
+  }>;
+  summary: string;
+};
+
+export type LocalEvidenceCard = {
+  evidence_id: string;
+  source_id: string;
+  filename: string;
+  source_type: string;
+  claim: string;
+  evidence_quote: string;
+  citation: {
+    page: number;
+    locator: string;
+  };
+  geography: {
+    country: string;
+    region: string | null;
+    zone: string | null;
+    woreda: string | null;
+    places: string[];
+    candidate_site_ids: string[];
+    match_level: string;
+  };
+  topics: string[];
+  intervention_tags: string[];
+  allowed_use: string;
+  not_allowed_use: string;
+  confidence: LocalKnowledgeConfidence;
+  source_confidence: LocalKnowledgeConfidence;
+  review_status: string;
+  validation_notes: string[];
+};
+
+export type LocalKnowledgeMatch = {
+  card: LocalEvidenceCard;
+  source_analysis: LocalDocumentAnalysis | null;
+  match_score: number;
+  match_reasons: string[];
+};
+
+export type SiteIntelligenceResponse = {
+  site_id: string;
+  generated_at: string;
+  model_used: string;
+  retrieval_strategy: string;
+  score_explanation: string;
+  why_this_area: string;
+  investment_summary: {
+    opportunity: string;
+    investment: string;
+    why_here: string;
+    expected_change: string;
+  };
+  investment_ideas: Array<{
+    title: string;
+    reasoning: string;
+    caveats: string[];
+    citations: string[];
+  }>;
+  local_caveats: Array<{
+    caveat: string;
+    confidence: LocalKnowledgeConfidence;
+    source: string;
+    citation: string;
+  }>;
+  field_checks: string[];
+  do_not_overclaim: string[];
+  retrieved_evidence: LocalKnowledgeMatch[];
+  audit: {
+    status: "not_run" | "passed" | "needs_review";
+    notes: string[];
+  };
 };
 
 export type RecommendationResult = {

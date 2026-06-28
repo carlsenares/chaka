@@ -1,13 +1,13 @@
+@import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 
-/* House style (see DESIGN.md): neutral base + ONE accent, OKLCH, dark-first.
-   These tokens auto-generate utilities (bg-base, text-accent, …) in Tailwind v4. */
+/* NGO decision-support theme: warm paper base, grounded greens, restrained blue accent. */
 @theme {
-  --color-base: oklch(0.17 0.02 265);
-  --color-surface: oklch(0.22 0.02 265);
-  --color-fg: oklch(0.97 0.01 265);
-  --color-muted: oklch(0.97 0.01 265 / 0.6);
-  --color-accent: oklch(0.74 0.17 152);
+  --color-base: oklch(0.97 0.025 91);
+  --color-surface: oklch(0.995 0.008 95);
+  --color-fg: oklch(0.25 0.045 150);
+  --color-muted: oklch(0.47 0.028 128);
+  --color-accent: oklch(0.45 0.095 169);
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -15,4 +15,158 @@ body {
   background: var(--color-base);
   color: var(--color-fg);
   font-family: var(--font-sans);
+}
+
+button,
+input,
+a {
+  cursor: pointer;
+  font: inherit;
+}
+
+.priority-slider {
+  width: 100%;
+  height: 28px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.priority-slider:focus {
+  outline: none;
+}
+
+.priority-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border: 1px solid #c8d5c5;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d9eadf, #7fa88d);
+}
+
+.priority-slider::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  margin-top: -8px;
+  appearance: none;
+  border: 3px solid #ffffff;
+  border-radius: 999px;
+  background: #1f6f68;
+  box-shadow: 0 2px 8px rgb(31 111 104 / 0.28);
+}
+
+.priority-slider::-moz-range-track {
+  height: 8px;
+  border: 1px solid #c8d5c5;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d9eadf, #7fa88d);
+}
+
+.priority-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #ffffff;
+  border-radius: 999px;
+  background: #1f6f68;
+  box-shadow: 0 2px 8px rgb(31 111 104 / 0.28);
+}
+
+.leaflet-container {
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+  background: #edf2e7;
+  color: #243f32;
+  font-family: var(--font-sans);
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.priority-map-tooltip {
+  border: 1px solid #d9d0bd;
+  border-radius: 6px;
+  box-shadow: 0 8px 22px rgb(71 59 47 / 0.14);
+  color: #243f32;
+  font-family: var(--font-sans);
+}
+
+.priority-boundary-active {
+  filter: drop-shadow(0 0 7px rgb(36 49 38 / 0.34)) drop-shadow(0 2px 4px rgb(36 49 38 / 0.18));
+  transition: fill-opacity 240ms ease, stroke-width 240ms ease, stroke 240ms ease, filter 240ms ease;
+}
+
+.priority-boundary {
+  transition: fill-opacity 220ms ease, stroke-width 220ms ease, stroke 220ms ease;
+}
+
+.ethiopia-context-mask {
+  mix-blend-mode: normal;
+  transition: fill-opacity 220ms ease;
+}
+
+.ethiopia-country-label-wrapper,
+.neighbor-country-label-wrapper,
+.priority-selected-label-wrapper {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+.ethiopia-country-label,
+.neighbor-country-label,
+.priority-selected-label {
+  display: inline-block;
+  min-width: max-content;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ethiopia-country-label {
+  color: #173d2f;
+  font-size: 20px;
+  font-weight: 850;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 7px #fff,
+    0 1px 4px rgb(23 61 47 / 0.22);
+}
+
+.neighbor-country-label {
+  color: rgb(96 101 94 / 0.72);
+  font-size: 12px;
+  font-weight: 650;
+  text-shadow:
+    0 0 3px rgb(255 255 255 / 0.82),
+    0 1px 3px rgb(255 255 255 / 0.75);
+}
+
+.priority-selected-label {
+  color: #173d2f;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 4px #fff,
+    1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff,
+    0 2px 5px rgb(36 49 38 / 0.24);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .priority-boundary,
+  .priority-boundary-active,
+  .ethiopia-context-mask,
+  .priority-selected-label {
+    transition: none;
+  }
 }

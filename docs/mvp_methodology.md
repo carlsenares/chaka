@@ -24,10 +24,19 @@ It does not prove:
 
 ## Candidate Areas
 
-The first MVP uses deterministic candidate grid cells inside two target regions from the data matrix:
+The first MVP started with deterministic candidate grid cells inside two target regions from the data matrix:
 
 - South Ethiopia (`SET`)
 - Southwest Ethiopia Peoples' Region (`SWE`)
+
+For the demo map, the candidate set has been expanded to 32 screening cells so the map has broader national coverage:
+
+- 8 in South Ethiopia (`SET`)
+- 8 in Southwest Ethiopia Peoples' Region (`SWE`)
+- 4 in Tigray (`TIG`)
+- 4 in Amhara (`AMH`)
+- 4 in Oromia (`ORO`)
+- 4 in Gambela (`GAM`)
 
 The candidate areas are generated from HDX/OCHA Ethiopia administrative boundaries and written to:
 

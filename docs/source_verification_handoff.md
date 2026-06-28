@@ -41,9 +41,13 @@ data/catalog/datasets.json
 
 Current candidate unit:
 
-- 16 deterministic grid cells.
+- 32 deterministic grid cells.
 - 8 in South Ethiopia (`SET`).
 - 8 in Southwest Ethiopia Peoples' Region (`SWE`).
+- 4 in Tigray (`TIG`).
+- 4 in Amhara (`AMH`).
+- 4 in Oromia (`ORO`).
+- 4 in Gambela (`GAM`).
 - Around 2,500 ha each.
 - These are screening units, not final project boundaries.
 

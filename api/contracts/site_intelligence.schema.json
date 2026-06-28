@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaka.local/contracts/site_intelligence.schema.json",
+  "title": "SiteIntelligenceResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "site_id",
+    "generated_at",
+    "model_used",
+    "retrieval_strategy",
+    "score_explanation",
+    "why_this_area",
+    "investment_summary",
+    "investment_ideas",
+    "local_caveats",
+    "field_checks",
+    "do_not_overclaim",
+    "retrieved_evidence",
+    "audit"
+  ],
+  "properties": {
+    "site_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "model_used": { "type": "string" },
+    "retrieval_strategy": { "type": "string" },
+    "score_explanation": { "type": "string" },
+    "why_this_area": { "type": "string" },
+    "investment_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["opportunity", "investment", "why_here", "expected_change"],
+      "properties": {
+        "opportunity": { "type": "string" },
+        "investment": { "type": "string" },
+        "why_here": { "type": "string" },
+        "expected_change": { "type": "string" }
+      }
+    },
+    "investment_ideas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "reasoning", "caveats", "citations"],
+        "properties": {
+          "title": { "type": "string" },
+          "reasoning": { "type": "string" },
+          "caveats": { "type": "array", "items": { "type": "string" } },
+          "citations": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "local_caveats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caveat", "confidence", "source", "citation"],
+        "properties": {
+          "caveat": { "type": "string" },
+          "confidence": {
+            "type": "string",
+            "enum": ["blocked", "low", "medium_low", "medium", "medium_high", "high"]
+          },
+          "source": { "type": "string" },
+          "citation": { "type": "string" }
+        }
+      }
+    },
+    "field_checks": { "type": "array", "items": { "type": "string" } },
+    "do_not_overclaim": { "type": "array", "items": { "type": "string" } },
+    "retrieved_evidence": { "type": "array" },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "notes"],
+      "properties": {
+        "status": { "type": "string", "enum": ["not_run", "passed", "needs_review"] },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
