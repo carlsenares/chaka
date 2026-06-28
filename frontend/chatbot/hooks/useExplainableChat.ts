@@ -13,6 +13,12 @@ export function useExplainableChat(context: ExplainableChatContext) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  function resetChat() {
+    setMessages([]);
+    setDraft("");
+    setError(null);
+  }
+
   async function sendMessage(messageOverride?: string) {
     const message = (messageOverride ?? draft).trim();
     if (!message || isStreaming) return;
@@ -34,7 +40,7 @@ export function useExplainableChat(context: ExplainableChatContext) {
     setMessages((current) => [...current, userMessage, assistantMessage]);
 
     try {
-      const response = await fetch("/api/explainable-chat", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, context }),
@@ -82,6 +88,7 @@ export function useExplainableChat(context: ExplainableChatContext) {
     error,
     isStreaming,
     messages,
+    resetChat,
     sendMessage,
     setDraft,
   };

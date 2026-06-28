@@ -195,7 +195,13 @@ array ordered from highest priority to lowest priority.
 The explainable chatbot is an optional explanation layer for the selected
 restoration recommendation. It answers questions about why an area ranks highly,
 which indicators contributed most, trade-offs across biodiversity/carbon/water/
-livelihood, methodology, assumptions, and limitations.
+livelihood, methodology, assumptions, and limitations. It is domain-specific:
+questions outside restoration prioritization, scoring, indicators, data sources,
+backend/sample results, assumptions, and limitations are declined.
+
+When enabled, the UI appears as a floating lower-right button named "Chaka" with
+an "AI assistant for Q&A" label. Opening it reveals the recommendation
+explanation panel without changing the map or ranking layout.
 
 The chatbot code lives in:
 
@@ -224,9 +230,9 @@ OPENAI_API_KEY=your_server_side_key
 OPENAI_MODEL=gpt-4o-mini
 ```
 
-`OPENAI_API_KEY` is used only by the server-side API route. The browser never
-calls OpenAI directly. The public flag only controls whether the lazy-loaded UI
-is mounted. When disabled, the chatbot component is not rendered and no chat
+`OPENAI_API_KEY` is used only by the server-side Vercel API route. The browser
+never calls OpenAI directly. The public flag only controls whether the lazy-loaded
+UI is mounted. When disabled, the chatbot component is not rendered and no chat
 state or API call is initialized.
 
 The public integration surface is the lazy-mounted component exported from:
@@ -235,15 +241,20 @@ The public integration surface is the lazy-mounted component exported from:
 frontend/chatbot/index.ts
 ```
 
-The Next.js route is:
+The streaming Next.js/Vercel route is:
 
 ```text
-frontend/app/api/explainable-chat/route.ts
+frontend/app/api/chat/route.ts
 ```
 
-That route delegates to `frontend/chatbot/api/route.ts`, which streams grounded
-responses from the OpenAI API using the selected ranked area, ranked candidate
-areas, adapted backend/sample outputs, and methodology snippets.
+That route delegates to `frontend/chatbot/api/route.ts`, which validates the
+payload, rejects clearly out-of-domain questions before calling OpenAI when
+feasible, and streams grounded responses from the OpenAI API using the selected
+ranked area, ranked candidate areas, adapted backend/sample outputs, active
+weights, and methodology snippets.
+
+`frontend/app/api/explainable-chat/route.ts` remains as a compatibility alias,
+but new chatbot UI calls `/api/chat`.
 
 ## Data Flow: Mock Now, Backend Later
 
